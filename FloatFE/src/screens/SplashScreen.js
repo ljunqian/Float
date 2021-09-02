@@ -15,6 +15,10 @@ const SplashScreen = ({navigation}) => {
         onPress={()=>{navigation.navigate('Profile')}}
         title="go to profile"
       />
+      <Button 
+        onPress={()=>{navigation.navigate('Reward')}}
+        title="go to reward"
+      />
     </View>
   )
 }
