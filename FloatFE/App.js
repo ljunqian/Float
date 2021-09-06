@@ -12,7 +12,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import SplashScreen from './src/screens/SplashScreen';
 import TodayScreen from './src/screens/TodayScreen';
-import ProfileScreen from './src/screens/ProfileScreen/ProfileScreen';
+import ProfileScreen from './src/screens/ProfileScreen';
 import RewardScreen from './src/screens/RewardScreen';
 
 const Stack = createNativeStackNavigator();
