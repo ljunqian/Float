@@ -5,7 +5,7 @@ const RewardScreen = ({ navigation }) => {
   return (
     <View>
       <Button
-        oonPress={()=>{navigation.navigate('Splash')}}
+        onPress={()=>{navigation.navigate('Splash')}}
         title="go to splash"
       />
     </View>
