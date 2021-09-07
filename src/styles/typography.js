@@ -16,7 +16,11 @@ const typo = StyleSheet.create({
         fontFamily: 'Montserrat-Bold',
         fontSize: 14,
     },
+<<<<<<< HEAD
     T2: {
+=======
+    T1: {
+>>>>>>> a0a70f873281ca639af6ea9722b4a19223e09794
         fontFamily: 'Montserrat-Bold',
         fontSize: 10,
     },
