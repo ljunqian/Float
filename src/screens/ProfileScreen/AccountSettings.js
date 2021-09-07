@@ -8,10 +8,10 @@ const AccountSettings = ({navigation}) => {
                    style={{width: 160, height: 160, borderRadius:80, marginTop:30, alignSelf: 'center'}} />
                    <Nav/>
        <Button
-                     onPress={()=>{}}
-                     title="Save Account Settings"
-                     style={style.buttonStyle}
-                     />
+          onPress={()=>{}}
+          title="Save Account Settings"
+          style={style.buttonStyle}
+          />
 
     </View>
   )

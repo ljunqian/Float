@@ -1,13 +1,15 @@
 import React from 'react';
-import {Button, Text, View, StyleSheet, ScrollView, TouchableOpacity} from 'react-native';
-import typo from '../../styles/typography';
+import {Text, View, StyleSheet, ScrollView, TouchableOpacity} from 'react-native';
+import typo from '../../../styles/typography';
 
-const TodayScreen = ({navigation}) => {
+const MeditateScreen = ({navigation}) => {
   return (
     <ScrollView style={style.container}> 
+      <View style={style.header}>
       <Text style={typo.H1}>
-        Good morning, User
+        Meditation
       </Text>
+      </View>
       <View style={{display: 'flex', flexDirection: 'row',}}>
         <TouchableOpacity style={style.button}>
           <Text>
@@ -31,9 +33,6 @@ const TodayScreen = ({navigation}) => {
       </Text>
       <CardComponent/>
       <CardComponent/>
-      <Text style={[typo.H2, {marginTop: 20}]}>
-        At night
-      </Text>
       <CardComponent/>
       <CardComponent/>
     </ScrollView>
@@ -51,8 +50,12 @@ const CardComponent = () => {
 
 const style = StyleSheet.create({
   container: {
-    padding: 15,
     backgroundColor: 'white',
+  },
+  header: {
+    width: '100%',
+    height: 300,
+    backgroundColor: '#EEEEEE',
   },
   button: {
     borderRadius: 12,
@@ -82,4 +85,4 @@ const style = StyleSheet.create({
   }
 })
 
-export default TodayScreen;
+export default MeditateScreen;

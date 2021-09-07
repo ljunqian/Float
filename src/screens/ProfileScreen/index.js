@@ -1,18 +1,22 @@
 import React from 'react';
-import {Button, Text, View, StyleSheet} from 'react-native';
+import {Button, Text, View, StyleSheet, ScrollView} from 'react-native';
 import ProfileScreen from './ProfileScreen';
-import { Icon } from 'react-native-elements'
+import { Icon } from 'react-native-elements';
+import typo from '../../styles/typography';
+
+const Coins = () => {
+  return (
+    <View style = {{alignSelf:'center',backgroundColor: '#C4C4C4', margin: 20, height: 45, padding:12}}>
+      <Text style={typo.H3}>My Coins Amount: 999</Text>
+    </View>
+  )
+}
+
 const MainProf = ({navigation}) => {
   return (
-    <View>
-        <View style={{
-              flexDirection: "row",  paddingLeft:5, paddingBottom:5, paddingRight: 5,justifyContent:'space-between'
-            }}>
-           <Icon name="home" size={30} color="black" />
-           <Icon name="create" size={30} color="black" onPress={()=>{navigation.navigate('Account Settings')}}/>
-       </View>
+    <ScrollView>
       <ProfileScreen/>
-      <View style = {{alignSelf:'center' }}><Text>Coin Placeholder</Text></View>
+      <Coins />
       <View style={{
                     flexDirection: "row",  paddingLeft:5, paddingBottom:5, paddingRight: 5
                   }}>
@@ -22,17 +26,12 @@ const MainProf = ({navigation}) => {
       <View style={{
             flexDirection: "column", paddingTop:20, paddingLeft:5, paddingBottom:25
           }}>
-            <View style = {style.fl}><Text style = {style.container}>Total Time Meditated</Text></View>
-            <View style = {style.fl}><Text style = {style.container}>Total Time Slept</Text></View>
-            <View style = {style.fl}><Text style = {style.container}>Total Sessions Completed</Text></View>
-            <View style = {style.fl}><Text style = {style.container}>Average Time Spent Per Session</Text></View>
+            <View style = {style.fl}><Text style = {style.container}>Total Time Meditated: 20mins</Text></View>
+            <View style = {style.fl}><Text style = {style.container}>Total Time Slept: 20mins</Text></View>
+            <View style = {style.fl}><Text style = {style.container}>Total Sessions Completed: 20mins</Text></View>
+            <View style = {style.fl}><Text style = {style.container}>Average Time Spent Per Session: 20mins</Text></View>
       </View>
-      <Button
-              onPress={()=>{navigation.navigate('Today')}}
-              title="go to today"
-              style={style.buttonStyle}
-              />
-    </View>
+    </ScrollView>
   )
 }
 
