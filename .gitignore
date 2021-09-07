@@ -78,3 +78,5 @@ amplify-gradle-config.json
 amplifytools.xcconfig
 .secret-*
 #amplify-do-not-edit-end
+
+android/java_pid49094.hprof
