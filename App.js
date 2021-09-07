@@ -14,7 +14,7 @@
  import TodayScreen from './src/screens/TodayScreen';
  import ProfileScreen from './src/screens/ProfileScreen';
  import RewardScreen from './src/screens/RewardScreen';
- 
+ import AccountSettings from './src/screens/ProfileScreen/AccountSettings.js';
  const Stack = createNativeStackNavigator();
  
  const App = () => {
@@ -25,6 +25,7 @@
          <Stack.Screen name="Today" component={TodayScreen} />
          <Stack.Screen name="Profile" component={ProfileScreen} />
          <Stack.Screen name="Reward" component={RewardScreen} />
+         <Stack.Screen name="Account Settings" component={AccountSettings} />
        </Stack.Navigator>
      </NavigationContainer>
    );
