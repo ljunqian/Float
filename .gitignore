@@ -79,4 +79,5 @@ amplifytools.xcconfig
 .secret-*
 #amplify-do-not-edit-end
 
+*.hprof
 android/java_pid49094.hprof
