@@ -10,15 +10,16 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@aws-amplify/ui-react": "^1.2.13",
+    "@aws-amplify/ui-react": "^1.2.14",
     "@fortawesome/fontawesome-free": "^5.15.4",
     "@react-native-async-storage/async-storage": "^1.15.7",
     "@react-native-community/netinfo": "^6.0.2",
-    "@react-native-picker/picker": "^1.16.7",
+    "@react-native-picker/picker": "^1.16.8",
+    "@react-navigation/bottom-tabs": "^6.0.5",
     "@react-navigation/native": "^6.0.2",
     "@react-navigation/native-stack": "^6.1.0",
     "amazon-cognito-identity-js": "^5.1.0",
-    "aws-amplify": "^4.2.7",
+    "aws-amplify": "^4.2.8",
     "aws-amplify-react-native": "^5.0.3",
     "native-base": "^3.1.0",
     "react": "17.0.2",
@@ -36,7 +37,7 @@
     "styled-system": "^5.1.5"
   },
   "devDependencies": {
-    "@babel/core": "^7.15.4",
+    "@babel/core": "^7.15.5",
     "@babel/runtime": "^7.15.4",
     "@react-native-community/eslint-config": "^2.0.0",
     "babel-jest": "^26.6.3",
