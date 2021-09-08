@@ -26,6 +26,7 @@
  import MagnifyIcon from './src/assets/icons/magnifier.png';
  import { Icon } from 'react-native-elements';
  import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import OtherScreen from './src/screens/OtherScreen';
  
 const Tab = createBottomTabNavigator();
 
