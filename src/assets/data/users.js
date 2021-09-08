@@ -18,7 +18,7 @@ export default [
     name: 'Zuck',
     image:
       'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/zuck.jpeg',
-    bio: 'No need to send me your nudes, I already saw them',
+    bio: 'No need to send me, I already saw them',
   },
   {
     id: '4',

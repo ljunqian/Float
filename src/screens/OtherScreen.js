@@ -1,14 +1,6 @@
 import React, { useState } from 'react'
-import { View, StyleSheet, TextInput, Pressable, Text } from 'react-native';
+import { View, StyleSheet, TextInput,} from 'react-native';
 import { Picker } from '@react-native-picker/picker';
-
-import { withAuthenticator } from 'aws-amplify-react-native';
-import Amplify from 'aws-amplify';
-import config from './src/aws-exports';
-Amplify.configure(config);
-
-import { AmplifyAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
-import { AuthState, onAuthUIStateChange } from '@aws-amplify/ui-components';
 
 const App = () => {
   const [name, setName] = useState('');
@@ -48,7 +40,6 @@ const App = () => {
         <Picker.Item label="Female" value="Female" />
         <Picker.Item label="Other" value="OTHER" />
       </Picker>
-      <AmplifySignOut buttonText="Custom Text"></AmplifySignOut>
 
     </View>
   )
@@ -61,4 +52,4 @@ const styles = StyleSheet.create({
   button: { padding: 10 }
 })
 
-export default withAuthenticator(App);
+export default App;
