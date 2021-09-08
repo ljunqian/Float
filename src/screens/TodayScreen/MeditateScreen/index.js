@@ -4,12 +4,14 @@ import typo from '../../../styles/typography';
 
 const MeditateScreen = ({navigation}) => {
   return (
-    <ScrollView style={style.container}> 
+    <ScrollView> 
       <View style={style.header}>
       <Text style={typo.H1}>
         Meditation
       </Text>
       </View>
+
+      <View style={style.container}>
       <View style={{display: 'flex', flexDirection: 'row',}}>
         <TouchableOpacity style={style.button}>
           <Text>
@@ -35,6 +37,7 @@ const MeditateScreen = ({navigation}) => {
       <CardComponent/>
       <CardComponent/>
       <CardComponent/>
+      </View>
     </ScrollView>
   )
 }
@@ -51,11 +54,13 @@ const CardComponent = () => {
 const style = StyleSheet.create({
   container: {
     backgroundColor: 'white',
+    paddingLeft: 10,
   },
   header: {
     width: '100%',
     height: 300,
     backgroundColor: '#EEEEEE',
+    padding: 10,
   },
   button: {
     borderRadius: 12,
