@@ -6,26 +6,27 @@
  * @flow strict-local
  */
 
- import React from 'react';
- import { Button, Image, View, TouchableOpacity } from 'react-native';
- import { NavigationContainer } from '@react-navigation/native';
- import { createNativeStackNavigator } from '@react-navigation/native-stack';
- 
- import SplashScreen from './src/screens/SplashScreen';
- import TodayScreen from './src/screens/TodayScreen/index';
- import ProfileScreen from './src/screens/ProfileScreen/';
- import RewardScreen from './src/screens/RewardScreen/';
- import AccountSettings from './src/screens/ProfileScreen/AccountSettings.js';
+import React from 'react';
+import { Button, Image, View, TouchableOpacity } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
- import MeditateScreen from './src/screens/TodayScreen/MeditateScreen';
- import FocusScreen from './src/screens/TodayScreen/FocusScreen';
- import SleepScreen from './src/screens/TodayScreen/SleepScreen';
- import MoveScreen from './src/screens/TodayScreen/MoveScreen';
+import SplashScreen from './src/screens/SplashScreen';
+import TodayScreen from './src/screens/TodayScreen/index';
+import ProfileScreen from './src/screens/ProfileScreen/';
+import RewardScreen from './src/screens/RewardScreen/';
+import AccountSettings from './src/screens/ProfileScreen/AccountSettings.js';
 
- import UserIcon from './src/assets/icons/user.png';
- import MagnifyIcon from './src/assets/icons/magnifier.png';
- import { Icon } from 'react-native-elements';
- import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import MeditateScreen from './src/screens/TodayScreen/MeditateScreen';
+import FocusScreen from './src/screens/TodayScreen/FocusScreen';
+import SleepScreen from './src/screens/TodayScreen/SleepScreen';
+import MoveScreen from './src/screens/TodayScreen/MoveScreen';
+
+import UserIcon from './src/assets/icons/user.png';
+import MagnifyIcon from './src/assets/icons/magnifier.png';
+
+import { Icon } from 'react-native-elements';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import OtherScreen from './src/screens/OtherScreen';
  
 const Tab = createBottomTabNavigator();
@@ -105,7 +106,7 @@ const BottomBar = () => {
               <TouchableOpacity
                 onPress={() => console.log("pressed")}
               >
-                <Image source={MagnifyIcon}/>
+                <Image source={MagnifyIcon} />
               </TouchableOpacity>
             ),
             headerLeft: () => (
