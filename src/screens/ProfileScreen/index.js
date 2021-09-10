@@ -1,13 +1,17 @@
 import React from 'react';
-import {Button, Text, View, StyleSheet, ScrollView} from 'react-native';
+import {Button, Text, View, StyleSheet, ScrollView, TouchableOpacity} from 'react-native';
 import ProfileScreen from './ProfileScreen';
 import { Icon } from 'react-native-elements';
 import typo from '../../styles/typography';
 
-const Coins = () => {
+const Coins = ({navigation}) => {
   return (
-    <View style = {{alignSelf:'center',backgroundColor: '#C4C4C4', margin: 20, height: 45, padding:12}}>
-      <Text style={typo.H3}>My Coins Amount: 999</Text>
+    <View style = {{alignSelf:'center',backgroundColor: '#C4C4C4', margin: 15, height: 45, padding:12}}>
+      <TouchableOpacity 
+        onPress={()=>{navigation.navigate('Reward');}}
+      >
+        <Text style={typo.H3}>My Coins Amount: 999</Text>
+      </TouchableOpacity>
     </View>
   )
 }
@@ -16,7 +20,8 @@ const MainProf = ({navigation}) => {
   return (
     <ScrollView>
       <ProfileScreen/>
-      <Coins />
+      <Text style={[typo.H1, {textAlign: 'center'}]}>John Doe</Text>
+      <Coins navigation={navigation}/>
       <View style={{
                     flexDirection: "row",  paddingLeft:5, paddingBottom:5, paddingRight: 5
                   }}>

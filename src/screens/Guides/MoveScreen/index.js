@@ -17,16 +17,17 @@ const GuideCardComponent = (props) => {
     </View>
   )
 }
-const MeditateScreen = ({navigation}) => {
+const MoveScreen = ({navigation}) => {
   return (
     <ScrollView> 
       <View style={style.header}>
         <Text style={typo.H1}>
-          Meditation
+          Move
         </Text>
       </View>
       
       <View style={style.container}>
+        <GuideCardComponent style={{height: 150, display: 'flex', flexDirection: 'row',justifyContent: 'space-between'}}/>
         <Text style={[typo.H2, {marginTop: 28}]}>
           Recent
         </Text>
@@ -39,42 +40,21 @@ const MeditateScreen = ({navigation}) => {
             <GuideCardComponent style={{height: 272}} thisis={"props"}/>
           </View>
         </View>
-        <View style={{display: 'flex', flexDirection: 'row',}}>
-          <TouchableOpacity style={style.button}>
-            <Text>
-              Button
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={style.button}>
-            <Text>
-              Button
-            </Text>
-          </TouchableOpacity>
+        <Text style={[typo.H2, {marginTop: 28}]}>
+          Explore
+        </Text>
+        <View style={{display: 'flex', flexDirection:'row'}}>
+          <View style={{flex:1, display: 'flex',flexDirection: 'column'}}>
+            <GuideCardComponent style={{height: 130}}/>
+            <GuideCardComponent style={{height: 272}}/>
+          </View>
+          <View style={{flex:1}}>
+            <GuideCardComponent style={{height: 200}} thisis={"props"}/>
+            <GuideCardComponent style={{height: 130}} thisis={"props"}/>
+          </View>
         </View>
-        <Text style={[typo.H2, {marginTop: 20}]}>
-          Start your day
-        </Text>
-        <CardComponent/>
-        <CardComponent/>
-        <CardComponent/>
-        <Text style={[typo.H2, {marginTop: 20}]}>
-          Your afternoon lift
-        </Text>
-        <CardComponent/>
-        <CardComponent/>
-        <CardComponent/>
-        <CardComponent/>
       </View>
     </ScrollView>
-  )
-}
-
-const CardComponent = () => {
-  return (
-    <View style={style.card}>
-        <Text style={typo.T1}>Title lorem ipsum</Text>
-        <View style={{backgroundColor: '#EEEEEE', width: 80, height: 80}}></View>
-    </View>
   )
 }
 
@@ -135,4 +115,4 @@ const style = StyleSheet.create({
   }
 })
 
-export default MeditateScreen;
+export default MoveScreen;

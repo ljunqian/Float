@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { flex } from "styled-system";
 
 const profile = {
-  name: 'Myname Is',
+  name: 'John Doe',
   username: 'user_name',
   email: 'email@mail.com',
   password: '********'
