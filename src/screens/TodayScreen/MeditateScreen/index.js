@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, View, StyleSheet, ScrollView, TouchableOpacity} from 'react-native';
+import {Text, View, ScrollView, TouchableOpacity} from 'react-native';
 import typo from '../../../styles/typography';
 import layout from '../../../styles/componentLayout';
 import * as Progress from 'react-native-progress';
