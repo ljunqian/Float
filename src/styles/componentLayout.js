@@ -10,7 +10,7 @@ const layout = StyleSheet.create({
     width: '100%',
     height: 300,
     backgroundColor: '#EEEEEE',
-    padding: 10,
+    paddingHorizontal: 10, 
   },
   minute: {
     backgroundColor: 'white',
