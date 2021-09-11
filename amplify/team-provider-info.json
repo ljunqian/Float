@@ -18,7 +18,7 @@
       "function": {
         "float8e79b21aPostConfirmation": {
           "deploymentBucketName": "amplify-float-dev-112515-deployment",
-          "s3Key": "amplify-builds/float8e79b21aPostConfirmation-75712f71597156765a6e-build.zip"
+          "s3Key": "amplify-builds/float8e79b21aPostConfirmation-62766d504c6443575473-build.zip"
         }
       }
     }

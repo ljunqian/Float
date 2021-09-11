@@ -1,12 +1,17 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { flex } from "styled-system";
+import { DataStore } from 'aws-amplify';
+import { SQLiteAdapter } from '@aws-amplify/datastore-storage-adapter';
+import {User} from './src/models'
 
 const profile = {
   name: 'John Doe',
   username: 'user_name',
   email: 'email@mail.com',
-  password: '********'
+  phone: '+65 12345678',
+  gender: 'Male',
+  birthday: 'Jan 1, 1998',
 }
 
 const Nav = () => {
@@ -14,10 +19,6 @@ const Nav = () => {
     <View style={{
       flexDirection: "column", paddingTop:20, paddingLeft:5, paddingBottom:25
     }}>
-      <View style={styles.row}>
-        <Text style = {styles.container}>Name </Text>
-        <Text style = {styles.container}>{profile.name}</Text>
-      </View>
       <View style={styles.row}>
         <Text style = {styles.container}>Username </Text>
         <Text style = {styles.container}>{profile.username}</Text>
@@ -27,8 +28,16 @@ const Nav = () => {
         <Text style = {styles.container}>{profile.email}</Text>
       </View>
       <View style={styles.row}>
-        <Text style = {styles.container}>Password </Text>
-        <Text style = {styles.container}>{profile.password}</Text>
+        <Text style = {styles.container}>Phone number </Text>
+        <Text style = {styles.container}>{profile.phone}</Text>
+      </View>
+      <View style={styles.row}>
+        <Text style = {styles.container}>Gender </Text>
+        <Text style = {styles.container}>{profile.gender}</Text>
+      </View>
+      <View style={styles.row}>
+        <Text style = {styles.container}>Birthday </Text>
+        <Text style = {styles.container}>{profile.birthday}</Text>
       </View>
     </View>
   );

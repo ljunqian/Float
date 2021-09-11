@@ -34,28 +34,28 @@ export const schema = {
                 "meditateD": {
                     "name": "meditateD",
                     "isArray": false,
-                    "type": "AWSTime",
+                    "type": "Int",
                     "isRequired": true,
                     "attributes": []
                 },
                 "sleepD": {
                     "name": "sleepD",
                     "isArray": false,
-                    "type": "AWSTime",
+                    "type": "Int",
                     "isRequired": true,
                     "attributes": []
                 },
                 "moveD": {
                     "name": "moveD",
                     "isArray": false,
-                    "type": "AWSTime",
+                    "type": "Int",
                     "isRequired": true,
                     "attributes": []
                 },
                 "focusD": {
                     "name": "focusD",
                     "isArray": false,
-                    "type": "AWSTime",
+                    "type": "Int",
                     "isRequired": true,
                     "attributes": []
                 },
@@ -96,5 +96,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "541612ebda5d9237957ed20f41fdeaf9"
+    "version": "c48e57803fb362692070f142e259a1cd"
 };
