@@ -29,10 +29,6 @@ import CoinIcon from './src/assets/icons/coin.png'
 import { Icon } from 'react-native-elements';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import OtherScreen from './src/screens/OtherScreen';
-import typo from './src/styles/typography';
-import { styles } from 'styled-system';
-
 import { withAuthenticator } from 'aws-amplify-react-native'
 
 import Amplify, { Auth } from 'aws-amplify';
