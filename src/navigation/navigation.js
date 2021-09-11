@@ -10,7 +10,7 @@ import { GuideRoutes } from './routes';
  import SignUpScreen from "../screens/Authenticate/SignUpScreen";
  
  // Profile
- import ProfileScreen from "../screens/ProfileScreen/ProfileScreen";
+ import ProfileScreen from "../screens/ProfileScreen/";
  import AccountSettings from "../screens/ProfileScreen/AccountSettings";
  import RewardScreen from "../screens/RewardScreen";
 // Guides

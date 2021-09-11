@@ -81,7 +81,7 @@ const FocusScreen = ({navigation}) => {
             <GuideCardComponent style={{height: 200}}/>
           </View>
           <View style={{flex:1}}>
-            <GuideCardComponent style={{height: 272}} thisis={"props"}/>
+            <GuideCardComponent style={{height: 272}}/>
           </View>
         </View>
         <Text style={[typo.H2, {marginTop: 20}]}>

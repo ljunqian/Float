@@ -1,8 +1,8 @@
 {
-    "identityPoolName": "float8b0afaa5_identitypool_8b0afaa5",
+    "identityPoolName": "float8e79b21a_identitypool_8e79b21a",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "float8b0afaa5",
-    "userPoolName": "float8b0afaa5_userpool_8b0afaa5",
+    "resourceNameTruncated": "float8e79b21a",
+    "userPoolName": "float8e79b21a_userpool_8e79b21a",
     "autoVerifiedAttributes": [
         "email"
     ],
@@ -31,10 +31,10 @@
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "userpoolClientLambdaRole": "float88b0afaa5_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "float88e79b21a_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "8b0afaa5",
-    "resourceName": "float8b0afaa5",
+    "sharedId": "8e79b21a",
+    "resourceName": "float8e79b21a",
     "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {
         "Fn::GetAtt": [
@@ -48,9 +48,29 @@
             "Arn"
         ]
     },
-    "useDefault": "default",
+    "useDefault": "manual",
     "userPoolGroupList": [],
     "serviceName": "Cognito",
-    "usernameCaseSensitive": false,
-    "dependsOn": []
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "float8e79b21aPostConfirmation",
+            "triggerProvider": "Cognito",
+            "attributes": [
+                "Arn",
+                "Name"
+            ]
+        }
+    ],
+    "thirdPartyAuth": false,
+    "userPoolGroups": false,
+    "adminQueries": false,
+    "triggers": "{\n  \"PostConfirmation\": [\n    \"custom\"\n  ]\n}",
+    "hostedUI": false,
+    "parentStack": {
+        "Ref": "AWS::StackId"
+    },
+    "breakCircularDependency": false,
+    "permissions": [],
+    "authProviders": []
 }
