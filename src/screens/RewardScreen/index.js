@@ -28,11 +28,6 @@ const RewardScreen = ({ navigation }) => {
   <RewardRow name = "Weapon"/>
   <RewardRow name = "Pet"/>
 
-  <Button
-      onPress={()=>{navigation.navigate('Splash')}}
-      title="go to splash"
-    />
-
 </ScrollView>
   )
 }
