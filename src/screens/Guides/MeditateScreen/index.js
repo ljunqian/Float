@@ -5,8 +5,7 @@ import layout from '../../../styles/componentLayout';
 import * as Progress from 'react-native-progress';
 
 const GuideCardComponent = (props) => {
-  console.log(props);
-  
+
   return (
     <View style={[layout.guideCard, props.style]}>
       <Text style={typo.T3}>
@@ -26,14 +25,14 @@ const MinuteView = () => {
   )
 }
 
-const SleepScreen = ({navigation}) => {
+const MeditateScreen = ({navigation}) => {
   return (
     <ScrollView> 
       <View style={layout.header}>
-        <Text style={[typo.H1, {flex:1.2}]}>
-          Sleep 
+        <Text style={[typo.H1, {flex: 1}]}>
+          Meditation
         </Text>
-        <View style={{flex: 1, marginTop: 6}}>
+        <View style={{flex: 1, marginTop: 12}}>
           <Text style={typo.T2}>
             Level 2
           </Text>
@@ -50,7 +49,7 @@ const SleepScreen = ({navigation}) => {
           <Text style={typo.H2}>
             Title Lorem Ipsum
           </Text>
-          <View style={[layout.big_button, {backgroundColor: '#4263DD', marginBottom: 30}]}>
+          <View style={[layout.big_button, {backgroundColor: '#FF9F00', marginBottom: 30}]}>
             <TouchableOpacity >
               <Text style={[typo.T4, {color: 'white'}]}>
                 Play
@@ -83,7 +82,7 @@ const SleepScreen = ({navigation}) => {
             <GuideCardComponent style={{height: 200}}/>
           </View>
           <View style={{flex:1}}>
-            <GuideCardComponent style={{height: 272}} thisis={"props"}/>
+            <GuideCardComponent style={{height: 272}}/>
           </View>
         </View>
         <Text style={[typo.H2, {marginTop: 20}]}>
@@ -99,11 +98,27 @@ const SleepScreen = ({navigation}) => {
             <GuideCardComponent style={{height: 130}}/>
           </View>
         </View>
+        <View style={{display: 'flex', flexDirection: 'row'}}>
+          <View style={{flex: 1}}>
+            <Text style={[typo.H2, {marginTop: 20}]}>
+              Group Meditation
+            </Text>
+            <TouchableOpacity style={[layout.big_button, {backgroundColor: '#074EE8'}]}>
+              <Text style={[typo.T4, {color: 'white'}]}>
+                Join
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <View style={{flex: 1, marginTop: 20}}>
+            <View style={layout.imageCard}>
+              
+            </View>
+          </View>
+        </View>
         
       </View>
     </ScrollView>
   )
 }
 
-
-export default SleepScreen;
+export default MeditateScreen;

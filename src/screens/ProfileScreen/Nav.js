@@ -6,7 +6,7 @@ import { SQLiteAdapter } from '@aws-amplify/datastore-storage-adapter';
 import {User} from './src/models'
 
 const profile = {
-  name: 'Myname Is',
+  name: 'John Doe',
   username: 'user_name',
   email: 'email@mail.com',
   phone: '+65 12345678',
