@@ -53,7 +53,6 @@ const style = StyleSheet.create({
       fontWeight: 'bold',
     },
 
-
       //add on top of global
 });
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import {Button, Text, View, StyleSheet, ScrollView, TouchableOpacity} from 'react-native';
 import typo from '../../styles/typography';
+import { Auth } from 'aws-amplify';
 
 const TodayScreen = ({navigation}) => {
   return (

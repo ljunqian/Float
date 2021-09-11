@@ -1,3 +1,4 @@
+
 import React, {Fragment, useState} from 'react';
 import { Center, NativeBaseProvider, HStack, Box } from 'native-base';
 import { Button, Text, View, ScrollView, TouchableOpacity, Image } from 'react-native';
@@ -29,6 +30,7 @@ const RewardScreen = ({ navigation }) => {
   }
 
   return (
+
 <ScrollView style={{backgroundColor: 'white'}}>
   <ProfileScreen />
 
@@ -120,10 +122,10 @@ const RewardScreen = ({ navigation }) => {
   ) : (
     null
   )}
-  
 </ScrollView>
   )
 }
+
 
 const RewardCard = (props) => {
   return(
@@ -168,6 +170,7 @@ const RedeemButton = ({onPress, title}) => {
     </TouchableOpacity>
   )
 }
+
 
 const VoucherCard = (props) => {
   return(
