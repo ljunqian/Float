@@ -13,11 +13,16 @@ import { GuideRoutes } from './routes';
  import ProfileScreen from "../screens/ProfileScreen/ProfileScreen";
  import AccountSettings from "../screens/ProfileScreen/AccountSettings";
  import RewardScreen from "../screens/RewardScreen";
+// Guides
+import ExploreScreen from "../screens/Guides/ExploreScreen";
+import MeditateScreen from "../screens/Guides/MeditateScreen";
+import FocusScreen from "../screens/Guides/FocusScreen";
+import SleepScreen from "../screens/Guides/SleepScreen";
+import MoveScreen from "../screens/Guides/MoveScreen";
 
 
 import UserIcon from '../assets/icons/user.png';
 import MagnifyIcon from '../assets/icons/magnifier.png';
-import ExploreScreen from '../screens/Guides/ExploreScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -46,24 +51,63 @@ const BottomBar = () => {
         style={{height: 60}}
         screenOptions={()=>(BottomTabOption())}
       >
-        <Tab.Screen name={"Explore"} component={ExploreScreen} 
-          options={()=>({
-            //tabBarIcon: () => (<Icon name={"explore"} size={30} color="black"/>)
-            tabBarIcon: ({ color, size }) => {
-              const icons = {
-                Home: 'home',
-                Profile: 'account',
-              };
-        
-              return (
-                <Icon
-                  name={"explore"}
-                />
-              );
-            },
+         <Tab.Screen name="Explore" component={ExploreScreen} 
+         options={({}) => ({
+          tabBarIcon: () => <Icon name="explore" size={30} color="black"/>,
+          headerShown: false,
+          tabBarStyle: {
+            height: 70,
+            padding: 10
+          },
+          tabBarLabelStyle: {marginBottom:10}
           })}
-          
         />
+        <Tab.Screen name="Meditate" component={MeditateScreen} 
+         options={({}) => ({
+          tabBarIcon: () => <Icon name="radio-button-unchecked" size={30} color="black"/>,
+          headerShown: false,
+          tabBarStyle: {
+            height: 70,
+            padding: 10
+          },
+          tabBarLabelStyle: {marginBottom:10}
+          })}
+        />
+        <Tab.Screen name="Sleep" component={SleepScreen} 
+         options={({}) => ({
+          tabBarIcon: () => <Icon name="nightlight-round" size={30} color="black"/>,
+          headerShown: false,
+          tabBarStyle: {
+            height: 70,
+            padding: 10
+          },
+          tabBarLabelStyle: {marginBottom:10}
+          })}
+        />
+        <Tab.Screen name="Move" component={MoveScreen} 
+         options={({}) => ({
+          tabBarIcon: () => <Icon name="timeline" size={30} color="black"/>,
+          headerShown: false,
+          tabBarStyle: {
+            height: 70,
+            padding: 10
+          },
+          tabBarLabelStyle: {marginBottom:10}
+          })}
+        />
+        <Tab.Screen name="Focus" component={FocusScreen} 
+         options={({}) => ({
+          tabBarIcon: () => <Icon name="adjust" size={30} color="black"/>,
+          headerShown: false,
+          tabBarStyle: {
+            height: 70,
+            padding: 10
+          },
+          tabBarLabelStyle: {marginBottom:10}
+          })}
+        />
+          
+      
       </Tab.Navigator>
   )
 }
