@@ -27,81 +27,90 @@ import MagnifyIcon from './src/assets/icons/magnifier.png';
 
 import { Icon } from 'react-native-elements';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import OtherScreen from './src/screens/OtherScreen';
- 
+
+import { withAuthenticator } from 'aws-amplify-react-native'
+
+import Amplify, { Auth } from 'aws-amplify';
+import config from './src/aws-exports'
+Amplify.configure(config)
+
+import { Analytics } from 'aws-amplify'
+
 const Tab = createBottomTabNavigator();
 
 const Stack = createNativeStackNavigator();
- 
+
 const BottomBar = () => {
   return (
-    
-      <Tab.Navigator style={{height: 60}}>
-        <Tab.Screen name="Explore" component={TodayScreen} 
-         options={({}) => ({
-          tabBarIcon: () => <Icon name="explore" size={30} color="black"/>,
+
+    <Tab.Navigator style={{ height: 60 }}>
+      <Tab.Screen name="Explore" component={TodayScreen}
+        options={({ }) => ({
+          tabBarIcon: () => <Icon name="explore" size={30} color="black" />,
           headerShown: false,
           tabBarStyle: {
             height: 70,
             padding: 10
           },
-          tabBarLabelStyle: {marginBottom:10}
-          })}
-        />
-        <Tab.Screen name="Meditate" component={MeditateScreen} 
-         options={({}) => ({
-          tabBarIcon: () => <Icon name="radio-button-unchecked" size={30} color="black"/>,
+          tabBarLabelStyle: { marginBottom: 10 }
+        })}
+      />
+      <Tab.Screen name="Meditate" component={MeditateScreen}
+        options={({ }) => ({
+          tabBarIcon: () => <Icon name="radio-button-unchecked" size={30} color="black" />,
           headerShown: false,
           tabBarStyle: {
             height: 70,
             padding: 10
           },
-          tabBarLabelStyle: {marginBottom:10}
-          })}
-        />
-        <Tab.Screen name="Sleep" component={SleepScreen} 
-         options={({}) => ({
-          tabBarIcon: () => <Icon name="nightlight-round" size={30} color="black"/>,
+          tabBarLabelStyle: { marginBottom: 10 }
+        })}
+      />
+      <Tab.Screen name="Sleep" component={SleepScreen}
+        options={({ }) => ({
+          tabBarIcon: () => <Icon name="nightlight-round" size={30} color="black" />,
           headerShown: false,
           tabBarStyle: {
             height: 70,
             padding: 10
           },
-          tabBarLabelStyle: {marginBottom:10}
-          })}
-        />
-        <Tab.Screen name="Move" component={MoveScreen} 
-         options={({}) => ({
-          tabBarIcon: () => <Icon name="timeline" size={30} color="black"/>,
+          tabBarLabelStyle: { marginBottom: 10 }
+        })}
+      />
+      <Tab.Screen name="Move" component={MoveScreen}
+        options={({ }) => ({
+          tabBarIcon: () => <Icon name="timeline" size={30} color="black" />,
           headerShown: false,
           tabBarStyle: {
             height: 70,
             padding: 10
           },
-          tabBarLabelStyle: {marginBottom:10}
-          })}
-        />
-        <Tab.Screen name="Focus" component={FocusScreen} 
-         options={({}) => ({
-          tabBarIcon: () => <Icon name="adjust" size={30} color="black"/>,
+          tabBarLabelStyle: { marginBottom: 10 }
+        })}
+      />
+      <Tab.Screen name="Focus" component={FocusScreen}
+        options={({ }) => ({
+          tabBarIcon: () => <Icon name="adjust" size={30} color="black" />,
           headerShown: false,
           tabBarStyle: {
             height: 70,
             padding: 10
           },
-          tabBarLabelStyle: {marginBottom:10}
-          })}
-        />
-      </Tab.Navigator>
+          tabBarLabelStyle: { marginBottom: 10 }
+        })}
+      />
+    </Tab.Navigator>
   )
 }
 
- const App = () => {
-   return (
-     <NavigationContainer>
-       <Stack.Navigator>
-         <Stack.Screen name="Today" component={BottomBar} 
-           options={({navigation}) => ({
+const App = () => {
+  Analytics.configure({ disabled: true })
+  Auth.currentAuthenticatedUser().then(console.log);
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Today" component={BottomBar}
+          options={({ navigation }) => ({
             headerRight: () => (
               <TouchableOpacity
                 onPress={() => console.log("pressed")}
@@ -113,37 +122,37 @@ const BottomBar = () => {
               <TouchableOpacity
                 onPress={() => navigation.navigate('Profile')}
               >
-                <Image source={UserIcon}  />
+                <Image source={UserIcon} />
               </TouchableOpacity>
-          ),
-            headerTitle: () => (<View/>),
-            
+            ),
+            headerTitle: () => (<View />),
+
           })}
-         />
-         <Stack.Screen name="Splash" component={SplashScreen} 
-          options={({navigation}) => ({
-          headerShown: false
+        />
+        <Stack.Screen name="Splash" component={SplashScreen}
+          options={({ navigation }) => ({
+            headerShown: false
           })}
-         />
-         <Stack.Screen name="Profile" component={ProfileScreen} 
-          options={({navigation}) => ({
+        />
+        <Stack.Screen name="Profile" component={ProfileScreen}
+          options={({ navigation }) => ({
             headerRight: () => (
               <TouchableOpacity
                 onPress={() => console.log("pressed")}
               >
-                <Icon name="create" size={30} color="black" onPress={()=>{navigation.navigate('Account Settings')}}/>
+                <Icon name="create" size={30} color="black" onPress={() => { navigation.navigate('Account Settings') }} />
               </TouchableOpacity>
             ),
-            headerTitle: () => (<View/>),
-            
+            headerTitle: () => (<View />),
+
           })}
-         
-         />
-         <Stack.Screen name="Reward" component={RewardScreen} />
-         <Stack.Screen name="Account Settings" component={AccountSettings} />
-       </Stack.Navigator>
-     </NavigationContainer>
-   );
- };
- 
- export default App;
+
+        />
+        <Stack.Screen name="Reward" component={RewardScreen} />
+        <Stack.Screen name="Account Settings" component={AccountSettings} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
+
+export default withAuthenticator(App)
