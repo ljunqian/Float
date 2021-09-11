@@ -1,34 +1,80 @@
 import React from 'react';
-import {Text, View, StyleSheet, ScrollView, TouchableOpacity} from 'react-native';
+import {Text, View, ScrollView, TouchableOpacity} from 'react-native';
 import typo from '../../../styles/typography';
+import layout from '../../../styles/componentLayout';
+import * as Progress from 'react-native-progress';
 
 const GuideCardComponent = (props) => {
   console.log(props);
+  
   return (
-    <View style={[style.guideCard, props.style]}>
-      <Text style={typo.H3}>
+    <View style={[layout.guideCard, props.style]}>
+      <Text style={typo.T3}>
         Title Lorem Ipsum
       </Text>
-      <View style={style.minute}>
+      <MinuteView />
+    </View> 
+  )
+}
+
+const MinuteView = () => {
+  return (<View style={[layout.minute]}>
         <Text style={typo.T3}>
           2 mins
         </Text>
       </View>
-    </View>
   )
 }
+
 const SleepScreen = ({navigation}) => {
   return (
     <ScrollView> 
-      <View style={style.header}>
-        <Text style={typo.H1}>
-          Sleep
+      <View style={layout.header}>
+        <Text style={[typo.H1, {flex:1.2}]}>
+          Sleep 
         </Text>
+        <View style={{flex: 1, marginTop: 6}}>
+          <Text style={typo.T2}>
+            Level 2
+          </Text>
+          <Progress.Bar 
+            progress={0.4}
+            width={100}
+            height={8}
+            color={'#074EE8'}
+            unfilledColor={'white'}
+            borderWidth={0}
+          />
+        </View>
+        <View style={{display: 'flex', flex: 8, justifyContent: 'flex-end', alignItems: 'center'}}>
+          <Text style={typo.H2}>
+            Title Lorem Ipsum
+          </Text>
+          <View style={[layout.big_button, {backgroundColor: '#4263DD', marginBottom: 30}]}>
+            <TouchableOpacity >
+              <Text style={[typo.T4, {color: 'white'}]}>
+                Play
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+        
       </View>
-      
-      <View style={style.container}>
-        <GuideCardComponent style={{height: 150, display: 'flex', flexDirection: 'row',justifyContent: 'space-between'}}/>
-        <Text style={[typo.H2, {marginTop: 28}]}>
+      <View style={layout.container}>
+        <View style={[layout.guideCard, {height: 155, display: 'flex', flexDirection: 'row'}]}>
+          <View style={{flex: 1}}>
+            <Text style={[typo.T1, {marginTop: 3}]}>
+              Title Lorem Ipsum
+            </Text> 
+          </View>
+          <View style={{flex: 1, alignItems: 'flex-end'}}>
+            <MinuteView />
+          </View>
+        </View>
+        
+      </View>
+      <View style={layout.container}>
+        <Text style={typo.H2}>
           Recent
         </Text>
         <View style={{display: 'flex', flexDirection:'row'}}>
@@ -40,79 +86,24 @@ const SleepScreen = ({navigation}) => {
             <GuideCardComponent style={{height: 272}} thisis={"props"}/>
           </View>
         </View>
-        <Text style={[typo.H2, {marginTop: 28}]}>
+        <Text style={[typo.H2, {marginTop: 20}]}>
           Explore
         </Text>
-        <View style={{display: 'flex', flexDirection:'row'}}>
-          <View style={{flex:1, display: 'flex',flexDirection: 'column'}}>
+        <View style={{display: 'flex', flexDirection: 'row'}}>
+          <View style={{flex: 1, display: 'flex'}}>
             <GuideCardComponent style={{height: 130}}/>
             <GuideCardComponent style={{height: 272}}/>
           </View>
-          <View style={{flex:1}}>
-            <GuideCardComponent style={{height: 200}} thisis={"props"}/>
-            <GuideCardComponent style={{height: 130}} thisis={"props"}/>
+          <View style={{flex: 1, display: 'flex'}}>
+            <GuideCardComponent style={{height: 194}}/>
+            <GuideCardComponent style={{height: 130}}/>
           </View>
         </View>
+        
       </View>
     </ScrollView>
   )
 }
 
-const style = StyleSheet.create({
-  container: {
-    backgroundColor: 'white',
-    padding: 10,
-    display: 'flex',
-    //alignItems: 'center'
-  },
-  header: {
-    width: '100%',
-    height: 300,
-    backgroundColor: '#EEEEEE',
-    padding: 10,
-  },
-  minute: {
-    backgroundColor: 'white',
-    borderRadius: 8,
-    width: 51,
-    height: 24,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 3,
-  },
-  guideCard: {
-    backgroundColor: "#EEEEEE",
-    padding: 12,
-    borderRadius: 20,
-    margin: 6,
-  },
-  button: {
-    borderRadius: 12,
-    borderWidth: 0.5,
-    borderColor: 'rgba(0, 0, 0, 0.5)',
-    backgroundColor: 'white',
-    color: 'black',
-    width: 180,
-    height: 40,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    margin: 5
-  },
-  card: {
-    borderWidth: 0.5,
-    borderColor: 'rgba(0, 0, 0, 0.5)',
-    backgroundColor: 'white',
-    height: 100,
-    width: '90%',
-    borderRadius: 12,
-    margin: 10,
-    padding: 10,
-    display: 'flex',
-    justifyContent:'space-between',
-    flexDirection: 'row'
-  }
-})
 
 export default SleepScreen;
