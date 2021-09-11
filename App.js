@@ -7,7 +7,7 @@
  */
 
 import React from 'react';
-import { Button, Image, View, TouchableOpacity } from 'react-native';
+import { Button, Image, View, TouchableOpacity, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -24,9 +24,14 @@ import MoveScreen from './src/screens/TodayScreen/MoveScreen';
 
 import UserIcon from './src/assets/icons/user.png';
 import MagnifyIcon from './src/assets/icons/magnifier.png';
+import CoinIcon from './src/assets/icons/coin.png'
 
 import { Icon } from 'react-native-elements';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+import OtherScreen from './src/screens/OtherScreen';
+import typo from './src/styles/typography';
+import { styles } from 'styled-system';
 
 import { withAuthenticator } from 'aws-amplify-react-native'
 
@@ -35,6 +40,7 @@ import config from './src/aws-exports'
 Amplify.configure(config)
 
 import { Analytics } from 'aws-amplify'
+
 
 const Tab = createBottomTabNavigator();
 
@@ -120,7 +126,7 @@ const App = () => {
             ),
             headerLeft: () => (
               <TouchableOpacity
-                onPress={() => navigation.navigate('Profile')}
+                onPress={() => navigation.navigate('Reward')}
               >
                 <Image source={UserIcon} />
               </TouchableOpacity>
@@ -147,12 +153,27 @@ const App = () => {
 
           })}
 
+         />
+         <Stack.Screen name="Reward" component={RewardScreen} 
+          options={({navigation}) => ({
+            headerShadowVisible: false,
+            headerTitle: () => (<View/>),
+            headerRight: () => (
+              <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <Image source = {CoinIcon} style={{marginRight: 4}}/>
+                <Text style = {{fontSize: 18, fontFamily: 'FredokaOne-Regular'}}>
+                  4,550
+                </Text>
+              </View>
+            )
+            
+          })}
         />
-        <Stack.Screen name="Reward" component={RewardScreen} />
-        <Stack.Screen name="Account Settings" component={AccountSettings} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
-};
-
+         <Stack.Screen name="Account Settings" component={AccountSettings} />
+       </Stack.Navigator>
+     </NavigationContainer>
+   );
+ };
+ 
 export default withAuthenticator(App)
+
