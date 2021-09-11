@@ -5,8 +5,6 @@ import layout from '../../../styles/componentLayout';
 import * as Progress from 'react-native-progress';
 
 const GuideCardComponent = (props) => {
-  console.log(props);
-  
   return (
     <View style={[layout.guideCard, props.style]}>
       <Text style={typo.T3}>
@@ -83,7 +81,7 @@ const SleepScreen = ({navigation}) => {
             <GuideCardComponent style={{height: 200}}/>
           </View>
           <View style={{flex:1}}>
-            <GuideCardComponent style={{height: 272}} thisis={"props"}/>
+            <GuideCardComponent style={{height: 272}}/>
           </View>
         </View>
         <Text style={[typo.H2, {marginTop: 20}]}>
