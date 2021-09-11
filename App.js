@@ -105,7 +105,7 @@ const BottomBar = () => {
 
 const App = () => {
   Analytics.configure({ disabled: true })
-  Auth.currentAuthenticatedUser().then(console.log);
+
   return (
     <NavigationContainer>
       <Stack.Navigator>

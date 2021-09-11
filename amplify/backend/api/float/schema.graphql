@@ -3,10 +3,10 @@ type User @model @auth(rules: [{allow: private}]) {
   name: String!
   email: String!
   coins: Int!
-  meditateD: AWSTime!
-  sleepD: AWSTime!
-  moveD: AWSTime!
-  focusD: AWSTime!
+  meditateD: Int!
+  sleepD: Int!
+  moveD: Int!
+  focusD: Int!
   friends: [String!]
 }
  
