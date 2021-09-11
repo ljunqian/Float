@@ -1,24 +1,12 @@
-type Match @model @auth(rules: [{allow: private}]) {
-  id: ID!
-  User1: User @connection
-  User2: User @connection
-}
-
-enum Gender {
-  MALE
-  FEMALE
-  OTHER
-}
-
 type User @model @auth(rules: [{allow: private}]) {
   id: ID!
   name: String!
-  sub: String!
-  bio: String!
-  gender: Gender!
-  exp: Int!
-  pts: Int!
-  mduration: Float!
-  fduration: Float!
+  email: String!
+  coins: Int!
+  meditateD: Int!
+  sleepD: Int!
+  moveD: Int!
+  focusD: Int!
+  friends: [String!]
 }
  
