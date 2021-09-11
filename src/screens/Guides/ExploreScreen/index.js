@@ -1,9 +1,9 @@
 import React from 'react';
 import {Button, Text, View, StyleSheet, ScrollView, TouchableOpacity} from 'react-native';
-import typo from '../../styles/typography';
+import typo from '../../../styles/typography';
 import { Auth } from 'aws-amplify';
 
-const TodayScreen = ({navigation}) => {
+const ExploreScreen = ({navigation}) => {
   return (
     <ScrollView style={style.container}> 
       <Text style={typo.H1}>
@@ -83,4 +83,4 @@ const style = StyleSheet.create({
   }
 })
 
-export default TodayScreen;
+export default ExploreScreen;
