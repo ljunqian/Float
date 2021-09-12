@@ -1,7 +1,8 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { Button, Text, View, StyleSheet, Image, TextInputField } from 'react-native';
 import Nav from './Nav';
 import { Auth } from 'aws-amplify';
+
 const AccountSettings = ({ navigation }) => {
 
   const [name, setName] = useState('')
@@ -12,12 +13,13 @@ const AccountSettings = ({ navigation }) => {
         style={{ width: 160, height: 160, borderRadius: 80, marginTop: 30, alignSelf: 'center' }} />
       <Nav />
       <Button
-        onPress={() => { }}
+      //user aws app sync to handle, only after our data schema is finalisedd
+        onPress={() => {  }}
         title="Change account information"
         style={style.buttonStyle}
       />
       <Button
-        onPress={() => {  }}
+        onPress={() => { }}
         title="Change my Password"
         style={style.buttonStyle}
       />
