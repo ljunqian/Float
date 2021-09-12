@@ -1,15 +1,57 @@
-import React from 'react';
-import {Button, Text, View, StyleSheet, ScrollView, TouchableOpacity} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { Text, View, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import typo from '../../../styles/typography';
-import { Auth } from 'aws-amplify';
 
-const ExploreScreen = ({navigation}) => {
+import { Auth } from 'aws-amplify';
+import { DataStore } from '@aws-amplify/datastore';
+import { SQLiteAdapter } from '@aws-amplify/datastore-storage-adapter';
+import { User } from "../../../models";
+
+DataStore.configure({
+  storageAdapter: SQLiteAdapter
+});
+
+const ExploreScreen = ({ navigation }) => {
+  const [info, setInfo] = useState({
+    name: '',
+    email: '',
+    coins: '',
+    meditateD: '',
+    sleepD: '',
+    moveD: '',
+    friends: []
+  });
+
+  const getUserInfo = async () => {
+    try {
+      //const post = await DataStore.query(User, Auth.currentAuthenticatedUser());
+      const { attributes } = await Auth.currentAuthenticatedUser();
+      const post = await DataStore.query(User, attributes.sub);
+      //onsole.log(post.email);
+      setInfo({
+        name: post.name,
+        email: post.email,
+        coins: post.coins,
+        meditateD: post.meditateD,
+        sleepD: post.sleepD,
+        moveD: post.moveD,
+        focusD: post.focusD,
+        friends: post.friends
+      });
+    } catch (error) {
+      console.log("Error saving post", error);
+    }
+  }
+
+  useEffect(() => {
+    getUserInfo();
+  }, []);
   return (
-    <ScrollView style={style.container}> 
+    <ScrollView style={style.container}>
       <Text style={typo.H1}>
-        Good morning, User
+        Good morning, {info.name}
       </Text>
-      <View style={{display: 'flex', flexDirection: 'row',}}>
+      <View style={{ display: 'flex', flexDirection: 'row', }}>
         <TouchableOpacity style={style.button}>
           <Text>
             Button
@@ -21,22 +63,22 @@ const ExploreScreen = ({navigation}) => {
           </Text>
         </TouchableOpacity>
       </View>
-      <Text style={[typo.H2, {marginTop: 20}]}>
+      <Text style={[typo.H2, { marginTop: 20 }]}>
         Start your day
       </Text>
-      <CardComponent/>
-      <CardComponent/>
-      <CardComponent/>
-      <Text style={[typo.H2, {marginTop: 20}]}>
+      <CardComponent />
+      <CardComponent />
+      <CardComponent />
+      <Text style={[typo.H2, { marginTop: 20 }]}>
         Your afternoon lift
       </Text>
-      <CardComponent/>
-      <CardComponent/>
-      <Text style={[typo.H2, {marginTop: 20}]}>
+      <CardComponent />
+      <CardComponent />
+      <Text style={[typo.H2, { marginTop: 20 }]}>
         At night
       </Text>
-      <CardComponent/>
-      <CardComponent/>
+      <CardComponent />
+      <CardComponent />
     </ScrollView>
   )
 }
@@ -44,8 +86,8 @@ const ExploreScreen = ({navigation}) => {
 const CardComponent = () => {
   return (
     <View style={style.card}>
-        <Text style={typo.T1}>Title lorem ipsum</Text>
-        <View style={{backgroundColor: '#EEEEEE', width: 80, height: 80}}></View>
+      <Text style={typo.T1}>Title lorem ipsum</Text>
+      <View style={{ backgroundColor: '#EEEEEE', width: 80, height: 80 }}></View>
     </View>
   )
 }
@@ -78,7 +120,7 @@ const style = StyleSheet.create({
     margin: 10,
     padding: 10,
     display: 'flex',
-    justifyContent:'space-between',
+    justifyContent: 'space-between',
     flexDirection: 'row'
   }
 })
