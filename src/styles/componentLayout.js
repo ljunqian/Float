@@ -1,16 +1,16 @@
 import {StyleSheet} from 'react-native';
 const layout = StyleSheet.create({
-    container: {
-    backgroundColor: 'white',
+  container: {
+    backgroundColor: 'rgba(52, 52, 52, 0)',
     padding: 10,
     display: 'flex',
   },
   header: {
     display: 'flex',
     width: '100%',
-    height: 300,
-    backgroundColor: '#EEEEEE',
+    //height: 400,
     paddingHorizontal: 10, 
+    zIndex: 1,
   },
   minute: {
     backgroundColor: 'white',

@@ -1,51 +1,64 @@
 import React from 'react';
-import {Button, Text, View, StyleSheet, ScrollView, TouchableOpacity} from 'react-native';
+import {Image, Text, View, StyleSheet, ScrollView, TouchableOpacity} from 'react-native';
 import typo from '../../../styles/typography';
+import theme, {color} from '../../../styles/theme';
 import { Auth } from 'aws-amplify';
+import { Icon } from 'react-native-elements';
+import LoveRed from '../../../assets/icons/lovered.png';
+import LoveYellow from '../../../assets/icons/loveyellow.png';
+import Explore1 from '../../../assets/images/explore1.png';
+import Explore2 from '../../../assets/images/explore2.png';
+import Explore3 from '../../../assets/images/explore3.png';
+import Explore4 from '../../../assets/images/explore4.png';
 
 const ExploreScreen = ({navigation}) => {
   return (
-    <ScrollView style={style.container}> 
-      <Text style={typo.H1}>
+    <ScrollView style={theme.container}> 
+      <Text style={[typo.H1, {color: 'white'}]}>
         Good morning, User
       </Text>
-      <View style={{display: 'flex', flexDirection: 'row',}}>
+      <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
         <TouchableOpacity style={style.button}>
+          <Image source={LoveRed} style={{marginRight: 10}}/>
           <Text>
-            Button
+            Favourites
           </Text>
         </TouchableOpacity>
         <TouchableOpacity style={style.button}>
+          <Image source={LoveYellow} style={{marginRight: 10}}/>
           <Text>
-            Button
+            Recents
           </Text>
         </TouchableOpacity>
       </View>
-      <Text style={[typo.H2, {marginTop: 20}]}>
+      <Text style={[style.header, typo.H2]}>
         Start your day
       </Text>
-      <CardComponent/>
-      <CardComponent/>
-      <CardComponent/>
-      <Text style={[typo.H2, {marginTop: 20}]}>
+        <CardComponent img={Explore1} title={"Meditate Session"}/>
+        <CardComponent img={Explore2} title={"Focus Session"}/>
+    
+      <Text style={[style.header, typo.H2]}>
         Your afternoon lift
       </Text>
-      <CardComponent/>
-      <CardComponent/>
-      <Text style={[typo.H2, {marginTop: 20}]}>
+        <CardComponent img={Explore3} title={"Move Session"}/>
+
+      <Text style={[style.header, typo.H2]}>
         At night
       </Text>
-      <CardComponent/>
-      <CardComponent/>
+        <CardComponent img={Explore1} title={"Meditate Session"}/>
+        <CardComponent img={Explore4} title={"Sleep Session"}/>
     </ScrollView>
   )
 }
 
-const CardComponent = () => {
+const CardComponent = ({img, title}) => {
   return (
-    <View style={style.card}>
-        <Text style={typo.T1}>Title lorem ipsum</Text>
-        <View style={{backgroundColor: '#EEEEEE', width: 80, height: 80}}></View>
+    <View style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
+      <Icon name="radio-button-unchecked" size={30} color="white"/>
+      <View style={style.card}>
+          <Text style={typo.T1}>{title}</Text>
+          <Image source={img} style={{backgroundColor: '#EEEEEE', width: 80, height: 80}} />
+      </View>
     </View>
   )
 }
@@ -54,6 +67,7 @@ const style = StyleSheet.create({
   container: {
     padding: 15,
     backgroundColor: 'white',
+    paddingBottom: 40
   },
   button: {
     borderRadius: 12,
@@ -62,11 +76,13 @@ const style = StyleSheet.create({
     backgroundColor: 'white',
     color: 'black',
     width: 180,
-    height: 40,
+    height: 45,
     display: 'flex',
+    flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    margin: 5
+    margin: 5,
+    
   },
   card: {
     borderWidth: 0.5,
@@ -80,7 +96,9 @@ const style = StyleSheet.create({
     display: 'flex',
     justifyContent:'space-between',
     flexDirection: 'row'
-  }
+  },
+  header: {marginTop: 20, color: 'white'},
+  
 })
 
 export default ExploreScreen;
