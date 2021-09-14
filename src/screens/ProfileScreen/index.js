@@ -1,5 +1,7 @@
+
 import React, { useState } from 'react';
 import {Button, Text, View, StyleSheet, ScrollView, TouchableOpacity, Image} from 'react-native';
+
 import ProfileScreen from './profile';
 import { Icon } from 'react-native-elements';
 import typo from '../../styles/typography';
@@ -8,6 +10,15 @@ import { color } from '../../styles/theme';
 import Friend1 from '../../assets/images/friend1.png';
 import Friend2 from '../../assets/images/friend2.png';
 import Friend3 from '../../assets/images/friend3.png';
+import { Auth } from 'aws-amplify';
+import { DataStore } from '@aws-amplify/datastore';
+import { SQLiteAdapter } from '@aws-amplify/datastore-storage-adapter';
+import { User } from "../../../src/models";
+
+DataStore.configure({
+  storageAdapter: SQLiteAdapter
+});
+
 
 const Coins = ({navigation}) => {
   return (
@@ -60,6 +71,40 @@ const FriendComponent = ({img, name}) => {
 
 const MainProf = ({navigation}) => {
   const [active, setActive] = useState(true);
+    const [info, setInfo] = useState({
+    name: '',
+    email: '',
+    coins: '',
+    meditateD: '',
+    sleepD: '',
+    moveD: '',
+    friends: []
+  });
+  const getUserInfo = async () => {
+    try {
+      //const post = await DataStore.query(User, Auth.currentAuthenticatedUser());
+      const { attributes } = await Auth.currentAuthenticatedUser();
+      const post = await DataStore.query(User, attributes.sub);
+      //onsole.log(post.email);
+      setInfo({
+        name: post.name,
+        email: post.email,
+        coins: post.coins,
+        meditateD: post.meditateD,
+        sleepD: post.sleepD,
+        moveD: post.moveD,
+        focusD: post.focusD,
+        friends: post.friends
+      });
+    } catch (error) {
+      console.log("Error saving post", error);
+    }
+  }
+
+  /*useEffect(() => {
+    getUserInfo();
+  }, []);*/
+
   return (
     <ScrollView style={{backgroundColor: color.bg, color:'white'}}>
       <ProfileScreen/>
@@ -111,6 +156,7 @@ const MainProf = ({navigation}) => {
 
 export default MainProf;
 const style = StyleSheet.create({
+
     buttonStyle: {
         color: 'green',
         height: '40px',
@@ -130,4 +176,5 @@ const style = StyleSheet.create({
         display: 'flex', flexDirection: 'row',
         alignItems:'center'
     }
+
 })

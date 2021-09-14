@@ -6,6 +6,7 @@
  * @flow strict-local
  */
 
+
 import React, { useState, useEffect } from 'react';
 import { Animated, Image, View, TouchableOpacity,Text, Easing, StyleSheet } from 'react-native';
 import typo from './src/styles/typography';
@@ -13,6 +14,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import ExploreScreen from './src/screens/Guides/ExploreScreen'
+
 import ProfileScreen from './src/screens/ProfileScreen/';
 import RewardScreen from './src/screens/RewardScreen/';
 import AccountSettings from './src/screens/ProfileScreen/AccountSettings.js';
@@ -33,17 +35,21 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { withAuthenticator } from 'aws-amplify-react-native'
 
-import Amplify, { Auth } from 'aws-amplify';
+import Amplify from 'aws-amplify';
+
 import config from './src/aws-exports'
 Amplify.configure(config)
 
 import { Analytics } from 'aws-amplify'
+Analytics.configure({ disabled: true })
+
+
 import CoinIcon from './src/assets/icons/coin.png';
 
 const Tab = createBottomTabNavigator();
 
 const Stack = createNativeStackNavigator();
-  
+
 const BottomBar = () => {
   const tabStyle = {
     height: 70,
@@ -53,6 +59,7 @@ const BottomBar = () => {
     borderTopLeftRadius: 16,
   }
   return (
+
       <Tab.Navigator style={{backgroundColor: 'none'}}
         screenOptions = {() => ({
           tabBarStyle: {
@@ -122,11 +129,12 @@ const BottomBar = () => {
           })}
         />
       </Tab.Navigator>
+
   )
 }
- 
 
 const App = () => {
+
   Analytics.configure({ disabled: true })
   const [verticalVal, setVerticalVal ] =  useState(new Animated.Value(1));
   const [isSplash, setIsSplash] = useState(true);
@@ -203,22 +211,23 @@ const App = () => {
             headerTintColor: 'white'
           })}
 
-         />
-         <Stack.Screen name="Reward" component={RewardScreen} 
-          options={({navigation}) => ({
+        />
+        <Stack.Screen name="Reward" component={RewardScreen}
+          options={({ navigation }) => ({
             headerShadowVisible: false,
-            headerTitle: () => (<View/>),
+            headerTitle: () => (<View />),
             headerRight: () => (
-              <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                <Image source = {CoinIcon} style={{marginRight: 4}}/>
-                <Text style = {{fontSize: 18, fontFamily: 'FredokaOne-Regular'}}>
-                  4,550
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <Image source={CoinIcon} style={{ marginRight: 4 }} />
+                <Text style={{ fontSize: 18, fontFamily: 'FredokaOne-Regular' }}>
+                  {info.meditateD}
                 </Text>
               </View>
             )
-            
+
           })}
         />
+
          <Stack.Screen name="Account Settings" component={AccountSettings} 
           options={()=>({
             headerTitleStyle: {color:'white'},
