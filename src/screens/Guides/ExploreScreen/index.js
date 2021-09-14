@@ -1,3 +1,4 @@
+
 import React from 'react';
 import {Image, Text, View, StyleSheet, ScrollView, TouchableOpacity} from 'react-native';
 import typo from '../../../styles/typography';
@@ -11,13 +12,61 @@ import Explore2 from '../../../assets/images/explore2.png';
 import Explore3 from '../../../assets/images/explore3.png';
 import Explore4 from '../../../assets/images/explore4.png';
 
-const ExploreScreen = ({navigation}) => {
+import { Auth } from 'aws-amplify';
+import { DataStore } from '@aws-amplify/datastore';
+import { SQLiteAdapter } from '@aws-amplify/datastore-storage-adapter';
+import { User } from "../../../models";
+
+DataStore.configure({
+  storageAdapter: SQLiteAdapter
+});
+
+const ExploreScreen = ({ navigation }) => {
+  
+  const [info, setInfo] = useState({
+    name: '',
+    email: '',
+    coins: '',
+    meditateD: '',
+    sleepD: '',
+    moveD: '',
+    friends: []
+  });
+
+  const getUserInfo = async () => {
+    try {
+      //const post = await DataStore.query(User, Auth.currentAuthenticatedUser());
+      const { attributes } = await Auth.currentAuthenticatedUser();
+      const post = await DataStore.query(User, attributes.sub);
+      //onsole.log(post.email);
+      setInfo({
+        name: post.name,
+        email: post.email,
+        coins: post.coins,
+        meditateD: post.meditateD,
+        sleepD: post.sleepD,
+        moveD: post.moveD,
+        focusD: post.focusD,
+        friends: post.friends
+      });
+    } catch (error) {
+      console.log("Error saving post", error);
+    }
+  }
+
+/*
+  useEffect(() => {
+    getUserInfo();
+  }, []);
+  */
   return (
+
     <ScrollView style={theme.container}> 
       <Text style={[typo.H1, {color: 'white'}]}>
-        Good morning, User
+        Good morning, User //{info.name}
       </Text>
       <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
+
         <TouchableOpacity style={style.button}>
           <Image source={LoveRed} style={{marginRight: 10}}/>
           <Text>
@@ -47,12 +96,14 @@ const ExploreScreen = ({navigation}) => {
       </Text>
         <CardComponent img={Explore1} title={"Meditate Session"}/>
         <CardComponent img={Explore4} title={"Sleep Session"}/>
+
     </ScrollView>
   )
 }
 
 const CardComponent = ({img, title}) => {
   return (
+
     <View style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
       <Icon name="radio-button-unchecked" size={30} color="white"/>
       <View style={style.card}>
@@ -94,7 +145,7 @@ const style = StyleSheet.create({
     margin: 10,
     padding: 10,
     display: 'flex',
-    justifyContent:'space-between',
+    justifyContent: 'space-between',
     flexDirection: 'row'
   },
   header: {marginTop: 20, color: 'white'},
