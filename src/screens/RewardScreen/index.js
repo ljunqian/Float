@@ -4,9 +4,19 @@ import { Center, NativeBaseProvider, HStack, Box, VStack } from 'native-base';
 import { Button, Text, View, ScrollView, TouchableOpacity, Image } from 'react-native';
 
 import typo from '../../styles/typography';
+import { color } from '../../styles/theme';
 import style from './style';
-import ProfileScreen from './ProfileScreen';
+import ProfileScreen from '../ProfileScreen/profile'
 import CoinIcon from '../../assets/icons/coin.png';
+
+import StarrySpace from '../../assets/images/starry-space.png';
+import Mountain from '../../assets/images/mountain1.png';
+import Beach from '../../assets/images/beach.png';
+
+import Hat1 from '../../assets/images/hat1.png';
+import Hat2 from '../../assets/images/hat2.png';
+import Hat3 from '../../assets/images/hat3.png';
+import Hat4 from '../../assets/images/hat4.png';
 
 const RewardScreen = ({ navigation }) => {
   const [tab, setIsTab] = useState("Colours");
@@ -29,8 +39,8 @@ const RewardScreen = ({ navigation }) => {
 
   return (
 
-<VStack style={{backgroundColor: 'white'}}>
-  <ProfileScreen />
+<VStack style={{backgroundColor: color.bg}}>
+  <ProfileScreen/>
 
   <HStack style={style.tabBar}>
   <TouchableOpacity onPress= {clickColoursTab}>
@@ -41,18 +51,7 @@ const RewardScreen = ({ navigation }) => {
           <View style={{height: 2, width: 56, marginBottom: 8}}/>
         )}
         <View style = {style.tabIcon}/>
-        <Text style ={{fontSize: 18, fontFamily: 'FredokaOne-Regular', color: 'black'}}>Colour</Text>
-    </View>
-  </TouchableOpacity>
-  <TouchableOpacity onPress= {clickAccessoryTab}>
-    <View style = {{alignItems: 'center', justifyContent: 'center'}}>
-        {tab === "Accessories" ? (
-          <View style={{backgroundColor: 'black', height: 2, width: 56, marginBottom: 8}}/>
-        ) : (
-          <View style={{height: 2, width: 56, marginBottom: 8}}/>
-        )}
-        <View style = {style.tabIcon}/>
-        <Text style ={{fontSize: 18, fontFamily: 'FredokaOne-Regular', color: 'black'}}>Accessory</Text>
+        <Text style ={{fontSize: 16, fontFamily: 'Montserrat-Bold', color: 'white'}}>Background</Text>
     </View>
   </TouchableOpacity>
   <TouchableOpacity onPress= {clickHatsTab}>
@@ -63,7 +62,18 @@ const RewardScreen = ({ navigation }) => {
           <View style={{height: 2, width: 56, marginBottom: 8}}/>
         )}
         <View style = {style.tabIcon}/>
-        <Text style ={{fontSize: 18, fontFamily: 'FredokaOne-Regular', color: 'black'}}>Hat</Text>
+        <Text style ={{fontSize: 16, fontFamily: 'Montserrat-Bold', color: 'white'}}>Hats</Text>
+    </View>
+  </TouchableOpacity>
+  <TouchableOpacity onPress= {clickAccessoryTab}>
+    <View style = {{alignItems: 'center', justifyContent: 'center'}}>
+        {tab === "Accessories" ? (
+          <View style={{backgroundColor: 'black', height: 2, width: 56, marginBottom: 8}}/>
+        ) : (
+          <View style={{height: 2, width: 56, marginBottom: 8}}/>
+        )}
+        <View style = {style.tabIcon}/>
+        <Text style ={{fontSize: 16, fontFamily: 'Montserrat-Bold', color: 'white'}}>Accessories</Text>
     </View>
   </TouchableOpacity>
   <TouchableOpacity onPress= {clickVouchersTab}>
@@ -74,7 +84,7 @@ const RewardScreen = ({ navigation }) => {
           <View style={{height: 2, width: 56, marginBottom: 8}}/>
         )}
         <View style = {style.tabIcon}/>
-        <Text style ={{fontSize: 18, fontFamily: 'FredokaOne-Regular', color: 'black'}}>Voucher</Text>
+        <Text style ={{fontSize: 16, fontFamily: 'Montserrat-Bold', color: 'white'}}>Voucher</Text>
     </View>
   </TouchableOpacity>
   </HStack>
@@ -84,12 +94,11 @@ const RewardScreen = ({ navigation }) => {
     <Fragment>
       <View style = {{flexDirection: 'column'}}>
         <View style = {style.rewardRowContainer}>
-          <RewardCard asset="Colour" id="1" coinsValue="200"/>
-          <RewardCard asset="Colour" id="2" coinsValue="300"/>
+          <RewardCard asset="Mountain" id="1" coinsValue="200" img={Mountain}/>
+          <RewardCard asset="Starry Space" id="2" coinsValue="300" img={StarrySpace}/>
         </View>
         <View style = {style.rewardRowContainer}>
-          <RewardCard asset="Colour" id="3" coinsValue="400"/>
-          <RewardCard asset="Colour" id="4" coinsValue="500"/>
+          <RewardCard asset="Beach" id="3" coinsValue="400" img={Beach}/>
         </View>
       </View>
     </Fragment>
@@ -118,12 +127,12 @@ const RewardScreen = ({ navigation }) => {
     <Fragment>
       <View style = {{flexDirection: 'column'}}>
         <View style = {style.rewardRowContainer}>
-          <RewardCard asset="Hat" id="1" coinsValue="100"/>
-          <RewardCard asset="Hat" id="2" coinsValue="200"/>
+          <RewardCard asset="Cowboy" id="1" coinsValue="100" img={Hat1}/>
+          <RewardCard asset="Santa" id="2" coinsValue="200" img={Hat2}/>
         </View>
         <View style = {style.rewardRowContainer}>
-          <RewardCard asset="Hat" id="3" coinsValue="300"/>
-          <RewardCard asset="Hat" id="4" coinsValue="400"/>
+          <RewardCard asset="Ushanka" id="3" coinsValue="300" img={Hat3}/>
+          <RewardCard asset="Wizard" id="4" coinsValue="400" img={Hat4}/>
         </View>
       </View>
     </Fragment>
@@ -149,14 +158,13 @@ const RewardScreen = ({ navigation }) => {
 const RewardCard = (props) => {
   return(
 
-      <>
         <View style = {{flexDirection: 'column'}}>
           <View style = {style.rewardCardContainer}>
-            <View style= {style.rewardItemImage}/>
+            <Image source={props.img} style= {style.rewardItemImage}/>
 
             <View style = {{flexDirection: "row"}}>
               <Text style={{marginTop: 5, marginLeft: 5,fontSize: 14, fontFamily: 'Montserrat-Bold'}}>
-                {props.asset} {props.id}
+                {props.asset} 
               </Text>
               <View style={{position:'absolute', right: 0, bottom: 0}}>
                 <CoinsValue coinsValue = {props.coinsValue}/>
@@ -164,11 +172,7 @@ const RewardCard = (props) => {
             </View>
 
           </View>
-          <View style={{marginLeft: 110}}>
-            <RedeemButton title="Redeem"/>
-          </View>
         </View>
-    </>
 
   )
 } 

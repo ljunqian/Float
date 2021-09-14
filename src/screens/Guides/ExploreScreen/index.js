@@ -1,9 +1,8 @@
 
-import React from 'react';
+import React, {useState} from 'react';
 import {Image, Text, View, StyleSheet, ScrollView, TouchableOpacity} from 'react-native';
 import typo from '../../../styles/typography';
 import theme, {color} from '../../../styles/theme';
-import { Auth } from 'aws-amplify';
 import { Icon } from 'react-native-elements';
 import LoveRed from '../../../assets/icons/lovered.png';
 import LoveYellow from '../../../assets/icons/loveyellow.png';
@@ -63,7 +62,7 @@ const ExploreScreen = ({ navigation }) => {
 
     <ScrollView style={theme.container}> 
       <Text style={[typo.H1, {color: 'white'}]}>
-        Good morning, User //{info.name}
+        Good morning, User {info.name}
       </Text>
       <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
 

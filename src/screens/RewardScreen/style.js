@@ -8,6 +8,7 @@ const style = StyleSheet.create({
       marginBottom: 20,
       justifyContent: 'center',
       alignItems: 'center',
+      marginTop:30,
     },
 
     tabIcon: {
@@ -26,13 +27,14 @@ const style = StyleSheet.create({
     rewardCardContainer: {
       backgroundColor: '#EBEBEB',
       margin: 8,
-      height: 176,
-      width: 176
+      width: 176,
+      padding: 6,
+      borderRadius: 10
     },
 
     rewardItemImage: {
       backgroundColor: '#C4C4C4',
-      opacity: 0.5,
+      
       height: 150,
       width: '100%'
     },
