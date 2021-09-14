@@ -41,33 +41,34 @@ const Nav = () => {
       console.log("Error saving post", error);
     }
   }
+  /*
   useEffect(() => {
     getUserInfo();
   }, []);
-
+*/
   return (
     <View style={{
-      flexDirection: "column", paddingTop:20, paddingLeft:5, paddingBottom:25
+      flexDirection: "column", paddingTop:20, paddingLeft:5, paddingBottom:25, color: 'white'
     }}>
       <View style={styles.row}>
         <Text style = {styles.container}>Username </Text>
-        <Text style = {styles.container}>{info.name}</Text>
+        <Text style = {styles.container}>user</Text>
       </View>
       <View style={styles.row}>
         <Text style = {styles.container}>Email </Text>
-        <Text style = {styles.container}>{info.email}</Text>
+        <Text style = {styles.container}>user@email.com</Text>
       </View>
       <View style={styles.row}>
         <Text style = {styles.container}>Phone number </Text>
-        <Text style = {styles.container}>Not stored yet</Text>
+        <Text style = {styles.container}>89030843</Text>
       </View>
       <View style={styles.row}>
         <Text style = {styles.container}>Gender </Text>
-        <Text style = {styles.container}>Not stored yet</Text>
+        <Text style = {styles.container}>Male</Text>
       </View>
       <View style={styles.row}>
         <Text style = {styles.container}>Birthday </Text>
-        <Text style = {styles.container}>Not stored yet</Text>
+        <Text style = {styles.container}>15 Jan 1999</Text>
       </View>
     </View>
   );
@@ -75,7 +76,7 @@ const Nav = () => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 5, fontSize: 16, fontFamily: 'Roboto'
+    padding: 5, fontSize: 16, fontFamily: 'Roboto',color: 'white'
   },
   row: {
     display: "flex",

@@ -23,7 +23,7 @@ import MeditateScreen from './src/screens/Guides/MeditateScreen';
 import FocusScreen from './src/screens/Guides/FocusScreen';
 import SleepScreen from './src/screens/Guides/SleepScreen';
 import MoveScreen from './src/screens/Guides/MoveScreen';
-
+import CoinIcon from './src/assets/icons/coins.png';
 import UserIcon from './src/assets/icons/user.png';
 import MagnifyIcon from './src/assets/icons/magnifier.png';
 // Image source
@@ -44,7 +44,7 @@ import { Analytics } from 'aws-amplify'
 Analytics.configure({ disabled: true })
 
 
-import CoinIcon from './src/assets/icons/coin.png';
+
 
 const Tab = createBottomTabNavigator();
 
@@ -219,12 +219,13 @@ const App = () => {
             headerRight: () => (
               <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <Image source={CoinIcon} style={{ marginRight: 4 }} />
-                <Text style={{ fontSize: 18, fontFamily: 'FredokaOne-Regular' }}>
-                  0
+                <Text style={{ fontSize: 18, fontFamily: 'FredokaOne-Regular',color:'white' }}>
+                  499
                   {/* {info.meditateD} */}
                 </Text>
               </View>
-            )
+            ),
+            headerTintColor: 'white'
           })}
         />
 
