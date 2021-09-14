@@ -1,13 +1,11 @@
 
 import React, {Fragment, useState} from 'react';
-import { Center, NativeBaseProvider, HStack, Box } from 'native-base';
+import { Center, NativeBaseProvider, HStack, Box, VStack } from 'native-base';
 import { Button, Text, View, ScrollView, TouchableOpacity, Image } from 'react-native';
 
 import typo from '../../styles/typography';
 import style from './style';
 import ProfileScreen from './ProfileScreen';
-// import { background, backgroundColor, height, marginRight, marginTop } from 'styled-system';
-
 import CoinIcon from '../../assets/icons/coin.png';
 
 const RewardScreen = ({ navigation }) => {
@@ -31,36 +29,57 @@ const RewardScreen = ({ navigation }) => {
 
   return (
 
-<ScrollView style={{backgroundColor: 'white'}}>
+<VStack style={{backgroundColor: 'white'}}>
   <ProfileScreen />
 
   <HStack style={style.tabBar}>
   <TouchableOpacity onPress= {clickColoursTab}>
     <View style = {{alignItems: 'center', justifyContent: 'center'}}>
+        {tab === "Colours" ? (
+          <View style={{backgroundColor: 'black', height: 2, width: 56, marginBottom: 8}}/>
+        ) : (
+          <View style={{height: 2, width: 56, marginBottom: 8}}/>
+        )}
         <View style = {style.tabIcon}/>
-        <Text style ={{fontSize: 18, fontFamily: 'FredokaOne-Regular'}}>Colours</Text>
+        <Text style ={{fontSize: 18, fontFamily: 'FredokaOne-Regular', color: 'black'}}>Colour</Text>
     </View>
   </TouchableOpacity>
   <TouchableOpacity onPress= {clickAccessoryTab}>
     <View style = {{alignItems: 'center', justifyContent: 'center'}}>
+        {tab === "Accessories" ? (
+          <View style={{backgroundColor: 'black', height: 2, width: 56, marginBottom: 8}}/>
+        ) : (
+          <View style={{height: 2, width: 56, marginBottom: 8}}/>
+        )}
         <View style = {style.tabIcon}/>
-        <Text style ={{fontSize: 18, fontFamily: 'FredokaOne-Regular'}}>Accessory</Text>
+        <Text style ={{fontSize: 18, fontFamily: 'FredokaOne-Regular', color: 'black'}}>Accessory</Text>
     </View>
   </TouchableOpacity>
   <TouchableOpacity onPress= {clickHatsTab}>
     <View style = {{alignItems: 'center', justifyContent: 'center'}}>
+        {tab === "Hats" ? (
+          <View style={{backgroundColor: 'black', height: 2, width: 56, marginBottom: 8}}/>
+        ) : (
+          <View style={{height: 2, width: 56, marginBottom: 8}}/>
+        )}
         <View style = {style.tabIcon}/>
-        <Text style ={{fontSize: 18, fontFamily: 'FredokaOne-Regular'}}>Hats</Text>
+        <Text style ={{fontSize: 18, fontFamily: 'FredokaOne-Regular', color: 'black'}}>Hat</Text>
     </View>
   </TouchableOpacity>
   <TouchableOpacity onPress= {clickVouchersTab}>
     <View style = {{alignItems: 'center', justifyContent: 'center'}}>
+        {tab === "Vouchers" ? (
+          <View style={{backgroundColor: 'black', height: 2, width: 56, marginBottom: 8}}/>
+        ) : (
+          <View style={{height: 2, width: 56, marginBottom: 8}}/>
+        )}
         <View style = {style.tabIcon}/>
-        <Text style ={{fontSize: 18, fontFamily: 'FredokaOne-Regular'}}>Vouchers</Text>
+        <Text style ={{fontSize: 18, fontFamily: 'FredokaOne-Regular', color: 'black'}}>Voucher</Text>
     </View>
   </TouchableOpacity>
   </HStack>
 
+  <ScrollView showsVerticalScrollIndicator={false}>
   {tab === "Colours" ? (
     <Fragment>
       <View style = {{flexDirection: 'column'}}>
@@ -122,10 +141,10 @@ const RewardScreen = ({ navigation }) => {
   ) : (
     null
   )}
-</ScrollView>
+  </ScrollView>
+</VStack>
   )
 }
-
 
 const RewardCard = (props) => {
   return(
@@ -170,7 +189,6 @@ const RedeemButton = ({onPress, title}) => {
     </TouchableOpacity>
   )
 }
-
 
 const VoucherCard = (props) => {
   return(
