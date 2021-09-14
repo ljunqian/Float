@@ -151,7 +151,7 @@ const App = () => {
           })}
 
         />
-        <Stack.Screen name="Reward" component={RewardScreen}
+        <Stack.Screen name="Reward" component={RewardScreen} 
           options={({ navigation }) => ({
             headerShadowVisible: false,
             headerTitle: () => (<View />),
@@ -159,11 +159,11 @@ const App = () => {
               <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <Image source={CoinIcon} style={{ marginRight: 4 }} />
                 <Text style={{ fontSize: 18, fontFamily: 'FredokaOne-Regular' }}>
-                  {info.meditateD}
+                  0
+                  {/* {info.meditateD} */}
                 </Text>
               </View>
             )
-
           })}
         />
         <Stack.Screen name="Account Settings" component={AccountSettings} />
