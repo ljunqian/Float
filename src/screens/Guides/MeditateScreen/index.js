@@ -57,7 +57,7 @@ const MeditateScreen = ({navigation}) => {
             unfilledColor={'white'}
             borderWidth={0}
           />
-          <Image source={MedAvatar} style={{ top: 20, left: 20,zIndex: 0, position: 'absolute'}}/>
+          <Image source={MedAvatar} style={{ top: 40, left: 20, zIndex: 0, position: 'absolute'}}/>
         </View>
           <View style={{display: 'flex', flex: 8, justifyContent: 'flex-end', alignItems: 'center', zIndex:2}}>
             <Text style={typo.H1}>
