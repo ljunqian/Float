@@ -25,6 +25,9 @@ import SleepScreen from './src/screens/Guides/SleepScreen';
 import MoveScreen from './src/screens/Guides/MoveScreen';
 import CoinIcon from './src/assets/icons/coins.png';
 import UserIcon from './src/assets/icons/user.png';
+import MoveIcon from './src/assets/icons/move.png';
+import FocusIcon from './src/assets/icons/focus.png';
+import ExploreIcon from './src/assets/icons/explore.png';
 import MagnifyIcon from './src/assets/icons/magnifier.png';
 // Image source
 import Stars from './src/assets/images/stars.png';
@@ -70,7 +73,7 @@ const BottomBar = () => {
       >
         <Tab.Screen name="Explore" component={ExploreScreen} 
         options={({}) => ({
-          tabBarIcon: () => <Icon name="explore" size={30} color="white"/>,
+          tabBarIcon: () => <Image source={ExploreIcon}/>,
           headerShown: false,
           tabBarStyle: tabStyle,
           tabBarLabelStyle: {
@@ -82,7 +85,7 @@ const BottomBar = () => {
         />
         <Tab.Screen name="Meditate" component={MeditateScreen} 
         options={({}) => ({
-          tabBarIcon: () => <Icon name="radio-button-unchecked" size={30} color="white"/>,
+          tabBarIcon: () => <Icon name="circle" size={30} color="white"/>,
           headerShown: false,
           tabBarStyle: tabStyle,
           tabBarLabelStyle: {
@@ -106,7 +109,7 @@ const BottomBar = () => {
         />
         <Tab.Screen name="Move" component={MoveScreen} 
         options={({}) => ({
-          tabBarIcon: () => <Icon name="timeline" size={30} color="white"/>,
+          tabBarIcon: () => <Image source={MoveIcon}/>,
           headerShown: false,
           tabBarStyle: tabStyle,
           tabBarLabelStyle: {
@@ -118,7 +121,7 @@ const BottomBar = () => {
         />
         <Tab.Screen name="Focus" component={FocusScreen} 
         options={({}) => ({
-          tabBarIcon: () => <Icon name="adjust" size={30} color="white"/>,
+          tabBarIcon: () => <Image source={FocusIcon}/>,
           headerShown: false,
           tabBarStyle: tabStyle,
           tabBarLabelStyle: {
@@ -143,7 +146,7 @@ const App = () => {
     
     setTimeout(()=>{
       setIsSplash(false);
-    }, 3000)
+    }, 6000)
 
     Animated.loop(
       Animated.timing(verticalVal, {
