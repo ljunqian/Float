@@ -48,12 +48,8 @@ const LoginScreen = () => {
               type="email"
               variant="underlined"
               placeholder="Your Email Address"
-              _light={{
-                placeholderTextColor: "blueGray.400",
-              }}
-              _dark={{
-                placeholderTextColor: "blueGray.50",
-              }}
+              _light={{color: "white",}}
+              _dark={{ color: "white", }}
             />
             <Text style={[typo.H2, {color:'white'}]}>
               Password
@@ -64,12 +60,8 @@ const LoginScreen = () => {
               variant="underlined"
               placeholder="Passoword"
               type="password"
-              _light={{
-                placeholderTextColor: "blueGray.400",
-              }}
-              _dark={{
-                placeholderTextColor: "blueGray.50",
-              }}
+              _light={{color: "white",}}
+              _dark={{ color: "white", }}
             />
             <Text>
               Forgot password?
