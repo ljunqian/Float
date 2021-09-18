@@ -23,12 +23,17 @@ import MeditateScreen from './src/screens/Guides/MeditateScreen';
 import FocusScreen from './src/screens/Guides/FocusScreen';
 import SleepScreen from './src/screens/Guides/SleepScreen';
 import MoveScreen from './src/screens/Guides/MoveScreen';
+
 import CoinIcon from './src/assets/icons/coins.png';
 import UserIcon from './src/assets/icons/user.png';
 import MoveIcon from './src/assets/icons/move.png';
 import FocusIcon from './src/assets/icons/focus.png';
 import ExploreIcon from './src/assets/icons/explore.png';
 import MagnifyIcon from './src/assets/icons/magnifier.png';
+
+import LoginScreen from './src/screens/Authenticate/LoginScreen';
+import SignUpScreen from './src/screens/Authenticate/SignUpScreen';
+
 // Image source
 import Stars from './src/assets/images/stars.png';
 import Float from './src/assets/images/float.png';
@@ -181,6 +186,46 @@ const App = () => {
           }
         })}
       >
+        <Stack.Screen name="Login" component={LoginScreen}
+          options={({ navigation }) => ({
+            headerRight: () => (
+              <TouchableOpacity
+                onPress={() => console.log("pressed")}
+              >
+                <Image source={MagnifyIcon} />
+              </TouchableOpacity>
+            ),
+            headerLeft: () => (
+              <TouchableOpacity
+                onPress={() => navigation.navigate('Signup')}
+              >
+                <Image source={UserIcon} />
+              </TouchableOpacity>
+            ),
+            headerTitle: () => (<View />),
+
+          })}
+        />
+        <Stack.Screen name="Signup" component={SignUpScreen}
+          options={({ navigation }) => ({
+            headerRight: () => (
+              <TouchableOpacity
+                onPress={() => console.log("pressed")}
+              >
+                <Image source={MagnifyIcon} />
+              </TouchableOpacity>
+            ),
+            headerLeft: () => (
+              <TouchableOpacity
+                onPress={() => navigation.navigate('Login')}
+              >
+                <Image source={UserIcon} />
+              </TouchableOpacity>
+            ),
+            headerTitle: () => (<View />),
+
+          })}
+        />
         <Stack.Screen name="Guides" component={BottomBar}
           options={({ navigation }) => ({
             headerRight: () => (
