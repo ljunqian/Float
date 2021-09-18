@@ -10,7 +10,7 @@ import { color } from '../../styles/theme';
 
 const initialState = { name: '', description: '' }
 
-const SignUpScreen = () => {
+const SignUpScreen = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
@@ -128,6 +128,11 @@ const SignUpScreen = () => {
           <Button onPress={onSignUp}>
             Sign Up
           </Button>
+          <Text onPress={()=>{navigation.navigate('Login')}}
+            style={{color:'white'}}
+          >
+            Already have an account? Log in.
+          </Text>
           </KeyboardAvoidingView>
         </View>
     </ScrollView>

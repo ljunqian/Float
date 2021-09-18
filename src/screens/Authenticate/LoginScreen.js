@@ -9,7 +9,7 @@ import { color } from '../../styles/theme';
 
 const initialState = { name: '', description: '' }
 
-const LoginScreen = () => {
+const LoginScreen = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -71,13 +71,18 @@ const LoginScreen = () => {
                 placeholderTextColor: "blueGray.50",
               }}
             />
-            <Text>
+            <Text style={{color:'white'}}>
               Forgot password?
             </Text>
           </KeyboardAvoidingView>
           <Button onPress={onLogin}>
             Login
           </Button>
+          <Text onPress={()=>{navigation.navigate('Signup')}}
+            style={{color:'white'}}
+          >
+            Don’t have an account? Sign up!
+          </Text>
         </View>
     </View>
       </NativeBaseProvider>
