@@ -1,10 +1,9 @@
 import React, {useState} from 'react'
-import { View, Image, StyleSheet, Text, KeyboardAvoidingView } from 'react-native'
-import { Input, Center, NativeBaseProvider, Button } from "native-base"
+import { View, Image, StyleSheet, KeyboardAvoidingView, Text } from 'react-native'
+import {Input, NativeBaseProvider, Button} from 'native-base'
 import { Auth } from 'aws-amplify';
-import typo from '../../styles/typography';
-
 import FloatLogo from '../../assets/images/float.png';
+import typo from '../../styles/typography';
 import { color } from '../../styles/theme';
 
 const initialState = { name: '', description: '' }
@@ -85,13 +84,13 @@ const LoginScreen = ({navigation}) => {
           </Text>
         </View>
     </View>
-      </NativeBaseProvider>
+    </NativeBaseProvider>
   )
 }
 
 const styles = StyleSheet.create({
-  container: { width:'100%', display: 'flex', padding: 10 ,minHeight:'100%',alignItems: 'center', backgroundColor: color.bg},
-  
+  container: { flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: color.bg },
+  image: { height: '50%', width: '50%' }
 })
 
 export default LoginScreen;

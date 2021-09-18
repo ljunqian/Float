@@ -1,12 +1,10 @@
-import React, {useState} from 'react'
-import { View, Image, StyleSheet, Text, KeyboardAvoidingView, ScrollView } from 'react-native'
-import { Input, Select, NativeBaseProvider, Button } from "native-base"
+import React, {useState} from 'react';
+import { View, Image, StyleSheet, KeyboardAvoidingView, Text, ScrollView } from 'react-native';
+import {Input, NativeBaseProvider, Select, Button} from 'native-base';
 import { Auth } from 'aws-amplify';
-import DateTimePicker from '@react-native-community/datetimepicker';
 import typo from '../../styles/typography';
-
-import FloatLogo from '../../assets/images/float.png';
 import { color } from '../../styles/theme';
+import FloatLogo from '../../assets/images/float.png';
 
 const initialState = { name: '', description: '' }
 
@@ -31,13 +29,9 @@ const SignUpScreen = ({navigation}) => {
   }
 
   const onSignUp = () => {
-    console.log("submit request");
+    console.log("sign up")
   }
 
-  const onChangeDate = (event, selectedDate) => {
-      const currentDate = selectedDate || birthday;
-      setBirthday(currentDate);
-    };
   return (
     <NativeBaseProvider>
     <ScrollView
@@ -141,8 +135,8 @@ const SignUpScreen = ({navigation}) => {
 }
 
 const styles = StyleSheet.create({
-  container: { width:'100%', display: 'flex', padding: 10 , paddingBottom: 50, minHeight:'100%', backgroundColor: color.bg},
-  
+  container: { flex: 1,  backgroundColor: color.bg },
+  image: { height: '50%', width: '50%' }
 })
 
 export default SignUpScreen;
