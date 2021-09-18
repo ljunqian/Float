@@ -1,14 +1,15 @@
 import React, {useState} from 'react'
-import { View, Image, StyleSheet, KeyboardAvoidingView, Text } from 'react-native'
-import {Input, NativeBaseProvider, Button} from 'native-base'
+import { View, Image, StyleSheet, Text, KeyboardAvoidingView } from 'react-native'
+import { Input, Center, NativeBaseProvider, Button } from "native-base"
 import { Auth } from 'aws-amplify';
-import FloatLogo from '../../assets/images/float.png';
 import typo from '../../styles/typography';
+
+import FloatLogo from '../../assets/images/float.png';
 import { color } from '../../styles/theme';
 
 const initialState = { name: '', description: '' }
 
-const LoginScreen = ({navigation}) => {
+const LoginScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -70,27 +71,22 @@ const LoginScreen = ({navigation}) => {
                 placeholderTextColor: "blueGray.50",
               }}
             />
-            <Text style={{color:'white'}}>
+            <Text>
               Forgot password?
             </Text>
           </KeyboardAvoidingView>
           <Button onPress={onLogin}>
             Login
           </Button>
-          <Text onPress={()=>{navigation.navigate('Signup')}}
-            style={{color:'white'}}
-          >
-            Don’t have an account? Sign up!
-          </Text>
         </View>
     </View>
-    </NativeBaseProvider>
-  )
-}
+      </NativeBaseProvider>
 
+       )
+     }
 const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: color.bg },
-  image: { height: '50%', width: '50%' }
-})
-
+    container: { width:'100%', display: 'flex', padding: 10 ,minHeight:'100%',alignItems: 'center', backgroundColor: color.bg},
+      
+ })
+    
 export default LoginScreen;
