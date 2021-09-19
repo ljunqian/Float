@@ -1,21 +1,20 @@
 import React, { useState } from 'react';
 import { Button, Text, View, StyleSheet, Image, TextInputField } from 'react-native';
 import Nav from './Nav';
+import Changeaccountinfo from '../../screens/ProfileScreen/Changeaccountinfo';
 
 import { Auth } from 'aws-amplify';
 import ProfileScreen from './profile';
 import { color } from '../../styles/theme';
+
 const AccountSettings = ({ navigation }) => {
-
-
-const Changeaccountinfo = ({ navigation }) => {
   return (
-    <View style={{backgroundColor: color.bg, minHeight: '100%'}}>
-      <ProfileScreen/>
+    <View style={{ backgroundColor: color.bg, minHeight: '100%' }}>
+      <ProfileScreen />
       <Nav />
       <Button
         //user aws app sync to handle, only after our data schema is finalisedd
-        onPress={() => { navigation.navigate('Change User infomation') }}
+        onPress={() => { }}
         title="Change account information"
         style={style.buttonStyle}
       />
@@ -39,6 +38,10 @@ const Changeaccountinfo = ({ navigation }) => {
     </View>
   )
 }
+
+
+export default AccountSettings;
+
 const style = StyleSheet.create({
   buttonStyle: {
     color: 'green',
@@ -48,6 +51,3 @@ const style = StyleSheet.create({
     height: '40px'
   }
 })
-
-
-export default Changeaccountinfo;
