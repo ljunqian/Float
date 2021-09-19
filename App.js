@@ -20,6 +20,7 @@ import RewardScreen from './src/screens/RewardScreen/';
 import AccountSettings from './src/screens/ProfileScreen/AccountSettings.js';
 
 import MeditateScreen from './src/screens/Guides/MeditateScreen';
+import GuideDetail from './src/screens/Guides/MeditateScreen/GuideDetail.js';
 import FocusScreen from './src/screens/Guides/FocusScreen';
 import SleepScreen from './src/screens/Guides/SleepScreen';
 import MoveScreen from './src/screens/Guides/MoveScreen';
@@ -239,6 +240,9 @@ const App = () => {
           })}
          
          />
+
+         <Stack.Screen name="Meditate Activity" component={GuideDetail} />
+
        </Stack.Navigator>
      </NavigationContainer>
        )
