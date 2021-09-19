@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Text, View, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import ProfileScreen from './profile';
-import { Icon } from 'react-native-elements';
 import typo from '../../styles/typography';
 
 import { Auth } from 'aws-amplify';

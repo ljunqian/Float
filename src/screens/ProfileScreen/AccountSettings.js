@@ -1,20 +1,26 @@
 import React, { useState } from 'react';
 import { Button, Text, View, StyleSheet, Image, TextInputField } from 'react-native';
 import Nav from './Nav';
+
 import { Auth } from 'aws-amplify';
+import { DataStore } from '@aws-amplify/datastore';
+import { SQLiteAdapter } from '@aws-amplify/datastore-storage-adapter';
+import { User } from "../../../src/models";
 
-const AccountSettings = ({ navigation }) => {
+DataStore.configure({
+  storageAdapter: SQLiteAdapter
+});
 
-  const [name, setName] = useState('')
 
+const Changeaccountinfo = ({ navigation }) => {
   return (
     <View>
       <Image source={{ uri: 'https://images.unsplash.com/photo-1529665253569-6d01c0eaf7b6?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZmlsZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80' }}
         style={{ width: 160, height: 160, borderRadius: 80, marginTop: 30, alignSelf: 'center' }} />
       <Nav />
       <Button
-      //user aws app sync to handle, only after our data schema is finalisedd
-        onPress={() => {  }}
+        //user aws app sync to handle, only after our data schema is finalisedd
+        onPress={() => { navigation.navigate('Change User infomation') }}
         title="Change account information"
         style={style.buttonStyle}
       />
@@ -48,4 +54,4 @@ const style = StyleSheet.create({
 })
 
 
-export default AccountSettings;
+export default Changeaccountinfo;

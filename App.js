@@ -16,7 +16,9 @@ import ExploreScreen from './src/screens/Guides/ExploreScreen';
 import ProfileScreen from './src/screens/ProfileScreen/';
 import RewardScreen from './src/screens/RewardScreen/';
 import AccountSettings from './src/screens/ProfileScreen/AccountSettings.js';
-
+import Changeaccountinfo from './src/screens/ProfileScreen/Changeaccountinfo';
+import LoginScreen from './src/screens/Authenticate/LoginScreen';
+import SignUpScreen from './src/screens/Authenticate/SignUpScreen';
 import MeditateScreen from './src/screens/Guides/MeditateScreen';
 import FocusScreen from './src/screens/Guides/FocusScreen';
 import SleepScreen from './src/screens/Guides/SleepScreen';
@@ -38,7 +40,6 @@ Amplify.configure(config)
 import { Analytics } from 'aws-amplify'
 Analytics.configure({ disabled: true })
 
-
 import CoinIcon from './src/assets/icons/coin.png';
 
 const Tab = createBottomTabNavigator();
@@ -47,7 +48,6 @@ const Stack = createNativeStackNavigator();
 
 const BottomBar = () => {
   return (
-
     <Tab.Navigator style={{ height: 60 }}>
       <Tab.Screen name="Explore" component={ExploreScreen}
         options={({ }) => ({
@@ -129,12 +129,6 @@ const App = () => {
               </TouchableOpacity>
             ),
             headerTitle: () => (<View />),
-
-          })}
-        />
-        <Stack.Screen name="Splash" component={SplashScreen}
-          options={({ navigation }) => ({
-            headerShown: false
           })}
         />
         <Stack.Screen name="Profile" component={ProfileScreen}
@@ -147,9 +141,7 @@ const App = () => {
               </TouchableOpacity>
             ),
             headerTitle: () => (<View />),
-
           })}
-
         />
         <Stack.Screen name="Reward" component={RewardScreen}
           options={({ navigation }) => ({
@@ -159,14 +151,24 @@ const App = () => {
               <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <Image source={CoinIcon} style={{ marginRight: 4 }} />
                 <Text style={{ fontSize: 18, fontFamily: 'FredokaOne-Regular' }}>
-                  {info.meditateD}
                 </Text>
               </View>
             )
-
           })}
         />
-        <Stack.Screen name="Account Settings" component={AccountSettings} />
+        <Stack.Screen name="Account Settings" component={AccountSettings}
+          options={({ navigation }) => ({
+            headerRight: () => (
+              <TouchableOpacity
+                onPress={() => console.log("pressed")}
+              >
+                <Icon name="create" size={30} color="black" onPress={() => { navigation.navigate('Account Settings') }} />
+              </TouchableOpacity>
+            ),
+            headerTitle: () => (<View />),
+          })} />
+
+        <Stack.Screen name="Change User infomation" component={Changeaccountinfo}></Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   );
