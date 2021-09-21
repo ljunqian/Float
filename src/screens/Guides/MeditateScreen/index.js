@@ -12,6 +12,7 @@ import Med2 from '../../../assets/images/med2.png';
 import Med3 from '../../../assets/images/med3.png';
 import Sleep3 from '../../../assets/images/sleep3.png';
 import { overflow } from 'styled-system';
+import play from '../../../assets/icons/play.png';
 
 /*TODO:
   1. Change <View> into <TouchableOpacity> for GuideCardComponent
@@ -67,7 +68,8 @@ const MeditateScreen = ({navigation}) => {
             <Text style={typo.H1}>
               Meditation Session
             </Text>
-            <TouchableOpacity style={[layout.big_button, {backgroundColor: color.Med3, marginBottom: 30, zIndex:2}]}>
+            <TouchableOpacity style={[layout.big_button, {backgroundColor: color.Med3, marginBottom: 30, zIndex:2, flexDirection: 'row'}]}>
+                <Image source={play} style={{marginRight: 5}} />
                 <Text style={[typo.T4, {color: 'white', fontWeight: '400'}]}>
                   Play
                 </Text>

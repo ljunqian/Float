@@ -9,6 +9,7 @@ import SleepAvatar from '../../../assets/images/sleep-avatar.png';
 import Sleep1 from '../../../assets/images/sleep1.png';
 import Sleep2 from '../../../assets/images/sleep2.png';
 import Sleep3 from '../../../assets/images/sleep3.png';
+import play from '../../../assets/icons/play.png';
 
 
 const GuideCardComponent = (props) => {
@@ -60,7 +61,8 @@ const SleepScreen = ({navigation}) => {
             <Text style={typo.H1}>
               Sleep Session
             </Text>
-            <TouchableOpacity style={[layout.big_button, {backgroundColor: color.Sleep3, marginBottom: 30, zIndex:2}]}>
+            <TouchableOpacity style={[layout.big_button, {backgroundColor: color.Sleep3, marginBottom: 30, zIndex:2, flexDirection: 'row'}]}>
+                <Image source={play} style={{marginRight: 5}} />
                 <Text style={[typo.T4, {color: 'white', fontWeight: '400'}]}>
                   Play
                 </Text>

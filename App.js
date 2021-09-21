@@ -195,10 +195,6 @@ const App = () => {
             headerLeft: null,
             headerTitle: () => (<View />),
           })}
-         
-         />
-
-         
         {isSignedIn && (
          <Stack.Screen name="Login" component={LoginScreen}
          screenOptions={() => ({

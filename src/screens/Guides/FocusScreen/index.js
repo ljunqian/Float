@@ -6,10 +6,12 @@ import { color } from '../../../styles/theme';
 import * as Progress from 'react-native-progress';
 import FocusBG from '../../../assets/images/focus-planet.png';
 import SleepAvatar from '../../../assets/images/sleep-avatar.png';
+
 import Focus1 from '../../../assets/images/focus-1.png';
 import Focus2 from '../../../assets/images/focus2.png';
 import Focus3 from '../../../assets/images/focus3.png';
 import Focus4 from '../../../assets/images/sleep3.png';
+
 
 
 const GuideCardComponent = (props) => {
@@ -61,7 +63,9 @@ const FocusScreen = ({navigation}) => {
             <Text style={typo.H1}>
               Your Focus Session
             </Text>
+
             <TouchableOpacity style={[layout.big_button, {backgroundColor: color.Focus3, marginBottom: 30, zIndex:2}]}>
+
                 <Text style={[typo.T4, {color: 'white', fontWeight: '400'}]}>
                   Play
                 </Text>
