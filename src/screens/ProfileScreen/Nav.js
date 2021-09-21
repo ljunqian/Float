@@ -53,11 +53,11 @@ const Nav = () => {
     }}>
       <View style={styles.row}>
         <Text style = {styles.container}>Username </Text>
-        <Text style = {styles.container}>user</Text>
+        <Text style = {styles.container}>ljunqian</Text>
       </View>
       <View style={styles.row}>
         <Text style = {styles.container}>Email </Text>
-        <Text style = {styles.container}>user@email.com</Text>
+        <Text style = {styles.container}>ljunqian@gmail.com</Text>
       </View>
       <View style={styles.row}>
         <Text style = {styles.container}>Phone number </Text>

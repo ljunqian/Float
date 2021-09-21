@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Image, StyleSheet, KeyboardAvoidingView, Text, ScrollView } from 'react-native';
+import { View, Image, StyleSheet, KeyboardAvoidingView, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { Input, NativeBaseProvider, Select, Button } from 'native-base';
 import { Auth } from 'aws-amplify';
 import typo from '../../styles/typography';
@@ -40,16 +40,20 @@ const SignUpScreen = ({ navigation }) => {
         <View style={{ width: '100%', }}>
           <KeyboardAvoidingView
             behavior="position"
-            style={{ margin: 20, justifyContent: 'flex-start', display: 'flex', width: '100%', }}
+            style={{  justifyContent: 'flex-start', display: 'flex', width: '100%', }}
           >
+          <View style={{justifyContent: 'center',
+                                  alignItems: 'center'}}>
             <Image source={FloatLogo} style={{ width: 120, height: 120 }} />
             <Text style={[typo.H0]}>
               Sign Up
-            </Text>
+            </Text></View>
+            <View style={{marginLeft:40}}>
             <Text style={[typo.H2, { color: 'white', marginTop: 10 }]}>
               Username
             </Text>
             <Input
+              style = {{width:331, height:40}}
               value={username}
               onChange={(e) => { setUsername(e.target.value) }}
               variant="underlined"
@@ -61,6 +65,7 @@ const SignUpScreen = ({ navigation }) => {
               Email
             </Text>
             <Input
+              style = {{width:331, height:40}}
               value={email}
               onChange={onChangeEmail}
               type="email"
@@ -76,9 +81,9 @@ const SignUpScreen = ({ navigation }) => {
               value={password}
               onChange={onChangePassword}
               variant="underlined"
-              placeholder="Passoword"
+              placeholder="Password"
               type="password"
-              style={{ color: 'white' }}
+              style={{ color: 'white', width:331, height:40 }}
               _light={{ color: "white", }}
               _dark={{ color: "white", }}
             />
@@ -86,6 +91,7 @@ const SignUpScreen = ({ navigation }) => {
               Phone Number
             </Text>
             <Input
+              style = {{width:331, height:40}}
               value={phone}
               onChange={onChangePhone}
               type="email"
@@ -97,7 +103,10 @@ const SignUpScreen = ({ navigation }) => {
             <Text style={[typo.H2, { color: 'white', marginTop: 10 }]}>
               Gender
             </Text>
+            <View
+            style={{width:331, height:45}}>
             <Select
+
               selectedValue={gender}
               minWidth={200}
               accessibilityLabel="Gender"
@@ -112,18 +121,25 @@ const SignUpScreen = ({ navigation }) => {
               <Select.Item label="Female" value="F" />
               <Select.Item label="Male" value="M" />
               <Select.Item label="Others" value="NA" />
-            </Select>
-            <Text style={[typo.H2, { color: 'white', marginTop: 10 }]}>
-              Birthday
-            </Text>
+            </Select></View>
 
-
-
-            <Button onPress={onSignUp}>
-              Sign Up
-            </Button>
+            <TouchableOpacity onPress={() => {onSignUp()}}>
+                        <View style={{
+                        marginTop:10,
+                            marginRight:46,
+                            height: 48,
+                            backgroundColor: '#4263DD',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            borderRadius: 35
+                          }}
+                        >
+                          <Text style={{ color: 'white' }}>Login</Text>
+                        </View>
+                      </TouchableOpacity>
+            </View>
             <Text onPress={() => { navigation.navigate('Login') }}
-              style={{ color: 'white' }}
+              style={{ color: 'white', marginLeft:40, marginTop:15 }}
             >
               Already have an account? Log in.
             </Text>

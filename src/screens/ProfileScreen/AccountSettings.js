@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Text, View, StyleSheet, Image, TextInputField } from 'react-native';
+import { Button, Text, View, StyleSheet, Image, TextInputField, TouchableOpacity } from 'react-native';
 import Nav from './Nav';
 import Changeaccountinfo from '../../screens/ProfileScreen/Changeaccountinfo';
 
@@ -21,28 +21,60 @@ const AccountSettings = ({ navigation }) => {
     <View style={{ backgroundColor: color.bg, minHeight: '100%' }}>
       <ProfileScreen />
       <Nav />
-      <Button
-        //user aws app sync to handle, only after our data schema is finalisedd
-        onPress={() => { }}
-        title="Change account information"
-        style={style.buttonStyle}
-      />
-      <Button
-        onPress={() => { }}
-        title="Change my Password"
-        style={style.buttonStyle}
-      />
-      <Button
-        onPress={() => { handlesignOut()}}
-        title="Signout"
-        style={style.buttonStyle}
-      />
-      <Button
-        onPress={() => {Auth.currentAuthenticatedUser().then(console.log) }}
-        title="Delete my account"
-        color="#ff0000"
-        style={style.warnStyle}
-      />
+      <View style={{marginLeft:50}}>
+      <TouchableOpacity onPress={() => {}}>
+        <View style={{
+                      marginTop:10,
+                      marginRight:46,
+                      height: 40,
+                      backgroundColor: '#4263DD',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      borderRadius: 35
+                      }}>
+            <Text style={{ color: 'white' }}>Edit Profile</Text>
+        </View>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => {}}>
+        <View style={{
+                      marginTop:10,
+                      marginRight:46,
+                      height: 40,
+                      backgroundColor: '#4263DD',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      borderRadius: 35
+                      }}>
+            <Text style={{ color: 'white' }}>Change Password</Text>
+        </View>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => {handlesignOut()}}>
+        <View style={{
+                      marginTop:10,
+                      marginRight:46,
+                      height: 40,
+                      backgroundColor: '#4263DD',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      borderRadius: 35
+                      }}>
+            <Text style={{ color: 'white' }}>Sign Out</Text>
+        </View>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => {Auth.currentAuthenticatedUser().then(console.log)}}>
+        <View style={{
+                      marginTop:10,
+                      marginRight:46,
+                      height: 40,
+                      backgroundColor: 'red',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      borderRadius: 35
+                      }}>
+            <Text style={{ color: 'white' }}>Delete Account</Text>
+        </View>
+      </TouchableOpacity>
+       </View>
     </View>
   )
 }

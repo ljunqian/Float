@@ -32,10 +32,15 @@ const LoginScreen = ({ navigation }) => {
         style={styles.container}
       >
         <View style={{ width: '100%', }}>
-          <Image source={FloatLogo} style={{ width: 120, height: 120 }} />
-          <Text style={[typo.H0]}>
-            Login
-          </Text>
+          <View style={{width:'100%',
+          justifyContent: 'center',
+          alignItems: 'center'}}>
+
+            <Image source={FloatLogo} style={{ width: 160, height: 160 }} />
+                <Text style={[typo.H0]}>
+                    Float
+                </Text>
+          </View>
           <KeyboardAvoidingView
             behavior="position"
             style={{ margin: 20, justifyContent: 'flex-start', display: 'flex', width: '100%', }}
@@ -44,16 +49,18 @@ const LoginScreen = ({ navigation }) => {
               Email
             </Text>
             <Input
+              style = {{width:331, height:40}}
               value={email}
               onChangeText={setEmail}
               variant="underlined"
               placeholder="Your Email Address"
               color='white'
             />
-            <Text style={[typo.H2, { color: 'white' }]}>
+            <Text style={[typo.H2, { color: 'white', paddingTop:20 }]}>
               Password
             </Text>
             <Input
+                style = {{width:331, height:40}}
               value={password}
               onChangeText={setPassword}
               variant="underlined"
@@ -62,9 +69,23 @@ const LoginScreen = ({ navigation }) => {
               color='white'
             />
           </KeyboardAvoidingView>
-          <Button onPress={() => { signIn() }}>
-            Login
-          </Button>
+
+
+
+          <TouchableOpacity onPress={() => {signIn()}}>
+            <View style={{
+                marginLeft:20,
+                marginRight:20,
+                height: 48,
+                backgroundColor: '#4263DD',
+                alignItems: 'center',
+                justifyContent: 'center',
+                borderRadius: 35
+              }}
+            >
+              <Text style={{ color: 'white' }}>Login</Text>
+            </View>
+          </TouchableOpacity>
           <TouchableOpacity>
             <Text style={styles.forgotButton}>
               Forgot password?
@@ -72,27 +93,37 @@ const LoginScreen = ({ navigation }) => {
           </TouchableOpacity>
           <TouchableOpacity onPress={() => { navigation.navigate('Signup') }} >
             <Text style={styles.navButtonText} >
-              Don't have an acount? Create here
+              Don't have an account? Create here
             </Text>
           </TouchableOpacity>
-          {errorstate && (<Text style={styles.navButtonText}>{errorMessage}</Text>)}
+          {errorstate && (<Text style={styles.errorText}>{errorMessage}</Text>)}
         </View>
       </View>
     </NativeBaseProvider >
   )
 }
 const styles = StyleSheet.create({
-  container: { width: '100%', display: 'flex', padding: 10, minHeight: '100%', alignItems: 'center', backgroundColor: color.bg },
+  container: { width: '100%', display: 'flex', paddingLeft: 20, paddingRight:20, minHeight: '100%', alignItems: 'center', backgroundColor: color.bg },
   forgotButton: {
     marginVertical: 10,
+    marginLeft:20,
     color: 'white',
   },
   navButtonText: {
-    fontSize: 18,
+  marginLeft:20,
+    fontSize: 14,
     fontWeight: '500',
     color: 'white',
     fontFamily: 'Lato-Regular',
   },
+  errorText: {
+  marginTop:30,
+    marginLeft:20,
+      fontSize: 14,
+      fontWeight: '500',
+      color: 'red',
+      fontFamily: 'Lato-Regular',
+    },
 
 })
 
