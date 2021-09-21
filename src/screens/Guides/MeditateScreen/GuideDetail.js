@@ -1,27 +1,30 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import typo from '../../../styles/typography';
+import { guide } from './constants';
 
-const GuideDetail = ({ navigation }) => {
+const GuideDetail = ({ navigation, props }) => {
     {
         /*TODO:
         1. Apply styles to Button Text (refer to meditate page)
-        2. Create Text widget for 'Title', 'Duration', 'Description'
-        3. Apply styles from 'typography' to respective texts       
-            - import ../styles/typography.js
-            - apply correct style based on wireframe
+        2. Apply styles from 'typography' to respective texts [Done]      
+            - import ../styles/typography.js [Done]
+            - apply correct style based on wireframe 
         */
     }
     return (
         <View style={{display: 'flex'}}> 
             {/*IMAGE DIV*/}
             <View style={styles.imgContainer}>
-                <Text style={styles.imgContainer}>Guide Activity</Text>
+                <Text style={styles.imgContainer}></Text>
             </View>
 
             {/*CONTENT DIV*/}
             <View style={styles.cntContainer}>
                 {/*Todo: #2*/}
-                <Text>res ipsa loquitur</Text>
+                <Text style={typo.H4}>Title of the activity</Text>
+                <Text style={[typo.T3, {marginBottom: 20}]}>Meditation ⚪ 1 min</Text>
+                <Text style={typo.T3}>Description</Text>
             </View>
 
             {/*BUTTON DIV*/}
