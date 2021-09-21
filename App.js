@@ -241,10 +241,18 @@ const App = () => {
          
          />
 
-         <Stack.Screen name="Meditate Activity" component={GuideDetail} />
+         <Stack.Screen name="Meditate Activity" component={GuideDetail} 
+          options={()=>({
+            headerShadowVisible: false,
+            headerTitleStyle: {color:'white'},
+            headerTintColor: 'white',
+            headerTitle: ''
+          })}
+         />
 
        </Stack.Navigator>
      </NavigationContainer>
+    
        )
    );
  };
