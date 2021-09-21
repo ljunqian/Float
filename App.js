@@ -21,6 +21,7 @@ import Changeaccountinfo from './src/screens/ProfileScreen/Changeaccountinfo';
 import LoginScreen from './src/screens/Authenticate/LoginScreen';
 import SignUpScreen from './src/screens/Authenticate/SignUpScreen';
 import MeditateScreen from './src/screens/Guides/MeditateScreen';
+import GuideDetail from './src/screens/Guides/MeditateScreen/GuideDetail.js';
 import FocusScreen from './src/screens/Guides/FocusScreen';
 import SleepScreen from './src/screens/Guides/SleepScreen';
 import MoveScreen from './src/screens/Guides/MoveScreen';
@@ -194,7 +195,10 @@ const App = () => {
             headerLeft: null,
             headerTitle: () => (<View />),
           })}
-        >
+         
+         />
+
+         
         {isSignedIn && (
          <Stack.Screen name="Login" component={LoginScreen}
          screenOptions={() => ({
@@ -205,6 +209,16 @@ const App = () => {
          })}
        />
         )}
+        <Stack.Screen name="Meditate Activity" component={GuideDetail} 
+          options={()=>({
+            headerShadowVisible: false,
+            headerTitleStyle: {color:'white'},
+            headerTintColor: 'white',
+            headerTitle: ''
+          })}
+         />
+
+        
           <Stack.Screen name="Signup" component={SignUpScreen}
             options={({ navigation }) => ({
               headerShown: false
@@ -269,6 +283,7 @@ const App = () => {
     )
   );
 };
+
 
 
 export default App;

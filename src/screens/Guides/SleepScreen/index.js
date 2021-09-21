@@ -50,7 +50,7 @@ const SleepScreen = ({navigation}) => {
             progress={0.4}
             width={100}
             height={8}
-            color={'#074EE8'}
+            color={color.Sleep3}
             unfilledColor={'white'}
             borderWidth={0}
           />
