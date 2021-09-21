@@ -11,6 +11,10 @@ import Sleep2 from '../../../assets/images/sleep2.png';
 import Sleep3 from '../../../assets/images/sleep3.png';
 import play from '../../../assets/icons/play.png';
 
+/*TODO:
+  1. Change <View> into <TouchableOpacity> for GuideCardComponent
+  2. Set 'onPress' handler to GuideDetail page  
+*/
 
 const GuideCardComponent = (props) => {
   return (

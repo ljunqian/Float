@@ -14,6 +14,10 @@ import Sleep3 from '../../../assets/images/sleep3.png';
 import { overflow } from 'styled-system';
 import play from '../../../assets/icons/play.png';
 
+/*TODO:
+  1. Change <View> into <TouchableOpacity> for GuideCardComponent 
+  2. Set 'onPress' handler to GuideDetail page  
+*/
 
 const GuideCardComponent = (props) => {
   return (

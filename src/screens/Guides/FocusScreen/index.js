@@ -6,18 +6,16 @@ import { color } from '../../../styles/theme';
 import * as Progress from 'react-native-progress';
 import FocusBG from '../../../assets/images/focus-planet.png';
 import SleepAvatar from '../../../assets/images/sleep-avatar.png';
-<<<<<<< HEAD
-import Sleep1 from '../../../assets/images/sleep1.png';
-import Sleep2 from '../../../assets/images/sleep2.png';
-import Sleep3 from '../../../assets/images/sleep3.png';
-import play from '../../../assets/icons/play.png';
-=======
 import Focus1 from '../../../assets/images/focus-1.png';
 import Focus2 from '../../../assets/images/focus2.png';
 import Focus3 from '../../../assets/images/focus3.png';
 import Focus4 from '../../../assets/images/sleep3.png';
->>>>>>> origin/Hao-Weng
+import play from '../../../assets/icons/play.png';
 
+/*TODO:
+  1. Change <View> into <TouchableOpacity> for GuideCardComponent
+  2. Set 'onPress' handler to GuideDetail page  
+*/
 
 const GuideCardComponent = (props) => {
   return (
@@ -79,11 +77,12 @@ const FocusScreen = ({navigation}) => {
       <View style={layout.container}>
         <ImageBackground source={Focus1} style={{width:'100%'}}>
         <View style={{height: 155, display: 'flex', 
-          flexDirection: 'row',padding: 12,
+          flexDirection: 'row', padding: 12,
           borderRadius: 20,
           margin: 6, }}>
-          <View style={{flex: 1}}>
-            <Text style={[typo.T1, {color: 'white'}]}>
+          <View style={{flex: 1}}></View>
+          <View style={{flex: 3, alignItems: 'center', justifyContent: 'center'}}>
+            <Text style={[typo.H4, {color: 'white'}]}>
               Featured
             </Text> 
           </View>
