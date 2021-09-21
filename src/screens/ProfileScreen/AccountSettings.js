@@ -8,6 +8,15 @@ import ProfileScreen from './profile';
 import { color } from '../../styles/theme';
 
 const AccountSettings = ({ navigation }) => {
+
+  async function handlesignOut() {
+    try {
+        await Auth.signOut();
+        navigation.navigate('Login');
+    } catch (error) {
+        console.log('error signing out: ', error);
+    }
+}
   return (
     <View style={{ backgroundColor: color.bg, minHeight: '100%' }}>
       <ProfileScreen />
@@ -23,18 +32,17 @@ const AccountSettings = ({ navigation }) => {
         title="Change my Password"
         style={style.buttonStyle}
       />
-      {/*
       <Button
-        onPress={() => { Auth.signOut(); }}
+        onPress={() => { handlesignOut()}}
         title="Signout"
         style={style.buttonStyle}
       />
       <Button
-        onPress={() => { }}
+        onPress={() => {Auth.currentAuthenticatedUser().then(console.log) }}
         title="Delete my account"
         color="#ff0000"
         style={style.warnStyle}
-      /> */}
+      />
     </View>
   )
 }

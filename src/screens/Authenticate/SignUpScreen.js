@@ -1,130 +1,142 @@
-import React, { useContext, useState } from 'react';
-import { View, Text, TouchableOpacity, Platform, StyleSheet, Button } from 'react-native';
-import FormInput from '../../../components/FormInput';
-import FormButton from '../../../components/FormButton';
-
-import CustomDatePicker from '../../../components/datepicker';
-
+import React, { useState } from 'react';
+import { View, Image, StyleSheet, KeyboardAvoidingView, Text, ScrollView } from 'react-native';
+import { Input, NativeBaseProvider, Select, Button } from 'native-base';
 import { Auth } from 'aws-amplify';
+import typo from '../../styles/typography';
+import { color } from '../../styles/theme';
+import FloatLogo from '../../assets/images/float.png';
 
+const initialState = { name: '', description: '' }
 
-const SignupScreen = ({ navigation }) => {
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-  const [confirmPassword, setConfirmPassword] = useState();
+const SignUpScreen = ({ navigation }) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('');
+  const [phone, setPhone] = useState('');
+  const [gender, setGender] = useState('M');
+  const [birthday, setBirthday] = useState('');
 
-  const [date, setDate] = useState(new Date(1598051730000));
-  const [mode, setMode] = useState('date');
-  const [show, setShow] = useState(false);
+  const onChangeEmail = (e) => {
+    setEmail(e.target.value);
+  }
 
-  const onChange = (event, selectedDate) => {
-    const currentDate = selectedDate || date;
-    setShow(Platform.OS === 'ios');
-    setDate(currentDate);
-  };
+  const onChangePassword = (e) => {
+    setPassword(e.target.value);
+  }
 
-  const showMode = (currentMode) => {
-    setShow(true);
-    setMode(currentMode);
-  };
+  const onChangePhone = (e) => {
+    setPhone(e.target.value);
+  }
 
-  const showDatepicker = () => {
-    showMode('date');
-  };
-
-  const showTimepicker = () => {
-    showMode('time');
-  };
+  const onSignUp = () => {
+    console.log("sign up")
+  }
 
   return (
+    <NativeBaseProvider>
+      <ScrollView
+        style={styles.container}
+      >
+        <View style={{ width: '100%', }}>
+          <KeyboardAvoidingView
+            behavior="position"
+            style={{ margin: 20, justifyContent: 'flex-start', display: 'flex', width: '100%', }}
+          >
+            <Image source={FloatLogo} style={{ width: 120, height: 120 }} />
+            <Text style={[typo.H0]}>
+              Sign Up
+            </Text>
+            <Text style={[typo.H2, { color: 'white', marginTop: 10 }]}>
+              Username
+            </Text>
+            <Input
+              value={username}
+              onChange={(e) => { setUsername(e.target.value) }}
+              variant="underlined"
+              placeholder="Username"
+              _light={{ color: "white", }}
+              _dark={{ color: "white", }}
+            />
+            <Text style={[typo.H2, { color: 'white', marginTop: 10 }]}>
+              Email
+            </Text>
+            <Input
+              value={email}
+              onChange={onChangeEmail}
+              type="email"
+              variant="underlined"
+              placeholder="Your Email Address"
+              _light={{ color: "white", }}
+              _dark={{ color: "white", }}
+            />
+            <Text style={[typo.H2, { color: 'white', marginTop: 10 }]}>
+              Password
+            </Text>
+            <Input
+              value={password}
+              onChange={onChangePassword}
+              variant="underlined"
+              placeholder="Passoword"
+              type="password"
+              style={{ color: 'white' }}
+              _light={{ color: "white", }}
+              _dark={{ color: "white", }}
+            />
+            <Text style={[typo.H2, { color: 'white', marginTop: 10 }]}>
+              Phone Number
+            </Text>
+            <Input
+              value={phone}
+              onChange={onChangePhone}
+              type="email"
+              variant="underlined"
+              placeholder="Your Email Address"
+              _light={{ color: "white", }}
+              _dark={{ color: "white", }}
+            />
+            <Text style={[typo.H2, { color: 'white', marginTop: 10 }]}>
+              Gender
+            </Text>
+            <Select
+              selectedValue={gender}
+              minWidth={200}
+              accessibilityLabel="Gender"
+              placeholder="Gender"
+              onValueChange={(itemValue) => setGender(itemValue)}
+              _selectedItem={{
+                bg: "cyan.600",
+              }}
+              _light={{ color: "white", }}
+              _dark={{ color: "white", }}
+            >
+              <Select.Item label="Female" value="F" />
+              <Select.Item label="Male" value="M" />
+              <Select.Item label="Others" value="NA" />
+            </Select>
+            <Text style={[typo.H2, { color: 'white', marginTop: 10 }]}>
+              Birthday
+            </Text>
 
-    <View style={styles.container}>
-      <Text style={styles.text}>Create an account</Text>
-
-      <FormInput
-        labelValue={email}
-        onChangeText={(userEmail) => setEmail(userEmail)}
-        placeholderText="Email"
-        iconType="user"
-        keyboardType="email-address"
-        autoCapitalize="none"
-        autoCorrect={false}
-      />
-
-      <FormInput
-        labelValue={password}
-        onChangeText={(userPassword) => setPassword(userPassword)}
-        placeholderText="Password"
-        iconType="lock"
-        secureTextEntry={true}
-      />
 
 
-
-      <FormButton
-        buttonTitle="Sign Up"
-        onPress={() => register(email, password)}
-      />
-
-      <View style={styles.textPrivate}>
-        <Text style={styles.color_textPrivate}>
-          By registering, you confirm that you accept our{' '}
-        </Text>
-        <TouchableOpacity onPress={() => alert('Terms Clicked!')}>
-          <Text style={[styles.color_textPrivate, { color: '#e88832' }]}>
-            Terms of service
-          </Text>
-        </TouchableOpacity>
-        <Text style={styles.color_textPrivate}> and </Text>
-        <Text style={[styles.color_textPrivate, { color: '#e88832' }]}>
-          Privacy Policy
-        </Text>
-      </View>
-
-      <TouchableOpacity
-        style={styles.navButton}
-        onPress={() => navigation.navigate('Login')}>
-        <Text style={styles.navButtonText}>Have an account? Sign In</Text>
-      </TouchableOpacity>
-    </View>
-  );
-};
-
-export default SignupScreen;
+            <Button onPress={onSignUp}>
+              Sign Up
+            </Button>
+            <Text onPress={() => { navigation.navigate('Login') }}
+              style={{ color: 'white' }}
+            >
+              Already have an account? Log in.
+            </Text>
+          </KeyboardAvoidingView>
+        </View>
+      </ScrollView>
+    </NativeBaseProvider>
+  )
+}
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#f9fafd',
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
-  },
-  text: {
-    fontFamily: 'Kufam-SemiBoldItalic',
-    fontSize: 28,
-    marginBottom: 10,
-    color: '#051d5f',
-  },
-  navButton: {
-    marginTop: 15,
-  },
-  navButtonText: {
-    fontSize: 18,
-    fontWeight: '500',
-    color: '#2e64e5',
-    fontFamily: 'Lato-Regular',
-  },
-  textPrivate: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    marginVertical: 35,
-    justifyContent: 'center',
-  },
-  color_textPrivate: {
-    fontSize: 13,
-    fontWeight: '400',
-    fontFamily: 'Lato-Regular',
-    color: 'grey',
-  },
-});
+  container: { flex: 1, backgroundColor: color.bg },
+  image: { height: '50%', width: '50%' }
+})
+
+export default SignUpScreen;

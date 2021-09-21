@@ -1,93 +1,99 @@
+import React, { useState } from 'react'
+import { View, Image, StyleSheet, Text, KeyboardAvoidingView, TouchableOpacity } from 'react-native'
+import { Input, Center, NativeBaseProvider, Button } from "native-base"
+import { Auth } from 'aws-amplify';
+import typo from '../../styles/typography';
 
-import React, { useContext, useState } from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Image,
-  Platform,
-  StyleSheet,
-  ScrollView
-} from 'react-native';
-import FormInput from '../../../components/FormInput';
-import FormButton from '../../../components/FormButton';
+import FloatLogo from '../../assets/images/float.png';
+import { color } from '../../styles/theme';
+
+const initialState = { name: '', description: '' }
 
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errorstate, seterrorState] = useState(false);
+  const [errorMessage, seterrorMessage] = useState('');
+
+  async function signIn() {
+    try {
+      const user = await Auth.signIn(email, password);
+      navigation.navigate('Guides');
+    } catch (error) {
+      console.log('error signing in', error);
+      seterrorState(true);
+      seterrorMessage(error.message)
+    }
+  } 
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.text}>Float</Text>
-
-      <FormInput
-        labelValue={email}
-        onChangeText={(userEmail) => setEmail(userEmail)}
-        placeholderText="Email"
-        iconType="user"
-        keyboardType="email-address"
-        autoCapitalize="none"
-        autoCorrect={false}
-      />
-
-      <FormInput
-        labelValue={password}
-        onChangeText={(userPassword) => setPassword(userPassword)}
-        placeholderText="Password"
-        iconType="lock"
-        secureTextEntry={true}
-      />
-
-      <FormButton
-        buttonTitle="Sign In"
-        onPress={() => login(email, password)}
-      />
-
-      <TouchableOpacity style={styles.forgotButton} onPress={() => { }}>
-        <Text style={styles.navButtonText}>Forgot Password?</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style={styles.forgotButton}
-        onPress={() => navigation.navigate('Signup')}>
-        <Text style={styles.navButtonText}>
-          Don't have an acount? Create here
-        </Text>
-      </TouchableOpacity>
-    </ScrollView>
-  );
-};
-
-export default LoginScreen;
-
+    <NativeBaseProvider>
+      <View
+        style={styles.container}
+      >
+        <View style={{ width: '100%', }}>
+          <Image source={FloatLogo} style={{ width: 120, height: 120 }} />
+          <Text style={[typo.H0]}>
+            Login
+          </Text>
+          <KeyboardAvoidingView
+            behavior="position"
+            style={{ margin: 20, justifyContent: 'flex-start', display: 'flex', width: '100%', }}
+          >
+            <Text style={[typo.H2, { color: 'white' }]}>
+              Email
+            </Text>
+            <Input
+              value={email}
+              onChangeText={setEmail}
+              variant="underlined"
+              placeholder="Your Email Address"
+              color='white'
+            />
+            <Text style={[typo.H2, { color: 'white' }]}>
+              Password
+            </Text>
+            <Input
+              value={password}
+              onChangeText={setPassword}
+              variant="underlined"
+              placeholder="Password"
+              type="password"
+              color='white'
+            />
+          </KeyboardAvoidingView>
+          <Button onPress={() => { signIn() }}>
+            Login
+          </Button>
+          <TouchableOpacity>
+            <Text style={styles.forgotButton}>
+              Forgot password?
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => { navigation.navigate('Signup') }} >
+            <Text style={styles.navButtonText} >
+              Don't have an acount? Create here
+            </Text>
+          </TouchableOpacity>
+          {errorstate && (<Text style={styles.navButtonText}>{errorMessage}</Text>)}
+        </View>
+      </View>
+    </NativeBaseProvider >
+  )
+}
 const styles = StyleSheet.create({
-  container: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
-    paddingTop: 50
-  },
-  logo: {
-    height: 150,
-    width: 150,
-    resizeMode: 'cover',
-  },
-  text: {
-    fontFamily: 'Kufam-SemiBoldItalic',
-    fontSize: 28,
-    marginBottom: 10,
-    color: '#051d5f',
-  },
-  navButton: {
-    marginTop: 15,
-  },
+  container: { width: '100%', display: 'flex', padding: 10, minHeight: '100%', alignItems: 'center', backgroundColor: color.bg },
   forgotButton: {
-    marginVertical: 35,
+    marginVertical: 10,
+    color: 'white',
   },
   navButtonText: {
     fontSize: 18,
     fontWeight: '500',
-    color: '#2e64e5',
+    color: 'white',
     fontFamily: 'Lato-Regular',
   },
-});
+
+})
+
+export default LoginScreen;
