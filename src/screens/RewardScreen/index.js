@@ -50,10 +50,10 @@ import { display } from 'styled-system';
 const RewardScreen = ({ navigation }) => {
   const [tab, setIsTab] = useState("Background");
 
-  const [CardBGStatus, setIsCardBGStatus] = useState("");
+  const [CardBGStatus, setIsCardBGStatus] = useState(""); //initial data
   const [BGEquipped, setIsBGEquipped] = useState(CardBGStatus == "" ? "No" : "Yes");
 
-  const [CardHatStatus, setIsCardHatStatus] = useState("");
+  const [CardHatStatus, setIsCardHatStatus] = useState(""); //initial data
   const [HatEquipped, setIsHatEquipped] = useState(CardHatStatus == "" ? "No" : "Yes");
 
   const clickBackgroundTab = () =>{
@@ -179,9 +179,15 @@ const RewardScreen = ({ navigation }) => {
             <View style = {{flexDirection: 'column'}}>
               <View style = {style.rewardRowContainer}>
 
-              <TouchableOpacity onPress={Activate_MountainBG}>
-                <RewardCard asset="Mountain" id="1" coinsValue="200" img={Background_Mountain}/>
-              </TouchableOpacity>
+              {CardBGStatus != "Activate_MountainBG"? (
+                  <TouchableOpacity onPress={Activate_MountainBG}>
+                    <RewardCard asset="Mountain" id="1" coinsValue="200" img={Background_Mountain}/>
+                  </TouchableOpacity>
+                ):(
+                  <TouchableOpacity onPress={Activate_MountainBG}>
+                    <RewardCardEquipped asset="Mountain" id="1" img={Background_Mountain}/>
+                  </TouchableOpacity>
+              )}
 
                 <RewardCard asset="Starry Space" id="2" coinsValue="300" img={Background_StarrySpace}/>
               </View>
@@ -205,13 +211,19 @@ const RewardScreen = ({ navigation }) => {
                     </TouchableOpacity>
                 ):(
                   <TouchableOpacity onPress={Activate_CowboyHat}>
-                     <RewardCardEquipped asset="Cowboy" id="1" coinsValue="100" img={Hat1}/>
+                     <RewardCardEquipped asset="Cowboy" id="1" img={Hat1}/>
                   </TouchableOpacity>
                 )}
-               
-                <TouchableOpacity onPress={Activate_SantaHat}>
-                  <RewardCard asset="Santa" id="2" coinsValue="200" img={Hat2}/>
-                </TouchableOpacity>
+
+                {CardHatStatus != "Activate_SantaHat"? (
+                  <TouchableOpacity onPress={Activate_SantaHat}>
+                     <RewardCard asset="Santa" id="2" coinsValue="200" img={Hat2}/>
+                  </TouchableOpacity>
+                ):(
+                  <TouchableOpacity onPress={Activate_SantaHat}>
+                    <RewardCardEquipped asset="Santa" id="2" img={Hat2}/>
+                  </TouchableOpacity>
+                )}
 
               </View>
               <View style = {style.rewardRowContainer}>
@@ -318,7 +330,7 @@ const RewardCardEquipped = (props) => {
               </Text>
             <View style={{position:'absolute', right: 0, bottom: 0}}>
               <View style={[style.statusContainer, {backgroundColor: 'white'}]}>
-                  <Text style={[style.statusText, {color: 'black'}]}>Redeemed</Text>
+                  <Text style={[style.statusText, {color: 'black'}]}>Equipped</Text>
               </View>
             </View> 
           </View>
