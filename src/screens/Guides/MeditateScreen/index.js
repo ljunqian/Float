@@ -57,7 +57,7 @@ const MeditateScreen = ({navigation}) => {
             progress={0.4}
             width={100}
             height={8}
-            color={'#074EE8'}
+            color={'#F57212'}
             unfilledColor={'white'}
             borderWidth={0}
           />

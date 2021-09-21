@@ -50,7 +50,7 @@ const FocusScreen = ({navigation}) => {
             progress={0.4}
             width={100}
             height={8}
-            color={'#074EE8'}
+            color={color.Focus3}
             unfilledColor={'white'}
             borderWidth={0}
           />
@@ -60,7 +60,7 @@ const FocusScreen = ({navigation}) => {
             <Text style={typo.H1}>
               Focus Session
             </Text>
-            <TouchableOpacity style={[layout.big_button, {backgroundColor: color.Sleep3, marginBottom: 30, zIndex:2}]}>
+            <TouchableOpacity style={[layout.big_button, {backgroundColor: color.Focus3, marginBottom: 30, zIndex:2}]}>
                 <Text style={[typo.T4, {color: 'white', fontWeight: '400'}]}>
                   Play
                 </Text>
