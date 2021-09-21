@@ -1,8 +1,8 @@
 {
-    "identityPoolName": "float8e79b21a_identitypool_8e79b21a",
+    "identityPoolName": "float5f5df824_identitypool_5f5df824",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "float8e79b21a",
-    "userPoolName": "float8e79b21a_userpool_8e79b21a",
+    "resourceNameTruncated": "float5f5df824",
+    "userPoolName": "float5f5df824_userpool_5f5df824",
     "autoVerifiedAttributes": [
         "email"
     ],
@@ -21,7 +21,8 @@
         "email"
     ],
     "aliasAttributes": [
-        "email"
+        "email",
+        "preferred_username"
     ],
     "userpoolClientGenerateSecret": false,
     "userpoolClientRefreshTokenValidity": 30,
@@ -31,10 +32,10 @@
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "userpoolClientLambdaRole": "float88e79b21a_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "float55f5df824_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "8e79b21a",
-    "resourceName": "float8e79b21a",
+    "sharedId": "5f5df824",
+    "resourceName": "float5f5df824",
     "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {
         "Fn::GetAtt": [
@@ -49,12 +50,18 @@
         ]
     },
     "useDefault": "manual",
+    "triggers": "{\n  \"PostConfirmation\": [\n    \"custom\"\n  ]\n}",
     "userPoolGroupList": [],
     "serviceName": "Cognito",
+    "parentStack": {
+        "Ref": "AWS::StackId"
+    },
+    "breakCircularDependency": false,
+    "permissions": [],
     "dependsOn": [
         {
             "category": "function",
-            "resourceName": "float8e79b21aPostConfirmation",
+            "resourceName": "float5f5df824PostConfirmation",
             "triggerProvider": "Cognito",
             "attributes": [
                 "Arn",
@@ -65,12 +72,6 @@
     "thirdPartyAuth": false,
     "userPoolGroups": false,
     "adminQueries": false,
-    "triggers": "{\n  \"PostConfirmation\": [\n    \"custom\"\n  ]\n}",
     "hostedUI": false,
-    "parentStack": {
-        "Ref": "AWS::StackId"
-    },
-    "breakCircularDependency": false,
-    "permissions": [],
     "authProviders": []
 }
