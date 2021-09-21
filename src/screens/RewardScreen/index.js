@@ -51,10 +51,10 @@ const RewardScreen = ({ navigation }) => {
   const [tab, setIsTab] = useState("Background");
 
   const [CardBGStatus, setIsCardBGStatus] = useState("");
-  const [BGEquipped, setIsBGEquipped] = useState("No");
+  const [BGEquipped, setIsBGEquipped] = useState(CardBGStatus == "" ? "No" : "Yes");
 
   const [CardHatStatus, setIsCardHatStatus] = useState("");
-  const [HatEquipped, setIsHatEquipped] = useState("No");
+  const [HatEquipped, setIsHatEquipped] = useState(CardHatStatus == "" ? "No" : "Yes");
 
   const clickBackgroundTab = () =>{
     setIsTab("Background");
@@ -74,7 +74,7 @@ const RewardScreen = ({ navigation }) => {
 
   const Activate_MountainBG = () =>{
     if (BGEquipped == "Yes") {
-      setIsCardBGStatus("");
+      setIsCardBGStatus("Empty");
       setIsBGEquipped("No");
     } else {
       setIsCardBGStatus("Activate_MountainBG");
@@ -84,7 +84,7 @@ const RewardScreen = ({ navigation }) => {
 
   const Activate_CowboyHat = () =>{
     if (HatEquipped == "Yes" && CardHatStatus == "Activate_CowboyHat") {
-      setIsCardHatStatus("");
+      setIsCardHatStatus("Empty");
       setIsHatEquipped("No");
     } else {
       setIsCardHatStatus("Activate_CowboyHat");
@@ -199,9 +199,16 @@ const RewardScreen = ({ navigation }) => {
             <View style = {{flexDirection: 'column'}}>
               <View style = {style.rewardRowContainer}>
 
-                <TouchableOpacity onPress={Activate_CowboyHat}>
-                  <RewardCard asset="Cowboy" id="1" coinsValue="100" img={Hat1}/>
-                </TouchableOpacity>
+                {CardHatStatus != "Activate_CowboyHat"? (
+                    <TouchableOpacity onPress={Activate_CowboyHat}>
+                     <RewardCard asset="Cowboy" id="1" coinsValue="100" img={Hat1}/>
+                    </TouchableOpacity>
+                ):(
+                  <TouchableOpacity onPress={Activate_CowboyHat}>
+                     <RewardCardEquipped asset="Cowboy" id="1" coinsValue="100" img={Hat1}/>
+                  </TouchableOpacity>
+                )}
+               
                 <TouchableOpacity onPress={Activate_SantaHat}>
                   <RewardCard asset="Santa" id="2" coinsValue="200" img={Hat2}/>
                 </TouchableOpacity>
@@ -275,18 +282,9 @@ const TabNotClicked =(props) => {
 }
 
 const RewardCard = (props) => {
-
-  const OwnedStatus = ({title}) =>{
-    return(
-      <View style={style.ownedButtonContainer}>
-        <Text style={style.ownedButtonText}>{title}</Text>
-      </View>
-    )
-  }
-
   return(
       <View style = {{flexDirection: 'column'}}>
-        <View style = {style.rewardCardContainer}>
+        <View style = {[style.rewardCardContainer, {backgroundColor: 'white'}]}>
             <Image source={props.img} style= {style.rewardItemImage}/>
             <View style = {{flexDirection: "row"}}>
               <Text style={{marginTop: 5, marginLeft: 5,fontSize: 14, fontFamily: 'Montserrat-Bold'}}>
@@ -297,7 +295,9 @@ const RewardCard = (props) => {
             </View> */}
 
             <View style={{position:'absolute', right: 0, bottom: 0, display: 'flex'}}>
-              <OwnedStatus title="Owned"/>
+              <View style={[style.statusContainer, {backgroundColor: '#A5A6F6'}]}>
+                <Text style={style.statusText}>Owned</Text>
+              </View>
             </View>
 
           </View>
@@ -305,6 +305,27 @@ const RewardCard = (props) => {
       </View>
   )
 } 
+
+const RewardCardEquipped = (props) => {
+
+  return(
+      <View style = {{flexDirection: 'column'}}>
+        <View style = {[style.rewardCardContainer, {backgroundColor: '#A5A6F6'}]}>
+            <Image source={props.img} style= {style.rewardItemImage}/>
+            <View style = {{flexDirection: "row"}}>
+              <Text style={{marginTop: 5, marginLeft: 5,fontSize: 14, fontFamily: 'Montserrat-Bold'}}>
+                  {props.asset} 
+              </Text>
+            <View style={{position:'absolute', right: 0, bottom: 0}}>
+              <View style={[style.statusContainer, {backgroundColor: 'white'}]}>
+                  <Text style={[style.statusText, {color: 'black'}]}>Redeemed</Text>
+              </View>
+            </View> 
+          </View>
+        </View>
+      </View>
+  )
+}
 
 const VoucherCard = (props) => {
   const [VoucherStatus, setIsVoucherStatus] = useState("Not_Redeemed");

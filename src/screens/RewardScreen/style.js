@@ -25,7 +25,6 @@ const style = StyleSheet.create({
     },
     
     rewardCardContainer: {
-      backgroundColor: 'white',
       margin: 8,
       width: 176,
       padding: 6,
@@ -53,15 +52,14 @@ const style = StyleSheet.create({
       color: '#000',
     },
 
-    ownedButtonContainer: {
+    statusContainer: {
       height: 16,
-      backgroundColor: "#A5A6F6",
       borderRadius: 4,
       justifyContent: 'center',
       alignItems: 'center',
     },
 
-    ownedButtonText: {
+    statusText: {
       fontSize: 12,
       fontFamily: 'Montserrat-Regular',
       color: '#FFF',
