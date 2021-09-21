@@ -195,28 +195,6 @@ const App = () => {
             headerLeft: null,
             headerTitle: () => (<View />),
           })}
-
-         
-         />
-
-         <Stack.Screen name="Meditate Activity" component={GuideDetail} 
-          options={()=>({
-            headerShadowVisible: false,
-            headerTitleStyle: {color:'white'},
-            headerTintColor: 'white',
-            headerTitle: ''
-          })}
-         />
-
-       </Stack.Navigator>
-     </NavigationContainer>
-    
-       )
-   );
- };
- 
-
-        >
         {isSignedIn && (
          <Stack.Screen name="Login" component={LoginScreen}
          screenOptions={() => ({
@@ -227,6 +205,16 @@ const App = () => {
          })}
        />
         )}
+        <Stack.Screen name="Meditate Activity" component={GuideDetail} 
+          options={()=>({
+            headerShadowVisible: false,
+            headerTitleStyle: {color:'white'},
+            headerTintColor: 'white',
+            headerTitle: ''
+          })}
+         />
+
+        
           <Stack.Screen name="Signup" component={SignUpScreen}
             options={({ navigation }) => ({
               headerShown: false
