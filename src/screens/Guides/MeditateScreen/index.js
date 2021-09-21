@@ -82,8 +82,9 @@ const MeditateScreen = ({navigation}) => {
           flexDirection: 'row',padding: 12,
           borderRadius: 20,
           margin: 6, }}>
-          <View style={{flex: 1}}>
-            <Text style={[typo.T1, ]}>
+          <View style={{flex: 1}}></View>
+          <View style={{flex: 3, alignItems: 'center', justifyContent: 'center'}}>
+            <Text style={[typo.H4, {color: 'white'}]}>
               Featured
             </Text> 
           </View>
@@ -104,7 +105,7 @@ const MeditateScreen = ({navigation}) => {
             <GuideCardComponent style={{height: 200}} img={Med2} height={220} width={200}/>
           </View>
           <View style={{flex:1}}>
-            <GuideCardComponent style={{height: 272}} img={Med3} height={272} width={250}/>
+            <GuideCardComponent style={{height: 272}} img={Med3} height={274} width={250}/>
           </View>
         </View>
         <Text style={[typo.H1, {marginTop: 20}]}>
@@ -113,10 +114,10 @@ const MeditateScreen = ({navigation}) => {
         <View style={{display: 'flex', flexDirection: 'row'}}>
           <View style={{flex: 1, display: 'flex'}}>
             <GuideCardComponent style={{height: 130}} img={Med} height={140} width={200}/>
-            <GuideCardComponent style={{height: 272}} img={Med2} height={320} width={200}/>
+            <GuideCardComponent style={{height: 272}} img={Med3} height={280} width={200}/>
           </View>
           <View style={{flex: 1, display: 'flex'}}>
-            <GuideCardComponent style={{height: 194}} img={Med3} height={200} width={200}/>
+            <GuideCardComponent style={{height: 194}} img={Med2} height={200} width={200}/>
             <GuideCardComponent style={{height: 130}} img={Med} height={150} width={200}/>
           </View>
         </View>

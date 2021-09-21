@@ -75,8 +75,9 @@ const SleepScreen = ({navigation}) => {
           flexDirection: 'row',padding: 12,
           borderRadius: 20,
           margin: 6, }}>
-          <View style={{flex: 1}}>
-            <Text style={[typo.T1, {color: 'white'}]}>
+          <View style={{flex: 1}}></View>
+          <View style={{flex: 3, alignItems: 'center', justifyContent: 'center'}}>
+            <Text style={[typo.H4, {color: 'white'}]}>
               Featured
             </Text> 
           </View>

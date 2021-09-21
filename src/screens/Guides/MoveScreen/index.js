@@ -7,9 +7,9 @@ import * as Progress from 'react-native-progress';
 import MoveBG from '../../../assets/images/move-planet.png';
 import MedAvatar from '../../../assets/images/meditate-avatar.png';
 import Mov from '../../../assets/images/mov-1.png';
-import Med1 from '../../../assets/images/med1.png';
-import Med2 from '../../../assets/images/med2.png';
-import Med3 from '../../../assets/images/med3.png';
+import Move1 from '../../../assets/images/move1.png';
+import Move2 from '../../../assets/images/move2.png';
+import Move3 from '../../../assets/images/move3.png';
 import Sleep3 from '../../../assets/images/sleep3.png';
 import { overflow } from 'styled-system';
 import play from '../../../assets/icons/play.png';
@@ -78,8 +78,9 @@ const MoveScreen = ({navigation}) => {
           flexDirection: 'row',padding: 12,
           borderRadius: 20,
           margin: 6, }}>
-          <View style={{flex: 1}}>
-            <Text style={[typo.T1, ]}>
+          <View style={{flex: 1}}></View>
+          <View style={{flex: 3, alignItems: 'center', justifyContent: 'center'}}>
+            <Text style={[typo.H4, {color: 'white'}]}>
               Featured
             </Text> 
           </View>
@@ -96,11 +97,11 @@ const MoveScreen = ({navigation}) => {
         </Text>
         <View style={{display: 'flex', flexDirection:'row'}}>
           <View style={{flex:1, display: 'flex',flexDirection: 'column'}}>
-            <GuideCardComponent style={{height: 130}} img={Sleep3} height={130} width={200}/>
-            <GuideCardComponent style={{height: 200}} img={Med2} height={220} width={200}/>
+            <GuideCardComponent style={{height: 130}} img={Move1} height={130} width={200}/>
+            <GuideCardComponent style={{height: 200}} img={Move2} height={220} width={200}/>
           </View>
           <View style={{flex:1}}>
-            <GuideCardComponent style={{height: 272}} img={Med3} height={272} width={250}/>
+            <GuideCardComponent style={{height: 272}} img={Move3} height={272} width={250}/>
           </View>
         </View>
         <Text style={[typo.H1, {marginTop: 20}]}>
@@ -108,12 +109,12 @@ const MoveScreen = ({navigation}) => {
         </Text>
         <View style={{display: 'flex', flexDirection: 'row'}}>
           <View style={{flex: 1, display: 'flex'}}>
-            <GuideCardComponent style={{height: 130}} img={Mov} height={140} width={200}/>
-            <GuideCardComponent style={{height: 272}} img={Med2} height={320} width={200}/>
+            <GuideCardComponent style={{height: 130}} img={Move1} height={140} width={200}/>
+            <GuideCardComponent style={{height: 272}} img={Move3} height={320} width={200}/>
           </View>
           <View style={{flex: 1, display: 'flex'}}>
-            <GuideCardComponent style={{height: 194}} img={Med3} height={200} width={200}/>
-            <GuideCardComponent style={{height: 130}} img={Mov} height={150} width={200}/>
+            <GuideCardComponent style={{height: 194}} img={Move2} height={200} width={200}/>
+            <GuideCardComponent style={{height: 130}} img={Move1} height={150} width={200}/>
           </View>
         </View>
         
