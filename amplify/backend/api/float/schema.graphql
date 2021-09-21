@@ -9,3 +9,4 @@ type User @model @auth(rules: [{allow: private}]) {
   focusD: Int!
   friends: [String!]
 }
+  
