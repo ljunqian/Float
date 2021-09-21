@@ -14,8 +14,8 @@ const style = StyleSheet.create({
     tabIcon: {
       width: 30,
       height: 30,
-      borderRadius: 100,
-      backgroundColor: '#C4C4C4',
+      // borderRadius: 100,
+      // backgroundColor: '#C4C4C4',
       marginHorizontal: 31
     },
 
@@ -25,7 +25,7 @@ const style = StyleSheet.create({
     },
     
     rewardCardContainer: {
-      backgroundColor: '#EBEBEB',
+      backgroundColor: 'white',
       margin: 8,
       width: 176,
       padding: 6,
@@ -33,26 +33,39 @@ const style = StyleSheet.create({
     },
 
     rewardItemImage: {
-      backgroundColor: '#C4C4C4',
-      
+      backgroundColor: '#EBEBEB', 
       height: 150,
       width: '100%'
     },
 
     redeemButtonContainer: {
-      width: 73,
-      height: 24,
-      backgroundColor: "#A5A6F6",
-      borderRadius: 48,
+      width: 76,
+      height: 16,
+      backgroundColor: "#FFF",
+      borderRadius: 4,
       justifyContent: 'center',
       alignItems: 'center',
     },
 
     redeemButtonText: {
-      fontSize: 10,
-      fontFamily: 'Montserrat-Bold',
+      fontSize: 12,
+      fontFamily: 'Montserrat-Regular',
+      color: '#000',
+    },
+
+    ownedButtonContainer: {
+      height: 16,
+      backgroundColor: "#A5A6F6",
+      borderRadius: 4,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+
+    ownedButtonText: {
+      fontSize: 12,
+      fontFamily: 'Montserrat-Regular',
       color: '#FFF',
-      fontWeight: 'bold',
+      marginHorizontal: 5
     },
 
       //add on top of global
