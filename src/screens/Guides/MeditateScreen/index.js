@@ -18,15 +18,15 @@ import { overflow } from 'styled-system';
   2. Set 'onPress' handler to GuideDetail page
 */
 
-const GuideCardComponent = (props) => {
+const GuideCardComponent = (props)  => {
   return (
-    <View style={[layout.guideCard, props.style, {overflow: 'hidden'}]}>
+    <TouchableOpacity style={[layout.guideCard, props.style, {overflow: 'hidden'} ]} >
       <Image source={props.img} style={{position: 'absolute', zIndex: 0, left: -5, width:props.width, height:props.height }}/>
       <Text style={typo.T3}>
         Activity
       </Text>
       <MinuteView />
-    </View> 
+    </TouchableOpacity>
   )
 }
 
