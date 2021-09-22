@@ -207,30 +207,6 @@ const App = () => {
         {state.isSignout ? (
           <>
          <Stack.Screen name="Login" component={LoginScreen}
-<<<<<<< HEAD
-         screenOptions={() => ({
-           headerStyle: {
-             headerShown: false
-           },
-           headerTitle: () => (<View />),
-         })}
-       />
-        )}
-        <Stack.Screen name="Meditate Activity" component={GuideDetail} 
-          options={()=>({
-            headerShadowVisible: false,
-            headerTitleStyle: {color:'white'},
-            headerTintColor: 'white',
-            headerTitle: '',
-            headerTransparent: true,
-            headerStyle: {
-              backgroundColor: 'transparent'
-            }
-          })}
-         />
-
-        
-=======
             screenOptions={() => ({
               headerStyle: {
                 headerShown: false
@@ -238,7 +214,6 @@ const App = () => {
               headerTitle: () => (<View />),
             })}
           /> 
->>>>>>> origin/main
           <Stack.Screen name="Signup" component={SignUpScreen}
             options={({ navigation }) => ({
               headerShown: false
@@ -309,7 +284,11 @@ const App = () => {
               headerShadowVisible: false,
               headerTitleStyle: {color:'white'},
               headerTintColor: 'white',
-              headerTitle: ''
+              headerTitle: '',
+              headerTransparent: true,
+              headerStyle: {
+                backgroundColor: 'transparent'
+              }
             })}
           />
          
