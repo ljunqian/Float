@@ -73,12 +73,12 @@ const SleepScreen = ({navigation}) => {
             </TouchableOpacity>
           </View>
       </View>
-      <View style={layout.container}>
+      <TouchableOpacity style={layout.container} onPress={() => navigation.navigate('Meditate Activity')}>
         <ImageBackground source={Sleep1} style={{width:'100%'}}>
         <View style={{height: 155, display: 'flex', 
           flexDirection: 'row',padding: 12,
           borderRadius: 20,
-          margin: 6, }}>
+          margin: 6, }}>  
           <View style={{flex: 1}}></View>
           <View style={{flex: 3, alignItems: 'center', justifyContent: 'center'}}>
             <Text style={[typo.H4, {color: 'white'}]}>
@@ -91,7 +91,7 @@ const SleepScreen = ({navigation}) => {
         </View>
         </ImageBackground>
         
-      </View>
+      </TouchableOpacity>
       <View style={layout.container}>
         <Text style={typo.H1}>
           Recent
