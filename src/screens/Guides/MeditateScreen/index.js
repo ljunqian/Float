@@ -15,13 +15,13 @@ import { overflow } from 'styled-system';
 import play from '../../../assets/icons/play.png';
 
 /*TODO:
-  1. Change <View> into <TouchableOpacity> for GuideCardComponent
-  2. Set 'onPress' handler to GuideDetail page
+  1. Change <View> into <TouchableOpacity> for GuideCardComponent [Done]
+  2. Set 'onPress' handler to GuideDetail page  
 */
 
 const GuideCardComponent = (props)  => {
   return (
-    <TouchableOpacity style={[layout.guideCard, props.style, {overflow: 'hidden'} ]} >
+    <TouchableOpacity style={[layout.guideCard, props.style, {overflow: 'hidden'}]} onPress={props.click}>
       <Image source={props.img} style={{position: 'absolute', zIndex: 0, left: -5, width:props.width, height:props.height }}/>
       <Text style={typo.T3}>
         Activity
@@ -39,6 +39,7 @@ const MinuteView = () => {
       </View>
   )
 }
+const clickHandler = ({navigation}) => navigation.navigate('Meditate Activity')
 
 const MeditateScreen = ({navigation}) => {
   return (
@@ -101,7 +102,7 @@ const MeditateScreen = ({navigation}) => {
         </Text>
         <View style={{display: 'flex', flexDirection:'row'}}>
           <View style={{flex:1, display: 'flex',flexDirection: 'column'}}>
-            <GuideCardComponent style={{height: 130}} img={Sleep3} height={130} width={200}/>
+            <GuideCardComponent style={{height: 130}} img={Sleep3} height={130} width={200} click={clickHandler}/>
             <GuideCardComponent style={{height: 200}} img={Med2} height={220} width={200}/>
           </View>
           <View style={{flex:1}}>

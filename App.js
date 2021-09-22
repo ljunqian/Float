@@ -246,7 +246,11 @@ const App = () => {
             headerShadowVisible: false,
             headerTitleStyle: {color:'white'},
             headerTintColor: 'white',
-            headerTitle: ''
+            headerTitle: '',
+            headerTransparent: true,
+            headerStyle: {
+              backgroundColor: 'transparent'
+            }
           })}
          />
 
