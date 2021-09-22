@@ -6,7 +6,7 @@ import typo from '../../styles/typography';
 
 import FloatLogo from '../../assets/images/float.png';
 import { color } from '../../styles/theme';
-
+import { Context } from './store';
 const initialState = { name: '', description: '' }
 
 const LoginScreen = ({ navigation }) => {
@@ -14,11 +14,13 @@ const LoginScreen = ({ navigation }) => {
   const [password, setPassword] = useState('');
   const [errorstate, seterrorState] = useState(false);
   const [errorMessage, seterrorMessage] = useState('');
-
+  const [state, dispatch] = React.useContext(Context);
+  
   async function signIn() {
     try {
       const user = await Auth.signIn(email, password);
-      navigation.navigate('Guides');
+      if (user) {dispatch({type: 'SIGN_IN', payload: true});}
+      // TODO: set false 
     } catch (error) {
       console.log('error signing in', error);
       seterrorState(true);
