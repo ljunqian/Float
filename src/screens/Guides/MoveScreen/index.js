@@ -77,7 +77,7 @@ const MoveScreen = ({navigation}) => {
             </TouchableOpacity>
           </View>
       </View>
-      <TouchableOpacity style={[layout.container,]} onPress={() => navigation.navigate('Meditate Activity')}>
+      <TouchableOpacity style={[layout.container,]} onPress={() => navigation.navigate('Meditate GuideDetail')}>
         <ImageBackground source={Mov} style={{width:'100%'}}>
         <View style={{height: 155, display: 'flex', 
           flexDirection: 'row',padding: 12,

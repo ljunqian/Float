@@ -279,7 +279,7 @@ const App = () => {
             })}
           />
 
-          <Stack.Screen name="Meditate Activity" component={GuideDetail} 
+          <Stack.Screen name="Meditate GuideDetail" component={GuideDetail} 
             options={()=>({
               headerShadowVisible: false,
               headerTitleStyle: {color:'white'},

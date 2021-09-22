@@ -39,7 +39,7 @@ const MinuteView = () => {
       </View>
   )
 }
-const clickHandler = ({navigation}) => navigation.navigate('Meditate Activity')
+const clickHandler = ({navigation}) => navigation.navigate('Meditate GuideDetail')
 
 const MeditateScreen = ({navigation}) => {
   return (
@@ -77,7 +77,7 @@ const MeditateScreen = ({navigation}) => {
             </TouchableOpacity>
           </View>
       </View>
-      <TouchableOpacity style={[layout.container,]} onPress={() => navigation.navigate('Meditate Activity')}>
+      <TouchableOpacity style={[layout.container,]} onPress={() => navigation.navigate('Meditate GuideDetail')}>
         <ImageBackground source={Med} style={{width:'100%'}}>
         <View style={{height: 155, display: 'flex', 
           flexDirection: 'row',padding: 12,
