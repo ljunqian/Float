@@ -13,6 +13,7 @@ import Med3 from '../../../assets/images/med3.png';
 import Sleep3 from '../../../assets/images/sleep3.png';
 import { overflow } from 'styled-system';
 import play from '../../../assets/icons/play.png';
+import { Guides } from './constants';
 
 /*TODO:
   1. Change <View> into <TouchableOpacity> for GuideCardComponent [Done]
@@ -22,9 +23,9 @@ import play from '../../../assets/icons/play.png';
 const GuideCardComponent = (props)  => {
   return (
     <TouchableOpacity style={[layout.guideCard, props.style, {overflow: 'hidden'}]} onPress={props.click}>
-      <Image source={props.img} style={{position: 'absolute', zIndex: 0, left: -5, width:props.width, height:props.height }}/>
-      <Text style={typo.T3}>
-        Activity
+      <Image source={props.img} style={{position: 'absolute', zIndex: 0, top: -3, left: -5, width:props.width, height:props.height }}/>
+      <Text style={[typo.T3, {marginBottom: 5}]}>
+        {props.title}
       </Text>
       <MinuteView />
     </TouchableOpacity>
@@ -39,7 +40,6 @@ const MinuteView = () => {
       </View>
   )
 }
-const clickHandler = ({navigation}) => navigation.navigate('Meditate GuideDetail')
 
 const MeditateScreen = ({navigation}) => {
   return (
@@ -80,7 +80,7 @@ const MeditateScreen = ({navigation}) => {
       <TouchableOpacity style={[layout.container,]} onPress={() => navigation.navigate('Meditate GuideDetail')}>
         <ImageBackground source={Med} style={{width:'100%'}}>
         <View style={{height: 155, display: 'flex', 
-          flexDirection: 'row',padding: 12,
+          flexDirection: 'row', padding: 12,
           borderRadius: 20,
           margin: 6, }}>
           <View style={{flex: 1}}></View>
@@ -100,13 +100,18 @@ const MeditateScreen = ({navigation}) => {
         <Text style={typo.H1}>
           Recent
         </Text>
-        <View style={{display: 'flex', flexDirection:'row'}}>
+          <View style={{display: 'flex', flexDirection:'row'}}>
           <View style={{flex:1, display: 'flex',flexDirection: 'column'}}>
-            <GuideCardComponent style={{height: 130}} img={Sleep3} height={130} width={200} click={clickHandler}/>
-            <GuideCardComponent style={{height: 200}} img={Med2} height={220} width={200}/>
-          </View>
+            {Guides.map(({ title, thumbnail }, index) => {
+              //console.log(index)
+              if(index < 2){
+              return(
+                <GuideCardComponent style={{height: 130}} title={title} img={thumbnail} height={140} width={200} />
+              )}
+            })}
+             </View>
           <View style={{flex:1}}>
-            <GuideCardComponent style={{height: 272}} img={Med3} height={274} width={250}/>
+            <GuideCardComponent style={{height: 272}} title={Guides[2].title} img={Guides[2].thumbnail} height={275} width={250}/>
           </View>
         </View>
         <Text style={[typo.H1, {marginTop: 20}]}>
