@@ -4,8 +4,8 @@ import typo from '../../../styles/typography';
 import { guide } from './constants';
 import layout from '../../../styles/componentLayout';
 import { color } from '../../../styles/theme';
-import love from '../../../assets/icons/loveyellow.png';
-import play from '../../../assets/icons/play.png';
+import heart from '../../../assets/icons/heart.png';
+import clock from '../../../assets/icons/clock.png';
 import Med from '../../../assets/images/med-1.png';
 
 
@@ -31,14 +31,14 @@ const GuideDetail = ({ navigation, props }) => {
                         Title of the activity
                     </Text>
                     <View style={{alignItems: 'center', justifyContent: 'center'}}>
-                        <Image source={love} style={{ top: 10, left: 40, zIndex: 0, position: 'absolute'}} />
+                        <Image source={heart} style={{ top: 10, left: 40, zIndex: 0, position: 'absolute'}} />
                     </View>
                 </View>
                 <View style={{ marginBottom: 20, flexDirection: 'row'}}>
                     <Text style={[typo.T3, {color: 'white', marginTop: 3}]}>
                         Meditation
                     </Text>
-                    <Image source={play} style={{ top: 0, left: 75, zIndex: 0, position: 'absolute'}} />
+                    <Image source={clock} style={{ top: 0, left: 75, zIndex: 0, position: 'absolute'}} />
                     <Text style={[typo.T3, {color: 'white', marginLeft: 35, marginTop: 3}]}>1 min</Text>
                 </View>
                 
