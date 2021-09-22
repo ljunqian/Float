@@ -38,10 +38,10 @@ import Float from './src/assets/images/float.png';
 import { Icon } from 'react-native-elements';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import { withAuthenticator } from 'aws-amplify-react-native'
+import { withAuthenticator } from 'aws-amplify-react-native';
+import Store, {Context} from './src/screens/Authenticate/store';
 
 import { Auth } from 'aws-amplify';
-
 import Amplify from 'aws-amplify';
 
 import config from './src/aws-exports'
@@ -143,13 +143,15 @@ const App = () => {
   const [verticalVal, setVerticalVal] = useState(new Animated.Value(1));
   const [isSplash, setIsSplash] = useState(true);
   const [isNotSignedIn, setisNotSignedIn] = useState(true);
+  const [state, dispatch] = React.useContext(Context);
 
   async function isUserAuthenticated() {
     try {
       const user = await Auth.currentAuthenticatedUser();
-      console.log('user is',user);
+      //console.log('user is',user);
       if (user) {
         setisNotSignedIn(false);
+        dispatch({type: 'SIGN_IN', payload: true});
       } else {
         {user === 'The user is not authenticated' && (setisNotSignedIn(true))};
 
@@ -202,7 +204,7 @@ const App = () => {
             headerTitle: () => (<View />),
           })}
           >
-        {isNotSignedIn ? (
+        {state.isSignout ? (
           <>
          <Stack.Screen name="Login" component={LoginScreen}
             screenOptions={() => ({
@@ -295,9 +297,15 @@ const App = () => {
 }
 
 
+const Container = () => {
+  return (
+    <Store>
+      <App/>
+    </Store>
+  )
+}
 
-
-export default App;
+export default Container;
 
 
 
