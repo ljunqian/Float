@@ -68,6 +68,7 @@ const MoveScreen = ({navigation}) => {
             <Text style={typo.H1}>
               Move Session
             </Text>
+
             <TouchableOpacity style={[layout.big_button, {backgroundColor: color.Move3, marginBottom: 30, zIndex:2, flexDirection: 'row'}]}>
                 <Image source={play} style={{marginRight: 5}} />
                 <Text style={[typo.T4, {color: 'white', fontWeight: '400'}]}>

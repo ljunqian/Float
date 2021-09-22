@@ -24,9 +24,9 @@ const Nav = () => {
 
   const getUserInfo = async () => {
     try {
-      //const post = await DataStore.query(User, Auth.currentAuthenticatedUser());
       const { attributes } = await Auth.currentAuthenticatedUser();
       const post = await DataStore.query(User, attributes.sub);
+      console.log(post);
       setInfo({
         name: post.name,
         email: post.email,
@@ -37,6 +37,7 @@ const Nav = () => {
         focusD: post.focusD,
         friends: post.friends
       });
+
     } catch (error) {
       console.log("Error saving post", error);
     }
@@ -52,11 +53,11 @@ const Nav = () => {
     }}>
       <View style={styles.row}>
         <Text style = {styles.container}>Username </Text>
-        <Text style = {styles.container}>user</Text>
+        <Text style = {styles.container}>ljunqian</Text>
       </View>
       <View style={styles.row}>
         <Text style = {styles.container}>Email </Text>
-        <Text style = {styles.container}>user@email.com</Text>
+        <Text style = {styles.container}>ljunqian@gmail.com</Text>
       </View>
       <View style={styles.row}>
         <Text style = {styles.container}>Phone number </Text>

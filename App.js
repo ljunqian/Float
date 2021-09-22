@@ -8,17 +8,18 @@
 
 
 import React, { useState, useEffect } from 'react';
-import { Animated, Image, View, TouchableOpacity,Text, Easing, StyleSheet } from 'react-native';
+import { Animated, Image, View, TouchableOpacity, Text, Easing, StyleSheet } from 'react-native';
 import typo from './src/styles/typography';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import ExploreScreen from './src/screens/Guides/ExploreScreen'
-
 import ProfileScreen from './src/screens/ProfileScreen/';
 import RewardScreen from './src/screens/RewardScreen/';
 import AccountSettings from './src/screens/ProfileScreen/AccountSettings.js';
-
+import Changeaccountinfo from './src/screens/ProfileScreen/Changeaccountinfo';
+import LoginScreen from './src/screens/Authenticate/LoginScreen';
+import SignUpScreen from './src/screens/Authenticate/SignUpScreen';
 import MeditateScreen from './src/screens/Guides/MeditateScreen';
 import GuideDetail from './src/screens/Guides/MeditateScreen/GuideDetail.js';
 import FocusScreen from './src/screens/Guides/FocusScreen';
@@ -39,6 +40,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { withAuthenticator } from 'aws-amplify-react-native'
 
+import { Auth } from 'aws-amplify';
+
 import Amplify from 'aws-amplify';
 
 import config from './src/aws-exports'
@@ -46,9 +49,6 @@ Amplify.configure(config)
 
 import { Analytics } from 'aws-amplify'
 Analytics.configure({ disabled: true })
-
-
-
 
 const Tab = createBottomTabNavigator();
 
@@ -64,75 +64,75 @@ const BottomBar = () => {
   }
   return (
 
-      <Tab.Navigator style={{backgroundColor: 'none'}}
-        screenOptions = {() => ({
-          tabBarStyle: {
-            backgroundColor: 'red'
-          },
+    <Tab.Navigator style={{ backgroundColor: 'none' }}
+      screenOptions={() => ({
+        tabBarStyle: {
+          backgroundColor: 'red'
+        },
+      })}
+    //tabBar={()=>(<View style={{backgroundColor: 'none', height: 70}}></View>)}
+    >
+      <Tab.Screen name="Explore" component={ExploreScreen}
+        options={({ }) => ({
+          tabBarIcon: () => <Image source={ExploreIcon} />,
+          headerShown: false,
+          tabBarStyle: tabStyle,
+          tabBarLabelStyle: {
+            marginBottom: 10,
+            color: 'white',
+            fontWeight: "400",
+          }
         })}
-        //tabBar={()=>(<View style={{backgroundColor: 'none', height: 70}}></View>)}
-      >
-        <Tab.Screen name="Explore" component={ExploreScreen} 
-        options={({}) => ({
-          tabBarIcon: () => <Image source={ExploreIcon}/>,
+      />
+      <Tab.Screen name="Meditate" component={MeditateScreen}
+        options={({ }) => ({
+          tabBarIcon: () => <Icon name="circle" size={30} color="white" />,
           headerShown: false,
           tabBarStyle: tabStyle,
           tabBarLabelStyle: {
-            marginBottom:10,
+            marginBottom: 10,
             color: 'white',
             fontWeight: "400",
           }
-          })}
-        />
-        <Tab.Screen name="Meditate" component={MeditateScreen} 
-        options={({}) => ({
-          tabBarIcon: () => <Icon name="circle" size={30} color="white"/>,
+        })}
+      />
+      <Tab.Screen name="Sleep" component={SleepScreen}
+        options={({ }) => ({
+          tabBarIcon: () => <Icon name="nightlight-round" size={30} color="white" />,
           headerShown: false,
           tabBarStyle: tabStyle,
           tabBarLabelStyle: {
-            marginBottom:10,
+            marginBottom: 10,
             color: 'white',
             fontWeight: "400",
           }
-          })}
-        />
-        <Tab.Screen name="Sleep" component={SleepScreen} 
-        options={({}) => ({
-          tabBarIcon: () => <Icon name="nightlight-round" size={30} color="white"/>,
+        })}
+      />
+      <Tab.Screen name="Move" component={MoveScreen}
+        options={({ }) => ({
+          tabBarIcon: () => <Image source={MoveIcon} />,
           headerShown: false,
           tabBarStyle: tabStyle,
           tabBarLabelStyle: {
-            marginBottom:10,
+            marginBottom: 10,
             color: 'white',
             fontWeight: "400",
           }
-          })}
-        />
-        <Tab.Screen name="Move" component={MoveScreen} 
-        options={({}) => ({
-          tabBarIcon: () => <Image source={MoveIcon}/>,
+        })}
+      />
+      <Tab.Screen name="Focus" component={FocusScreen}
+        options={({ }) => ({
+          tabBarIcon: () => <Image source={FocusIcon} />,
           headerShown: false,
           tabBarStyle: tabStyle,
           tabBarLabelStyle: {
-            marginBottom:10,
+            marginBottom: 10,
             color: 'white',
             fontWeight: "400",
           }
-          })}
-        />
-        <Tab.Screen name="Focus" component={FocusScreen} 
-        options={({}) => ({
-          tabBarIcon: () => <Image source={FocusIcon}/>,
-          headerShown: false,
-          tabBarStyle: tabStyle,
-          tabBarLabelStyle: {
-            marginBottom:10,
-            color: 'white',
-            fontWeight: "400",
-          }
-          })}
-        />
-      </Tab.Navigator>
+        })}
+      />
+    </Tab.Navigator>
 
   )
 }
@@ -140,12 +140,23 @@ const BottomBar = () => {
 const App = () => {
 
   Analytics.configure({ disabled: true })
-  const [verticalVal, setVerticalVal ] =  useState(new Animated.Value(1));
+  const [verticalVal, setVerticalVal] = useState(new Animated.Value(1));
   const [isSplash, setIsSplash] = useState(true);
+  const [isSignedIn, setisSignedIn] = useState(true);
 
+  async function isUserAuthenticated() {
+    try {
+      const user = await Auth.currentAuthenticatedUser();
+      console.log(user);
+      {user == 'The user is not authenticated' && (setisSignedIn(false))};
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  
   useEffect(() => {
-    
-    setTimeout(()=>{
+    isUserAuthenticated()
+    setTimeout(() => {
       setIsSplash(false);
     }, 6000)
 
@@ -156,92 +167,45 @@ const App = () => {
         easing: Easing.ease,
         useNativeDriver: true,
       }),
-      {iterations: 1000},
+      { iterations: 1000 },
     ).start();
   }, []);
 
   return (
     isSplash ? (
       <View style={style.viewStyle}>
-        <Image source={Stars} style={style.bgImage}/>
+        <Image source={Stars} style={style.bgImage} />
         <View style={style.logoView}>
-          <Animated.Image source={Float} style={{top: 0,transform: [{translateY: verticalVal}]}}/>
-          <Text style={[typo.H1, {color: 'white'}]}>
+          <Animated.Image source={Float} style={{ top: 0, transform: [{ translateY: verticalVal }] }} />
+          <Text style={[typo.H1, { color: 'white' }]}>
             Float
           </Text>
         </View>
       </View>
+      
     ) : (
-
-    <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={() => ({
-          headerStyle: {
-            backgroundColor: '#272727',
-            shadowOpacity: 0,
-          }
-        })}
-      >
-        <Stack.Screen name="Guides" component={BottomBar}
-          options={({ navigation }) => ({
-            headerRight: () => (
-              <TouchableOpacity
-                onPress={() => console.log("pressed")}
-              >
-                <Image source={MagnifyIcon} />
-              </TouchableOpacity>
-            ),
-            headerLeft: () => (
-              <TouchableOpacity
-                onPress={() => navigation.navigate('Profile')}
-              >
-                <Image source={UserIcon} />
-              </TouchableOpacity>
-            ),
+      <NavigationContainer>
+        <Stack.Navigator
+          screenOptions={() => ({
+            headerStyle: {
+              backgroundColor: '#272727',
+              shadowOpacity: 0,
+              headerShown: false
+            },
+            headerLeft: null,
             headerTitle: () => (<View />),
-
           })}
-        />
-        <Stack.Screen name="Profile" component={ProfileScreen}
-          options={({ navigation }) => ({
-            headerRight: () => (
-              <TouchableOpacity
-                onPress={() => console.log("pressed")}
-              >
-                <Icon name="create" size={30} color="white" onPress={() => { navigation.navigate('Account Settings') }} />
-              </TouchableOpacity>
-            ),
-            headerTitle: () => (<View />),
-            headerTintColor: 'white'
-          })}
-
-        />
-        <Stack.Screen name="Reward" component={RewardScreen} 
-          options={({ navigation }) => ({
-            headerShadowVisible: false,
-            headerTitle: () => (<View />),
-            headerRight: () => (
-              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                <Image source={CoinIcon} style={{ marginRight: 4 }} />
-                <Text style={{ fontSize: 18, fontFamily: 'FredokaOne-Regular',color:'white' }}>
-                  499
-                  {/* {info.meditateD} */}
-                </Text>
-              </View>
-            ),
-            headerTintColor: 'white'
-          })}
-        />
-
-         <Stack.Screen name="Account Settings" component={AccountSettings} 
-          options={()=>({
-            headerTitleStyle: {color:'white'},
-            headerTintColor: 'white'
-          })}
-         
-         />
-
-         <Stack.Screen name="Meditate Activity" component={GuideDetail} 
+        {isSignedIn && (
+         <Stack.Screen name="Login" component={LoginScreen}
+         screenOptions={() => ({
+           headerStyle: {
+             headerShown: false
+           },
+           headerTitle: () => (<View />),
+         })}
+       />
+        )}
+        <Stack.Screen name="Meditate Activity" component={GuideDetail} 
           options={()=>({
             headerShadowVisible: false,
             headerTitleStyle: {color:'white'},
@@ -254,13 +218,72 @@ const App = () => {
           })}
          />
 
-       </Stack.Navigator>
-     </NavigationContainer>
-    
-       )
-   );
- };
- 
+        
+          <Stack.Screen name="Signup" component={SignUpScreen}
+            options={({ navigation }) => ({
+              headerShown: false
+            })}
+          />
+          <Stack.Screen name="Guides" component={BottomBar}
+            options={({ navigation }) => ({
+              headerRight: () => (
+                <TouchableOpacity
+                  onPress={() => Auth.currentAuthenticatedUser().then(console.log)}
+                >
+                  <Image source={MagnifyIcon} />
+                </TouchableOpacity>
+              ),
+              headerLeft: () => (
+                <TouchableOpacity
+                  onPress={() => navigation.navigate('Profile')}
+                >
+                  <Image source={UserIcon} />
+                </TouchableOpacity>
+              ),
+              headerTitle: () => (<View />),
+            })}
+          />
+          <Stack.Screen name="Profile" component={ProfileScreen}
+            options={({ navigation }) => ({
+              headerRight: () => (
+                <TouchableOpacity
+                  onPress={() => console.log("pressed")}
+                >
+                  <Icon name="create" size={30} color="white" onPress={() => { navigation.navigate('Account Settings') }} />
+                </TouchableOpacity>
+              ),
+              headerTitle: () => (<View />),
+              headerTintColor: 'white'
+            })}
+          />
+          <Stack.Screen name="Reward" component={RewardScreen}
+            options={({ navigation }) => ({
+              headerShadowVisible: false,
+              headerTitle: () => (<View />),
+              headerRight: () => (
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                  <Image source={CoinIcon} style={{ marginRight: 4 }} />
+                  <Text style={{ fontSize: 18, fontFamily: 'FredokaOne-Regular', color: 'white' }}>
+                    499
+                    {/* {info.meditateD} */}
+                  </Text>
+                </View>
+              ),
+              headerTintColor: 'white'
+            })}
+          />
+          <Stack.Screen name="Account Settings" component={AccountSettings}
+            options={() => ({
+              headerTitleStyle: { color: 'white' },
+              headerTintColor: 'white'
+            })}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    )
+  );
+};
+
 
 
 export default App;
@@ -270,7 +293,7 @@ export default App;
 const style = StyleSheet.create({
   viewStyle: {
     backgroundColor: '#262626',
-    width:'100%',
+    width: '100%',
     height: '100%',
     display: 'flex',
     justifyContent: 'center',

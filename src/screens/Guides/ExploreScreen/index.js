@@ -34,10 +34,8 @@ const ExploreScreen = ({ navigation }) => {
 
   const getUserInfo = async () => {
     try {
-      //const post = await DataStore.query(User, Auth.currentAuthenticatedUser());
       const { attributes } = await Auth.currentAuthenticatedUser();
       const post = await DataStore.query(User, attributes.sub);
-      //onsole.log(post.email);
       setInfo({
         name: post.name,
         email: post.email,
