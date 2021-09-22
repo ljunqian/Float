@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image, ImageBackground } from 'react-native';
 import typo from '../../../styles/typography';
-import { guide } from './constants';
+import { Guides } from './constants';
 import layout from '../../../styles/componentLayout';
 import { color } from '../../../styles/theme';
 import heart from '../../../assets/icons/heart.png';
@@ -17,8 +17,6 @@ const GuideDetail = ({ navigation, props }) => {
         */
     }
 
-    //const {act1: {description},} = guide;
-    //console.log(description);
     return (
         <View style={{display: 'flex'}}> 
             {/*IMAGE DIV*/}
@@ -44,8 +42,15 @@ const GuideDetail = ({ navigation, props }) => {
                     <Image source={clock} style={{ top: 3, left: 80, zIndex: 0, position: 'absolute'}} />
                     <Text style={[typo.T3, {color: 'white', marginLeft: 35, marginTop: 3}]}>1 min</Text>
                 </View>
-                <Text style={[typo.T3, {color: 'white'}]}>
-                    Description
+                <Text style={[typo.T3, {color: 'white'}]}>                   
+                    {Guides[0].description
+                    /*Guides.map(({description})=>
+                        {
+                            console.log(description);
+                            return (Guides[0].description)
+                        }
+                    )*/
+                    }
                 </Text>
             </View>
 
