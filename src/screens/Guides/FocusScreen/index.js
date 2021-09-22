@@ -67,18 +67,18 @@ const FocusScreen = ({navigation}) => {
         </View>
           <View style={{display: 'flex', flex: 8, justifyContent: 'flex-end', alignItems: 'center', zIndex:2}}>
             <Text style={typo.H1}>
-              Your Focus Session
+              Focus Session
             </Text>
 
-            <TouchableOpacity style={[layout.big_button, {backgroundColor: color.Focus3, marginBottom: 30, zIndex:2}]}>
-
+            <TouchableOpacity style={[layout.big_button, {backgroundColor: color.Med3, marginBottom: 30, zIndex:2, flexDirection: 'row'}]}>
+                <Image source={play} style={{marginRight: 5}} />
                 <Text style={[typo.T4, {color: 'white', fontWeight: '400'}]}>
                   Play
                 </Text>
             </TouchableOpacity>
           </View>
       </View>
-      <View style={layout.container}>
+      <TouchableOpacity style={layout.container}>
         <ImageBackground source={Focus1} style={{width:'100%'}}>
         <View style={{height: 155, display: 'flex', 
           flexDirection: 'row', padding: 12,
@@ -96,7 +96,7 @@ const FocusScreen = ({navigation}) => {
         </View>
         </ImageBackground>
         
-      </View>
+      </TouchableOpacity>
       <View style={layout.container}>
         <Text style={typo.H1}>
           Recent

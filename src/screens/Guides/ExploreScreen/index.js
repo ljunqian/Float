@@ -101,13 +101,13 @@ const ExploreScreen = ({ navigation }) => {
 const CardComponent = ({img, title}) => {
   return (
 
-    <View style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
+    <TouchableOpacity style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
       <Icon name="radio-button-unchecked" size={30} color="white"/>
       <View style={style.card}>
           <Text style={typo.T1}>{title}</Text>
           <Image source={img} style={{backgroundColor: '#EEEEEE', width: 80, height: 80}} />
       </View>
-    </View>
+    </TouchableOpacity>
   )
 }
 

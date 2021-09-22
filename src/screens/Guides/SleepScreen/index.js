@@ -18,13 +18,13 @@ import play from '../../../assets/icons/play.png';
 
 const GuideCardComponent = (props) => {
   return (
-    <View style={[layout.guideCard, props.style, {overflow: 'hidden'}]}>
+    <TouchableOpacity style={[layout.guideCard, props.style, {overflow: 'hidden'}]}>
       <Image source={props.img} style={{position: 'absolute', zIndex: 0, left: -5, width:props.width, height:props.height }}/>
       <Text style={typo.T3}>
         Activity
       </Text>
       <MinuteView />
-    </View> 
+    </TouchableOpacity> 
   )
 }
 
@@ -73,7 +73,7 @@ const SleepScreen = ({navigation}) => {
             </TouchableOpacity>
           </View>
       </View>
-      <View style={layout.container}>
+      <TouchableOpacity style={layout.container}>
         <ImageBackground source={Sleep1} style={{width:'100%'}}>
         <View style={{height: 155, display: 'flex', 
           flexDirection: 'row',padding: 12,
@@ -91,7 +91,7 @@ const SleepScreen = ({navigation}) => {
         </View>
         </ImageBackground>
         
-      </View>
+      </TouchableOpacity>
       <View style={layout.container}>
         <Text style={typo.H1}>
           Recent
