@@ -142,13 +142,18 @@ const App = () => {
   Analytics.configure({ disabled: true })
   const [verticalVal, setVerticalVal] = useState(new Animated.Value(1));
   const [isSplash, setIsSplash] = useState(true);
-  const [isSignedIn, setisSignedIn] = useState(true);
+  const [isNotSignedIn, setisNotSignedIn] = useState(true);
 
   async function isUserAuthenticated() {
     try {
       const user = await Auth.currentAuthenticatedUser();
-      console.log(user);
-      {user == 'The user is not authenticated' && (setisSignedIn(false))};
+      console.log('user is',user);
+      if (user) {
+        setisNotSignedIn(false);
+      } else {
+        {user === 'The user is not authenticated' && (setisNotSignedIn(true))};
+
+      }
     } catch (error) {
       console.log(error);
     }
@@ -171,8 +176,8 @@ const App = () => {
     ).start();
   }, []);
 
-  return (
-    isSplash ? (
+  if (isSplash) {
+    return (
       <View style={style.viewStyle}>
         <Image source={Stars} style={style.bgImage} />
         <View style={style.logoView}>
@@ -182,8 +187,9 @@ const App = () => {
           </Text>
         </View>
       </View>
-      
-    ) : (
+    )
+  }
+  return (
       <NavigationContainer>
         <Stack.Navigator
           screenOptions={() => ({
@@ -195,31 +201,27 @@ const App = () => {
             headerLeft: null,
             headerTitle: () => (<View />),
           })}
-        {isSignedIn && (
+          >
+        {isNotSignedIn ? (
+          <>
          <Stack.Screen name="Login" component={LoginScreen}
-         screenOptions={() => ({
-           headerStyle: {
-             headerShown: false
-           },
-           headerTitle: () => (<View />),
-         })}
-       />
-        )}
-        <Stack.Screen name="Meditate Activity" component={GuideDetail} 
-          options={()=>({
-            headerShadowVisible: false,
-            headerTitleStyle: {color:'white'},
-            headerTintColor: 'white',
-            headerTitle: ''
-          })}
-         />
-
-        
+            screenOptions={() => ({
+              headerStyle: {
+                headerShown: false
+              },
+              headerTitle: () => (<View />),
+            })}
+          /> 
           <Stack.Screen name="Signup" component={SignUpScreen}
             options={({ navigation }) => ({
               headerShown: false
             })}
           />
+          </>
+       ) : (
+        <>
+       
+        
           <Stack.Screen name="Guides" component={BottomBar}
             options={({ navigation }) => ({
               headerRight: () => (
@@ -274,11 +276,24 @@ const App = () => {
               headerTintColor: 'white'
             })}
           />
+
+          <Stack.Screen name="Meditate Activity" component={GuideDetail} 
+            options={()=>({
+              headerShadowVisible: false,
+              headerTitleStyle: {color:'white'},
+              headerTintColor: 'white',
+              headerTitle: ''
+            })}
+          />
+         
+          
+
+         </> )}
         </Stack.Navigator>
       </NavigationContainer>
     )
-  );
-};
+}
+
 
 
 

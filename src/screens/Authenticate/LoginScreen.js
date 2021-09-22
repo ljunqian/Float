@@ -18,7 +18,7 @@ const LoginScreen = ({ navigation }) => {
   async function signIn() {
     try {
       const user = await Auth.signIn(email, password);
-      navigation.navigate('Guides');
+      // TODO: set false 
     } catch (error) {
       console.log('error signing in', error);
       seterrorState(true);

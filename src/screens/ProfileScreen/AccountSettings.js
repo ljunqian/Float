@@ -7,12 +7,13 @@ import { Auth } from 'aws-amplify';
 import ProfileScreen from './profile';
 import { color } from '../../styles/theme';
 
-const AccountSettings = ({ navigation }) => {
+const AccountSettings = ({ route }) => {
 
   async function handlesignOut() {
     try {
         await Auth.signOut();
-        navigation.navigate('Login');
+        console.log(route.params);
+        // navigation.navigate('Login');
     } catch (error) {
         console.log('error signing out: ', error);
     }
