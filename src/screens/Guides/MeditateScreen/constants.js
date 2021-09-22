@@ -11,14 +11,14 @@ const guide = StyleSheet.create({
 })
 
 export const Guides = {
-    one: {
+    act1: {
         title : 'activity 1',
         duration : 20,
         done : false,
         source : 'link',
         description : 'Description Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
     },
-    two: {
+    act2: {
         title : 'activity 2',
         duration : 20,
         done : false,

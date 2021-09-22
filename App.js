@@ -22,6 +22,7 @@ import LoginScreen from './src/screens/Authenticate/LoginScreen';
 import SignUpScreen from './src/screens/Authenticate/SignUpScreen';
 import MeditateScreen from './src/screens/Guides/MeditateScreen';
 import GuideDetail from './src/screens/Guides/MeditateScreen/GuideDetail.js';
+import GuideActivity from './src/screens/Guides/MeditateScreen/GuideActivity.js';
 import FocusScreen from './src/screens/Guides/FocusScreen';
 import SleepScreen from './src/screens/Guides/SleepScreen';
 import MoveScreen from './src/screens/Guides/MoveScreen';
@@ -292,7 +293,18 @@ const App = () => {
             })}
           />
          
-          
+          <Stack.Screen name="Meditate GuideActivity" component={GuideActivity} 
+            options={()=>({
+              headerShadowVisible: false,
+              headerTitleStyle: {color:'white'},
+              headerTintColor: 'white',
+              headerTitle: '',
+              headerTransparent: true,
+              headerStyle: {
+                backgroundColor: 'transparent'
+              }
+            })}
+          />
 
          </> )}
         </Stack.Navigator>

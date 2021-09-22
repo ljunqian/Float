@@ -16,6 +16,9 @@ const GuideDetail = ({ navigation, props }) => {
         2. Import clock icon and replace play icon
         */
     }
+
+    //const {act1: {description},} = guide;
+    //console.log(description);
     return (
         <View style={{display: 'flex'}}> 
             {/*IMAGE DIV*/}
@@ -38,10 +41,9 @@ const GuideDetail = ({ navigation, props }) => {
                     <Text style={[typo.T3, {color: 'white', marginTop: 3}]}>
                         Meditation
                     </Text>
-                    <Image source={clock} style={{ top: 0, left: 75, zIndex: 0, position: 'absolute'}} />
+                    <Image source={clock} style={{ top: 3, left: 80, zIndex: 0, position: 'absolute'}} />
                     <Text style={[typo.T3, {color: 'white', marginLeft: 35, marginTop: 3}]}>1 min</Text>
                 </View>
-                
                 <Text style={[typo.T3, {color: 'white'}]}>
                     Description
                 </Text>
@@ -50,7 +52,7 @@ const GuideDetail = ({ navigation, props }) => {
             {/*BUTTON DIV*/}
             <TouchableOpacity style={styles.btnContainer}>
                 {/*Todo: #1*/}
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Meditate GuideActivity')}>
                     <Text style={[typo.H3, {color: 'white'}]}>Begin</Text> 
                 </TouchableOpacity>    
             </TouchableOpacity>

@@ -1,11 +1,11 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 
 const Activity = ({navigate}) => {
     return  (
         <View style={styles.container}>
             <View style={styles.actComponent}>
-                <Text>
+                <Text style={{color: 'white'}}>
                     (this is the video)
                 </Text>
             </View>
@@ -14,13 +14,16 @@ const Activity = ({navigate}) => {
 }
 
 const styles = StyleSheet.create({
-    container: {
+    container : {
         display: 'flex',
         width: '100%',
-        height: '100%'
+        height: '100%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#272727'
     },
     actComponent: {
-        backgroundColor: '#'
+        backgroundColor: '#272727'
     }
 })
 
