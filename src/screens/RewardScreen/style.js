@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 import { inlineStyles } from 'react-native-svg';
-import { backgroundColor } from 'styled-system';
+import { backgroundColor, flexWrap } from 'styled-system';
 
 const style = StyleSheet.create({
     tabBar: {
@@ -21,7 +21,8 @@ const style = StyleSheet.create({
 
     rewardRowContainer: {
       marginHorizontal: 12,
-      flexDirection: 'row'
+      flexDirection: 'row',
+      flexWrap: 'wrap'
     },
     
     rewardCardContainer: {
