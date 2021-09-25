@@ -23,7 +23,7 @@ import { Guides } from './constants';
 const GuideCardComponent = (props)  => {
   return (
     <TouchableOpacity style={[layout.guideCard, props.style, {overflow: 'hidden'}]} onPress={props.click}>
-      <Image source={props.img} style={{position: 'absolute', zIndex: 0, top: -3, left: -5, width:props.width, height:props.height }}/>
+      <Image source={props.img} style={{position: 'absolute', zIndex: 0, top: -6, left: -5, width:props.width, height:props.height }}/>
       <Text style={[typo.T3, {marginBottom: 5}]}>
         {props.title}
       </Text>
@@ -100,18 +100,24 @@ const MeditateScreen = ({navigation}) => {
         <Text style={typo.H1}>
           Recent
         </Text>
-          <View style={{display: 'flex', flexDirection:'row'}}>
-          <View style={{flex:1, display: 'flex',flexDirection: 'column'}}>
+        <View style={{display: 'flex', flexDirection:'row'}}>
+          <View style={{flex:1, display: 'flex',flexDirection: 'column'}}>        
             {Guides.map(({ title, thumbnail }, index) => {
-              //console.log(index)
+              // left component
               if(index < 2){
               return(
-                <GuideCardComponent style={{height: 130}} title={title} img={thumbnail} height={140} width={200} />
-              )}
-            })}
+                  <GuideCardComponent style={{height: 130}} title={title} img={thumbnail} height={140} width={200} />
+              )
+             }})}
              </View>
           <View style={{flex:1}}>
-            <GuideCardComponent style={{height: 272}} title={Guides[2].title} img={Guides[2].thumbnail} height={275} width={250}/>
+            {Guides.map(({ title, thumbnail }, index) => {
+              // right component
+              if(index == 2){
+              return(
+                <GuideCardComponent style={{height: 272}} title={title} img={thumbnail} height={278} width={250}/>
+              )}
+            })}
           </View>
         </View>
         <Text style={[typo.H1, {marginTop: 20}]}>
@@ -119,12 +125,38 @@ const MeditateScreen = ({navigation}) => {
         </Text>
         <View style={{display: 'flex', flexDirection: 'row'}}>
           <View style={{flex: 1, display: 'flex'}}>
-            <GuideCardComponent style={{height: 130}} img={Med} height={140} width={200}/>
-            <GuideCardComponent style={{height: 272}} img={Med3} height={280} width={200}/>
+            {Guides.map(({ title, thumbnail }, index) => {
+              // left component
+              let isActOne, isActTwo;
+              if(index == 0)
+                isActOne = true;
+              else if(index == 2)
+                isActTwo = true;
+
+              return(
+                <View>
+                  {isActOne && <GuideCardComponent style={{height: 130}} title={title} img={thumbnail} height={140} width={200} />}
+                  {isActTwo && <GuideCardComponent style={{height: 272}} title={title} img={thumbnail} height={285} width={200}/>}
+                </View>
+              )
+             })}
           </View>
           <View style={{flex: 1, display: 'flex'}}>
-            <GuideCardComponent style={{height: 194}} img={Med2} height={200} width={200}/>
-            <GuideCardComponent style={{height: 130}} img={Med} height={150} width={200}/>
+            {Guides.map(({ title, thumbnail }, index) => {
+              // right component
+              let isActThree, isActFour;
+              if(index == 1)
+                isActThree = true;
+              else if(index == 3)
+                isActFour = true;
+
+              return(
+                <View>
+                  {isActThree && <GuideCardComponent style={{height: 194}} title={title} img={thumbnail} height={210} width={200} />}
+                  {isActFour && <GuideCardComponent style={{height: 130}} title={title} img={thumbnail} height={150} width={200}/>}
+                </View>
+              )
+             })}
           </View>
         </View>
         <View style={{display: 'flex', flexDirection: 'row'}}>

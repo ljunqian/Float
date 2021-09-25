@@ -17,7 +17,7 @@ export const Guides = [
         thumbnail: Med2,
     },
     {
-        title : 'Activity 2',
+        title : 'Activity 3',
         duration : 20,
         done : false,
         source : 'link',
@@ -26,13 +26,22 @@ export const Guides = [
         thumbnail: Med1,
     },
     {
-        title : 'Activity 3',
+        title : 'Activity 2',
         duration : 20,
         done : false,
         source : 'link',
         description : 'Description Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
         type: 'meditate',
         thumbnail: Med3,
+    },
+    {
+        title : 'Activity 4',
+        duration : 20,
+        done : false,
+        source : 'link',
+        description : 'Description Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+        type: 'meditate',
+        thumbnail: Med2,
     },
 ];
 
