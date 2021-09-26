@@ -45,6 +45,53 @@ const MinuteView = (props) => {
   )
 }
 
+const DLoadComponents = (props) => {
+  return(
+    <View>
+      {Guides.map(({ title, thumbnail, duration }, index) => {
+              let isActOne, isActTwo, isActThree, isActFour;
+
+              if(index < 2 && props.isRecentLeft){
+              return(
+                <GuideCardComponent key={title} style={{height: 130}} title={title} dur={duration} img={thumbnail} height={140} width={200} click={() => navigation.navigate('Meditate GuideDetail')}/>
+              )
+              }else if(index == 2 && props.isRecentRight){
+                return(
+                  <GuideCardComponent key={title} style={{height: 272}} title={title} dur={duration} img={thumbnail} height={278} width={250}/>
+                )
+              }else if(props.isExploreLeft){
+                
+                if(index == 0)
+                  isActOne = true;
+                else if(index == 2)
+                  isActTwo = true;
+
+                return(
+                  <View key={title}>
+                    {isActOne && <GuideCardComponent style={{height: 130}} title={title} dur={duration} img={thumbnail} height={140} width={200} />}
+                    {isActTwo && <GuideCardComponent style={{height: 272}} title={title} dur={duration} img={thumbnail} height={285} width={200}/>}
+                  </View>
+                )
+              }else if(props.isExploreRight){
+                
+                if(index == 1)
+                  isActThree = true;
+                else if(index == 3)
+                  isActFour = true;
+
+                return(
+                  <View key={title} >
+                    {isActThree && <GuideCardComponent style={{height: 194}} title={title} dur={duration} img={thumbnail} height={210} width={200} />}
+                    {isActFour && <GuideCardComponent style={{height: 130}} title={title} dur={duration} img={thumbnail} height={150} width={200}/>}
+                  </View>
+                ) 
+              }
+             
+             })}
+    </View>
+  )
+}
+
 const MeditateScreen = ({navigation}) => {
   return (
     <ScrollView style={{backgroundColor: '#272727'}}> 
@@ -106,22 +153,10 @@ const MeditateScreen = ({navigation}) => {
         </Text>
         <View style={{display: 'flex', flexDirection:'row'}}>
           <View style={{flex:1, display: 'flex',flexDirection: 'column'}}>        
-            {Guides.map(({ title, thumbnail, duration }, index) => {
-              // left component
-              if(index < 2){
-              return(
-                  <GuideCardComponent style={{height: 130}} title={title} dur={duration} img={thumbnail} height={140} width={200} />
-              )
-             }})}
-             </View>
+            <DLoadComponents isRecentLeft={true}/>
+          </View>
           <View style={{flex:1}}>
-            {Guides.map(({ title, thumbnail, duration }, index) => {
-              // right component
-              if(index == 2){
-              return(
-                <GuideCardComponent style={{height: 272}} title={title} dur={duration} img={thumbnail} height={278} width={250}/>
-              )}
-            })}
+            <DLoadComponents isRecentRight={true}/>
           </View>
         </View>
         <Text style={[typo.H1, {marginTop: 20}]}>
@@ -129,38 +164,10 @@ const MeditateScreen = ({navigation}) => {
         </Text>
         <View style={{display: 'flex', flexDirection: 'row'}}>
           <View style={{flex: 1, display: 'flex'}}>
-            {Guides.map(({ title, thumbnail, duration }, index) => {
-              // left component
-              let isActOne, isActTwo;
-              if(index == 0)
-                isActOne = true;
-              else if(index == 2)
-                isActTwo = true;
-
-              return(
-                <View>
-                  {isActOne && <GuideCardComponent style={{height: 130}} title={title} dur={duration} img={thumbnail} height={140} width={200} />}
-                  {isActTwo && <GuideCardComponent style={{height: 272}} title={title} dur={duration} img={thumbnail} height={285} width={200}/>}
-                </View>
-              )
-             })}
+            <DLoadComponents isExploreLeft={true}/>
           </View>
           <View style={{flex: 1, display: 'flex'}}>
-            {Guides.map(({ title, thumbnail, duration }, index) => {
-              // right component
-              let isActThree, isActFour;
-              if(index == 1)
-                isActThree = true;
-              else if(index == 3)
-                isActFour = true;
-
-              return(
-                <View>
-                  {isActThree && <GuideCardComponent style={{height: 194}} title={title} dur={duration} img={thumbnail} height={210} width={200} />}
-                  {isActFour && <GuideCardComponent style={{height: 130}} title={title} dur={duration} img={thumbnail} height={150} width={200}/>}
-                </View>
-              )
-             })}
+            <DLoadComponents isExploreRight={true} />
           </View>
         </View>
         <View style={{display: 'flex', flexDirection: 'row'}}>
