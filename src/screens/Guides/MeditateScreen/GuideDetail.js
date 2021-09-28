@@ -9,13 +9,15 @@ import clock from '../../../assets/icons/clock.png';
 import Med from '../../../assets/images/med-1.png';
 
 
-const GuideDetail = ({ navigation, props }) => {
+const GuideDetail = ({ navigation, props, route }) => {
     {
         /*TODO:
         1. Import heart (white) icon and replace loveyellow icon
         2. Import clock icon and replace play icon
         */
     }
+
+    const source = route.params.text;
 
     return (
         <View style={{display: 'flex'}}> 
@@ -43,7 +45,8 @@ const GuideDetail = ({ navigation, props }) => {
                     <Text style={[typo.T3, {color: 'white', marginLeft: 35, marginTop: 3}]}>1 min</Text>
                 </View>
                 <Text style={[typo.T3, {color: 'white'}]}>                   
-                    {Guides[0].description
+                    { source
+                    /* {Guides[0].description */
                     /*Guides.map(({description})=>
                         {
                             console.log(description);
