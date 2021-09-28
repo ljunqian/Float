@@ -7,7 +7,7 @@ const ProfileScreen = ({ navigation }) => {
   return (
     <View>
       <Image source={Avatar}
-             style={{width: 160, height: 160, borderRadius:80, alignSelf: 'center', marginTop:20, backgroundColor:'#A5A6F6'}} />
+             style={{width: 160, height: 160, borderRadius:80, alignSelf: 'center', marginTop:20}} />
 
     </View>
   )

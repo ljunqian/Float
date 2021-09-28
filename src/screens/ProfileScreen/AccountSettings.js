@@ -1,22 +1,26 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Text, View, StyleSheet, Image, TextInputField, TouchableOpacity } from 'react-native';
 import Nav from './Nav';
 import Changeaccountinfo from '../../screens/ProfileScreen/Changeaccountinfo';
-
+import { Context } from '../Authenticate/store';
 import { Auth } from 'aws-amplify';
 import ProfileScreen from './profile';
 import { color } from '../../styles/theme';
 
-const AccountSettings = ({ navigation }) => {
-
+const AccountSettings = ({ route }) => {
+  const [state, dispatch] = React.useContext(Context);
   async function handlesignOut() {
     try {
         await Auth.signOut();
-        navigation.navigate('Login');
+        dispatch({type: 'SIGN_OUT', payload: true});
     } catch (error) {
         console.log('error signing out: ', error);
     }
 }
+
+useEffect(()=> {
+  console.log('context',state);
+}, [])
   return (
     <View style={{ backgroundColor: color.bg, minHeight: '100%' }}>
       <ProfileScreen />

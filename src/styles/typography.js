@@ -18,6 +18,10 @@ const typo = StyleSheet.create({
         fontFamily: 'FredokaOne-Regular',
         fontSize: 14,
     },
+    H4: {
+        fontFamily: 'FredokaOne-Regular',
+        fontSize: 32,
+    },
     T1: {
         fontFamily: 'Montserrat-Bold',
         fontSize: 14,

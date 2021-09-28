@@ -11,6 +11,7 @@ const theme = StyleSheet.create({
 export const color = {
   Move1: "#e15529",
   Move2: '#dbaec4',
+  Move3: '#FF3D00',
   Sleep1: '#b2e5d7',
   Sleep2: '#4263dd',
   Sleep3: '#44BED9',
@@ -19,6 +20,7 @@ export const color = {
   Med3: '#F57212',
   Focus1: '#3c886b',
   Focus2: '#91b0a5',
+  Focus3: '#0BB530',
   bg: '#272727',
 }
 export default theme;

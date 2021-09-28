@@ -21,6 +21,8 @@ import Changeaccountinfo from './src/screens/ProfileScreen/Changeaccountinfo';
 import LoginScreen from './src/screens/Authenticate/LoginScreen';
 import SignUpScreen from './src/screens/Authenticate/SignUpScreen';
 import MeditateScreen from './src/screens/Guides/MeditateScreen';
+import GuideDetail from './src/screens/Guides/MeditateScreen/GuideDetail.js';
+import GuideActivity from './src/screens/Guides/MeditateScreen/GuideActivity.js';
 import FocusScreen from './src/screens/Guides/FocusScreen';
 import SleepScreen from './src/screens/Guides/SleepScreen';
 import MoveScreen from './src/screens/Guides/MoveScreen';
@@ -37,10 +39,10 @@ import Float from './src/assets/images/float.png';
 import { Icon } from 'react-native-elements';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import { withAuthenticator } from 'aws-amplify-react-native'
+import { withAuthenticator } from 'aws-amplify-react-native';
+import Store, {Context} from './src/screens/Authenticate/store';
 
 import { Auth } from 'aws-amplify';
-
 import Amplify from 'aws-amplify';
 
 import config from './src/aws-exports'
@@ -141,13 +143,20 @@ const App = () => {
   Analytics.configure({ disabled: true })
   const [verticalVal, setVerticalVal] = useState(new Animated.Value(1));
   const [isSplash, setIsSplash] = useState(true);
-  const [isSignedIn, setisSignedIn] = useState(true);
+  const [isNotSignedIn, setisNotSignedIn] = useState(true);
+  const [state, dispatch] = React.useContext(Context);
 
   async function isUserAuthenticated() {
     try {
       const user = await Auth.currentAuthenticatedUser();
-      console.log(user);
-      {user == 'The user is not authenticated' && (setisSignedIn(false))};
+      //console.log('user is',user);
+      if (user) {
+        setisNotSignedIn(false);
+        dispatch({type: 'SIGN_IN', payload: true});
+      } else {
+        {user === 'The user is not authenticated' && (setisNotSignedIn(true))};
+
+      }
     } catch (error) {
       console.log(error);
     }
@@ -170,8 +179,8 @@ const App = () => {
     ).start();
   }, []);
 
-  return (
-    isSplash ? (
+  if (isSplash) {
+    return (
       <View style={style.viewStyle}>
         <Image source={Stars} style={style.bgImage} />
         <View style={style.logoView}>
@@ -181,8 +190,9 @@ const App = () => {
           </Text>
         </View>
       </View>
-      
-    ) : (
+    )
+  }
+  return (
       <NavigationContainer>
         <Stack.Navigator
           screenOptions={() => ({
@@ -194,22 +204,27 @@ const App = () => {
             headerLeft: null,
             headerTitle: () => (<View />),
           })}
-        >
-        {isSignedIn && (
+          >
+        {state.isSignout ? (
+          <>
          <Stack.Screen name="Login" component={LoginScreen}
-         screenOptions={() => ({
-           headerStyle: {
-             headerShown: false
-           },
-           headerTitle: () => (<View />),
-         })}
-       />
-        )}
+            screenOptions={() => ({
+              headerStyle: {
+                headerShown: false
+              },
+              headerTitle: () => (<View />),
+            })}
+          /> 
           <Stack.Screen name="Signup" component={SignUpScreen}
             options={({ navigation }) => ({
               headerShown: false
             })}
           />
+          </>
+       ) : (
+        <>
+       
+        
           <Stack.Screen name="Guides" component={BottomBar}
             options={({ navigation }) => ({
               headerRight: () => (
@@ -264,14 +279,49 @@ const App = () => {
               headerTintColor: 'white'
             })}
           />
+
+          <Stack.Screen name="Meditate GuideDetail" component={GuideDetail} 
+            options={()=>({
+              headerShadowVisible: false,
+              headerTitleStyle: {color:'white'},
+              headerTintColor: 'white',
+              headerTitle: '',
+              headerTransparent: true,
+              headerStyle: {
+                backgroundColor: 'transparent'
+              }
+            })}
+          />
+         
+          <Stack.Screen name="Meditate GuideActivity" component={GuideActivity} 
+            options={()=>({
+              headerShadowVisible: false,
+              headerTitleStyle: {color:'white'},
+              headerTintColor: 'white',
+              headerTitle: '',
+              headerTransparent: true,
+              headerStyle: {
+                backgroundColor: 'transparent'
+              }
+            })}
+          />
+
+         </> )}
         </Stack.Navigator>
       </NavigationContainer>
     )
-  );
-};
+}
 
 
-export default App;
+const Container = () => {
+  return (
+    <Store>
+      <App/>
+    </Store>
+  )
+}
+
+export default Container;
 
 
 
