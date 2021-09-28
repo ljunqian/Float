@@ -7,7 +7,7 @@ import { Auth } from 'aws-amplify';
 import ProfileScreen from './profile';
 import { color } from '../../styles/theme';
 
-const AccountSettings = ({ route }) => {
+const AccountSettings = ({ navigation, route }) => {
   const [state, dispatch] = React.useContext(Context);
   async function handlesignOut() {
     try {
@@ -26,7 +26,7 @@ useEffect(()=> {
       <ProfileScreen />
       <Nav />
       <View style={{marginLeft:50}}>
-      <TouchableOpacity onPress={() => {}}>
+      <TouchableOpacity onPress={() => {navigation.navigate('Edit Profile')}}>
         <View style={{
                       marginTop:10,
                       marginRight:46,
@@ -39,19 +39,7 @@ useEffect(()=> {
             <Text style={{ color: 'white' }}>Edit Profile</Text>
         </View>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => {}}>
-        <View style={{
-                      marginTop:10,
-                      marginRight:46,
-                      height: 40,
-                      backgroundColor: '#4263DD',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      borderRadius: 35
-                      }}>
-            <Text style={{ color: 'white' }}>Change Password</Text>
-        </View>
-      </TouchableOpacity>
+
       <TouchableOpacity onPress={() => {handlesignOut()}}>
         <View style={{
                       marginTop:10,

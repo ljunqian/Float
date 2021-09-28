@@ -5,7 +5,7 @@ import { Auth } from 'aws-amplify';
 import typo from '../../styles/typography';
 import { color } from '../../styles/theme';
 import FloatLogo from '../../assets/images/float.png';
-
+import BirthDate from './BirthDate'
 const initialState = { name: '', description: '' }
 
 const SignUpScreen = ({ navigation }) => {
@@ -122,7 +122,7 @@ const SignUpScreen = ({ navigation }) => {
               <Select.Item label="Male" value="M" />
               <Select.Item label="Others" value="NA" />
             </Select></View>
-
+            <BirthDate/>
             <TouchableOpacity onPress={() => {onSignUp()}}>
                         <View style={{
                         marginTop:10,
