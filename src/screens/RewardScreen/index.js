@@ -24,6 +24,7 @@ import { TabClicked } from './component';
 import { TabNotClicked } from './component';
 
 import AvatarMountain from '../../assets/images/Background-Mountain.png'
+import AvatarStarrySpace from '../../assets/images/starry-space.png'
 import AvatarHat1 from '../../assets/images/Hat-Cowboy.png'
 import AvatarHat2 from '../../assets/images/Hat-Santa.png'
 import { Card } from 'react-native-elements/dist/card/Card';
@@ -37,6 +38,8 @@ import { emptyStatement } from '@babel/types';
 
 const RewardScreen = ({ navigation }) => {
   const [tab, setIsTab] = useState("Background");
+  const [background, setIsBackground] = useState('Initial bg');
+  const [selected, setSelected] = useState(null);
 
   const TabView = (props) => {
     return(
@@ -50,9 +53,34 @@ const RewardScreen = ({ navigation }) => {
     )
   }
 
+  const updateAvatar = (data) =>{
+    
+    if(data === 'Mountain' || data === 'Starry Space'){
+      setIsBackground(data);
+    }else if(data === 'Remove Asset'){
+      setIsBackground('Remove Asset');
+    }
+  }
+
+  const handleSelected = (value) =>{
+    setSelected(value);
+  }
+
   return (
     <VStack style={{backgroundColor: color.bg}}>
-      <Asset background="initial bg" hat="initial hat" accessory="initial accessory"/>
+
+      <View style={{marginLeft: 120}}>
+      {
+        background === 'Mountain' ? (
+          <Image source={AvatarMountain} style={{width: 200, height: 200, zIndex: -1, position:'absolute'}}/>
+        ) : background === 'Starry Space' ? (
+          <Image source={AvatarStarrySpace} style={{width: 200, height: 200, zIndex: -1, position:'absolute'}}/>
+        ) : (
+          <View></View>
+        )
+      }
+      </View>
+
       <ProfileScreen style={{position: 'absolute', zIndex: 1}}/>
      
       <HStack style={style.tabBar}>
@@ -77,7 +105,8 @@ const RewardScreen = ({ navigation }) => {
                 {/*Populate Background Reward Cards*/}
                 {BackgroundImages.map((bgInfo)=>{
                     return(
-                      <RewardCard key = {bgInfo.id} img={bgInfo.source} asset={bgInfo.name} coinsValue={bgInfo.value} purchased={bgInfo.purchased} equipped={bgInfo.equipped}/>
+                      <RewardCard key = {bgInfo.id} img={bgInfo.source} asset={bgInfo.name} coinsValue={bgInfo.value} purchased={bgInfo.purchased} equipped={bgInfo.equipped}
+                      updateAssetState ={updateAvatar} onPress={handleSelected} value={selected}/>
                     )
                   })
                 }
@@ -88,7 +117,8 @@ const RewardScreen = ({ navigation }) => {
               <View style = {style.rewardRowContainer}>
                 {HatImages.map((hatInfo)=>{
                     return(
-                      <RewardCard key = {hatInfo.id} img={hatInfo.source} asset={hatInfo.name} coinsValue={hatInfo.value} purchased={hatInfo.purchased} equipped={hatInfo.equipped}/>
+                      <RewardCard key = {hatInfo.id} img={hatInfo.source} asset={hatInfo.name} coinsValue={hatInfo.value} purchased={hatInfo.purchased} equipped={hatInfo.equipped}
+                      updateAssetState ={updateAvatar}/>
                     )
                   })
                 }
@@ -125,21 +155,6 @@ const RewardScreen = ({ navigation }) => {
   )
 }
 
-const Asset = (props) =>{
-  const [background, setIsbackground] = useState(props.background != emptyStatement ? props.background : console.log("No background"));
-
-  console.log(background)
-  return(
-    <View>
-      {background === 'Mountain' ? (
-        <Image source={AvatarMountain} style={{width: 100, height: 100, zIndex: -1, position:'absolute'}}/>
-      ):(
-        null
-      )}
-    </View>
-  )
-}
-
 const RewardCard = (props) => {
   const [purchasestatus, setIsPurchaseStatus] = useState(props.purchased);
   const [equippedstatus, setIsEquippedStatus] = useState(props.equipped);
@@ -158,19 +173,24 @@ const RewardCard = (props) => {
       }else if (purchasestatus === true && equippedstatus === false){
         //add asset onto avatar
         setIsEquippedStatus(true);
-        
+        props.updateAssetState(props.asset);
       }else if (purchasestatus === true && equippedstatus === true){
         //remove asset from avatar
         setIsEquippedStatus(false);
+        props.updateAssetState('Remove Asset');
       }else{
         //if my coins < asset value
         null
       }
   }
 
+  const update = () =>{
+    props.onPress(props.asset);
+  }
+
   return(
     <View>
-      <TouchableOpacity onPress={purchaseOrEquip}>
+      <TouchableOpacity onPress={()=>{update(); purchaseOrEquip();}}>
         <VStack>
           <View style = {[style.rewardCardContainer, {backgroundColor: bgColour}]}>
               <Image source={props.img} style= {style.rewardItemImage}/>
@@ -187,16 +207,15 @@ const RewardCard = (props) => {
                           <Text style={{fontSize: 12, fontFamily: 'Montserrat-Regular', color: '#FFF', marginHorizontal: 5}}>Owned</Text>
                         </View>
                   ) : (
-                      <View style={[style.statusContainer, {backgroundColor: 'white'}]}>
+                    <View style={[style.statusContainer, {backgroundColor: 'white'}]}>
                         <Text style={{fontSize: 12, color: 'black', marginHorizontal: 5, fontFamily: 'Montserrat-Regular'}}>Equipped</Text>
-                      </View>
-                    
+                    </View>
                   )}
                 </View>
             </HStack>
           </View>
         </VStack>
-      </TouchableOpacity>
+      </TouchableOpacity> 
     </View>
   )
 } 
