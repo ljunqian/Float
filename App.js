@@ -13,6 +13,8 @@ import typo from './src/styles/typography';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
+import changePass from './src/screens/ProfileScreen/changePass';
+import editProfile from './src/screens/ProfileScreen/editProfile';
 import ExploreScreen from './src/screens/Guides/ExploreScreen'
 import ProfileScreen from './src/screens/ProfileScreen/';
 import RewardScreen from './src/screens/RewardScreen/';
@@ -254,6 +256,18 @@ const App = () => {
                 </TouchableOpacity>
               ),
               headerTitle: () => (<View />),
+              headerTintColor: 'white'
+            })}
+          />
+          <Stack.Screen name="Edit Profile" component={editProfile}
+            options={() => ({
+              headerTitleStyle: { color: 'white' },
+              headerTintColor: 'white'
+            })}
+          />
+          <Stack.Screen name="Change Password" component={changePass}
+            options={() => ({
+              headerTitleStyle: { color: 'white' },
               headerTintColor: 'white'
             })}
           />
