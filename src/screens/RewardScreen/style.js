@@ -14,8 +14,6 @@ const style = StyleSheet.create({
     tabIcon: {
       width: 30,
       height: 30,
-      // borderRadius: 100,
-      // backgroundColor: '#C4C4C4',
       marginHorizontal: 31
     },
 
@@ -59,15 +57,6 @@ const style = StyleSheet.create({
       justifyContent: 'center',
       alignItems: 'center',
     },
-
-    statusText: {
-      fontSize: 12,
-      fontFamily: 'Montserrat-Regular',
-      color: '#FFF',
-      marginHorizontal: 5
-    },
-
-      //add on top of global
 });
 
 export default style;

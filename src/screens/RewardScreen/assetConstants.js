@@ -20,25 +20,25 @@ export const BackgroundImages = [
     {   name: 'Mountain',
         source: Background_Mountain,
         value: '300',
-        id: '1',
-        equipped: true,
+        id: 'BG Mountain',
+        equipped: false,
         purchased: true
     },
 
     {   name: 'Starry Space',
         source: Background_StarrySpace,
         value: '200',
-        id: '2',
-        equipped: true,
-        purchased: true
+        id: 'BG Starry Space',
+        equipped: false,
+        purchased: false
     },
     
     {   name: 'Beach',
         source: Background_Beach,
         value: '150',
-        id: '3',
-        equipped: true,
-        purchased: true
+        id: 'BG Beach',
+        equipped: false,
+        purchased: false
     }
 ]
 
@@ -47,36 +47,36 @@ export const HatImages = [
         name: 'Cowboy',
         source: Hat1,
         value: '100',
-        id: '1',
-        equipped: true,
-        purchased: true
+        id: 'Hat Cowboy',
+        equipped: false,
+        purchased: false
     },
 
     {
         name: 'Santa',
         source: Hat2,
         value: '250',
-        id: '2',
-        equipped: true,
-        purchased: true
+        id: 'Hat Santa',
+        equipped: false,
+        purchased: false
     },
 
     {
         name: 'Ushanka',
         source: Hat3,
         value: '300',
-        id: '3',
-        equipped: true,
-        purchased: true
+        id: 'Hat Ushanka',
+        equipped: false,
+        purchased: false
     },
 
     {
         name: 'Wizard',
         source: Hat4,
         value: '400',
-        id: '3',
-        equipped: true,
-        purchased: true
+        id: 'Hat Wizard',
+        equipped: false,
+        purchased: false
     }
 ]
 
@@ -85,36 +85,36 @@ export const AccessoryImages = [
         name: 'Band Aid',
         source: Accessory1,
         value: '250',
-        id: '1',
-        equipped: true,
-        purchased: true
+        id: 'ACC Band Aid',
+        equipped: false,
+        purchased: false
     },
 
     {
         name: 'Eyepatch',
         source: Accessory2,
         value: '350',
-        id: '2',
-        equipped: true,
-        purchased: true
+        id: 'ACC Eyepatch',
+        equipped: false,
+        purchased: false
     },
 
     {
         name: 'Mustache',
         source: Accessory3,
         value: '400',
-        id: '3',
-        equipped: true,
-        purchased: true
+        id: 'ACC Mustache',
+        equipped: false,
+        purchased: false
     },
 
     {
         name: 'Santa Beard',
         source: Accessory4,
         value: '500',
-        id: '4',
-        equipped: true,
-        purchased: true
+        id: 'ACC Santa Beard',
+        equipped: false,
+        purchased: false
     },
 ]
 
@@ -123,24 +123,23 @@ export const VoucherImages = [
         name: '1-for-1 Korean BBQ',
         source: Voucher1,
         value: '200',
-        id: '1',
-        redeemed: true
+        id: 'Voucher BBQ',
+        redeemed: false
     },
 
     {
         name: 'Weekday Lunch Deals',
         source: Voucher2,
-        value: '200',
+        value: 'Voucher Lunch',
         id: '2',
         redeemed: false
     },
 
     {
         name: '50% off 2nd admission',
-        source: Voucher2,
+        source: Voucher3,
         value: '200',
-        id: '3',
+        id: 'Voucher 50%',
         redeemed: false
     },
 ]
-
