@@ -1,12 +1,13 @@
 import React from 'react';
 import { View, Text, StyleSheet, ImageBackground, Image, TouchableOpacity } from 'react-native';
 import typo from '../../../styles/typography';
-import { style } from 'styled-system';
+import { layout, style } from 'styled-system';
 import MedBG from '../../../assets/images/meditate-planet.png';
 import Bigplay from '../../../assets/icons/bigplay.png';
 import { Guides } from './constants';
+import { color } from '../../../styles/theme';
 
-const Activity = ({navigate}) => {
+const Activity = ({navigation}) => {
     return  (
         
        
@@ -19,13 +20,15 @@ const Activity = ({navigate}) => {
                     Session Name
                 </Text>
                 </View>
+                
+                <TouchableOpacity   style={{top: 240} } onPress={() => navigation.navigate('Meditate GuideComplete')} >
+                <Image source={Bigplay} />
+                </TouchableOpacity>
             
-                <TouchableOpacity >
-                <Image source={Bigplay} style={{top: 240 }} />
-                <Text style={[typo.H2, {top: 280, color: 'white', fontWeight: '400', marginLeft: 18 }]}>
+                <Text style={[typo.H2, {top: 280, color: 'white', fontWeight: '400', marginLeft: 15 }]}>
                   13:42
                 </Text>
-                </TouchableOpacity>
+                
             </View>
              </ImageBackground>
         </View>
@@ -47,6 +50,21 @@ const styles = StyleSheet.create({
     },
     actComponent: {
         backgroundColor: '#272727'
+    },
+    btnContainer : {
+        display: 'flex',
+        height: 100,
+        width: 412,
+        alignItems: 'center',
+        backgroundColor : '#272727',     
+    },
+    button : {
+        height: 48,
+        width: 240,
+        alignItems: 'center',   
+        justifyContent: 'center',
+        borderRadius: 48, 
+        backgroundColor : '#272727' 
     }
 })
 
