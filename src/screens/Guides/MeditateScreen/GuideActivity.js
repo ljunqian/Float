@@ -21,7 +21,7 @@ const Activity = ({navigation}) => {
                     </Text>
                 </View>
                 
-                <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                <View style={{flex: 2, justifyContent: 'center', alignItems: 'center'}}>
                     <TouchableOpacity style={{backgroundColor: 'transparent', justifyContent: 'center', alignItems: 'center'} } onPress={() => navigation.navigate('Meditate GuideComplete')} >
                         <Image source={Bigplay} />
                     </TouchableOpacity>
@@ -30,7 +30,7 @@ const Activity = ({navigation}) => {
                     </Text>
                 </View>
             
-                <View style={{flex: 1, backgroundColor:'white'}}> 
+                <View style={{flex: 3, backgroundColor:'white'}}> 
                     {/* <Text>This is the bottom space </Text> */}
                 </View>
                 
