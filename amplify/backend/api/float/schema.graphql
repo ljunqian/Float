@@ -8,5 +8,8 @@ type User @model @auth(rules: [{allow: private}]) {
   moveD: Int!
   focusD: Int!
   friends: [String!]
+  birthday: String!
+  gender: String!
+  phone: String!
 }
-  
+ 

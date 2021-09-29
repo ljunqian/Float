@@ -15,18 +15,18 @@ const LoginScreen = ({ navigation }) => {
   const [errorstate, seterrorState] = useState(false);
   const [errorMessage, seterrorMessage] = useState('');
   const [state, dispatch] = React.useContext(Context);
-  
+
   async function signIn() {
     try {
       const user = await Auth.signIn(email, password);
-      if (user) {dispatch({type: 'SIGN_IN', payload: true});}
+      if (user) { dispatch({ type: 'SIGN_IN', payload: true }); }
       // TODO: set false 
     } catch (error) {
       console.log('error signing in', error);
       seterrorState(true);
       seterrorMessage(error.message)
     }
-  } 
+  }
 
   return (
     <NativeBaseProvider>
@@ -34,14 +34,16 @@ const LoginScreen = ({ navigation }) => {
         style={styles.container}
       >
         <View style={{ width: '100%', }}>
-          <View style={{width:'100%',
-          justifyContent: 'center',
-          alignItems: 'center'}}>
+          <View style={{
+            width: '100%',
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}>
 
             <Image source={FloatLogo} style={{ width: 160, height: 160 }} />
-                <Text style={[typo.H0]}>
-                    Float
-                </Text>
+            <Text style={[typo.H0]}>
+              Float
+            </Text>
           </View>
           <KeyboardAvoidingView
             behavior="position"
@@ -51,18 +53,18 @@ const LoginScreen = ({ navigation }) => {
               Email
             </Text>
             <Input
-              style = {{width:331, height:40}}
+              style={{ width: 331, height: 40 }}
               value={email}
               onChangeText={setEmail}
               variant="underlined"
               placeholder="Your Email Address"
               color='white'
             />
-            <Text style={[typo.H2, { color: 'white', paddingTop:20 }]}>
+            <Text style={[typo.H2, { color: 'white', paddingTop: 20 }]}>
               Password
             </Text>
             <Input
-                style = {{width:331, height:40}}
+              style={{ width: 331, height: 40 }}
               value={password}
               onChangeText={setPassword}
               variant="underlined"
@@ -72,18 +74,16 @@ const LoginScreen = ({ navigation }) => {
             />
           </KeyboardAvoidingView>
 
-
-
-          <TouchableOpacity onPress={() => {signIn()}}>
+          <TouchableOpacity onPress={() => { signIn() }}>
             <View style={{
-                marginLeft:20,
-                marginRight:20,
-                height: 48,
-                backgroundColor: '#4263DD',
-                alignItems: 'center',
-                justifyContent: 'center',
-                borderRadius: 35
-              }}
+              marginLeft: 20,
+              marginRight: 20,
+              height: 48,
+              backgroundColor: '#4263DD',
+              alignItems: 'center',
+              justifyContent: 'center',
+              borderRadius: 35
+            }}
             >
               <Text style={{ color: 'white' }}>Login</Text>
             </View>
@@ -105,27 +105,27 @@ const LoginScreen = ({ navigation }) => {
   )
 }
 const styles = StyleSheet.create({
-  container: { width: '100%', display: 'flex', paddingLeft: 20, paddingRight:20, minHeight: '100%', alignItems: 'center', backgroundColor: color.bg },
+  container: { width: '100%', display: 'flex', paddingLeft: 20, paddingRight: 20, minHeight: '100%', alignItems: 'center', backgroundColor: color.bg },
   forgotButton: {
     marginVertical: 10,
-    marginLeft:20,
+    marginLeft: 20,
     color: 'white',
   },
   navButtonText: {
-  marginLeft:20,
+    marginLeft: 20,
     fontSize: 14,
     fontWeight: '500',
     color: 'white',
     fontFamily: 'Lato-Regular',
   },
   errorText: {
-  marginTop:30,
-    marginLeft:20,
-      fontSize: 14,
-      fontWeight: '500',
-      color: 'red',
-      fontFamily: 'Lato-Regular',
-    },
+    marginTop: 10,
+    marginLeft: 20,
+    fontSize: 10,
+    fontWeight: '500',
+    color: 'red',
+    fontFamily: 'Lato-Regular',
+  },
 
 })
 

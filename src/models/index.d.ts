@@ -14,6 +14,9 @@ export declare class User {
   readonly moveD: number;
   readonly focusD: number;
   readonly friends?: string[];
+  readonly birthday: string;
+  readonly gender: string;
+  readonly phone: string;
   constructor(init: ModelInit<User>);
   static copyOf(source: User, mutator: (draft: MutableModel<User>) => MutableModel<User> | void): User;
 }

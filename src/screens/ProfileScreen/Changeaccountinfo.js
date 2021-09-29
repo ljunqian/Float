@@ -17,55 +17,48 @@ const AccountSettings = ({ navigation }) => {
     const [info, setInfo] = useState({
         name: '',
         email: '',
-        coins: '',
-        meditateD: '',
-        sleepD: '',
-        moveD: '',
-        friends: []
+        phone: '',
+        gender: '',
+        date: ''
     });
-    const [username, setUsername] = useState('')
-    const [email, setEmail] = useState('')
+
 
     const getUserInfo = async () => {
         try {
             const { attributes } = await Auth.currentAuthenticatedUser();
-            const post = await DataStore.query(User, attributes.sub);
+            console.log(attributes);
             setInfo({
-                name: post.name,
-                email: post.email,
-                coins: post.coins,
-                meditateD: post.meditateD,
-                sleepD: post.sleepD,
-                moveD: post.moveD,
-                focusD: post.focusD,
-                friends: post.friends
+                name: attributes.name,
+                email: attributes.email,
+                phone: attributes.email,
+                gender: attributes.email,
+                date: attributes.email
             });
         } catch (error) {
             console.log("Error saving post", error);
         }
     }
 
-    const updateuserattributes = async () => {
-        if (username != '' && email != '') {
+    async function handleupdate() {
+        try {
             let user = await Auth.currentAuthenticatedUser();
-            console.log("hello");
-            let result = await Auth.updateUserAttributes(user, {
-                'email': email
-            });
-            console.log(result); // SUCCESS
+            console.log(user);
+
+ // SUCCESS
+        } catch (error) {
+            console.log(error);
         }
     }
-
-    useEffect(() => {
-        getUserInfo();
-    }, []);
 
     return (
         <View>
             <TextInput placeholder={info.name} onChangeText={text => setUsername(text)}></TextInput>
             <TextInput placeholder={info.email} onChangeText={text => setEmail(text)}></TextInput>
+            <TextInput placeholder={info.email} onChangeText={text => setEmail(text)}></TextInput>
+            <TextInput placeholder={info.email} onChangeText={text => setEmail(text)}></TextInput>
+            <TextInput placeholder={info.email} onChangeText={text => setEmail(text)}></TextInput>
             <Button
-                onPress={() => { updateuserattributes() }}
+                onPress={() => { handleupdate() }}
                 title="Update"
                 style={style.buttonStyle}
             />

@@ -66,6 +66,27 @@ export const schema = {
                     "isRequired": true,
                     "attributes": [],
                     "isArrayNullable": true
+                },
+                "birthday": {
+                    "name": "birthday",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "gender": {
+                    "name": "gender",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "phone": {
+                    "name": "phone",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
                 }
             },
             "syncable": true,
@@ -96,5 +117,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "c48e57803fb362692070f142e259a1cd"
+    "version": "16ae4e2abc6a3da9acd0e5db53da2b31"
 };
