@@ -50,14 +50,14 @@ const LoginScreen = ({ navigation }) => {
             style={{ margin: 20, justifyContent: 'flex-start', display: 'flex', width: '100%', }}
           >
             <Text style={[typo.H2, { color: 'white' }]}>
-              Email
+              Username
             </Text>
             <Input
               style={{ width: 331, height: 40 }}
               value={email}
               onChangeText={setEmail}
               variant="underlined"
-              placeholder="Your Email Address"
+              placeholder="Your Username"
               color='white'
             />
             <Text style={[typo.H2, { color: 'white', paddingTop: 20 }]}>

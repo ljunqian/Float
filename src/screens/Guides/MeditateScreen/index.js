@@ -7,39 +7,84 @@ import * as Progress from 'react-native-progress';
 import MedBG from '../../../assets/images/meditate-planet.png';
 import MedAvatar from '../../../assets/images/meditate-avatar.png';
 import Med from '../../../assets/images/med-1.png'; 
-import Med1 from '../../../assets/images/med1.png';
+import Mov from '../../../assets/images/mov-1.png';
 import Med2 from '../../../assets/images/med2.png';
-import Med3 from '../../../assets/images/med3.png';
-import Sleep3 from '../../../assets/images/sleep3.png';
 import { overflow } from 'styled-system';
 import play from '../../../assets/icons/play.png';
-
-/*TODO:
-  1. Change <View> into <TouchableOpacity> for GuideCardComponent [Done]
-  2. Set 'onPress' handler to GuideDetail page  
-*/
+import { Guides } from './constants';
 
 const GuideCardComponent = (props)  => {
   return (
     <TouchableOpacity style={[layout.guideCard, props.style, {overflow: 'hidden'}]} onPress={props.click}>
-      <Image source={props.img} style={{position: 'absolute', zIndex: 0, left: -5, width:props.width, height:props.height }}/>
-      <Text style={typo.T3}>
-        Activity
+      <Image source={props.img} style={{position: 'absolute', zIndex: 0, top: -6, left: -5, width:props.width, height:props.height }}/>
+      <Text style={[typo.T3, {marginBottom: 5}]}>
+        {props.title}
       </Text>
-      <MinuteView />
+      <MinuteView duration={props.dur}/>
     </TouchableOpacity>
   )
 }
 
-const MinuteView = () => {
-  return (<View style={[layout.minute]}>
-        <Text style={typo.T3}>
-          2 mins
-        </Text>
-      </View>
+const MinuteView = (props) => {
+  let duration = props.duration;
+  let isTwoDigit = false;
+  if (duration > 9)
+    isTwoDigit = true;
+  return (
+    <View style={[layout.minute, {width: isTwoDigit? 61 : 51}]}>
+      <Text style={typo.T3}>
+        {duration} mins
+      </Text>
+    </View>
   )
 }
-const clickHandler = ({navigation}) => navigation.navigate('Meditate GuideDetail')
+
+const DLoadComponents = (props) => {
+  return(
+    <View>
+      {Guides.map(({ title, thumbnail, duration }, index) => {
+        let isActOne, isActTwo, isActThree, isActFour;
+
+        if(index < 2 && props.isRecentLeft){
+        return(
+          <GuideCardComponent key={title} style={{height: 130}} title={title} dur={duration} img={thumbnail} height={140} width={200} click={props.click}/>
+        )
+        }else if(index == 2 && props.isRecentRight){
+          return(
+            <GuideCardComponent key={title} style={{height: 272}} title={title} dur={duration} img={thumbnail} height={278} width={250} click={props.click}/>
+          )
+        }else if(props.isExploreLeft){
+          
+          if(index == 0)
+            isActOne = true;
+          else if(index == 2)
+            isActTwo = true;
+
+          return(
+            <View key={title}>
+              {isActOne && <GuideCardComponent style={{height: 130}} title={title} dur={duration} img={thumbnail} height={140} width={200} click={props.click}/>}
+              {isActTwo && <GuideCardComponent style={{height: 272}} title={title} dur={duration} img={thumbnail} height={285} width={200} click={props.click}/>}
+            </View>
+          )
+        }else if(props.isExploreRight){
+          
+          if(index == 1)
+            isActThree = true;
+          else if(index == 3)
+            isActFour = true;
+
+          return(
+            <View key={title} >
+              {isActThree && <GuideCardComponent style={{height: 194}} title={title} dur={duration} img={thumbnail} height={210} width={200} click={props.click}/>}
+              {isActFour && <GuideCardComponent style={{height: 130}} title={title} dur={duration} img={thumbnail} height={150} width={200} click={props.click}/>}
+            </View>
+          ) 
+        }
+        
+        })}
+    </View>
+  )
+}
 
 const MeditateScreen = ({navigation}) => {
   return (
@@ -77,10 +122,10 @@ const MeditateScreen = ({navigation}) => {
             </TouchableOpacity>
           </View>
       </View>
-      <TouchableOpacity style={[layout.container,]} onPress={() => navigation.navigate('Meditate GuideDetail')}>
+      <TouchableOpacity style={[layout.container,]} onPress={() => navigation.navigate('Meditate GuideDetail', {text: 'Hello from Screen 1'})}>
         <ImageBackground source={Med} style={{width:'100%'}}>
         <View style={{height: 155, display: 'flex', 
-          flexDirection: 'row',padding: 12,
+          flexDirection: 'row', padding: 12,
           borderRadius: 20,
           margin: 6, }}>
           <View style={{flex: 1}}></View>
@@ -90,7 +135,7 @@ const MeditateScreen = ({navigation}) => {
             </Text> 
           </View>
           <View style={{flex: 1, alignItems: 'flex-end'}}>
-            <MinuteView />
+            <MinuteView duration={2}/>
           </View>
         </View>
         </ImageBackground>
@@ -101,12 +146,11 @@ const MeditateScreen = ({navigation}) => {
           Recent
         </Text>
         <View style={{display: 'flex', flexDirection:'row'}}>
-          <View style={{flex:1, display: 'flex',flexDirection: 'column'}}>
-            <GuideCardComponent style={{height: 130}} img={Sleep3} height={130} width={200} click={clickHandler}/>
-            <GuideCardComponent style={{height: 200}} img={Med2} height={220} width={200}/>
+          <View style={{flex:1, display: 'flex',flexDirection: 'column'}}>        
+            <DLoadComponents isRecentLeft={true} click={() => navigation.navigate('Meditate GuideDetail')}/>
           </View>
           <View style={{flex:1}}>
-            <GuideCardComponent style={{height: 272}} img={Med3} height={274} width={250}/>
+            <DLoadComponents isRecentRight={true} click={() => navigation.navigate('Meditate GuideDetail')}/>
           </View>
         </View>
         <Text style={[typo.H1, {marginTop: 20}]}>
@@ -114,12 +158,10 @@ const MeditateScreen = ({navigation}) => {
         </Text>
         <View style={{display: 'flex', flexDirection: 'row'}}>
           <View style={{flex: 1, display: 'flex'}}>
-            <GuideCardComponent style={{height: 130}} img={Med} height={140} width={200}/>
-            <GuideCardComponent style={{height: 272}} img={Med3} height={280} width={200}/>
+            <DLoadComponents isExploreLeft={true} click={() => navigation.navigate('Meditate GuideDetail')}/>
           </View>
           <View style={{flex: 1, display: 'flex'}}>
-            <GuideCardComponent style={{height: 194}} img={Med2} height={200} width={200}/>
-            <GuideCardComponent style={{height: 130}} img={Med} height={150} width={200}/>
+            <DLoadComponents isExploreRight={true} click={() => navigation.navigate('Meditate GuideDetail')}/>
           </View>
         </View>
         <View style={{display: 'flex', flexDirection: 'row'}}>
