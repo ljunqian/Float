@@ -18,9 +18,11 @@ const LoginScreen = ({ navigation }) => {
 
   async function signIn() {
     try {
-      const user = await Auth.signIn(email, password);
-      if (user) { dispatch({ type: 'SIGN_IN', payload: true }); }
-      // TODO: set false 
+      if (email != '' && password != '') {
+        const user = await Auth.signIn(email, password);
+        if (user) { dispatch({ type: 'SIGN_IN', payload: true }); }
+        // TODO: set false 
+      }
     } catch (error) {
       console.log('error signing in', error);
       seterrorState(true);

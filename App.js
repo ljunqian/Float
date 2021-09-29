@@ -281,20 +281,13 @@ const App = () => {
               })}
             />
 
-            <Stack.Screen name="Change Account Information" component={Changeaccountinfo}
+            <Stack.Screen name="Change Account Information" component={editProfile}
               options={() => ({
                 headerTitleStyle: { color: 'white' },
                 headerTintColor: 'white'
               })}
             />
-
-            <Stack.Screen name="Edit Profile" component={editProfile}
-              options={() => ({
-                headerTitleStyle: { color: 'white' },
-                headerTintColor: 'white'
-              })}
-            />
-            <Stack.Screen name="Change Password" component={changePass}
+             <Stack.Screen name="Change password" component={changePass}
               options={() => ({
                 headerTitleStyle: { color: 'white' },
                 headerTintColor: 'white'
@@ -326,12 +319,13 @@ const App = () => {
                 }
               })}
             />
-
           </>)}
       </Stack.Navigator>
     </NavigationContainer>
   )
 }
+
+
 const Container = () => {
   return (
     <Store>
