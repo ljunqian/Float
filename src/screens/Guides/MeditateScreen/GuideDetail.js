@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image, ImageBackground } from 'react-native';
 import typo from '../../../styles/typography';
-import { guide } from './constants';
+import { Guides } from './constants';
 import layout from '../../../styles/componentLayout';
 import { color } from '../../../styles/theme';
 import heart from '../../../assets/icons/heart.png';
@@ -9,7 +9,7 @@ import clock from '../../../assets/icons/clock.png';
 import Med from '../../../assets/images/med-1.png';
 
 
-const GuideDetail = ({ navigation, props }) => {
+const GuideDetail = ({ navigation, props, route }) => {
     {
         /*TODO:
         1. Import heart (white) icon and replace loveyellow icon
@@ -17,8 +17,8 @@ const GuideDetail = ({ navigation, props }) => {
         */
     }
 
-    //const {act1: {description},} = guide;
-    //console.log(description);
+    const source = route.params.text;
+
     return (
         <View style={{display: 'flex'}}> 
             {/*IMAGE DIV*/}
@@ -44,8 +44,16 @@ const GuideDetail = ({ navigation, props }) => {
                     <Image source={clock} style={{ top: 3, left: 80, zIndex: 0, position: 'absolute'}} />
                     <Text style={[typo.T3, {color: 'white', marginLeft: 35, marginTop: 3}]}>1 min</Text>
                 </View>
-                <Text style={[typo.T3, {color: 'white'}]}>
-                    Description
+                <Text style={[typo.T3, {color: 'white'}]}>                   
+                    { source
+                    /* {Guides[0].description */
+                    /*Guides.map(({description})=>
+                        {
+                            console.log(description);
+                            return (Guides[0].description)
+                        }
+                    )*/
+                    }
                 </Text>
             </View>
 

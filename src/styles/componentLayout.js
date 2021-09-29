@@ -15,7 +15,7 @@ const layout = StyleSheet.create({
   minute: {
     backgroundColor: 'white',
     borderRadius: 8,
-    width: 51,
+    //width: 51,
     height: 24,
     display: 'flex',
     justifyContent: 'center',
