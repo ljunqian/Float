@@ -10,20 +10,6 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "name": {
-                    "name": "name",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "email": {
-                    "name": "email",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
                 "coins": {
                     "name": "coins",
                     "isArray": false,
@@ -66,27 +52,6 @@ export const schema = {
                     "isRequired": true,
                     "attributes": [],
                     "isArrayNullable": true
-                },
-                "birthday": {
-                    "name": "birthday",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "gender": {
-                    "name": "gender",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "phone": {
-                    "name": "phone",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
                 }
             },
             "syncable": true,
@@ -117,5 +82,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "16ae4e2abc6a3da9acd0e5db53da2b31"
+    "version": "ddca1ae07685fb6f206539279eaab7e4"
 };

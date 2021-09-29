@@ -226,8 +226,6 @@ const App = () => {
           </>
         ) : (
           <>
-
-
             <Stack.Screen name="Guides" component={BottomBar}
               options={({ navigation }) => ({
                 headerRight: () => (
@@ -290,6 +288,19 @@ const App = () => {
               })}
             />
 
+            <Stack.Screen name="Edit Profile" component={editProfile}
+              options={() => ({
+                headerTitleStyle: { color: 'white' },
+                headerTintColor: 'white'
+              })}
+            />
+            <Stack.Screen name="Change Password" component={changePass}
+              options={() => ({
+                headerTitleStyle: { color: 'white' },
+                headerTintColor: 'white'
+              })}
+            />
+
             <Stack.Screen name="Meditate GuideDetail" component={GuideDetail}
               options={() => ({
                 headerShadowVisible: false,
@@ -320,122 +331,7 @@ const App = () => {
       </Stack.Navigator>
     </NavigationContainer>
   )
-       ) : (
-        <>
-       
-        
-          <Stack.Screen name="Guides" component={BottomBar}
-            options={({ navigation }) => ({
-              headerRight: () => (
-                <TouchableOpacity
-                  onPress={() => Auth.currentAuthenticatedUser().then(console.log)}
-                >
-                  <Image source={MagnifyIcon} />
-                </TouchableOpacity>
-              ),
-              headerLeft: () => (
-                <TouchableOpacity
-                  onPress={() => navigation.navigate('Profile')}
-                >
-                  <Image source={UserIcon} />
-                </TouchableOpacity>
-              ),
-              headerTitle: () => (<View />),
-            })}
-          />
-          <Stack.Screen name="Profile" component={ProfileScreen}
-            options={({ navigation }) => ({
-              headerRight: () => (
-                <TouchableOpacity
-                  onPress={() => console.log("pressed")}
-                >
-                  <Icon name="create" size={30} color="white" onPress={() => { navigation.navigate('Account Settings') }} />
-                </TouchableOpacity>
-              ),
-              headerTitle: () => (<View />),
-              headerTintColor: 'white'
-            })}
-          />
-          <Stack.Screen name="Edit Profile" component={editProfile}
-            options={() => ({
-              headerTitleStyle: { color: 'white' },
-              headerTintColor: 'white'
-            })}
-          />
-          <Stack.Screen name="Change Password" component={changePass}
-            options={() => ({
-              headerTitleStyle: { color: 'white' },
-              headerTintColor: 'white'
-            })}
-          />
-          <Stack.Screen name="Reward" component={RewardScreen}
-            options={({ navigation }) => ({
-              headerShadowVisible: false,
-              headerTitle: () => (<View />),
-              headerRight: () => (
-                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                  <Image source={CoinIcon} style={{ marginRight: 4 }} />
-                  <Text style={{ fontSize: 18, fontFamily: 'FredokaOne-Regular', color: 'white' }}>
-                    499
-                    {/* {info.meditateD} */}
-                  </Text>
-                </View>
-              ),
-              headerTintColor: 'white'
-            })}
-          />
-          <Stack.Screen name="Account Settings" component={AccountSettings}
-            options={() => ({
-              headerTitleStyle: { color: 'white' },
-              headerTintColor: 'white'
-            })}
-          />
-
-          <Stack.Screen name="Meditate GuideDetail" component={GuideDetail} 
-            options={()=>({
-              headerShadowVisible: false,
-              headerTitleStyle: {color:'white'},
-              headerTintColor: 'white',
-              headerTitle: '',
-              headerTransparent: true,
-              headerStyle: {
-                backgroundColor: 'transparent'
-              }
-            })}
-          />
-         
-          <Stack.Screen name="Meditate GuideActivity" component={GuideActivity} 
-            options={()=>({
-              headerShadowVisible: false,
-              headerTitleStyle: {color:'white'},
-              headerTintColor: 'white',
-              headerTitle: '',
-              headerTransparent: true,
-              headerStyle: {
-                backgroundColor: 'transparent'
-              }
-            })}
-          />
-          <Stack.Screen name="Meditate GuideComplete" component={GuideComplete} 
-            options={()=>({
-              headerShadowVisible: false,
-              headerTitleStyle: {color:'white'},
-              headerTintColor: 'white',
-              headerTitle: '',
-              headerTransparent: true,
-              headerStyle: {
-                backgroundColor: 'transparent'
-              }
-            })}
-          />
-
-         </> )}
-        </Stack.Navigator>
-      </NavigationContainer>
-    )
 }
-
-
 const Container = () => {
   return (
     <Store>

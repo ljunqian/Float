@@ -16,7 +16,6 @@ DataStore.configure({
 });
 
 
-const AccountSettings = ({ navigation }) => {
 const AccountSettings = ({ navigation, route }) => {
   const [state, dispatch] = React.useContext(Context);
   async function handlesignOut() {
@@ -45,6 +44,7 @@ const AccountSettings = ({ navigation, route }) => {
   useEffect(() => {
     console.log('context', state);
   }, [])
+
   return (
     <View style={{ backgroundColor: color.bg, minHeight: '100%' }}>
       <ProfileScreen />
@@ -86,47 +86,50 @@ const AccountSettings = ({ navigation, route }) => {
             justifyContent: 'center',
             borderRadius: 35
           }}>
-      <View style={{marginLeft:50}}>
-      <TouchableOpacity onPress={() => {navigation.navigate('Edit Profile')}}>
-        <View style={{
-                      marginTop:10,
-                      marginRight:46,
-                      height: 40,
-                      backgroundColor: '#4263DD',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      borderRadius: 35
-                      }}>
-            <Text style={{ color: 'white' }}>Edit Profile</Text>
-        </View>
-      </TouchableOpacity>
+          </View>
+        </TouchableOpacity>
+        <View style={{ marginLeft: 50 }}>
+          <TouchableOpacity onPress={() => { navigation.navigate('Edit Profile') }}>
+            <View style={{
+              marginTop: 10,
+              marginRight: 46,
+              height: 40,
+              backgroundColor: '#4263DD',
+              alignItems: 'center',
+              justifyContent: 'center',
+              borderRadius: 35
+            }}>
+              <Text style={{ color: 'white' }}>Edit Profile</Text>
+            </View>
+          </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => {handlesignOut()}}>
-        <View style={{
-                      marginTop:10,
-                      marginRight:46,
-                      height: 40,
-                      backgroundColor: '#4263DD',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      borderRadius: 35
-                      }}>
-            <Text style={{ color: 'white' }}>Sign Out</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => { Auth.currentAuthenticatedUser().then(console.log) }}>
-          <View style={{
-            marginTop: 10,
-            marginRight: 46,
-            height: 40,
-            backgroundColor: 'red',
-            alignItems: 'center',
-            justifyContent: 'center',
-            borderRadius: 35
-          }}>
-            <Text style={{ color: 'white' }}>Delete Account</Text>
-          </View>
-        </TouchableOpacity>
+          <TouchableOpacity onPress={() => { handlesignOut() }}>
+            <View style={{
+              marginTop: 10,
+              marginRight: 46,
+              height: 40,
+              backgroundColor: '#4263DD',
+              alignItems: 'center',
+              justifyContent: 'center',
+              borderRadius: 35
+            }}>
+              <Text style={{ color: 'white' }}>Sign Out</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => { Auth.currentAuthenticatedUser().then(console.log) }}>
+            <View style={{
+              marginTop: 10,
+              marginRight: 46,
+              height: 40,
+              backgroundColor: 'red',
+              alignItems: 'center',
+              justifyContent: 'center',
+              borderRadius: 35
+            }}>
+              <Text style={{ color: 'white' }}>Delete Account</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   )

@@ -25,16 +25,11 @@ exports.handler = async (event) => {
     "friends": { L: [] },
     "createdAt": { S: now.toISOString() },
     "sleepD": { N: "0" },
-    "email": { S: event.request.userAttributes.email },
-    "name": { S: event.userName },
-    "gender": { S: event.request.userAttributes['custom:gender'] },
     "focusD": { N: "0" },
     "_version": { N: "1" },
     "updatedAt": { S: now.toISOString() },
     "coins": { N: "0" },
-    "moveD": { N: "0" },
-    "phone": { S: event.request.userAttributes['custom:phone'] },
-    "birthday": { S: event.request.userAttributes['custom:birthday'] }
+    "moveD": { N: "0" }
   }
 
   const params = {

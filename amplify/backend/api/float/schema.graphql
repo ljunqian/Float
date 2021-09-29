@@ -1,15 +1,10 @@
 type User @model @auth(rules: [{allow: private}]) {
   id: ID!
-  name: String!
-  email: String!
   coins: Int!
   meditateD: Int!
   sleepD: Int!
   moveD: Int!
   focusD: Int!
   friends: [String!]
-  birthday: String!
-  gender: String!
-  phone: String!
 }
  
