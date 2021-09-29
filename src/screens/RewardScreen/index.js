@@ -1,7 +1,7 @@
 
-import React, {Fragment, useEffect, useState} from 'react';
+import React, {Fragment, useContext, useState} from 'react';
 import { Center, NativeBaseProvider, HStack, Box, VStack, usePropsResolution, Flex } from 'native-base';
-import { Button, Text, View, ScrollView, TouchableOpacity, Image } from 'react-native';
+import { Button, Text, View, ScrollView, TouchableOpacity, Image, Modal, Alert, Pressable } from 'react-native';
 
 import typo from '../../styles/typography';
 import { color } from '../../styles/theme';
@@ -9,16 +9,6 @@ import style from './style';
 
 import ProfileScreen from '../ProfileScreen/profile'
 import CoinIcon from '../../assets/icons/coins.png';
-
-import BackGroundTab from '../../assets/icons/Tab_Background.png';
-import HatsTab from '../../assets/icons/Tab_Hat.png';
-import AccessoriesTab from '../../assets/icons/Tab_Accessory.png';
-import VouchersTab from '../../assets/icons/Tab_Voucher.png';
-
-import BackGroundTabClicked from '../../assets/icons/Tab_Background_Clicked.png';
-import HatsTabClicked from '../../assets/icons/Tab_Hat_Clicked.png';
-import AccessoriesTabClicked from '../../assets/icons/Tab_Accessory_Clicked.png';
-import VouchersTabClicked from '../../assets/icons/Tab_Voucher_Clicked.png';
 
 import { TabClicked } from './component';
 import { TabNotClicked } from './component';
@@ -30,17 +20,108 @@ import AvatarHat2 from '../../assets/images/Hat-Santa.png'
 import { Card } from 'react-native-elements/dist/card/Card';
 import { display, zIndex } from 'styled-system';
 
-import { BackgroundImages } from './assetConstants';
-import { HatImages } from './assetConstants';
-import { AccessoryImages } from './assetConstants';
-import { VoucherImages } from './assetConstants';
-import { emptyStatement } from '@babel/types';
+
+import Store, {Context} from '../GlobalStates/store';
+import {
+  CHANGE_BACKGROUND,
+  CHANGE_HAT,
+  CHANGE_ACCESSORY,
+} from '../GlobalStates/type'
+
+import { 
+  BackgroundImages,
+  HatImages,
+  AccessoryImages,
+  VoucherImages,
+  rewardTabs,
+} from './assetConstants';
 
 const RewardScreen = ({ navigation }) => {
   const [tab, setIsTab] = useState("Background");
-  const [background, setIsBackground] = useState('Initial bg');
   const [selected, setSelected] = useState(null);
 
+  const [userData, dispatch] = React.useContext(Context);
+  const [userState, setUserState] = useState(userData);
+
+  const [modalVisible, setModalVisible] = useState(false); 
+  const [modalContent, setModalContent] = useState();
+
+  const [backgroundState, setBackgroundState] = useState(BackgroundImages);
+  const [hatState, setHatState] = useState(HatImages);
+  /*
+    {
+      background: '',
+      hat: '',
+      accessory: '',
+    } 
+  */
+  const AssetChoices = ({assetArray, type}) => {
+    return (
+      <Fragment>
+        <View style = {style.rewardRowContainer}>
+          {/*Populate Background Reward Cards*/}
+          {assetArray.map((asset)=>{
+              return(
+                <RewardCard 
+                  key={asset.id} 
+                  img={asset.source} 
+                  asset={asset.name} 
+                  coinsValue={asset.value} 
+                  purchased={asset.purchased} 
+                  equipped={asset.equipped}
+                  updateAssetState ={(purchased,equipped)=>updateAssetState(type,asset.name,purchased,equipped,assetArray)} 
+                  updateUser={(name)=>updateAvatar(type,name)}
+                  value={selected}
+                  showModal={()=>showModal(asset)}
+                />
+              )
+            })
+          }
+      </View>
+    </Fragment>
+    )
+  }
+
+  const showModal = (asset) => {
+    setModalContent(asset);
+    setModalVisible(true);
+  }
+
+
+  const RewardPopup = () => {
+    return (
+          <View style={style.centeredView}>
+            <Modal
+              animationType="slide"
+              transparent={true}
+              visible={modalVisible}
+              onRequestClose={() => {
+                Alert.alert("Modal has been closed.");
+                setModalVisible(!modalVisible);
+              }}
+            >
+              <View style={style.centeredView}>
+                <View style={style.modalView}>
+                  <Text style={style.modalText}>You have successfully redeemed</Text>
+                  <Image source={modalContent.source} style={{marginTop:70, position: 'absolute', zIndex: -1, alignSelf: 'center', width: 164, height: 140}}/>
+                  <Text style={{marginTop:210, fontWeight: "bold",position: 'absolute',alignSelf: 'center'}}>{modalContent.name}</Text>
+                  <Text style={style.text}>“The strongest people are those who win battles we know nothing about.”</Text>
+                  <Pressable
+                    style={[style.button, style.buttonClose]}
+                    onPress={() => setModalVisible(!modalVisible)}
+                  >
+                    <Text style={style.btntext}>Continue</Text>
+                  </Pressable>
+                </View>
+              </View>
+            </Modal>
+            <Pressable
+              onPress={() => setModalVisible(true)}
+            >
+            </Pressable>
+          </View>
+    )
+  }
   const TabView = (props) => {
     return(
       <View style = {{alignItems: 'center', justifyContent: 'center'}}>
@@ -53,107 +134,125 @@ const RewardScreen = ({ navigation }) => {
     )
   }
 
-  const updateAvatar = (data) =>{
-    
-    if(data === 'Mountain' || data === 'Starry Space'){
-      setIsBackground(data);
-    }else if(data === 'Remove Asset'){
-      setIsBackground('Remove Asset');
+  const updateAssetState = (type, name, purchased, equipped, assetArray) => {
+    const newAssets = assetArray.map((asset)=>{
+      if (asset.name === name) {
+        return {
+          ...asset,
+          purchased: purchased,
+          equipped: equipped,
+        }
+      } else {
+        if (equipped) {
+          return {
+            ...asset,
+            equipped: false
+          }
+        }
+        return asset;
+      }
+    });
+
+    if (type === "background") {
+      setBackgroundState(newAssets);
+    } else 
+    if (type === "hat") {
+      setHatState(newAssets);
     }
   }
 
-  const handleSelected = (value) =>{
-    setSelected(value);
+  const updateAvatar = (type, name) =>{
+    setUserState({
+      ...userState,
+      [type]: name,
+    })
+  }
+
+
+  const AvatarBackground = ({backgroundName}) => {
+    const bg = BackgroundImages.find(background => background.name === backgroundName);
+    if (bg) {
+      return (
+        <Image source={bg.source} style={{width: 200, marginLeft: 120, height: 200, zIndex: -1, position:'absolute'}}/>
+      )
+    }
+    return <View/>
+  }
+
+  const AvatarHat = ({hatName}) => {
+    const hat = HatImages.find(hat => hat.name === hatName);
+    if (hat) {
+      return (
+        <Image source={hat.source} style={{top:15, left:110, position: 'absolute', zIndex: 2, width: 164, height: 140}}/>
+      )
+    }
+    return <View />
   }
 
   return (
-    <VStack style={{backgroundColor: color.bg}}>
+      <VStack style={{backgroundColor: color.bg}}>
 
-      <View style={{marginLeft: 120}}>
-      {
-        background === 'Mountain' ? (
-          <Image source={AvatarMountain} style={{width: 200, height: 200, zIndex: -1, position:'absolute'}}/>
-        ) : background === 'Starry Space' ? (
-          <Image source={AvatarStarrySpace} style={{width: 200, height: 200, zIndex: -1, position:'absolute'}}/>
-        ) : (
-          <View></View>
-        )
-      }
-      </View>
+        <View>
+          {
+            // Avatar Assets
+            // TODO: fix hat alignment and create an accessory component
+          }
+          <AvatarBackground backgroundName={userState.background}/>
+          <AvatarHat hatName={userState.hat}/>
+        </View>
+        { modalVisible && <RewardPopup />}
+        <ProfileScreen style={{position: 'absolute', zIndex: 1}}/>
+      
+        <HStack style={style.tabBar}>
+          {rewardTabs.map((tab)=>(
+            <TouchableOpacity onPress= { () => {setIsTab(tab.title)}} key={tab.title}>
+              <TabView reward={tab.title} imgClicked={tab.imgClicked} imgNotCLicked={tab.imgNotCLicked}/>
+            </TouchableOpacity>
+          ))}
+        </HStack>
 
-      <ProfileScreen style={{position: 'absolute', zIndex: 1}}/>
-     
-      <HStack style={style.tabBar}>
-        <TouchableOpacity onPress= { () => {setIsTab("Background")}}>
-          <TabView reward = "Background" imgClicked={BackGroundTabClicked} imgNotCLicked={BackGroundTab}/>
-        </TouchableOpacity>
-        <TouchableOpacity onPress= { () => {setIsTab("Hats")}}>
-          <TabView reward = "Hats" imgClicked={HatsTabClicked} imgNotCLicked={HatsTab}/>
-        </TouchableOpacity>
-        <TouchableOpacity onPress= { () => {setIsTab("Accessories")}}>
-          <TabView reward = "Accessories" imgClicked={AccessoriesTabClicked} imgNotCLicked={AccessoriesTab}/>
-        </TouchableOpacity>
-        <TouchableOpacity onPress= { () => {setIsTab("Vouchers")}}>
-          <TabView reward = "Vouchers" imgClicked={VouchersTabClicked} imgNotCLicked={VouchersTab}/>
-        </TouchableOpacity>
-      </HStack>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          {tab === "Background" ? (
+            <AssetChoices assetArray={backgroundState} type={"background"} />
+          ) 
+          : tab === "Hats" ? (
+            <AssetChoices assetArray={hatState} type={"hat"}/>
+            
+          ) : tab === "Accessories" ? (
 
-      <ScrollView showsVerticalScrollIndicator={false}>
-        {tab === "Background" ? (
-          <Fragment>
-              <View style = {style.rewardRowContainer}>
-                {/*Populate Background Reward Cards*/}
-                {BackgroundImages.map((bgInfo)=>{
-                    return(
-                      <RewardCard key = {bgInfo.id} img={bgInfo.source} asset={bgInfo.name} coinsValue={bgInfo.value} purchased={bgInfo.purchased} equipped={bgInfo.equipped}
-                      updateAssetState ={updateAvatar} onPress={handleSelected} value={selected}/>
-                    )
-                  })
-                }
-            </View>
-          </Fragment>
-        ) : tab === "Hats" ? (
-          <Fragment>
-              <View style = {style.rewardRowContainer}>
-                {HatImages.map((hatInfo)=>{
-                    return(
-                      <RewardCard key = {hatInfo.id} img={hatInfo.source} asset={hatInfo.name} coinsValue={hatInfo.value} purchased={hatInfo.purchased} equipped={hatInfo.equipped}
-                      updateAssetState ={updateAvatar}/>
-                    )
-                  })
-                }
-            </View>
-          </Fragment>
-        ) : tab === "Accessories" ? (
-          <Fragment>
-              <View style = {style.rewardRowContainer}>
-                {AccessoryImages.map((accInfo)=>{
-                    return(
-                      <RewardCard key = {accInfo.id} img={accInfo.source} asset={accInfo.name} coinsValue={accInfo.value} purchased={accInfo.purchased} equipped={accInfo.equipped}/>
-                    )
-                  })
-                }
-            </View>
-          </Fragment>
-        ) : tab === "Vouchers" ? (
-          <Fragment>
-            <View style={{flex:1, display: 'flex'}}>
-                {VoucherImages.map((voucherInfo)=>{
-                    return(
-                      <VoucherCard key = {voucherInfo.id} img={voucherInfo.source} asset={voucherInfo.name} coinsValue={voucherInfo.value}
-                      redeemed={voucherInfo.redeemed}/>
-                    )
-                  })
-                }
-            </View>
-          </Fragment>
-        ) : (
-          console.log("Failed to load reward cards")
-        )} 
-      </ScrollView>
-    </VStack>
+            <Fragment>
+              {//* TODO: Use AssetChoices
+              }
+                <View style = {style.rewardRowContainer}>
+                  {AccessoryImages.map((accInfo)=>{
+                      return(
+                        <RewardCard key = {accInfo.id} img={accInfo.source} asset={accInfo.name} coinsValue={accInfo.value} purchased={accInfo.purchased} equipped={accInfo.equipped}/>
+                      )
+                    })
+                  }
+              </View>
+            </Fragment>
+          ) : tab === "Vouchers" ? (
+            <Fragment>
+              <View style={{flex:1, display: 'flex'}}>
+                  {VoucherImages.map((voucherInfo)=>{
+                      return(
+                        <VoucherCard key = {voucherInfo.id} img={voucherInfo.source} asset={voucherInfo.name} coinsValue={voucherInfo.value}
+                        redeemed={voucherInfo.redeemed}/>
+                      )
+                    })
+                  }
+              </View>
+            </Fragment>
+          ) : (
+            console.log("Failed to load reward cards")
+          )} 
+        </ScrollView>
+      </VStack>
   )
 }
+
+
 
 const RewardCard = (props) => {
   const [purchasestatus, setIsPurchaseStatus] = useState(props.purchased);
@@ -167,30 +266,29 @@ const RewardCard = (props) => {
 
   const purchaseOrEquip = () =>{
       // if my coins >= asset value
-      if(purchasestatus === false && equippedstatus === false){
+      if(!purchasestatus && !equippedstatus){
         //buy asset
         setIsPurchaseStatus(true);
-      }else if (purchasestatus === true && equippedstatus === false){
+        props.showModal();
+        props.updateAssetState(true, equippedstatus);
+      }else 
+      if (purchasestatus && !equippedstatus){
         //add asset onto avatar
         setIsEquippedStatus(true);
-        props.updateAssetState(props.asset);
-      }else if (purchasestatus === true && equippedstatus === true){
+        props.updateUser(props.asset);
+        props.updateAssetState(purchasestatus, true);
+      }else 
+      if (purchasestatus && equippedstatus){
         //remove asset from avatar
         setIsEquippedStatus(false);
-        props.updateAssetState('Remove Asset');
-      }else{
-        //if my coins < asset value
-        null
+        props.updateUser("Remove Asset");
+        props.updateAssetState(purchasestatus, false);
       }
-  }
-
-  const update = () =>{
-    props.onPress(props.asset);
   }
 
   return(
     <View>
-      <TouchableOpacity onPress={()=>{update(); purchaseOrEquip();}}>
+      <TouchableOpacity onPress={()=>{purchaseOrEquip();}}>
         <VStack>
           <View style = {[style.rewardCardContainer, {backgroundColor: bgColour}]}>
               <Image source={props.img} style= {style.rewardItemImage}/>
@@ -269,10 +367,12 @@ const CoinsValue = (props) => {
 
 export default () => {
   return (
-    <NativeBaseProvider>
-      <Center flex={1}>
-        <RewardScreen/>
-      </Center>
-    </NativeBaseProvider>
+    <Store>
+      <NativeBaseProvider>
+        <Center flex={1}>
+          <RewardScreen/>
+        </Center>
+      </NativeBaseProvider>
+    </Store>
   )
 }
