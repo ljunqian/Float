@@ -50,11 +50,11 @@ const Recent = ({ array, navigation }) => {
       </Text>
       <View style={{display: 'flex', flexDirection:'row'}}>
         <View style={{flex:1, display: 'flex',flexDirection: 'column'}}>        
-          <GuideCardComponent style={{height: 130}} title={one.title} dur={one.duration} img={one.thumbnail} height={140} width={200} click={() => navigation.navigate('Meditate GuideDetail', one)}/>
-          <GuideCardComponent style={{height: 130}} title={two.title} dur={two.duration} img={two.thumbnail} height={140} width={200} click={() => navigation.navigate('Meditate GuideDetail', two)}/>        
+          <GuideCardComponent style={{height: 130}} title={one.title} dur={one.duration} img={one.thumbnail} height={140} width={200} click={() => navigation.navigate('GuideDetail', one)}/>
+          <GuideCardComponent style={{height: 130}} title={two.title} dur={two.duration} img={two.thumbnail} height={140} width={200} click={() => navigation.navigate('GuideDetail', two)}/>        
         </View>
         <View style={{flex:1}}>
-          <GuideCardComponent style={{height: 272}} title={three.title} dur={three.duration} img={three.thumbnail} height={278} width={250} click={() => navigation.navigate('Meditate GuideDetail', three)}/>          
+          <GuideCardComponent style={{height: 272}} title={three.title} dur={three.duration} img={three.thumbnail} height={278} width={250} click={() => navigation.navigate('GuideDetail', three)}/>          
          </View>
       </View>
     </View>
@@ -74,12 +74,12 @@ const Explore = ({ array, navigation }) => {
       </Text>
       <View style={{display: 'flex', flexDirection: 'row'}}>
         <View style={{flex: 1, display: 'flex'}}>
-          <GuideCardComponent style={{height: 130}} title={one.title} dur={one.duration} img={one.thumbnail} height={140} width={200} click={() => navigation.navigate('Meditate GuideDetail', one)}/>
-          <GuideCardComponent style={{height: 272}} title={three.title} dur={three.duration} img={three.thumbnail} height={285} width={200} click={() => navigation.navigate('Meditate GuideDetail', three)}/>
+          <GuideCardComponent style={{height: 130}} title={one.title} dur={one.duration} img={one.thumbnail} height={140} width={200} click={() => navigation.navigate('GuideDetail', one)}/>
+          <GuideCardComponent style={{height: 272}} title={three.title} dur={three.duration} img={three.thumbnail} height={285} width={200} click={() => navigation.navigate('GuideDetail', three)}/>
         </View>
         <View style={{flex: 1, display: 'flex'}}>
-          <GuideCardComponent style={{height: 195}} title={two.title} dur={two.duration} img={two.thumbnail} height={210} width={200} click={() => navigation.navigate('Meditate GuideDetail', two)}/>
-          <GuideCardComponent style={{height: 130}} title={four.title} dur={four.duration} img={four.thumbnail} height={150} width={200} click={() => navigation.navigate('Meditate GuideDetail', four)}/>
+          <GuideCardComponent style={{height: 195}} title={two.title} dur={two.duration} img={two.thumbnail} height={210} width={200} click={() => navigation.navigate('GuideDetail', two)}/>
+          <GuideCardComponent style={{height: 130}} title={four.title} dur={four.duration} img={four.thumbnail} height={150} width={200} click={() => navigation.navigate('GuideDetail', four)}/>
         </View>
       </View>
     </View>
@@ -124,7 +124,7 @@ const MeditateScreen = ({navigation}) => {
             </TouchableOpacity>
           </View>
       </View>
-      <TouchableOpacity style={[layout.container,]} onPress={() => navigation.navigate('Meditate GuideDetail', Guides[1])}>
+      <TouchableOpacity style={[layout.container,]} onPress={() => navigation.navigate('GuideDetail', Guides[1])}>
         <ImageBackground source={Med} style={{width:'100%'}}>
         <View style={{height: 155, display: 'flex', 
           flexDirection: 'row', padding: 12,

@@ -17,7 +17,7 @@ const GuideDetail = ({ navigation, props, route }) => {
         <View style={{display: 'flex'}}> 
             {/*IMAGE DIV*/}
             <View style={styles.imgContainer}>
-                <Image source={detail.thumbnail} style={{position: 'absolute', zIndex: 0, top: -7, left: -7, width:427, height:255 }} />
+                <Image source={detail.thumbnail} style={{position: 'absolute', zIndex: 0, top: -7, left: -8, width:427, height:260 }} />
             </View>
 
             {/*CONTENT DIV*/}
@@ -51,7 +51,7 @@ const GuideDetail = ({ navigation, props, route }) => {
             {/*BUTTON DIV*/}
             <TouchableOpacity style={styles.btnContainer}>
                 {/* Begin */}
-                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Meditate GuideActivity', detail)}>
+                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('GuideActivity', detail)}>
                     <Text style={[typo.H3, {color: 'white'}]}>Begin</Text> 
                 </TouchableOpacity>    
             </TouchableOpacity>

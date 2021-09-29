@@ -295,7 +295,7 @@ const App = () => {
             })}
           />
 
-          <Stack.Screen name="Meditate GuideDetail" component={GuideDetail} 
+          <Stack.Screen name="GuideDetail" component={GuideDetail} 
             options={()=>({
               headerShadowVisible: false,
               headerTitleStyle: {color:'white'},
@@ -308,7 +308,7 @@ const App = () => {
             })}
           />
          
-          <Stack.Screen name="Meditate GuideActivity" component={GuideActivity} 
+          <Stack.Screen name="GuideActivity" component={GuideActivity} 
             options={()=>({
               headerShadowVisible: false,
               headerTitleStyle: {color:'white'},
@@ -320,7 +320,7 @@ const App = () => {
               }
             })}
           />
-          <Stack.Screen name="Meditate GuideComplete" component={GuideComplete} 
+          <Stack.Screen name="GuideComplete" component={GuideComplete} 
             options={()=>({
               headerShadowVisible: false,
               headerTitleStyle: {color:'white'},
