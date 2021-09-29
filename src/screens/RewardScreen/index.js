@@ -1,7 +1,7 @@
 
 import React, {Fragment, useState} from 'react';
 import { Center, NativeBaseProvider, HStack, Box, VStack } from 'native-base';
-import { Button, Text, View, ScrollView, TouchableOpacity, Image } from 'react-native';
+import { Button, Text, View, ScrollView, TouchableOpacity, Image, Modal, Alert, Pressable } from 'react-native';
 
 import typo from '../../styles/typography';
 import { color } from '../../styles/theme';
@@ -56,6 +56,8 @@ const RewardScreen = ({ navigation }) => {
   const [CardHatStatus, setIsCardHatStatus] = useState(""); //initial data
   const [HatEquipped, setIsHatEquipped] = useState(CardHatStatus == "" ? "No" : "Yes");
 
+  const [modalVisible, setModalVisible] = useState(false); 
+
   const clickBackgroundTab = () =>{
     setIsTab("Background");
   }
@@ -86,9 +88,11 @@ const RewardScreen = ({ navigation }) => {
     if (HatEquipped == "Yes" && CardHatStatus == "Activate_CowboyHat") {
       setIsCardHatStatus("Empty");
       setIsHatEquipped("No");
+      setModalVisible(false)
     } else {
       setIsCardHatStatus("Activate_CowboyHat");
       setIsHatEquipped("Yes");
+      setModalVisible(true)
     }
   }
 
@@ -96,9 +100,11 @@ const RewardScreen = ({ navigation }) => {
     if (HatEquipped == "Yes" && CardHatStatus == "Activate_SantaHat") {
       setIsCardHatStatus("");
       setIsHatEquipped("No");
+      setModalVisible(false)
     } else {
       setIsCardHatStatus("Activate_SantaHat");
       setIsHatEquipped("Yes");
+      setModalVisible(true)
     }
   }
 
@@ -117,11 +123,75 @@ const RewardScreen = ({ navigation }) => {
 
     if (CardHatStatus === "Activate_CowboyHat") {
       return(
+        <>
         <Image source={AvatarHat1} style={{marginTop:28, marginLeft:130, position: 'absolute', zIndex: 2, width: 164, height: 140}}/>
+        <View style={style.centeredView}>
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={modalVisible}
+            onRequestClose={() => {
+              Alert.alert("Modal has been closed.");
+              setModalVisible(!modalVisible);
+            }}
+          >
+            <View style={style.centeredView}>
+              <View style={style.modalView}>
+                <Text style={style.modalText}>You have successfully redeemed</Text>
+                <Image source={AvatarHat1} style={{marginTop:70, position: 'absolute', zIndex: -1, alignSelf: 'center', width: 164, height: 140}}/>
+                <Text style={{marginTop:210, fontWeight: "bold",position: 'absolute',alignSelf: 'center'}}>Cowboy</Text>
+                <Text style={style.text}>“The strongest people are those who win battles we know nothing about.”</Text>
+                <Pressable
+                  style={[style.button, style.buttonClose]}
+                  onPress={() => setModalVisible(!modalVisible)}
+                >
+                  <Text style={style.btntext}>Continue</Text>
+                </Pressable>
+              </View>
+            </View>
+          </Modal>
+          <Pressable
+            onPress={() => setModalVisible(true)}
+          >
+          </Pressable>
+    </View>
+        </>
       )
     }else if(CardHatStatus === "Activate_SantaHat"){
       return(
+        <>
         <Image source={AvatarHat2} style={{marginTop:30, marginLeft:129, position: 'absolute', zIndex: 2, width: 164, height: 140}}/>
+        <View style={style.centeredView}>
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={modalVisible}
+            onRequestClose={() => {
+              Alert.alert("Modal has been closed.");
+              setModalVisible(!modalVisible);
+            }}
+          >
+            <View style={style.centeredView}>
+              <View style={style.modalView}>
+                <Text style={style.modalText}>You have successfully redeemed</Text>
+                <Image source={AvatarHat2} style={{marginTop:70, position: 'absolute', zIndex: -1, alignSelf: 'center', width: 164, height: 140}}/>
+                <Text style={{marginTop:210, fontWeight: "bold",position: 'absolute',alignSelf: 'center'}}>Santa</Text>
+                <Text style={style.text}>“The strongest people are those who win battles we know nothing about.”</Text>
+                <Pressable
+                  style={[style.button, style.buttonClose]}
+                  onPress={() => setModalVisible(!modalVisible)}
+                >
+                  <Text style={style.btntext}>Continue</Text>
+                </Pressable>
+              </View>
+            </View>
+          </Modal>
+          <Pressable
+            onPress={() => setModalVisible(true)}
+          >
+          </Pressable>
+        </View>
+        </>
       )
     }else{
       return null

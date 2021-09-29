@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 import { inlineStyles } from 'react-native-svg';
-import { backgroundColor } from 'styled-system';
+import { backgroundColor, marginBottom } from 'styled-system';
 
 const style = StyleSheet.create({
     tabBar: {
@@ -64,6 +64,64 @@ const style = StyleSheet.create({
       fontFamily: 'Montserrat-Regular',
       color: '#FFF',
       marginHorizontal: 5
+    },
+
+
+    centeredView: {
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
+      marginTop: 22
+    },
+    modalView: {
+      margin: 50,
+      backgroundColor: "white",
+      borderRadius: 30,
+      padding: 40,
+      flex: 0.65,
+      alignItems: "center",
+      shadowColor: "#000",
+      shadowOffset: {
+        width: 0,
+        height: 2
+      },
+      shadowOpacity: 0.25,
+      shadowRadius: 4,
+      elevation: 5
+    },
+    button: {
+      borderRadius: 20,
+      marginTop: 20,
+      width:200,
+      padding: 10,
+      elevation: 2
+    },
+    buttonClose: {
+      backgroundColor: "#A5A6F6",
+    },
+    text: {
+      color: "#000",
+      fontWeight: "bold",
+      fontSize: 12,
+      fontFamily: 'Montserrat-Regular',
+      textAlign: "center",
+      marginTop:170
+    },
+    btntext: {
+      color: "white",
+      fontWeight: "bold",
+      fontSize: 12,
+      fontFamily: 'Montserrat-Regular',
+      textAlign: "center"
+
+    },
+    modalText: {
+      marginBottom: 15,
+      textAlign: "center",
+      fontSize: 14,
+      fontFamily: 'Montserrat-Regular',
+      fontWeight: "bold",
+      color: '#000'
     },
 
       //add on top of global
