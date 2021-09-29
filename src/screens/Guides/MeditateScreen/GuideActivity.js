@@ -25,7 +25,7 @@ const Activity = ({navigation, route}) => {
                 </View>
                 
                 <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-                    <TouchableOpacity style={{backgroundColor: 'transparent', justifyContent: 'center', alignItems: 'center'} } onPress={() => navigation.navigate('Meditate GuideComplete', detail)} >
+                    <TouchableOpacity style={{backgroundColor: 'transparent', justifyContent: 'center', alignItems: 'center'} } onPress={() => navigation.navigate('GuideComplete', detail)} >
                         <Image source={Bigplay} />
                     </TouchableOpacity>
                     <Text style={[typo.H2, {marginTop: 10, color: 'white', fontWeight: '400'}]}>
