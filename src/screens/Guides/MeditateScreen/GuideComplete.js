@@ -10,39 +10,38 @@ import { Guides } from './constants';
 
 const Complete = ({navigation}) => {
     return  (
-        
-       
+
         <View style={styles.container}> 
-        <ImageBackground source={MedBG1}  resizeMode="cover" style={{width : '100%', height: '100%'}} >
-            <View style={styles.actComponent, {justifyContent: 'center', alignItems: 'center'}}>
-            
-                <View>
-                <Text style={[typo.H2,{top: 75, color: 'white', fontWeight:'400', marginLeft: 15}]}>
-                    Title of the activity 
-                </Text>
-                <Text style={[typo.T1,{top: 85, color: 'white', fontWeight:'400', marginLeft: 95}]}>
-                    1 min 
-                </Text>
-                <Text style={[typo.H0,{top: 100, color: 'white', fontWeight:'400'}]}>
-                    Complete! 
-                </Text>
-                </View>
-                <View style={{flexDirection: 'row'}}>
-                <Text style={[typo.H2,{top: 130, left: 22 , color: 'white', fontWeight:'400'}]}>
-                    4510 
-                </Text>
-                <View style={{alignItems: 'center', justifyContent: 'center'}}>
-                        <Image source={coins} style={{ top: 131, left: 27, zIndex: 0, position: 'absolute'}} />
-                </View>
+            <ImageBackground source={MedBG1}  resizeMode="cover" style={{width : '100%', height: '100%'}} >
+                <View style={styles.actComponent, {justifyContent: 'center', alignItems: 'center'}}>
+                
+                    <View>
+                    <Text style={[typo.H2,{top: 75, color: 'white', fontWeight:'400', marginLeft: 15}]}>
+                        Title of the activity 
+                    </Text>
+                    <Text style={[typo.T1,{top: 85, color: 'white', fontWeight:'400', marginLeft: 95}]}>
+                        1 min 
+                    </Text>
+                    <Text style={[typo.H0,{top: 100, color: 'white', fontWeight:'400'}]}>
+                        Complete! 
+                    </Text>
+                    </View>
+                    <View style={{flexDirection: 'row'}}>
+                    <Text style={[typo.H2,{top: 130, left: 22 , color: 'white', fontWeight:'400'}]}>
+                        4510 
+                    </Text>
+                    <View style={{alignItems: 'center', justifyContent: 'center'}}>
+                            <Image source={coins} style={{ top: 131, left: 27, zIndex: 0, position: 'absolute'}} />
+                    </View>
 
-                <Text style={[typo.H2,{top: 165, right: 22 , color: 'white', fontWeight:'400'}]}>
-                    250 EXP
-                </Text>
+                    <Text style={[typo.H2,{top: 165, right: 22 , color: 'white', fontWeight:'400'}]}>
+                        250 EXP
+                    </Text>
 
-               </View>
-              
-            </View>
-             </ImageBackground>
+                </View>
+                
+                </View>
+            </ImageBackground>
         </View>
       
         

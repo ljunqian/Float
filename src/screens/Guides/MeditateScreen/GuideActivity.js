@@ -7,22 +7,25 @@ import Bigplay from '../../../assets/icons/bigplay.png';
 import { Guides } from './constants';
 import { color } from '../../../styles/theme';
 
-const Activity = ({navigation}) => {
+const Activity = ({navigation, route}) => {
+
+    const detail = route.params;       // get object passed from previous activity 
+
     return  (
         
-       
         <View style={styles.container}> 
         <ImageBackground source={MedBG}  resizeMode= "cover" style={{width : '100%', height: '100%'}} >
             <View style={styles.actComponent}>
             
                 <View style={{flex: 1, marginTop: 150}}>
                     <Text style={[typo.H4,{color: 'white', fontWeight: '400'}]}>
-                        Session Name
+                        {/* Session Name */}
+                        { detail.title }
                     </Text>
                 </View>
                 
                 <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-                    <TouchableOpacity style={{backgroundColor: 'transparent', justifyContent: 'center', alignItems: 'center'} } onPress={() => navigation.navigate('Meditate GuideComplete')} >
+                    <TouchableOpacity style={{backgroundColor: 'transparent', justifyContent: 'center', alignItems: 'center'} } onPress={() => navigation.navigate('Meditate GuideComplete', detail)} >
                         <Image source={Bigplay} />
                     </TouchableOpacity>
                     <Text style={[typo.H2, {marginTop: 10, color: 'white', fontWeight: '400'}]}>
