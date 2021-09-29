@@ -7,6 +7,7 @@ import * as Progress from 'react-native-progress';
 import MedBG from '../../../assets/images/meditate-planet.png';
 import MedAvatar from '../../../assets/images/meditate-avatar.png';
 import Med from '../../../assets/images/med-1.png'; 
+import Mov from '../../../assets/images/mov-1.png';
 import Med2 from '../../../assets/images/med2.png';
 import { overflow } from 'styled-system';
 import play from '../../../assets/icons/play.png';

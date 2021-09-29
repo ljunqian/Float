@@ -134,7 +134,7 @@ const SignUpScreen = ({ navigation }) => {
                             borderRadius: 35
                           }}
                         >
-                          <Text style={{ color: 'white' }}>Login</Text>
+                          <Text style={{ color: 'white' }}>Sign up</Text>
                         </View>
                       </TouchableOpacity>
             </View>
