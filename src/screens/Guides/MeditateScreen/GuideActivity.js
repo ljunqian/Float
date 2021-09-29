@@ -33,7 +33,7 @@ const Activity = ({navigation, route}) => {
                     </Text>
                 </View>
             
-                <View style={{flex: 1, backgroundColor:'white'}}> 
+                <View style={{flex: 3, backgroundColor:'white'}}> 
                     {/* <Text>This is the bottom space </Text> */}
                 </View>
                 
