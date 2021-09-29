@@ -12,23 +12,29 @@ const Activity = ({navigation}) => {
         
        
         <View style={styles.container}> 
-        <ImageBackground source={MedBG}  resizeMode="cover" style={{width : '100%', height: '100%'}} >
+        <ImageBackground source={MedBG}  resizeMode= "cover" style={{width : '100%', height: '100%'}} >
             <View style={styles.actComponent}>
             
                 <View style={{flex: 1, marginTop: 150}}>
-                    <Text style={[typo.H4,{color: 'white', fontWeight:'400'}]}>
+                    <Text style={[typo.H4,{color: 'white', fontWeight: '400'}]}>
                         Session Name
                     </Text>
                 </View>
                 
-                <TouchableOpacity style={{flex: 3, backgroundColor:'yellow', justifyContent: 'center'} } onPress={() => navigation.navigate('Meditate GuideComplete')} >
-                    <Image source={Bigplay} />
-                    
-                </TouchableOpacity>
+                <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                    <TouchableOpacity style={{backgroundColor: 'transparent', justifyContent: 'center', alignItems: 'center'} } onPress={() => navigation.navigate('Meditate GuideComplete')} >
+                        <Image source={Bigplay} />
+                    </TouchableOpacity>
+                    <Text style={[typo.H2, {marginTop: 10, color: 'white', fontWeight: '400'}]}>
+                        13:42
+                    </Text>
+                </View>
             
-                <Text style={[typo.H2, {flex: 3, color: 'white', fontWeight: '400' }]}>
-                  13:42
-                </Text>
+                <View style={{flex: 1, backgroundColor:'white'}}> 
+                    {/* <Text>This is the bottom space </Text> */}
+                </View>
+                
+                
                 
             </View>
              </ImageBackground>
