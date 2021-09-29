@@ -57,6 +57,79 @@ const style = StyleSheet.create({
       justifyContent: 'center',
       alignItems: 'center',
     },
+    statusContainer: {
+      height: 16,
+      borderRadius: 4,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+
+    statusText: {
+      fontSize: 12,
+      fontFamily: 'Montserrat-Regular',
+      color: '#FFF',
+      marginHorizontal: 5
+    },
+
+
+    centeredView: {
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
+      alignSelf:'center',
+      top: '20%',
+      position: 'absolute',
+    },
+    modalView: {
+      margin: 50,
+      backgroundColor: "white",
+      borderRadius: 30,
+      padding: 40,
+      flex: 0.65,
+      alignItems: "center",
+      shadowColor: "#000",
+      shadowOffset: {
+        width: 0,
+        height: 2
+      },
+      shadowOpacity: 0.25,
+      shadowRadius: 4,
+      elevation: 5
+    },
+    button: {
+      borderRadius: 20,
+      marginTop: 20,
+      width:200,
+      padding: 10,
+      elevation: 2
+    },
+    buttonClose: {
+      backgroundColor: "#A5A6F6",
+    },
+    text: {
+      color: "#000",
+      fontWeight: "bold",
+      fontSize: 12,
+      fontFamily: 'Montserrat-Regular',
+      textAlign: "center",
+      marginTop:170
+    },
+    btntext: {
+      color: "white",
+      fontWeight: "bold",
+      fontSize: 12,
+      fontFamily: 'Montserrat-Regular',
+      textAlign: "center"
+
+    },
+    modalText: {
+      marginBottom: 15,
+      textAlign: "center",
+      fontSize: 14,
+      fontFamily: 'Montserrat-Regular',
+      fontWeight: "bold",
+      color: '#000'
+    },
 });
 
 export default style;

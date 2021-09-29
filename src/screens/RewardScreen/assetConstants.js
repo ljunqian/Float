@@ -16,6 +16,40 @@ import Voucher1 from '../../assets/images/Voucher1.png';
 import Voucher2 from '../../assets/images/Voucher2.png';
 import Voucher3 from '../../assets/images/Voucher3.png';
 
+import BackGroundTab from '../../assets/icons/Tab_Background.png';
+import HatsTab from '../../assets/icons/Tab_Hat.png';
+import AccessoriesTab from '../../assets/icons/Tab_Accessory.png';
+import VouchersTab from '../../assets/icons/Tab_Voucher.png';
+
+import BackGroundTabClicked from '../../assets/icons/Tab_Background_Clicked.png';
+import HatsTabClicked from '../../assets/icons/Tab_Hat_Clicked.png';
+import AccessoriesTabClicked from '../../assets/icons/Tab_Accessory_Clicked.png';
+import VouchersTabClicked from '../../assets/icons/Tab_Voucher_Clicked.png';
+
+export const rewardTabs = [
+    {
+        title: 'Background',
+        imgClicked: BackGroundTabClicked,
+        imgNotCLicked: BackGroundTab,
+    },
+    {
+        title: 'Hats',
+        imgClicked: HatsTabClicked,
+        imgNotCLicked: HatsTab,
+    },
+    {
+        title: 'Accessories',
+        imgClicked: AccessoriesTabClicked,
+        imgNotCLicked: AccessoriesTab,
+    },
+    {
+        title: 'Vouchers',
+        imgClicked: VouchersTabClicked,
+        imgNotCLicked: VouchersTab,
+    },
+
+]
+
 export const BackgroundImages = [
     {   name: 'Mountain',
         source: Background_Mountain,
