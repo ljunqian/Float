@@ -13,19 +13,20 @@ const Activity = ({navigation}) => {
        
         <View style={styles.container}> 
         <ImageBackground source={MedBG}  resizeMode="cover" style={{width : '100%', height: '100%'}} >
-            <View style={styles.actComponent, {justifyContent: 'center', alignItems: 'center'}}>
+            <View style={styles.actComponent}>
             
-                <View>
-                <Text style={[typo.H4,{top: 150, color: 'white', fontWeight:'400'}]}>
-                    Session Name
-                </Text>
+                <View style={{flex: 1, marginTop: 150}}>
+                    <Text style={[typo.H4,{color: 'white', fontWeight:'400'}]}>
+                        Session Name
+                    </Text>
                 </View>
                 
-                <TouchableOpacity   style={{top: 240} } onPress={() => navigation.navigate('Meditate GuideComplete')} >
-                <Image source={Bigplay} />
+                <TouchableOpacity style={{flex: 3, backgroundColor:'yellow', justifyContent: 'center'} } onPress={() => navigation.navigate('Meditate GuideComplete')} >
+                    <Image source={Bigplay} />
+                    
                 </TouchableOpacity>
             
-                <Text style={[typo.H2, {top: 280, color: 'white', fontWeight: '400', marginLeft: 15 }]}>
+                <Text style={[typo.H2, {flex: 3, color: 'white', fontWeight: '400' }]}>
                   13:42
                 </Text>
                 
@@ -49,7 +50,11 @@ const styles = StyleSheet.create({
 
     },
     actComponent: {
-        backgroundColor: '#272727'
+        display: 'flex',
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        //backgroundColor: '#272727'
     },
     btnContainer : {
         display: 'flex',

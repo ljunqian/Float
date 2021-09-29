@@ -121,7 +121,7 @@ const MeditateScreen = ({navigation}) => {
             </TouchableOpacity>
           </View>
       </View>
-      <TouchableOpacity style={[layout.container,]} onPress={() => navigation.navigate('Meditate GuideDetail', {text: 'Hello from Screen 1'})}>
+      <TouchableOpacity style={[layout.container,]} onPress={() => navigation.navigate('Meditate GuideDetail', {text: 'Hello from Featured'})}>
         <ImageBackground source={Med} style={{width:'100%'}}>
         <View style={{height: 155, display: 'flex', 
           flexDirection: 'row', padding: 12,
@@ -146,10 +146,10 @@ const MeditateScreen = ({navigation}) => {
         </Text>
         <View style={{display: 'flex', flexDirection:'row'}}>
           <View style={{flex:1, display: 'flex',flexDirection: 'column'}}>        
-            <DLoadComponents isRecentLeft={true} click={() => navigation.navigate('Meditate GuideDetail')}/>
+            <DLoadComponents isRecentLeft={true} click={() => navigation.navigate('Meditate GuideDetail', {text: 'Hello from Recent left'})}/>
           </View>
           <View style={{flex:1}}>
-            <DLoadComponents isRecentRight={true} click={() => navigation.navigate('Meditate GuideDetail')}/>
+            <DLoadComponents isRecentRight={true} click={() => navigation.navigate('Meditate GuideDetail', {text: 'Hello from Recent right'})}/>
           </View>
         </View>
         <Text style={[typo.H1, {marginTop: 20}]}>
@@ -157,10 +157,10 @@ const MeditateScreen = ({navigation}) => {
         </Text>
         <View style={{display: 'flex', flexDirection: 'row'}}>
           <View style={{flex: 1, display: 'flex'}}>
-            <DLoadComponents isExploreLeft={true} click={() => navigation.navigate('Meditate GuideDetail')}/>
+            <DLoadComponents isExploreLeft={true} click={() => navigation.navigate('Meditate GuideDetail', {text: 'Hello from Explore left'})}/>
           </View>
           <View style={{flex: 1, display: 'flex'}}>
-            <DLoadComponents isExploreRight={true} click={() => navigation.navigate('Meditate GuideDetail')}/>
+            <DLoadComponents isExploreRight={true} click={() => navigation.navigate('Meditate GuideDetail', {text: 'Hello from Explore right'})}/>
           </View>
         </View>
         <View style={{display: 'flex', flexDirection: 'row'}}>
