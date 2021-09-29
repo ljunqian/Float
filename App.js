@@ -43,7 +43,7 @@ import { Icon } from 'react-native-elements';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { withAuthenticator } from 'aws-amplify-react-native';
-import Store, {Context} from './src/screens/Authenticate/store';
+import Store, { Context } from './src/screens/Authenticate/store';
 
 import { Auth } from 'aws-amplify';
 import Amplify from 'aws-amplify';
@@ -155,16 +155,16 @@ const App = () => {
       //console.log('user is',user);
       if (user) {
         setisNotSignedIn(false);
-        dispatch({type: 'SIGN_IN', payload: true});
+        dispatch({ type: 'SIGN_IN', payload: true });
       } else {
-        {user === 'The user is not authenticated' && (setisNotSignedIn(true))};
+        { user === 'The user is not authenticated' && (setisNotSignedIn(true)) };
 
       }
     } catch (error) {
       console.log(error);
     }
   }
-  
+
   useEffect(() => {
     isUserAuthenticated()
     setTimeout(() => {
@@ -196,104 +196,90 @@ const App = () => {
     )
   }
   return (
-      <NavigationContainer>
-        <Stack.Navigator
-          screenOptions={() => ({
-            headerStyle: {
-              backgroundColor: '#272727',
-              shadowOpacity: 0,
-              headerShown: false
-            },
-            headerLeft: null,
-            headerTitle: () => (<View />),
-          })}
-          >
+    <NavigationContainer>
+      <Stack.Navigator
+        screenOptions={() => ({
+          headerStyle: {
+            backgroundColor: '#272727',
+            shadowOpacity: 0,
+            headerShown: false
+          },
+          headerLeft: null,
+          headerTitle: () => (<View />),
+        })}
+      >
         {state.isSignout ? (
           <>
-         <Stack.Screen name="Login" component={LoginScreen}
-            screenOptions={() => ({
-              headerStyle: {
+            <Stack.Screen name="Login" component={LoginScreen}
+              screenOptions={() => ({
+                headerStyle: {
+                  headerShown: false
+                },
+                headerTitle: () => (<View />),
+              })}
+            />
+            <Stack.Screen name="Signup" component={SignUpScreen}
+              options={({ navigation }) => ({
                 headerShown: false
-              },
-              headerTitle: () => (<View />),
-            })}
-          /> 
-          <Stack.Screen name="Signup" component={SignUpScreen}
-            options={({ navigation }) => ({
-              headerShown: false
-            })}
-          />
+              })}
+            />
           </>
-       ) : (
-        <>
-       
-        
-          <Stack.Screen name="Guides" component={BottomBar}
-            options={({ navigation }) => ({
-              headerRight: () => (
-                <TouchableOpacity
-                  onPress={() => Auth.currentAuthenticatedUser().then(console.log)}
-                >
-                  <Image source={MagnifyIcon} />
-                </TouchableOpacity>
-              ),
-              headerLeft: () => (
-                <TouchableOpacity
-                  onPress={() => navigation.navigate('Profile')}
-                >
-                  <Image source={UserIcon} />
-                </TouchableOpacity>
-              ),
-              headerTitle: () => (<View />),
-            })}
-          />
-          <Stack.Screen name="Profile" component={ProfileScreen}
-            options={({ navigation }) => ({
-              headerRight: () => (
-                <TouchableOpacity
-                  onPress={() => console.log("pressed")}
-                >
-                  <Icon name="create" size={30} color="white" onPress={() => { navigation.navigate('Account Settings') }} />
-                </TouchableOpacity>
-              ),
-              headerTitle: () => (<View />),
-              headerTintColor: 'white'
-            })}
-          />
-          <Stack.Screen name="Edit Profile" component={editProfile}
-            options={() => ({
-              headerTitleStyle: { color: 'white' },
-              headerTintColor: 'white'
-            })}
-          />
-          <Stack.Screen name="Change Password" component={changePass}
-            options={() => ({
-              headerTitleStyle: { color: 'white' },
-              headerTintColor: 'white'
-            })}
-          />
-          <Stack.Screen name="Reward" component={RewardScreen}
-            options={({ navigation }) => ({
-              headerShadowVisible: false,
-              headerTitle: () => (<View />),
-              headerRight: () => (
-                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                  <Image source={CoinIcon} style={{ marginRight: 4 }} />
-                  <Text style={{ fontSize: 18, fontFamily: 'FredokaOne-Regular', color: 'white' }}>
-                    499
-                    {/* {info.meditateD} */}
-                  </Text>
-                </View>
-              ),
-              headerTintColor: 'white'
-            })}
-          />
-          <Stack.Screen name="Account Settings" component={AccountSettings}
-            options={() => ({
-              headerTitleStyle: { color: 'white' },
-              headerTintColor: 'white'
-            })}
-          />
+        ) : (
+          <>
+            <Stack.Screen name="Guides" component={BottomBar}
+              options={({ navigation }) => ({
+                headerRight: () => (
+                  <TouchableOpacity
+                    onPress={() => Auth.currentAuthenticatedUser().then(console.log)}
+                  >
+                    <Image source={MagnifyIcon} />
+                  </TouchableOpacity>
+                ),
+                headerLeft: () => (
+                  <TouchableOpacity
+                    onPress={() => navigation.navigate('Profile')}
+                  >
+                    <Image source={UserIcon} />
+                  </TouchableOpacity>
+                ),
+                headerTitle: () => (<View />),
+              })}
+            />
+            <Stack.Screen name="Profile" component={ProfileScreen}
+              options={({ navigation }) => ({
+                headerRight: () => (
+                  <TouchableOpacity
+                    onPress={() => console.log("pressed")}
+                  >
+                    <Icon name="create" size={30} color="white" onPress={() => { navigation.navigate('Account Settings') }} />
+                  </TouchableOpacity>
+                ),
+                headerTitle: () => (<View />),
+                headerTintColor: 'white'
+              })}
+            />
+            <Stack.Screen name="Reward" component={RewardScreen}
+              options={({ navigation }) => ({
+                headerShadowVisible: false,
+                headerTitle: () => (<View />),
+                headerRight: () => (
+                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                    <Image source={CoinIcon} style={{ marginRight: 4 }} />
+                    <Text style={{ fontSize: 18, fontFamily: 'FredokaOne-Regular', color: 'white' }}>
+                      499
+                      {/* {info.meditateD} */}
+                    </Text>
+                  </View>
+                ),
+                headerTintColor: 'white'
+              })}
+            />
+            <Stack.Screen name="Account Settings" component={AccountSettings}
+              options={() => ({
+                headerTitleStyle: { color: 'white' },
+                headerTintColor: 'white'
+              })}
+            />
 
           <Stack.Screen name="GuideDetail" component={GuideDetail} 
             options={()=>({
@@ -332,18 +318,30 @@ const App = () => {
               }
             })}
           />
+            <Stack.Screen name="Change Account Information" component={editProfile}
+              options={() => ({
+                headerTitleStyle: { color: 'white' },
+                headerTintColor: 'white'
+              })}
+            />
+             <Stack.Screen name="Change password" component={changePass}
+              options={() => ({
+                headerTitleStyle: { color: 'white' },
+                headerTintColor: 'white'
+              })}
+            />
 
-         </> )}
-        </Stack.Navigator>
-      </NavigationContainer>
-    )
+          </>)}
+      </Stack.Navigator>
+    </NavigationContainer>
+  )
 }
 
 
 const Container = () => {
   return (
     <Store>
-      <App/>
+      <App />
     </Store>
   )
 }

@@ -15,44 +15,40 @@ DataStore.configure({
 
 const AccountSettings = ({ navigation }) => {
     const [info, setInfo] = useState({
-        name: '',
         email: '',
-        coins: '',
-        meditateD: '',
-        sleepD: '',
-        moveD: '',
-        friends: []
+        phone: '',
+        gender: '',
+        date: ''
     });
-    const [username, setUsername] = useState('')
-    const [email, setEmail] = useState('')
+
 
     const getUserInfo = async () => {
         try {
-            const { attributes } = await Auth.currentAuthenticatedUser();
-            const post = await DataStore.query(User, attributes.sub);
+            const user = await Auth.currentAuthenticatedUser();
             setInfo({
-                name: post.name,
-                email: post.email,
-                coins: post.coins,
-                meditateD: post.meditateD,
-                sleepD: post.sleepD,
-                moveD: post.moveD,
-                focusD: post.focusD,
-                friends: post.friends
+                email: user.attributes.email,
+                phone: user.attributes["custom:phone"],
+                gender: user.attributes["custom:gender"],
+                date: user.attributes["custom:birthday"]
             });
         } catch (error) {
             console.log("Error saving post", error);
         }
     }
 
-    const updateuserattributes = async () => {
-        if (username != '' && email != '') {
+    async function handleupdate() {
+        try {
             let user = await Auth.currentAuthenticatedUser();
-            console.log("hello");
+
             let result = await Auth.updateUserAttributes(user, {
-                'email': email
+                'email': email,
+                'custom:birthday': date,
+                'custom:gender': gender,
+                'custom:phone': phone
             });
             console.log(result); // SUCCESS
+        } catch (error) {
+            console.log(error);
         }
     }
 
@@ -62,10 +58,34 @@ const AccountSettings = ({ navigation }) => {
 
     return (
         <View>
-            <TextInput placeholder={info.name} onChangeText={text => setUsername(text)}></TextInput>
-            <TextInput placeholder={info.email} onChangeText={text => setEmail(text)}></TextInput>
+            <TextInput
+                onChangeText={setInfo({})}
+                value={info.email}
+                keyboardType="email-address"
+            />
+            <TextInput
+                onChangeText={setInfo({})}
+                value={info.phone}
+                keyboardType="phone-pad"
+            />
+            <TextInput
+                onChangeText={setInfo({})}
+                value={info.gender}
+
+                keyboardType="default"
+            />
+            <TextInput
+                onChangeText={setInfo({})}
+                value={info.date}
+                keyboardType="default"
+            />
+            <TextInput value={info.name} onChangeText={text => setInfo(text)}></TextInput>
+            <TextInput value={info.email} onChangeText={text => setInfo(text)}></TextInput>
+            <TextInput value={info.phone} onChangeText={text => setInfo(text)}></TextInput>
+            <TextInput value={info.gender} onChangeText={text => setInfo(text)}></TextInput>
+            <TextInput value={info.date} onChangeText={text => setInfo(text)}></TextInput>
             <Button
-                onPress={() => { updateuserattributes() }}
+                onPress={() => { handleupdate() }}
                 title="Update"
                 style={style.buttonStyle}
             />

@@ -13,13 +13,6 @@ import CoinIcon from '../../assets/icons/coins.png';
 import { TabClicked } from './component';
 import { TabNotClicked } from './component';
 
-import AvatarMountain from '../../assets/images/Background-Mountain.png'
-import AvatarStarrySpace from '../../assets/images/starry-space.png'
-import AvatarHat1 from '../../assets/images/Hat-Cowboy.png'
-import AvatarHat2 from '../../assets/images/Hat-Santa.png'
-import { Card } from 'react-native-elements/dist/card/Card';
-import { display, zIndex } from 'styled-system';
-
 
 import Store, {Context} from '../GlobalStates/store';
 import {
@@ -196,6 +189,7 @@ const RewardScreen = ({ navigation }) => {
           {
             // Avatar Assets
             // TODO: fix hat alignment and create an accessory component
+            // TODO: move components to be part of <ProfileScreen />
           }
           <AvatarBackground backgroundName={userState.background}/>
           <AvatarHat hatName={userState.hat}/>
@@ -269,8 +263,10 @@ const RewardCard = (props) => {
       if(!purchasestatus && !equippedstatus){
         //buy asset
         setIsPurchaseStatus(true);
+        setIsEquippedStatus(true);
         props.showModal();
-        props.updateAssetState(true, equippedstatus);
+        props.updateUser(props.asset);
+        props.updateAssetState(true, true);
       }else 
       if (purchasestatus && !equippedstatus){
         //add asset onto avatar

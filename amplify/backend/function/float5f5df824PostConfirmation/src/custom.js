@@ -25,8 +25,6 @@ exports.handler = async (event) => {
     "friends": { L: [] },
     "createdAt": { S: now.toISOString() },
     "sleepD": { N: "0" },
-    "email": { S: event.request.userAttributes.email },
-    "name": { S: event.userName },
     "focusD": { N: "0" },
     "_version": { N: "1" },
     "updatedAt": { S: now.toISOString() },
