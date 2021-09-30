@@ -303,7 +303,8 @@ const App = () => {
               headerTransparent: true,
               headerStyle: {
                 backgroundColor: 'transparent'
-              }
+              },
+              headerShown: false
             })}
           />
           <Stack.Screen name="GuideComplete" component={GuideComplete} 
@@ -315,7 +316,8 @@ const App = () => {
               headerTransparent: true,
               headerStyle: {
                 backgroundColor: 'transparent'
-              }
+              },
+              headerShown: false
             })}
           />
             <Stack.Screen name="Change Account Information" component={editProfile}
