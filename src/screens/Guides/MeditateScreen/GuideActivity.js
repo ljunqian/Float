@@ -3,6 +3,10 @@ import { View, Text, StyleSheet, ImageBackground, Image, TouchableOpacity, SafeA
 import typo from '../../../styles/typography';
 import { layout, style } from 'styled-system';
 import MedBG from '../../../assets/images/meditate-planet.png';
+import MedBG1 from '../../../assets/images/meditate-planet1.png';
+import SleepBG from '../../../assets/images/sleep-planet.png';
+import MoveBG from '../../../assets/images/move-planet.png';
+import FocusBG from '../../../assets/images/focus-planet.png';
 import Bigplay from '../../../assets/icons/bigplay.png';
 import { Guides } from './constants';
 import { color } from '../../../styles/theme';
@@ -17,7 +21,7 @@ const Activity = ({ navigation, route }) => {
     return  (
         
         <View style={styles.container}> 
-        <ImageBackground source={MedBG}  resizeMode= "cover" style={{width : '100%', height: '100%'}} >
+        <ImageBackground source={backgrounds[detail.type]}  resizeMode= "cover" style={{width : '100%', height: '100%'}} >
             <View style={styles.actComponent}>
             
                 <View style={{flex: 1, marginTop: 150, marginBottom: 120}}>
@@ -62,7 +66,7 @@ const VideoComponent = ({ array, navigation }) => {
                     ref={playerRef}
                     height={250}
                     width={400}
-                    play={true}
+                    play={false}
                     videoId={'inpok4MKVLM'} // videoId to be loaded from `detail` received
                 />
             </SafeAreaView>
@@ -71,11 +75,11 @@ const VideoComponent = ({ array, navigation }) => {
                 onPress={() => {
                     playerRef.current?.getCurrentTime().then(
                         currentTime => console.log({currentTime})
-                    );
+                    )
                     playerRef.current?.getDuration().then(
                         getDuration => console.log({getDuration})
-                    );
-                    navigation.navigate('GuideComplete', detail);
+                    )
+                    navigation.navigate('GuideComplete', detail)
                     }}
                     >
                 <Image source={Bigplay} />
@@ -84,6 +88,13 @@ const VideoComponent = ({ array, navigation }) => {
         </View>
         
     )
+}
+
+const backgrounds = {
+    Meditate: MedBG1,
+    Sleep: SleepBG,
+    Move: MoveBG,
+    Focus: FocusBG 
 }
 
 const styles = StyleSheet.create({
