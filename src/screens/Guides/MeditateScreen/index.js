@@ -7,6 +7,7 @@ import * as Progress from 'react-native-progress';
 import MedBG from '../../../assets/images/meditate-planet.png';
 import MedAvatar from '../../../assets/images/meditate-avatar.png';
 import Med from '../../../assets/images/med-1.png'; 
+import Mov from '../../../assets/images/mov-1.png';
 import Med2 from '../../../assets/images/med2.png';
 import { overflow } from 'styled-system';
 import play from '../../../assets/icons/play.png';
@@ -38,60 +39,63 @@ const MinuteView = (props) => {
   )
 }
 
-const DLoadComponents = (props) => {
-  return(
+const Recent = ({ array, navigation }) => {
+  const one = array[0];
+  const two = array[1];
+  const three = array[2];
+
+  return (
     <View>
-      {Guides.map(({ title, thumbnail, duration }, index) => {
-        let isActOne, isActTwo, isActThree, isActFour;
-
-        if(index < 2 && props.isRecentLeft){
-        return(
-          <GuideCardComponent key={title} style={{height: 130}} title={title} dur={duration} img={thumbnail} height={140} width={200} click={props.click}/>
-        )
-        }else if(index == 2 && props.isRecentRight){
-          return(
-            <GuideCardComponent key={title} style={{height: 272}} title={title} dur={duration} img={thumbnail} height={278} width={250} click={props.click}/>
-          )
-        }else if(props.isExploreLeft){
-          
-          if(index == 0)
-            isActOne = true;
-          else if(index == 2)
-            isActTwo = true;
-
-          return(
-            <View key={title}>
-              {isActOne && <GuideCardComponent style={{height: 130}} title={title} dur={duration} img={thumbnail} height={140} width={200} click={props.click}/>}
-              {isActTwo && <GuideCardComponent style={{height: 272}} title={title} dur={duration} img={thumbnail} height={285} width={200} click={props.click}/>}
-            </View>
-          )
-        }else if(props.isExploreRight){
-          
-          if(index == 1)
-            isActThree = true;
-          else if(index == 3)
-            isActFour = true;
-
-          return(
-            <View key={title} >
-              {isActThree && <GuideCardComponent style={{height: 194}} title={title} dur={duration} img={thumbnail} height={210} width={200} click={props.click}/>}
-              {isActFour && <GuideCardComponent style={{height: 130}} title={title} dur={duration} img={thumbnail} height={150} width={200} click={props.click}/>}
-            </View>
-          ) 
-        }
-        
-        })}
+      <Text style={typo.H1}>
+        Recent
+      </Text>
+      <View style={{display: 'flex', flexDirection:'row'}}>
+        <View style={{flex:1, display: 'flex',flexDirection: 'column'}}>        
+          <GuideCardComponent style={{height: 130}} title={one.title} dur={one.duration} img={one.thumbnail} height={140} width={200} click={() => navigation.navigate('GuideDetail', one)}/>
+          <GuideCardComponent style={{height: 130}} title={two.title} dur={two.duration} img={two.thumbnail} height={140} width={200} click={() => navigation.navigate('GuideDetail', two)}/>        
+        </View>
+        <View style={{flex:1}}>
+          <GuideCardComponent style={{height: 272}} title={three.title} dur={three.duration} img={three.thumbnail} height={278} width={250} click={() => navigation.navigate('GuideDetail', three)}/>          
+         </View>
+      </View>
     </View>
   )
 }
 
+const Explore = ({ array, navigation }) => {
+  const one = array[0];
+  const two = array[1];
+  const three = array[2];
+  const four = array[3];
+
+  return (
+    <View> 
+      <Text style={[typo.H1, {marginTop: 20}]}>
+        Explore
+      </Text>
+      <View style={{display: 'flex', flexDirection: 'row'}}>
+        <View style={{flex: 1, display: 'flex'}}>
+          <GuideCardComponent style={{height: 130}} title={one.title} dur={one.duration} img={one.thumbnail} height={140} width={200} click={() => navigation.navigate('GuideDetail', one)}/>
+          <GuideCardComponent style={{height: 272}} title={three.title} dur={three.duration} img={three.thumbnail} height={285} width={200} click={() => navigation.navigate('GuideDetail', three)}/>
+        </View>
+        <View style={{flex: 1, display: 'flex'}}>
+          <GuideCardComponent style={{height: 195}} title={two.title} dur={two.duration} img={two.thumbnail} height={210} width={200} click={() => navigation.navigate('GuideDetail', two)}/>
+          <GuideCardComponent style={{height: 130}} title={four.title} dur={four.duration} img={four.thumbnail} height={150} width={200} click={() => navigation.navigate('GuideDetail', four)}/>
+        </View>
+      </View>
+    </View>
+  )
+}
+
+
 const MeditateScreen = ({navigation}) => {
+
   return (
     <ScrollView style={{backgroundColor: '#272727'}}> 
       <ImageBackground source={MedBG}  resizeMode="cover" style={{width: '100%'}} >
       <View style={layout.header}>
         <View style={{height: 200}}>
-          
+        
         <Text style={[typo.H0]}>
           Meditation
         </Text>
@@ -121,12 +125,13 @@ const MeditateScreen = ({navigation}) => {
             </TouchableOpacity>
           </View>
       </View>
-      <TouchableOpacity style={[layout.container,]} onPress={() => navigation.navigate('Meditate GuideDetail', {text: 'Hello from Featured'})}>
-        <ImageBackground source={Med} style={{width:'100%'}}>
+      <TouchableOpacity style={[layout.container,]} onPress={() => navigation.navigate('GuideDetail', Guides[1])}>
+        {/* <ImageBackground source={Med} style={{width:'100%'}}> */}
         <View style={{height: 155, display: 'flex', 
           flexDirection: 'row', padding: 12,
           borderRadius: 20,
-          margin: 6, }}>
+          margin: 6, overflow:'hidden'}}>
+          <ImageBackground source={Med} style={{width:'108%', height: 155, top:-12, left:-16, flexDirection:'row', padding: 12}}>  
           <View style={{flex: 1}}></View>
           <View style={{flex: 3, alignItems: 'center', justifyContent: 'center'}}>
             <Text style={[typo.H4, {color: 'white'}]}>
@@ -134,35 +139,17 @@ const MeditateScreen = ({navigation}) => {
             </Text> 
           </View>
           <View style={{flex: 1, alignItems: 'flex-end'}}>
-            <MinuteView duration={2}/>
+            <MinuteView duration={Guides[1].duration}/>
           </View>
-        </View>
         </ImageBackground>
+        </View>
         
       </TouchableOpacity>
       <View style={layout.container}>
-        <Text style={typo.H1}>
-          Recent
-        </Text>
-        <View style={{display: 'flex', flexDirection:'row'}}>
-          <View style={{flex:1, display: 'flex',flexDirection: 'column'}}>        
-            <DLoadComponents isRecentLeft={true} click={() => navigation.navigate('Meditate GuideDetail', {text: 'Hello from Recent left'})}/>
-          </View>
-          <View style={{flex:1}}>
-            <DLoadComponents isRecentRight={true} click={() => navigation.navigate('Meditate GuideDetail', {text: 'Hello from Recent right'})}/>
-          </View>
-        </View>
-        <Text style={[typo.H1, {marginTop: 20}]}>
-          Explore
-        </Text>
-        <View style={{display: 'flex', flexDirection: 'row'}}>
-          <View style={{flex: 1, display: 'flex'}}>
-            <DLoadComponents isExploreLeft={true} click={() => navigation.navigate('Meditate GuideDetail', {text: 'Hello from Explore left'})}/>
-          </View>
-          <View style={{flex: 1, display: 'flex'}}>
-            <DLoadComponents isExploreRight={true} click={() => navigation.navigate('Meditate GuideDetail', {text: 'Hello from Explore right'})}/>
-          </View>
-        </View>
+      
+        <Recent array={Guides} navigation={navigation}/>
+        <Explore array={Guides} navigation={navigation}/>
+
         <View style={{display: 'flex', flexDirection: 'row'}}>
           <View style={{flex: 1}}>
             <Text style={[typo.H2, {marginTop: 20, color: 'white'}]}>

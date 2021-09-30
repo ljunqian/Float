@@ -11,13 +11,13 @@ import Med from '../../../assets/images/med-1.png';
 
 const GuideDetail = ({ navigation, props, route }) => {
 
-    const source = route.params.text;       // get object (text) passed from previous activity 
+    const detail = route.params;       // get object passed from previous activity 
 
     return (
         <View style={{display: 'flex'}}> 
             {/*IMAGE DIV*/}
             <View style={styles.imgContainer}>
-                <Image source={Med} style={{position: 'absolute', zIndex: 0, left: 0, width:412, height:252 }} />
+                <Image source={detail.thumbnail} style={{position: 'absolute', zIndex: 0, top: -7, left: -8, width:427, height:260 }} />
             </View>
 
             {/*CONTENT DIV*/}
@@ -25,7 +25,8 @@ const GuideDetail = ({ navigation, props, route }) => {
                 {/* Title */}
                 <View style={{flexDirection: 'row'}}>
                     <Text style={[typo.H4, {color: 'white'}]}>
-                        Title of the activity
+                        {/* Title of the activity */}
+                        { detail.title }
                     </Text>
                     <View style={{alignItems: 'center', justifyContent: 'center'}}>
                         <Image source={heart} style={{ top: 10, left: 40, zIndex: 0, position: 'absolute'}} />
@@ -34,31 +35,23 @@ const GuideDetail = ({ navigation, props, route }) => {
                 {/* Type/Duration */}
                 <View style={{ marginBottom: 20, flexDirection: 'row'}}>
                     <Text style={[typo.T3, {color: 'white', marginTop: 3}]}>
-                        Meditate
+                        { detail.type }
                     </Text>
                     <Image source={clock} style={{ top: 3, marginLeft: 10}} />
                     <Text style={[typo.T3, {color: 'white', marginLeft: 10, marginTop: 3}]}>
-                        1 min
+                        { detail.duration } min
                     </Text>
                 </View>
                 {/* Description */}
                 <Text style={[typo.T3, {color: 'white'}]}>                   
-                    { source
-                    /* {Guides[0].description */
-                    /*Guides.map(({description})=>
-                        {
-                            console.log(description);
-                            return (Guides[0].description)
-                        }
-                    )*/
-                    }
+                    { detail.description }
                 </Text>
             </View>
 
             {/*BUTTON DIV*/}
             <TouchableOpacity style={styles.btnContainer}>
                 {/* Begin */}
-                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Meditate GuideActivity')}>
+                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('GuideActivity', detail)}>
                     <Text style={[typo.H3, {color: 'white'}]}>Begin</Text> 
                 </TouchableOpacity>    
             </TouchableOpacity>
