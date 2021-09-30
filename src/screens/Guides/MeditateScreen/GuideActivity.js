@@ -1,15 +1,18 @@
-import React from 'react';
-import { View, Text, StyleSheet, ImageBackground, Image, TouchableOpacity } from 'react-native';
+import React, {useRef} from 'react';
+import { View, Text, StyleSheet, ImageBackground, Image, TouchableOpacity, SafeAreaView } from 'react-native';
 import typo from '../../../styles/typography';
 import { layout, style } from 'styled-system';
 import MedBG from '../../../assets/images/meditate-planet.png';
 import Bigplay from '../../../assets/icons/bigplay.png';
 import { Guides } from './constants';
 import { color } from '../../../styles/theme';
+import YoutubePlayer, { YoutubeIframeRef } from 'react-native-youtube-iframe';
 
-const Activity = ({navigation, route}) => {
 
-    const detail = route.params;       // get object passed from previous activity 
+const Activity = ({ navigation, route }) => {
+
+    const detail = route.params;       // get object passed from previous activity const 
+
 
     return  (
         
@@ -17,7 +20,7 @@ const Activity = ({navigation, route}) => {
         <ImageBackground source={MedBG}  resizeMode= "cover" style={{width : '100%', height: '100%'}} >
             <View style={styles.actComponent}>
             
-                <View style={{flex: 1, marginTop: 150}}>
+                <View style={{flex: 1, marginTop: 150, marginBottom: 120}}>
                     <Text style={[typo.H4,{color: 'white', fontWeight: '400'}]}>
                         {/* Session Name */}
                         { detail.title }
@@ -25,9 +28,9 @@ const Activity = ({navigation, route}) => {
                 </View>
                 
                 <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-                    <TouchableOpacity style={{backgroundColor: 'transparent', justifyContent: 'center', alignItems: 'center'} } onPress={() => navigation.navigate('GuideComplete', detail)} >
-                        <Image source={Bigplay} />
-                    </TouchableOpacity>
+                                       
+                    <VideoComponent navigation={navigation} array={detail}/>
+                    
                     <Text style={[typo.H2, {marginTop: 10, color: 'white', fontWeight: '400'}]}>
                         13:42
                     </Text>
@@ -43,6 +46,42 @@ const Activity = ({navigation, route}) => {
              </ImageBackground>
         </View>
       
+        
+    )
+}
+
+const VideoComponent = ({ array, navigation }) => {
+
+    const playerRef = useRef();
+    const detail = array;
+
+    return(
+        <View>
+            <SafeAreaView>
+                <YoutubePlayer 
+                    ref={playerRef}
+                    height={250}
+                    width={400}
+                    play={true}
+                    videoId={'inpok4MKVLM'} // videoId to be loaded from `detail` received
+                />
+            </SafeAreaView>
+            
+            <TouchableOpacity style={{backgroundColor: 'transparent', justifyContent: 'center', alignItems: 'center'}} 
+                onPress={() => {
+                    playerRef.current?.getCurrentTime().then(
+                        currentTime => console.log({currentTime})
+                    );
+                    playerRef.current?.getDuration().then(
+                        getDuration => console.log({getDuration})
+                    );
+                    navigation.navigate('GuideComplete', detail);
+                    }}
+                    >
+                <Image source={Bigplay} />
+                
+            </TouchableOpacity>
+        </View>
         
     )
 }
