@@ -98,7 +98,6 @@ const Complete = ({ navigation, route }) => {
     )
 }
 
-
 const backgrounds = {
     Meditate: MedBG1,
     Sleep: SleepBG,

@@ -23,13 +23,13 @@ const GuideDetail = ({ navigation, props, route }) => {
             {/*CONTENT DIV*/}
             <View style={styles.cntContainer}>
                 {/* Title */}
-                <View style={{flexDirection: 'row'}}>
-                    <Text style={[typo.H4, {color: 'white'}]}>
+                <View style={{flexDirection: 'row', display: 'flex', justifyContent:'space-between'}}>
+                    <Text style={[typo.H4, {color: 'white', flex: 10}]}>
                         {/* Title of the activity */}
                         { detail.title }
                     </Text>
-                    <View style={{alignItems: 'center', justifyContent: 'center'}}>
-                        <Image source={heart} style={{ top: 10, left: 40, zIndex: 0, position: 'absolute'}} />
+                    <View style={{flex: 1}}>
+                        <Image source={heart} style={{ top: 10, left:0, zIndex: 0,}} />
                     </View>
                 </View>
                 {/* Type/Duration */}
