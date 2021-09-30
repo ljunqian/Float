@@ -22,6 +22,7 @@ const LoginScreen = ({ navigation }) => {
         const user = await Auth.signIn(email, password);
         if (user) { dispatch({ type: 'SIGN_IN', payload: true }); }
         // TODO: set false 
+        navigation.navigate('Guides');
       }
     } catch (error) {
       console.log('error signing in', error);
