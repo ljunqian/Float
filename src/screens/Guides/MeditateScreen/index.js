@@ -126,11 +126,12 @@ const MeditateScreen = ({navigation}) => {
           </View>
       </View>
       <TouchableOpacity style={[layout.container,]} onPress={() => navigation.navigate('GuideDetail', Guides[1])}>
-        <ImageBackground source={Med} style={{width:'100%'}}>
+        {/* <ImageBackground source={Med} style={{width:'100%'}}> */}
         <View style={{height: 155, display: 'flex', 
           flexDirection: 'row', padding: 12,
           borderRadius: 20,
-          margin: 6, }}>
+          margin: 6, overflow:'hidden'}}>
+          <ImageBackground source={Med} style={{width:'108%', height: 155, top:-12, left:-16, flexDirection:'row', padding: 12}}>  
           <View style={{flex: 1}}></View>
           <View style={{flex: 3, alignItems: 'center', justifyContent: 'center'}}>
             <Text style={[typo.H4, {color: 'white'}]}>
@@ -140,8 +141,8 @@ const MeditateScreen = ({navigation}) => {
           <View style={{flex: 1, alignItems: 'flex-end'}}>
             <MinuteView duration={Guides[1].duration}/>
           </View>
-        </View>
         </ImageBackground>
+        </View>
         
       </TouchableOpacity>
       <View style={layout.container}>

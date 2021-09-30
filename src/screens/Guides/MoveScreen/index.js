@@ -127,11 +127,12 @@ const MoveScreen = ({navigation}) => {
           </View>
       </View>
       <TouchableOpacity style={[layout.container,]} onPress={() => navigation.navigate('GuideDetail', Guides[4])}>
-        <ImageBackground source={Mov} style={{width:'100%'}}>
+        {/* <ImageBackground source={Mov} style={{width:'100%'}}> */}
         <View style={{height: 155, display: 'flex', 
           flexDirection: 'row',padding: 12,
           borderRadius: 20,
-          margin: 6, }}>
+          margin: 6, overflow: 'hidden'}}>
+          <ImageBackground source={Mov} style={{width:'107%', height: 155, top:-12, left:-12, flexDirection:'row', padding: 12}}>
           <View style={{flex: 1}}></View>
           <View style={{flex: 3, alignItems: 'center', justifyContent: 'center'}}>
             <Text style={[typo.H4, {color: 'white'}]}>
@@ -141,8 +142,9 @@ const MoveScreen = ({navigation}) => {
           <View style={{flex: 1, alignItems: 'flex-end'}}>
             <MinuteView duration={Guides[4].duration}/>
           </View>
+          </ImageBackground>
         </View>
-        </ImageBackground>
+        
         
       </TouchableOpacity>
       <View style={layout.container}>

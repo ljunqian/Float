@@ -123,13 +123,14 @@ const SleepScreen = ({navigation}) => {
           </View>
       </View>
       <TouchableOpacity style={layout.container} onPress={() => navigation.navigate('GuideDetail', Guides[4])}>
-        <ImageBackground source={Sleep1} style={{width:'100%'}}>
+        
         <View style={{height: 155, display: 'flex', 
           flexDirection: 'row',padding: 12,
           borderRadius: 20,
-          margin: 6, }}>  
+          margin: 6, overflow:'hidden'}}>
+          <ImageBackground source={Sleep1} style={{width:'108%', height: 155, top:-12, left:-16, flexDirection:'row', padding: 12}}>  
           <View style={{flex: 1}}></View>
-          <View style={{flex: 3, alignItems: 'center', justifyContent: 'center'}}>
+          <View style={{flex: 3, alignItems: 'center', justifyContent: 'center', left:3}}>
             <Text style={[typo.H4, {color: 'white'}]}>
               Featured
             </Text> 
@@ -137,8 +138,8 @@ const SleepScreen = ({navigation}) => {
           <View style={{flex: 1, alignItems: 'flex-end'}}>
             <MinuteView duration={Guides[4].duration}/>
           </View>
+          </ImageBackground>
         </View>
-        </ImageBackground>
         
       </TouchableOpacity>
       <View style={layout.container}>
