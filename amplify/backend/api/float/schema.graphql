@@ -1,0 +1,10 @@
+type User @model @auth(rules: [{allow: private}]) {
+  id: ID!
+  coins: Int!
+  meditateD: Int!
+  sleepD: Int!
+  moveD: Int!
+  focusD: Int!
+  friends: [String!]
+}
+ 
