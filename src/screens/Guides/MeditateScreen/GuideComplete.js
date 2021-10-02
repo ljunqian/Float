@@ -12,6 +12,7 @@ import coins from '../../../assets/icons/coins.png';
 import { color } from '../../../styles/theme';
 import avatarsmall from '../../../assets/images/avatarsmall.png';
 import redheart from '../../../assets/icons/redheart.png';
+import heart from '../../../assets/icons/heart.png';
 import { Guides } from './constants';
 
 const ExpCoinsComponent = ({ styles }) => {
@@ -48,9 +49,9 @@ const ActDetailComponent = ({ detail }) => {
 
 const Complete = ({ navigation, route }) => {
     const detail = route.params;
+    const [isFavourite, setFav] = useState(false);
 
     return  (
-
 
         <View style={styles.container}> 
 
@@ -81,10 +82,14 @@ const Complete = ({ navigation, route }) => {
                 </View>
 
                 <View style={{flex: 4, marginTop: 50, alignItems: 'center'}}>
-                    <Text style={[typo.H2, {color: 'white'}]}>
-                        Added to favourites!
-                    </Text>
-                    <Image source={redheart} style ={{marginTop: 14}} />
+                    <TouchableOpacity onPress={ () => {
+                        if (isFavourite == true)
+                            setFav(false);
+                        else
+                            setFav(true);
+                    } }>
+                        <FavComponent isFav = {isFavourite} />                       
+                    </TouchableOpacity>
                 </View>
 
               
@@ -94,6 +99,24 @@ const Complete = ({ navigation, route }) => {
         </View>
       
         
+    )
+}
+
+const FavComponent = ({ isFav }) => {
+    let icon = heart;
+    let text = 'Add to favourites'
+    if(isFav){
+        icon = redheart;
+        text = 'Added to favourites!';
+    }
+ 
+    return(
+        <View style={{alignItems: 'center'}}>
+            <Text style={[typo.H2, {color: 'white'}]}>
+                {text}
+            </Text>
+            <Image source={icon} style ={{marginTop: 14}} />
+        </View>
     )
 }
 
