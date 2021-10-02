@@ -296,27 +296,11 @@ const App = () => {
          
           <Stack.Screen name="GuideActivity" component={GuideActivity} 
             options={()=>({
-              headerShadowVisible: false,
-              headerTitleStyle: {color:'white'},
-              headerTintColor: 'white',
-              headerTitle: '',
-              headerTransparent: true,
-              headerStyle: {
-                backgroundColor: 'transparent'
-              },
               headerShown: false
             })}
           />
           <Stack.Screen name="GuideComplete" component={GuideComplete} 
             options={()=>({
-              headerShadowVisible: false,
-              headerTitleStyle: {color:'white'},
-              headerTintColor: 'white',
-              headerTitle: '',
-              headerTransparent: true,
-              headerStyle: {
-                backgroundColor: 'transparent'
-              },
               headerShown: false
             })}
           />

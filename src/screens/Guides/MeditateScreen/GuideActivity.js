@@ -35,12 +35,12 @@ const Activity = ({ navigation, route }) => {
                                        
                     <VideoComponent navigation={navigation} array={detail}/>
                     
-                    <Text style={[typo.H2, {marginTop: 10, color: 'white', fontWeight: '400'}]}>
+                    {/* <Text style={[typo.H2, {marginTop: 10, color: 'white', fontWeight: '400'}]}>
                         13:42
-                    </Text>
+                    </Text> */}
                 </View>
             
-                <View style={{flex: 3, backgroundColor:'white'}}> 
+                <View style={{flex: 6, backgroundColor:'white'}}> 
                     {/* <Text>This is the bottom space </Text> */}
                 </View>
                 
@@ -58,33 +58,47 @@ const VideoComponent = ({ array, navigation }) => {
 
     const playerRef = useRef();
     const detail = array;
-
+    const getTime = function(){
+        playerRef.current?.getCurrentTime().then(
+            currentTime => console.log({currentTime})
+        )
+        playerRef.current?.getDuration().then(
+            getDuration => console.log({getDuration})
+        )
+    }
+    
     return(
         <View>
             <SafeAreaView>
                 <YoutubePlayer 
                     ref={playerRef}
-                    height={250}
-                    width={400}
+                    height={231}
+                    width={410}
                     play={false}
-                    videoId={'inpok4MKVLM'} // videoId to be loaded from `detail` received
+                    videoId={detail.source} // videoId to be loaded from `detail` received
+                    onChangeState={ event => {
+                        if(event === 'ended'){
+                            // auto navigate upon completion
+                            detail.done = true
+                            console.log(detail)
+                            getTime()
+                            navigation.navigate('GuideComplete', detail)
+                        }else if(event === 'playing')
+                            console.log("Video playing. To skip, end the video")
+                    }}
+                    onError={err => {console.log(err)}}
                 />
             </SafeAreaView>
             
-            <TouchableOpacity style={{backgroundColor: 'transparent', justifyContent: 'center', alignItems: 'center'}} 
+            {/* <TouchableOpacity style={{backgroundColor: 'transparent', justifyContent: 'center', alignItems: 'center'}} 
                 onPress={() => {
-                    playerRef.current?.getCurrentTime().then(
-                        currentTime => console.log({currentTime})
-                    )
-                    playerRef.current?.getDuration().then(
-                        getDuration => console.log({getDuration})
-                    )
+                    getTime()
                     navigation.navigate('GuideComplete', detail)
                     }}
                     >
                 <Image source={Bigplay} />
                 
-            </TouchableOpacity>
+            </TouchableOpacity> */}
         </View>
         
     )

@@ -53,7 +53,6 @@ const editProfile = ({ navigation }) => {
     <NativeBaseProvider>
       <View style={{ backgroundColor: color.bg, minHeight: '100%' }}>
         <View style={{ marginLeft: 50 }}>
-
           <Input
             style={{ width: 331, height: 40 }}
             value={email}
@@ -121,7 +120,7 @@ const editProfile = ({ navigation }) => {
               }}
             />
           </View>
-          <TouchableOpacity onPress={() => {handleupdate() }}>
+          <TouchableOpacity onPress={() => { handleupdate() }}>
             <View style={{
               marginTop: 10,
               marginRight: 46,
@@ -135,9 +134,7 @@ const editProfile = ({ navigation }) => {
             </View>
           </TouchableOpacity>
         </View>
-
       </View>
-
     </NativeBaseProvider>
 
   )

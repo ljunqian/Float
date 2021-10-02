@@ -7,11 +7,8 @@ import * as Progress from 'react-native-progress';
 import FocusBG from '../../../assets/images/focus-planet.png';
 import SleepAvatar from '../../../assets/images/sleep-avatar.png';
 import Focus1 from '../../../assets/images/focus-1.png';
-// import Focus2 from '../../../assets/images/focus2.png';
-// import Focus3 from '../../../assets/images/focus3.png';
-// import Focus4 from '../../../assets/images/sleep3.png';
 import play from '../../../assets/icons/play.png';
-import { Guides } from './constants';
+import { Guides } from '../constants';
 
 
 const GuideCardComponent = (props)  => {
@@ -41,9 +38,9 @@ const MinuteView = (props) => {
 }
 
 const Recent = ({ array, navigation }) => {
-  const one = array[0];
-  const two = array[1];
-  const three = array[2];
+  const one = array[18];
+  const two = array[19];
+  const three = array[20];
 
   return (
     <View>
@@ -64,10 +61,10 @@ const Recent = ({ array, navigation }) => {
 }
 
 const Explore = ({ array, navigation }) => {
-  const one = array[0];
-  const two = array[1];
-  const three = array[2];
-  const four = array[3];
+  const one = array[21];
+  const two = array[22];
+  const three = array[23];
+  const four = array[24];
 
   return (
     <View> 
@@ -125,7 +122,7 @@ const FocusScreen = ({navigation}) => {
             </TouchableOpacity>
           </View>
       </View>
-      <TouchableOpacity style={layout.container} onPress={() => navigation.navigate('GuideDetail', Guides[4])}>
+      <TouchableOpacity style={layout.container} onPress={() => navigation.navigate('GuideDetail', Guides[25])}>
               
         <View style={{height: 155, display: 'flex', 
           flexDirection: 'row', padding: 12,
@@ -139,7 +136,7 @@ const FocusScreen = ({navigation}) => {
             </Text>
           </View>
           <View style={{flex: 1, alignItems: 'flex-end', justifyContent: 'flex-start'}}>
-            <MinuteView duration={Guides[4].duration}/>
+            <MinuteView duration={Guides[25].duration}/>
           </View>
           </ImageBackground>
         </View>

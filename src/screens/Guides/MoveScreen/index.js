@@ -7,13 +7,9 @@ import * as Progress from 'react-native-progress';
 import MoveBG from '../../../assets/images/move-planet.png';
 import MedAvatar from '../../../assets/images/meditate-avatar.png';
 import Mov from '../../../assets/images/mov-1.png';
-// import Move1 from '../../../assets/images/move1.png';
-// import Move2 from '../../../assets/images/move2.png';
-// import Move3 from '../../../assets/images/move3.png';
-// import Sleep3 from '../../../assets/images/sleep3.png';
 import { overflow } from 'styled-system';
 import play from '../../../assets/icons/play.png';
-import { Guides } from './constants.js';
+import { Guides } from '../constants.js';
 
 const GuideCardComponent = (props)  => {
   return (
@@ -42,9 +38,9 @@ const MinuteView = (props) => {
 }
 
 const Recent = ({ array, navigation }) => {
-  const one = array[0];
-  const two = array[1];
-  const three = array[2];
+  const one = array[13];
+  const two = array[14];
+  const three = array[15];
 
   return (
     <View>
@@ -65,10 +61,10 @@ const Recent = ({ array, navigation }) => {
 }
 
 const Explore = ({ array, navigation }) => {
-  const one = array[0];
-  const two = array[1];
-  const three = array[2];
-  const four = array[3];
+  const one = array[16];
+  const two = array[14];
+  const three = array[15];
+  const four = array[13];
 
   return (
     <View> 
@@ -126,7 +122,7 @@ const MoveScreen = ({navigation}) => {
             </TouchableOpacity>
           </View>
       </View>
-      <TouchableOpacity style={[layout.container,]} onPress={() => navigation.navigate('GuideDetail', Guides[4])}>
+      <TouchableOpacity style={[layout.container,]} onPress={() => navigation.navigate('GuideDetail', Guides[17])}>
         {/* <ImageBackground source={Mov} style={{width:'100%'}}> */}
         <View style={{height: 155, display: 'flex', 
           flexDirection: 'row',padding: 12,
@@ -140,7 +136,7 @@ const MoveScreen = ({navigation}) => {
             </Text> 
           </View>
           <View style={{flex: 1, alignItems: 'flex-end'}}>
-            <MinuteView duration={Guides[4].duration}/>
+            <MinuteView duration={Guides[17].duration}/>
           </View>
           </ImageBackground>
         </View>

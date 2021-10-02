@@ -10,7 +10,7 @@ import Sleep1 from '../../../assets/images/sleep1.png';
 // import Sleep2 from '../../../assets/images/sleep2.png';
 // import Sleep3 from '../../../assets/images/sleep3.png';
 import play from '../../../assets/icons/play.png';
-import { Guides } from './constants';
+import { Guides } from '../constants';
 
 const GuideCardComponent = (props)  => {
   return (
@@ -39,9 +39,9 @@ const MinuteView = (props) => {
 }
 
 const Recent = ({ array, navigation }) => {
-  const one = array[0];
-  const two = array[1];
-  const three = array[2];
+  const one = array[7];
+  const two = array[8];
+  const three = array[9];
 
   return (
     <View>
@@ -62,10 +62,10 @@ const Recent = ({ array, navigation }) => {
 }
 
 const Explore = ({ array, navigation }) => {
-  const one = array[0];
-  const two = array[1];
-  const three = array[2];
-  const four = array[3];
+  const one = array[10];
+  const two = array[11];
+  const three = array[9];
+  const four = array[7];
 
   return (
     <View> 
@@ -78,7 +78,7 @@ const Explore = ({ array, navigation }) => {
           <GuideCardComponent style={{height: 272}} title={three.title} dur={three.duration} img={three.thumbnail} height={285} width={200} click={() => navigation.navigate('GuideDetail', three)}/>
         </View>
         <View style={{flex: 1, display: 'flex'}}>
-          <GuideCardComponent style={{height: 195}} title={two.title} dur={two.duration} img={two.thumbnail} height={210} width={200} click={() => navigation.navigate('GuideDetail', two)}/>
+          <GuideCardComponent style={{height: 195}} title={two.title} dur={two.duration} img={two.thumbnail} height={220} width={200} click={() => navigation.navigate('GuideDetail', two)}/>
           <GuideCardComponent style={{height: 130}} title={four.title} dur={four.duration} img={four.thumbnail} height={150} width={200} click={() => navigation.navigate('GuideDetail', four)}/>
         </View>
       </View>
@@ -122,7 +122,7 @@ const SleepScreen = ({navigation}) => {
             </TouchableOpacity>
           </View>
       </View>
-      <TouchableOpacity style={layout.container} onPress={() => navigation.navigate('GuideDetail', Guides[4])}>
+      <TouchableOpacity style={layout.container} onPress={() => navigation.navigate('GuideDetail', Guides[12])}>
         
         <View style={{height: 155, display: 'flex', 
           flexDirection: 'row',padding: 12,
@@ -136,7 +136,7 @@ const SleepScreen = ({navigation}) => {
             </Text> 
           </View>
           <View style={{flex: 1, alignItems: 'flex-end'}}>
-            <MinuteView duration={Guides[4].duration}/>
+            <MinuteView duration={Guides[12].duration}/>
           </View>
           </ImageBackground>
         </View>

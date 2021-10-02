@@ -68,5 +68,12 @@
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     }
+  },
+  "video": {},
+  "storage": {
+    "s3160b8850": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation"
+    }
   }
 }

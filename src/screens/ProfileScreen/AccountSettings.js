@@ -49,7 +49,7 @@ const AccountSettings = ({ navigation }) => {
             <Text style={{ color: 'white' }}>Edit Profile</Text>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => {navigation.navigate('Change password') }}>
+        <TouchableOpacity onPress={() => { navigation.navigate('Change password') }}>
           <View style={{
             marginTop: 10,
             marginRight: 46,
@@ -75,7 +75,7 @@ const AccountSettings = ({ navigation }) => {
             <Text style={{ color: 'white' }}>Sign Out</Text>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => { Auth.currentAuthenticatedUser().then(console.log) }}>
+        <TouchableOpacity onPress={() => { }}>
           <View style={{
             marginTop: 10,
             marginRight: 46,
@@ -102,5 +102,12 @@ const style = StyleSheet.create({
   },
   warnStyle: {
     height: '40px'
+  },
+  backgroundVideo: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
   }
 })

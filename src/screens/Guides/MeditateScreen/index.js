@@ -11,7 +11,7 @@ import Mov from '../../../assets/images/mov-1.png';
 import Med2 from '../../../assets/images/med2.png';
 import { overflow } from 'styled-system';
 import play from '../../../assets/icons/play.png';
-import { Guides } from './constants';
+import { Guides } from '../constants';
 
 const GuideCardComponent = (props)  => {
   return (
@@ -63,10 +63,10 @@ const Recent = ({ array, navigation }) => {
 }
 
 const Explore = ({ array, navigation }) => {
-  const one = array[0];
-  const two = array[1];
-  const three = array[2];
-  const four = array[3];
+  const one = array[3];
+  const two = array[4];
+  const three = array[5];
+  const four = array[6];
 
   return (
     <View> 
