@@ -37,11 +37,10 @@ const ActDetailComponent = ({ detail }) => {
     return(
         <View style={{alignItems: 'center'}}>
             <Text style={[typo.H2,{color: 'white', fontWeight:'400'}]}>
-                {/* Title of the activity */}
                 {detail.title}
             </Text>
             <Text style={[typo.T1,{ color: 'white', fontWeight:'400'}]}>
-                1 min {/* Get time from currentTime */}
+                {detail.duration} min 
             </Text>
         </View>
     )

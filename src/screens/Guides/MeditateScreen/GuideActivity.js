@@ -17,16 +17,19 @@ const Activity = ({ navigation, route }) => {
 
     const detail = route.params;       // get object passed from previous activity const 
 
-
+    // Adjust layout based on title length
+    let isLong = false;
+    if(detail.title.length > 20)
+        isLong = true;
+        
     return  (
         
         <View style={styles.container}> 
         <ImageBackground source={backgrounds[detail.type]}  resizeMode= "cover" style={{width : '100%', height: '100%'}} >
             <View style={styles.actComponent}>
             
-                <View style={{flex: 1, marginTop: 150, marginBottom: 120}}>
-                    <Text style={[typo.H4,{color: 'white', fontWeight: '400'}]}>
-                        {/* Session Name */}
+                <View style={styles.title}>
+                    <Text style={[typo.H4,{color: 'white', fontWeight: '400', textAlign: 'center', fontSize: isLong? 30 : 32}]}>
                         { detail.title }
                     </Text>
                 </View>
@@ -40,7 +43,7 @@ const Activity = ({ navigation, route }) => {
                     </Text> */}
                 </View>
             
-                <View style={{flex: 6, backgroundColor:'white'}}> 
+                <View style={{flex: 5, backgroundColor:'white'}}> 
                     {/* <Text>This is the bottom space </Text> */}
                 </View>
                 
@@ -143,6 +146,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         borderRadius: 48, 
         backgroundColor : '#272727' 
+    },
+    title : {
+        flex: 2, 
+        marginVertical: 110, 
+        marginHorizontal: 10,
+        justifyContent: 'flex-end'
     }
 })
 
