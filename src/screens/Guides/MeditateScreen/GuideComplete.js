@@ -35,8 +35,8 @@ const ExpCoinsComponent = ({ styles }) => {
 
 const ActDetailComponent = ({ detail }) => {
     return(
-        <View style={{alignItems: 'center'}}>
-            <Text style={[typo.H2,{color: 'white', fontWeight:'400'}]}>
+        <View style={styles.title}>
+            <Text style={[typo.H2,{color: 'white', fontWeight:'400', textAlign: 'center'}]}>
                 {detail.title}
             </Text>
             <Text style={[typo.T1,{ color: 'white', fontWeight:'400'}]}>
@@ -129,6 +129,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         borderRadius: 48, 
         backgroundColor: color.Med3,
+    },
+    title: {
+        alignItems: 'center',
+        marginHorizontal: 10,
     }
 })
 
