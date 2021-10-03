@@ -18,6 +18,7 @@ import editProfile from './src/screens/ProfileScreen/editProfile';
 import ExploreScreen from './src/screens/Guides/ExploreScreen';
 import Recents from './src/screens/Guides/ExploreScreen/Recents.js';
 import ProfileScreen from './src/screens/ProfileScreen/';
+import SearchScreen from './src/screens/SearchScreen/';
 import RewardScreen from './src/screens/RewardScreen/';
 import AccountSettings from './src/screens/ProfileScreen/AccountSettings.js';
 import Changeaccountinfo from './src/screens/ProfileScreen/Changeaccountinfo';
@@ -231,7 +232,7 @@ const App = () => {
               options={({ navigation }) => ({
                 headerRight: () => (
                   <TouchableOpacity
-                    onPress={() => Auth.currentAuthenticatedUser().then(console.log)}
+                    onPress={() => navigation.navigate('Search')}
                   >
                     <Image source={MagnifyIcon} />
                   </TouchableOpacity>
@@ -258,6 +259,11 @@ const App = () => {
                 headerTitle: () => (<View />),
                 headerTintColor: 'white'
               })}
+            />
+            <Stack.Screen name="Search" component={SearchScreen} 
+            options={()=>({
+              headerShown: false
+            })}
             />
             <Stack.Screen name="Reward" component={RewardScreen}
               options={({ navigation }) => ({
@@ -307,14 +313,7 @@ const App = () => {
           />
           <Stack.Screen name="Recents" component={Recents} 
             options={()=>({
-              headerShadowVisible: false,
-              headerTitleStyle: {color:'white'},
-              headerTintColor: 'white',
-              headerTitle: '',
-              headerTransparent: true,
-              headerStyle: {
-                backgroundColor: 'transparent'
-              }
+              headerShown: false
             })}
           />
             <Stack.Screen name="Change Account Information" component={editProfile}
