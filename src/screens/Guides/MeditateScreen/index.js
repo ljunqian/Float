@@ -152,10 +152,10 @@ const MeditateScreen = ({navigation}) => {
 
         <View style={{display: 'flex', flexDirection: 'row'}}>
           <View style={{flex: 1}}>
-            <Text style={[typo.H2, {marginTop: 20, color: 'white'}]}>
+            <Text style={[typo.H4, {marginTop: 20, color: 'white'}]}>
               Group Meditation
             </Text>
-            <TouchableOpacity style={[layout.big_button, {backgroundColor: color.Med3}]}>
+            <TouchableOpacity style={[layout.bigger_button, {backgroundColor: color.Med3}]}>
               <Text style={[typo.T4, {color: 'white'}]}>
                 Join
               </Text>

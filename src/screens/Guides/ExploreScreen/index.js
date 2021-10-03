@@ -70,7 +70,7 @@ const ExploreScreen = ({ navigation }) => {
             Favourites
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={style.button}>
+        <TouchableOpacity style={style.button} onPress={() => navigation.navigate('Recents') }>
           <Image source={LoveYellow} style={{marginRight: 10}}/>
           <Text>
             Recents
