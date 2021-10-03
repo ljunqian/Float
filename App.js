@@ -15,7 +15,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import changePass from './src/screens/ProfileScreen/changePass';
 import editProfile from './src/screens/ProfileScreen/editProfile';
-import ExploreScreen from './src/screens/Guides/ExploreScreen'
+import ExploreScreen from './src/screens/Guides/ExploreScreen';
+import Recents from './src/screens/Guides/ExploreScreen/Recents.js';
 import ProfileScreen from './src/screens/ProfileScreen/';
 import RewardScreen from './src/screens/RewardScreen/';
 import AccountSettings from './src/screens/ProfileScreen/AccountSettings.js';
@@ -307,6 +308,18 @@ const App = () => {
             })}
           />
           <Stack.Screen name="GuideComplete" component={GuideComplete} 
+            options={()=>({
+              headerShadowVisible: false,
+              headerTitleStyle: {color:'white'},
+              headerTintColor: 'white',
+              headerTitle: '',
+              headerTransparent: true,
+              headerStyle: {
+                backgroundColor: 'transparent'
+              }
+            })}
+          />
+          <Stack.Screen name="Recents" component={Recents} 
             options={()=>({
               headerShadowVisible: false,
               headerTitleStyle: {color:'white'},
