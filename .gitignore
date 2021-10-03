@@ -27,7 +27,7 @@ build/
 .idea
 
 ### ReactNative.Gradle Stack ###
-/.gradle
+.gradle
 **/build/
 
 # Intellij
