@@ -19,7 +19,6 @@ import ExploreScreen from './src/screens/Guides/ExploreScreen'
 import ProfileScreen from './src/screens/ProfileScreen/';
 import RewardScreen from './src/screens/RewardScreen/';
 import AccountSettings from './src/screens/ProfileScreen/AccountSettings.js';
-import Changeaccountinfo from './src/screens/ProfileScreen/Changeaccountinfo';
 import LoginScreen from './src/screens/Authenticate/LoginScreen';
 import SignUpScreen from './src/screens/Authenticate/SignUpScreen';
 import MeditateScreen from './src/screens/Guides/MeditateScreen';

@@ -89,7 +89,6 @@ const Explore = ({ array, navigation }) => {
 
 
 const MeditateScreen = ({navigation}) => {
-
   return (
     <ScrollView style={{backgroundColor: '#272727'}}> 
       <ImageBackground source={MedBG}  resizeMode="cover" style={{width: '100%'}} >

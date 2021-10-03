@@ -23,7 +23,7 @@ export const Guides = [
         done : false,
         source : 'link',
         description : 'Description Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-        type: 'Move',
+        type: 'moveD',
         thumbnail: Move2,
     },
     {
@@ -32,7 +32,7 @@ export const Guides = [
         done : false,
         source : 'link',
         description : 'Description Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-        type: 'Move',
+        type: 'moveD',
         thumbnail: Move3,
     },
     {
@@ -41,7 +41,7 @@ export const Guides = [
         done : false,
         source : 'link',
         description : 'Description Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-        type: 'Move',
+        type: 'moveD',
         thumbnail: Move1,
     },
     {
@@ -50,7 +50,7 @@ export const Guides = [
         done : false,
         source : 'link',
         description : 'Description Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-        type: 'Move',
+        type: 'moveD',
         thumbnail: Mov,
     },
 ];
