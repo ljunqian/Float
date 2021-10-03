@@ -99,7 +99,7 @@ const style = StyleSheet.create({
     button: {
       borderRadius: 20,
       marginTop: 20,
-      width:200,
+      // width:200,
       padding: 10,
       elevation: 2
     },
@@ -108,7 +108,7 @@ const style = StyleSheet.create({
     },
     text: {
       color: "#000",
-      fontWeight: "bold",
+      // fontWeight: "bold",
       fontSize: 12,
       fontFamily: 'Montserrat-Regular',
       textAlign: "center",
