@@ -48,11 +48,11 @@ const ListComponent = ({ navigation }) => {
     )
 }
 
-const Recents = ({ navigation }) => {
+const Favourites = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <View style={{marginTop: 25, marginLeft: 23}}>
-                <Text style={[typo.H4, {color: 'white'}]}>Recents</Text>
+                <Text style={[typo.H4, {color: 'white'}]}>Favourites</Text>
             </View>
             <SearchComponent navigation={navigation}/>
             <ListComponent navigation={navigation}/>
@@ -115,4 +115,4 @@ const styles = StyleSheet.create({
     
 })
 
-export default Recents;
+export default Favourites;

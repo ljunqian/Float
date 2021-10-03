@@ -17,6 +17,7 @@ import changePass from './src/screens/ProfileScreen/changePass';
 import editProfile from './src/screens/ProfileScreen/editProfile';
 import ExploreScreen from './src/screens/Guides/ExploreScreen';
 import Recents from './src/screens/Guides/ExploreScreen/Recents.js';
+import Favourites from './src/screens/Guides/ExploreScreen/Favourites.js';
 import ProfileScreen from './src/screens/ProfileScreen/';
 import SearchScreen from './src/screens/SearchScreen/';
 import RewardScreen from './src/screens/RewardScreen/';
@@ -312,6 +313,11 @@ const App = () => {
             })}
           />
           <Stack.Screen name="Recents" component={Recents} 
+            options={()=>({
+              headerShown: false
+            })}
+          />
+          <Stack.Screen name="Favourites" component={Favourites} 
             options={()=>({
               headerShown: false
             })}
