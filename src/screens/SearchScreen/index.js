@@ -1,11 +1,17 @@
-import React from 'react';
-import { Text, View, StyleSheet, Image, TouchableOpacity, TextInput, FlatList } from 'react-native';
+import React, {useState} from 'react';
+import { Text, View, StyleSheet, Image, TouchableOpacity, TextInput, FlatList, ScrollView } from 'react-native';
 import layout from '../../styles/componentLayout';
 import typo from '../../styles/typography';
 import back from '../../assets/icons/backbutton.png';
 import forward from '../../assets/icons/forwardarrow.png';
 import xBtn from '../../assets/icons/xbutton.png';
 import { Guides } from '../Guides/constants';
+
+// Todo(s): 
+// 0.   Learn redux.
+// 1.   Pass user input (variable) from SearchComponent(TextInput) to ListComponent
+// 2.   Variable received to be used as array filter {.includes(variable_received)}
+// 3.   Change layout from toggle to auto switch upon user input {onChangeText()} or    
 
 const SearchComponent = ({ navigation }) => {
     return (
@@ -36,8 +42,8 @@ const ListComponent = ({ navigation }) => {
             renderItem={({ item })=>(
                 <View style={{alignItems: 'center'}}>
                     <TouchableOpacity style={styles.list} onPress={()=>navigation.navigate('GuideDetail', item)}>
-                        <View style={styles.imageContainer}>
-                            <Image source={item.thumbnail} style={styles.image}/>
+                        <View style={styles.small_guideComponent}>
+                            <Image source={item.thumbnail} style={styles.small_image}/>
                         </View>
                         <View style={styles.textBox}>
                             <Text style={[typo.T1, {color: 'white'}]}>{item.title}</Text>
@@ -52,14 +58,111 @@ const ListComponent = ({ navigation }) => {
     )
 }
 
-const Search = ({ navigation }) => {
+const SuggestComponent = ({ navigation }) => {
     return (
-        <View style={styles.container}>
-            <SearchComponent navigation={navigation}/>
-            <ListComponent navigation={navigation}/>
+        <ScrollView>
+            <ScrollView contentContainerStyle={{marginLeft:12}} fadingEdgeLength={10} horizontal={true}>
+                {filters.map((item, index) => {
+                    return(
+                        <TouchableOpacity style={styles.filterBox} key={index}>
+                            <Text style={[typo.T4, {color:'white'}]}>{item}</Text>
+                        </TouchableOpacity>
+                    )
+                })}
+            </ScrollView>
+            <TopSixComponent isPopular={false} navigation={navigation}/>
+            <TopSixComponent isPopular={true} navigation={navigation}/>
+        </ScrollView>
+    )
+}
+
+const TopSixComponent = ({ isPopular, navigation }) => {
+    let data = [Guides[25], Guides[14], Guides[15], Guides[9], Guides[4], Guides[21]];
+    let heading = "Ideas for you";
+    if(isPopular){
+        data = [Guides[2], Guides[9], Guides[17], Guides[20], Guides[12], Guides[19]];
+        heading = "Popular on FLOAT";
+    }
+    
+    return (
+        <View style={styles.suggestContainer}>
+            <Text style={[typo.T1, {color: 'white'}]}>{heading}</Text>
+            <View style={{flexDirection: 'row', marginTop: 5}}>
+                <View>
+                    <GuideCardComponent item={data[0]} navigation={navigation}/>
+                    <GuideCardComponent item={data[1]} navigation={navigation}/>
+                    <GuideCardComponent item={data[2]} navigation={navigation}/>
+                </View>
+                <View>
+                    <GuideCardComponent item={data[3]} navigation={navigation}/>
+                    <GuideCardComponent item={data[4]} navigation={navigation}/>
+                    <GuideCardComponent item={data[5]} navigation={navigation}/>
+                </View>
+            </View>
         </View>
     )
 }
+
+const GuideCardComponent = ({ item, navigation }) => {
+    return (
+        <TouchableOpacity style={styles.big_guideComponent} onPress={()=>navigation.navigate('GuideDetail', item)}>
+            <Image source={item.thumbnail} style={styles.big_image}/>
+            <View style={{margin: 10}}>
+                <Text style={[typo.T1, {color: 'white'}]}>{item.title}</Text>
+            </View>
+        </TouchableOpacity>
+    )
+}
+
+{/* For now (display purposes) ...  */}
+const ToggleView = ({ isSearching, navigation }) => {
+    if(isSearching)
+        return <SuggestComponent navigation={navigation}/>
+    return <ListComponent navigation={navigation}/>
+}
+
+const Search = ({ navigation }) => {
+    const [toggle, setToggle] = useState(true);
+    return (
+        <View style={styles.container}>
+            {/* <SearchComponent navigation={navigation}/> */}
+            <View style={styles.searchContainer}>
+                <TouchableOpacity onPress={()=>navigation.pop()}>
+                    <Image source={back} style={{marginLeft: 10}}/>  
+                </TouchableOpacity>
+                <TextInput 
+                    style={[typo.H2, styles.searchBox]}
+                    placeholder="Search"
+                    onChangeText={()=>{}}
+                />
+
+                {/* For now (display purposes) ...  */}
+                <TouchableOpacity onPress={()=>{
+                    if(toggle==false)
+                        setToggle(true);
+                    else
+                        setToggle(false);
+                    }}>
+                    {/*set xBtn to toggle the view*/}
+                    <Image source={xBtn} style={{marginLeft: 10}}/>  
+                </TouchableOpacity>
+            </View>
+            
+            <ToggleView isSearching={toggle} navigation={navigation}/>
+            {/* <SuggestComponent navigation={navigation}/>
+            <ListComponent navigation={navigation}/> */}
+        </View>
+    )
+}
+
+const filters = [
+    "focus",
+    "meditation",
+    "sleep",
+    "morning",
+    "afternoon",
+    "night"
+]
 
 const styles = StyleSheet.create({
     container: {
@@ -88,7 +191,7 @@ const styles = StyleSheet.create({
         marginVertical: 15,
         marginLeft: 10
     },
-    imageContainer: {
+    small_guideComponent: {
         width: 110,
         height: 70,
         borderRadius: 20,
@@ -96,7 +199,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'orange',
         overflow: 'hidden',
     },
-    image: {
+    small_image: {
         width: 120,
         height: 80,
         left: -2,
@@ -112,8 +215,39 @@ const styles = StyleSheet.create({
         height: 2,
         backgroundColor: 'white',
         borderRadius: 1,
-    }
-    
+    },
+    filterBox: {
+        height: 40,
+        backgroundColor:'#FF9F00',
+        alignSelf: 'flex-start',
+        justifyContent: 'center',
+        marginHorizontal: 6,
+        paddingHorizontal: 16,
+        borderRadius: 48
+    },
+    big_guideComponent: {
+        width: 180,
+        height: 90,
+        borderRadius: 20,
+        margin: 6,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: 'black',
+        overflow: 'hidden',        
+    },
+    big_image: {
+        width: 190,
+        height: 100,
+        left: -3,
+        top: -2,
+        position: 'absolute',
+        opacity: 0.5
+    },
+    suggestContainer: {
+        display: 'flex', 
+        alignItems: 'center', 
+        marginTop: 27,
+    },
 })
 
 export default Search;

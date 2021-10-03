@@ -23,9 +23,9 @@ const SearchComponent = ({ navigation }) => {
 
 const ListComponent = ({ navigation }) => {
     let data = Guides.filter(item => 
-    item.type.includes('meditation') || 
-    item.title.includes('meditation') ||
-    item.description.includes('meditation'));
+    item.type.includes('10') || 
+    item.title.includes('10') ||
+    item.description.includes('10'));
     return (
         <FlatList 
             data={data}
