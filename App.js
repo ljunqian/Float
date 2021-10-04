@@ -68,6 +68,7 @@ const BottomBar = () => {
     backgroundColor: '#4F4F4F',
     borderTopRightRadius: 16,
     borderTopLeftRadius: 16,
+    
   }
   return (
 
@@ -100,7 +101,7 @@ const BottomBar = () => {
             marginBottom: 10,
             color: 'white',
             fontWeight: "400",
-          }
+          },
         })}
       />
       <Tab.Screen name="Sleep" component={SleepScreen}
@@ -246,6 +247,7 @@ const App = () => {
                   </TouchableOpacity>
                 ),
                 headerTitle: () => (<View />),
+                
               })}
             />
             <Stack.Screen name="Profile" component={ProfileScreen}

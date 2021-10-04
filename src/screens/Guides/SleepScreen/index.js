@@ -5,6 +5,7 @@ import layout from '../../../styles/componentLayout';
 import { color } from '../../../styles/theme';
 import * as Progress from 'react-native-progress';
 import SleepBG from '../../../assets/images/sleep-planet.png';
+import StarsBG from '../../../assets/images/stars.png';
 import SleepAvatar from '../../../assets/images/sleep-avatar.png';
 import Sleep1 from '../../../assets/images/sleep1.png';
 // import Sleep2 from '../../../assets/images/sleep2.png';
@@ -45,7 +46,7 @@ const Recent = ({ array, navigation }) => {
 
   return (
     <View>
-      <Text style={typo.H1}>
+      <Text style={[typo.H1, {left:10}]}>
         Recent
       </Text>
       <View style={{display: 'flex', flexDirection:'row'}}>
@@ -69,7 +70,7 @@ const Explore = ({ array, navigation }) => {
 
   return (
     <View> 
-      <Text style={[typo.H1, {marginTop: 20}]}>
+      <Text style={[typo.H1, {marginTop: 20, left:10}]}>
         Explore
       </Text>
       <View style={{display: 'flex', flexDirection: 'row'}}>
@@ -89,15 +90,16 @@ const Explore = ({ array, navigation }) => {
 const SleepScreen = ({navigation}) => {
   return (
     <ScrollView style={{backgroundColor: '#272727'}}> 
-      <ImageBackground source={SleepBG}  resizeMode="cover" style={{width: '100%'}} >
+      <ImageBackground source={StarsBG}  resizeMode="cover" style={{width: '100%'}} >
+      <Image source={SleepBG} style={{ top: -1175, left: -45, zIndex: 0, transform:[{scaleY:-1}], position: 'absolute', width: '110%'}}/>
       <View style={layout.header}>
         <View style={{height: 200}}>
           
-        <Text style={[typo.H0]}>
+        <Text style={[typo.H0, {left:20}]}>
           Sleep 
         </Text>
         
-          <Text style={[typo.T2, {color:'white'}]}>
+          <Text style={[typo.T2, {color:'white', left:20}]}>
             Level 2
           </Text>
           <Progress.Bar 
@@ -107,6 +109,8 @@ const SleepScreen = ({navigation}) => {
             color={color.Sleep3}
             unfilledColor={'white'}
             borderWidth={0}
+            top={10}
+            left={20}
           />
           <Image source={SleepAvatar} style={{ top: 20, left: 20,zIndex: 0, position: 'absolute'}}/>
         </View>

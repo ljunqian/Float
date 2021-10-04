@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 
 import Focus1 from '../../../assets/images/focus-1.png';
 import Focus2 from '../../../assets/images/focus2.png';
-import Focus3 from '../../../assets/images/focus3.png';
+import Focus3 from '../../../assets/images/focus2.png';
 import Focus4 from '../../../assets/images/sleep3.png';
 
 export const Guides = [

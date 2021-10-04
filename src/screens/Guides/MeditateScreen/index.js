@@ -4,7 +4,9 @@ import typo from '../../../styles/typography';
 import { color } from '../../../styles/theme';
 import layout from '../../../styles/componentLayout';
 import * as Progress from 'react-native-progress';
-import MedBG from '../../../assets/images/meditate-planet.png';
+import oldMedBG from '../../../assets/images/meditate-planet.png';
+import MedBG from '../../../assets/images/mediitatebgnew.png';
+import StarsBG from '../../../assets/images/stars.png';
 import MedAvatar from '../../../assets/images/meditate-avatar.png';
 import Med from '../../../assets/images/med-1.png'; 
 import Mov from '../../../assets/images/mov-1.png';
@@ -46,7 +48,7 @@ const Recent = ({ array, navigation }) => {
 
   return (
     <View>
-      <Text style={typo.H1}>
+      <Text style={[typo.H1, {left:10}]}>
         Recent
       </Text>
       <View style={{display: 'flex', flexDirection:'row'}}>
@@ -70,7 +72,7 @@ const Explore = ({ array, navigation }) => {
 
   return (
     <View> 
-      <Text style={[typo.H1, {marginTop: 20}]}>
+      <Text style={[typo.H1, {marginTop: 20,left:10}]}>
         Explore
       </Text>
       <View style={{display: 'flex', flexDirection: 'row'}}>
@@ -91,16 +93,18 @@ const Explore = ({ array, navigation }) => {
 const MeditateScreen = ({navigation}) => {
 
   return (
-    <ScrollView style={{backgroundColor: '#272727'}}> 
-      <ImageBackground source={MedBG}  resizeMode="cover" style={{width: '100%'}} >
+    <ScrollView sourcestyle={{backgroundColor: '#272727'}}> 
+      {/* <Image source={oldMedBG} style={{marginRight: 5, position: 'absolute'}} /> */}
+      <ImageBackground source={StarsBG}  resizeMode="cover" style={{width: '100%'}} >
+      <Image source={oldMedBG} style={{ top: -1175, left: -45, zIndex: 0, transform:[{scaleY:-1}], position: 'absolute', width: '110%'}}/>
       <View style={layout.header}>
         <View style={{height: 200}}>
         
-        <Text style={[typo.H0]}>
+        <Text style={[typo.H0,{left:20}]}>
           Meditation
         </Text>
         
-          <Text style={[typo.T2, {color:'white'}]}>
+          <Text style={[typo.T2, {color:'white', left:20 }]}>
             Level 1
           </Text>
           <Progress.Bar 
@@ -110,14 +114,17 @@ const MeditateScreen = ({navigation}) => {
             color={'#F57212'}
             unfilledColor={'white'}
             borderWidth={0}
+            top={10}
+            left={20}
           />
           <Image source={MedAvatar} style={{ top: 40, left: 20, zIndex: 0, position: 'absolute'}}/>
+          
         </View>
           <View style={{display: 'flex', flex: 8, justifyContent: 'flex-end', alignItems: 'center', zIndex:2}}>
             <Text style={typo.H1}>
               Meditation Session
             </Text>
-            <TouchableOpacity style={[layout.big_button, {backgroundColor: color.Med3, marginBottom: 30, zIndex:2, flexDirection: 'row'}]}>
+            <TouchableOpacity style={[layout.big_button, {backgroundColor: color.Med1, marginBottom: 30, zIndex:2, flexDirection: 'row'}]}>
                 <Image source={play} style={{marginRight: 5}} />
                 <Text style={[typo.T4, {color: 'white', fontWeight: '400'}]}>
                   Play
@@ -134,7 +141,7 @@ const MeditateScreen = ({navigation}) => {
           <ImageBackground source={Med} style={{width:'108%', height: 155, top:-12, left:-16, flexDirection:'row', padding: 12}}>  
           <View style={{flex: 1}}></View>
           <View style={{flex: 3, alignItems: 'center', justifyContent: 'center'}}>
-            <Text style={[typo.H4, {color: 'white'}]}>
+            <Text style={[typo.H4, {color: 'white' }]}>
               Featured
             </Text> 
           </View>
@@ -150,23 +157,7 @@ const MeditateScreen = ({navigation}) => {
         <Recent array={Guides} navigation={navigation}/>
         <Explore array={Guides} navigation={navigation}/>
 
-        <View style={{display: 'flex', flexDirection: 'row'}}>
-          <View style={{flex: 1}}>
-            <Text style={[typo.H4, {marginTop: 20, color: 'white'}]}>
-              Group Meditation
-            </Text>
-            <TouchableOpacity style={[layout.bigger_button, {backgroundColor: color.Med3}]}>
-              <Text style={[typo.T4, {color: 'white'}]}>
-                Join
-              </Text>
-            </TouchableOpacity>
-          </View>
-          <View style={{flex: 1, marginTop: 20}}>
-            <View style={[layout.imageCard, {overflow: 'hidden'}]}>
-              <Image source={Med2} style={{top: -15, left: -20}}/>
-            </View>
-          </View>
-        </View>
+        
       </View>
       </ImageBackground>
     </ScrollView>
