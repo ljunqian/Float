@@ -9,7 +9,6 @@ import MedAvatar from '../../../assets/images/meditate-avatar.png';
 import Med from '../../../assets/images/med-1.png'; 
 import Mov from '../../../assets/images/mov-1.png';
 import Med2 from '../../../assets/images/med2.png';
-import { overflow } from 'styled-system';
 import play from '../../../assets/icons/play.png';
 import { Guides } from './constants';
 
@@ -24,6 +23,8 @@ const GuideCardComponent = (props)  => {
     </TouchableOpacity>
   )
 }
+
+// navigation params
 
 const MinuteView = (props) => {
   let duration = props.duration;
@@ -86,7 +87,21 @@ const DLoadComponents = (props) => {
   )
 }
 
+const Recent = ({array, onDetail}) => {
+  const one = array[0];
+  return (
+  <>
+      <GuideCardComponent key={title} style={{height: 130}} title={one.title} dur={duration} img={thumbnail} height={140} width={200} click={onDetail}/>
+      <GuideCardComponent key={title} style={{height: 272}} title={title} dur={duration} img={thumbnail} height={278} width={250} click={props.click}/>
+  </>
+)}
+
+
 const MeditateScreen = ({navigation}) => {
+
+  const moveToDetail = (content) => {
+    navigation.navigate('Meditate GuideDetail', {guide: content})
+  }
   return (
     <ScrollView style={{backgroundColor: '#272727'}}> 
       <ImageBackground source={MedBG}  resizeMode="cover" style={{width: '100%'}} >
@@ -122,7 +137,7 @@ const MeditateScreen = ({navigation}) => {
             </TouchableOpacity>
           </View>
       </View>
-      <TouchableOpacity style={[layout.container,]} onPress={() => navigation.navigate('Meditate GuideDetail', {text: 'Hello from Screen 1'})}>
+      <TouchableOpacity style={[layout.container,]} onPress={() => navigation.navigate('Meditate GuideDetail', {guide: Guides[0]})}>
         <ImageBackground source={Med} style={{width:'100%'}}>
         <View style={{height: 155, display: 'flex', 
           flexDirection: 'row', padding: 12,
@@ -142,17 +157,11 @@ const MeditateScreen = ({navigation}) => {
         
       </TouchableOpacity>
       <View style={layout.container}>
-        <Text style={typo.H1}>
-          Recent
-        </Text>
-        <View style={{display: 'flex', flexDirection:'row'}}>
-          <View style={{flex:1, display: 'flex',flexDirection: 'column'}}>        
-            <DLoadComponents isRecentLeft={true} click={() => navigation.navigate('Meditate GuideDetail')}/>
-          </View>
-          <View style={{flex:1}}>
-            <DLoadComponents isRecentRight={true} click={() => navigation.navigate('Meditate GuideDetail')}/>
-          </View>
-        </View>
+
+
+        <Recent array={Guides.recent} onDetail={moveToDetail}/> 
+
+
         <Text style={[typo.H1, {marginTop: 20}]}>
           Explore
         </Text>

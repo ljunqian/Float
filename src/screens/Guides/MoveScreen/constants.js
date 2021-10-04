@@ -1,10 +1,11 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 
-import Med from '../../../assets/images/med-1.png'; 
-import Med1 from '../../../assets/images/med1.png';
-import Med2 from '../../../assets/images/med2.png';
-import Med3 from '../../../assets/images/med3.png';
+import Mov from '../../../assets/images/mov-1.png';
+import Move1 from '../../../assets/images/move1.png';
+import Move2 from '../../../assets/images/move2.png';
+import Move3 from '../../../assets/images/move3.png';
+import Move4 from '../../../assets/images/sleep3.png';
 
 export const Guides = [
     {
@@ -13,8 +14,8 @@ export const Guides = [
         done : false,
         source : 'link',
         description : 'Description Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-        type: 'meditateD',
-        thumbnail: Med2,
+        type: 'Move',
+        thumbnail: Move1,
     },
     {
         title : 'Activity 3',
@@ -22,8 +23,8 @@ export const Guides = [
         done : false,
         source : 'link',
         description : 'Description Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-        type: 'meditateD',
-        thumbnail: Med1,
+        type: 'moveD',
+        thumbnail: Move2,
     },
     {
         title : 'Activity 2',
@@ -31,8 +32,8 @@ export const Guides = [
         done : false,
         source : 'link',
         description : 'Description Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-        type: 'meditateD',
-        thumbnail: Med3,
+        type: 'moveD',
+        thumbnail: Move3,
     },
     {
         title : 'Activity 4',
@@ -40,8 +41,17 @@ export const Guides = [
         done : false,
         source : 'link',
         description : 'Description Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-        type: 'meditateD',
-        thumbnail: Med2,
+        type: 'moveD',
+        thumbnail: Move1,
+    },
+    {
+        title : 'Activity 5',
+        duration : 20,
+        done : false,
+        source : 'link',
+        description : 'Description Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+        type: 'moveD',
+        thumbnail: Mov,
     },
 ];
 

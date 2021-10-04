@@ -7,13 +7,6 @@ import { color } from '../../styles/theme';
 import FloatLogo from '../../assets/images/float.png';
 import DatePicker from 'react-native-datepicker';
 
-import { DataStore } from '@aws-amplify/datastore';
-import { SQLiteAdapter } from '@aws-amplify/datastore-storage-adapter';
-
-import { User } from "../../../src/models";
-DataStore.configure({
-  storageAdapter: SQLiteAdapter
-});
 
 const initialState = { name: '', description: '' }
 
