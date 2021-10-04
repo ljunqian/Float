@@ -1,61 +1,89 @@
-import React from 'react';
-import { Text, View, StyleSheet, Image, TouchableOpacity, TextInput, FlatList } from 'react-native';
+import React, { useState } from 'react';
+import { Text, View, StyleSheet, Image, TouchableOpacity, TextInput, FlatList, ScrollView } from 'react-native';
 import layout from '../../../styles/componentLayout';
 import typo from '../../../styles/typography';
 import back from '../../../assets/icons/backbutton.png';
 import forward from '../../../assets/icons/forwardarrow.png';
 import { Guides } from '../constants';
 
-const SearchComponent = ({ navigation }) => {
-    return (
-        <View style={styles.searchContainer}>
-            <TouchableOpacity onPress={()=>navigation.pop()}>
-                <Image source={back} style={{marginLeft: 10}}/>  
-            </TouchableOpacity>
-            <TextInput 
-                style={[typo.H2, styles.searchBox]}
-                placeholder="Search"
-                onChangeText={()=>{}}
-            />
-        </View>
-    )
-}
-
-const ListComponent = ({ navigation }) => {
-    let data = Guides.filter(item => 
-    item.type.includes('meditation') || 
-    item.title.includes('meditation') ||
-    item.description.includes('meditation'));
-    return (
-        <FlatList 
-            data={data}
-            renderItem={({ item })=>(
-                <View style={{alignItems: 'center'}}>
-                    <TouchableOpacity style={styles.list} onPress={()=>navigation.navigate('GuideDetail', item)}>
-                        <View style={styles.imageContainer}>
-                            <Image source={item.thumbnail} style={styles.image}/>
-                        </View>
-                        <View style={styles.textBox}>
-                            <Text style={[typo.T1, {color: 'white'}]}>{item.title}</Text>
-                            <Text style={[typo.T3, {color: 'grey'}]}>{item.type} - {item.duration} min</Text>
-                        </View>
-                        <Image source={forward} style={{marginLeft: 10, marginRight: 40}}/>
-                    </TouchableOpacity>
-                    <View style={styles.whiteline}></View>
-                </View>
-            )}
-        />
-    )
-}
-
 const Recents = ({ navigation }) => {
+    const [userInput, setUserInput] = useState('');
+
+    const searchComponent = () => {
+        return (
+            <View style={styles.searchContainer}>
+                <TouchableOpacity onPress={()=>navigation.pop()}>
+                    <Image source={back} style={{marginLeft: 10}}/>  
+                </TouchableOpacity>
+                <TextInput 
+                    style={[typo.H2, styles.searchBox]}
+                    placeholder="Search"
+                    onChangeText={text => {setUserInput(text)}}
+                    value={userInput}   //it re-renders after every word...
+                    
+                />
+            </View>
+        )
+    }
+
+    const ListComponent = () => {
+        let data = Guides.filter(item => 
+        item.type.includes(userInput) || 
+        item.title.includes(userInput) ||
+        item.description.includes(userInput));
+        return (
+            <FlatList 
+                keyboardShouldPersistTaps='always'
+                keyboardDismissMode='on-drag'
+                data={data}
+                ListHeaderComponent={ searchComponent() }  
+                extraData= {true}
+                renderItem={({ item })=>(
+                    <View style={{alignItems: 'center'}}>
+                        <TouchableOpacity style={styles.list} onPress={()=>navigation.navigate('GuideDetail', item)}>
+                            <View style={styles.imageContainer}>
+                                <Image source={item.thumbnail} style={styles.image}/>
+                            </View>
+                            <View style={styles.textBox}>
+                                <Text style={[typo.T1, {color: 'white'}]}>{item.title}</Text>
+                                <Text style={[typo.T3, {color: 'grey'}]}>{item.type} - {item.duration} min</Text>
+                            </View>
+                            <Image source={forward} style={{marginLeft: 10, marginRight: 40}}/>
+                        </TouchableOpacity>
+                        <View style={styles.whiteline}></View>
+                    </View>
+                )}
+            />
+            // <ScrollView keyboardShouldPersistTaps={'always'}>
+            //     {
+            //     data.map(item => {
+            //         return(
+            //             <View style={{alignItems: 'center'}}>
+            //                 <TouchableOpacity key={item.key} style={styles.list} onPress={()=>navigation.navigate('GuideDetail', item)}>
+            //                     <View style={styles.imageContainer}>
+            //                         <Image source={item.thumbnail} style={styles.image}/>
+            //                     </View>
+            //                     <View style={styles.textBox}>
+            //                         <Text style={[typo.T1, {color: 'white'}]}>{item.title}</Text>
+            //                         <Text style={[typo.T3, {color: 'grey'}]}>{item.type} - {item.duration} min</Text>
+            //                     </View>
+            //                     <Image source={forward} style={{marginLeft: 10, marginRight: 40}}/>
+            //                 </TouchableOpacity>
+            //                 <View style={styles.whiteline}></View>
+            //             </View>
+            //         )
+            //     })
+            //     }
+            // </ScrollView>
+        )
+    }
     return (
         <View style={styles.container}>
             <View style={{marginTop: 25, marginLeft: 23}}>
                 <Text style={[typo.H4, {color: 'white'}]}>Recents</Text>
             </View>
-            <SearchComponent navigation={navigation}/>
-            <ListComponent navigation={navigation}/>
+            {/* <SearchComponent /> */}
+            <ListComponent />
         </View>
     )
 }
@@ -70,7 +98,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'grey',
         height: 50,
         marginTop: 25,
-        marginBottom: 15,
+        marginBottom: 15,                   
         marginHorizontal: 15,
         borderRadius: 20,
         flexDirection: 'row',
