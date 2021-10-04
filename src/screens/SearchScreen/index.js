@@ -7,75 +7,6 @@ import forward from '../../assets/icons/forwardarrow.png';
 import xBtn from '../../assets/icons/xbutton.png';
 import { Guides } from '../Guides/constants';
 
-// Todo(s): 
-// 0.   Learn redux.
-// 1.   Pass user input (variable) from SearchComponent(TextInput) to ListComponent
-// 2.   Variable received to be used as array filter {.includes(variable_received)}
-// 3.   Change layout from toggle to auto switch upon user input {onChangeText()} or    
-
-const SearchComponent = ({ navigation }) => {
-    return (
-        <View style={styles.searchContainer}>
-            <TouchableOpacity onPress={()=>navigation.pop()}>
-                <Image source={back} style={{marginLeft: 10}}/>  
-            </TouchableOpacity>
-            <TextInput 
-                style={[typo.H2, styles.searchBox]}
-                placeholder="Search"
-                onChangeText={()=>{}}
-            />
-            <TouchableOpacity onPress={()=>navigation.pop()}>
-                <Image source={xBtn} style={{marginLeft: 10}}/>  
-            </TouchableOpacity>
-        </View>
-    )
-}
-
-const ListComponent = ({ navigation }) => {
-    let data = Guides.filter(item => 
-    item.type.includes('Meditation') || 
-    item.title.includes('Meditation') ||
-    item.description.includes('Meditation'));
-    return (
-        <FlatList 
-            data={data}
-            renderItem={({ item })=>(
-                <View style={{alignItems: 'center'}}>
-                    <TouchableOpacity style={styles.list} onPress={()=>navigation.navigate('GuideDetail', item)}>
-                        <View style={styles.small_guideComponent}>
-                            <Image source={item.thumbnail} style={styles.small_image}/>
-                        </View>
-                        <View style={styles.textBox}>
-                            <Text style={[typo.T1, {color: 'white'}]}>{item.title}</Text>
-                            <Text style={[typo.T3, {color: 'grey'}]}>{item.type} - {item.duration} min</Text>
-                        </View>
-                        <Image source={forward} style={{marginLeft: 10, marginRight: 40}}/>
-                    </TouchableOpacity>
-                    <View style={styles.whiteline}></View>
-                </View>
-            )}
-        />
-    )
-}
-
-const SuggestComponent = ({ navigation }) => {
-    return (
-        <ScrollView>
-            <ScrollView contentContainerStyle={{marginLeft:12}} fadingEdgeLength={10} horizontal={true}>
-                {filters.map((item, index) => {
-                    return(
-                        <TouchableOpacity style={styles.filterBox} key={index}>
-                            <Text style={[typo.T4, {color:'white'}]}>{item}</Text>
-                        </TouchableOpacity>
-                    )
-                })}
-            </ScrollView>
-            <TopSixComponent isPopular={false} navigation={navigation}/>
-            <TopSixComponent isPopular={true} navigation={navigation}/>
-        </ScrollView>
-    )
-}
-
 const TopSixComponent = ({ isPopular, navigation }) => {
     let data = [Guides[25], Guides[14], Guides[15], Guides[9], Guides[4], Guides[21]];
     let heading = "Ideas for you";
@@ -114,18 +45,35 @@ const GuideCardComponent = ({ item, navigation }) => {
     )
 }
 
-{/* For now (display purposes) ...  */}
-const ToggleView = ({ isSearching, navigation }) => {
-    if(isSearching)
-        return <SuggestComponent navigation={navigation}/>
-    return <ListComponent navigation={navigation}/>
-}
-
 const Search = ({ navigation }) => {
-    const [toggle, setToggle] = useState(true);
-    return (
-        <View style={styles.container}>
-            {/* <SearchComponent navigation={navigation}/> */}
+    const [userInput, setUserInput] = useState('');
+    const [isSearching, setIsSearching] = useState(false);
+
+    const SuggestComponent = () => {
+        return (
+            <ScrollView>
+                <ScrollView contentContainerStyle={{marginLeft:12}} fadingEdgeLength={10} horizontal={true}>
+                {filters.map((item, index) => {
+                    return(
+                        <TouchableOpacity style={styles.filterBox} key={index} 
+                            onPress={() => {
+                                setUserInput(item)
+                                if(isSearching == false)
+                                    setIsSearching(true)}}>
+                            <Text style={[typo.T4, {color:'white'}]}>{item}</Text>
+                        </TouchableOpacity>
+                    )
+                })}
+                </ScrollView>
+
+                <TopSixComponent isPopular={false} navigation={navigation}/>
+                <TopSixComponent isPopular={true} navigation={navigation}/>
+            </ScrollView>
+        )
+    }
+
+    const searchComponent = () => {
+        return (
             <View style={styles.searchContainer}>
                 <TouchableOpacity onPress={()=>navigation.pop()}>
                     <Image source={back} style={{marginLeft: 10}}/>  
@@ -133,35 +81,74 @@ const Search = ({ navigation }) => {
                 <TextInput 
                     style={[typo.H2, styles.searchBox]}
                     placeholder="Search"
-                    onChangeText={()=>{}}
+                    onChangeText={text => {
+                        if(text == '')
+                            setIsSearching(false)
+                        else{
+                            setIsSearching(true)
+                            setUserInput(text.toLowerCase())
+                        }}
+                    }
+                    value={isSearching?userInput:""}
                 />
-
-                {/* For now (display purposes) ...  */}
-                <TouchableOpacity onPress={()=>{
-                    if(toggle==false)
-                        setToggle(true);
-                    else
-                        setToggle(false);
-                    }}>
-                    {/*set xBtn to toggle the view*/}
-                    <Image source={xBtn} style={{marginLeft: 10}}/>  
-                </TouchableOpacity>
+                {isSearching && 
+                    <TouchableOpacity onPress={()=>setIsSearching(false)}>                           
+                        <Image source={xBtn} style={{marginLeft: 10}}/>  
+                    </TouchableOpacity>   
+                } 
             </View>
-            
-            <ToggleView isSearching={toggle} navigation={navigation}/>
-            {/* <SuggestComponent navigation={navigation}/>
-            <ListComponent navigation={navigation}/> */}
+        ) 
+    }
+
+    const ListComponent = () => {
+        let data = Guides.filter(item => 
+        item.type.toLowerCase().includes(userInput) || 
+        item.title.toLowerCase().includes(userInput) || 
+        item.description.toLowerCase().includes(userInput)); 
+        return (
+            <FlatList 
+                data={data}
+                renderItem={({ item })=>(
+                    <View style={{alignItems: 'center'}}>
+                        <TouchableOpacity style={styles.list} onPress={()=>navigation.navigate('GuideDetail', item)}>
+                            <View style={styles.small_guideComponent}>
+                                <Image source={item.thumbnail} style={styles.small_image}/>
+                            </View>
+                            <View style={styles.textBox}>
+                                <Text style={[typo.T1, {color: 'white'}]}>{item.title}</Text>
+                                <Text style={[typo.T3, {color: 'grey'}]}>{item.type} - {item.duration} min</Text>
+                            </View>
+                            <Image source={forward} style={{marginLeft: 10, marginRight: 40}}/>
+                        </TouchableOpacity>
+                        <View style={styles.whiteline}></View>
+                    </View>
+                )}
+            />
+        )
+    }
+
+    const ToggleView = () => {
+        if(isSearching)
+            return <ListComponent />
+        
+        return <SuggestComponent />
+    }
+
+    return (
+        <View style={styles.container}>
+            {searchComponent()}
+            <ToggleView />
         </View>
     )
 }
 
 const filters = [
-    "focus",
+    "focus",     
     "meditation",
     "sleep",
     "morning",
     "afternoon",
-    "night"
+    "Mobility",
 ]
 
 const styles = StyleSheet.create({
@@ -182,7 +169,8 @@ const styles = StyleSheet.create({
     },
     searchBox: {
         width: 280,
-        marginHorizontal: 10
+        marginHorizontal: 10,
+        color: 'white',
     },
     list: {
         flexDirection: 'row',
