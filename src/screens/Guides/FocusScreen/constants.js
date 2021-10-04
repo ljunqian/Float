@@ -13,7 +13,7 @@ export const Guides = [
         done : false,
         source : 'link',
         description : 'Description Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-        type: 'Focus',
+        type: 'focusD',
         thumbnail: Focus4,
     },
     {
@@ -22,7 +22,7 @@ export const Guides = [
         done : false,
         source : 'link',
         description : 'Description Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-        type: 'Focus',
+        type: 'focusD',
         thumbnail: Focus2,
     },
     {
@@ -31,7 +31,7 @@ export const Guides = [
         done : false,
         source : 'link',
         description : 'Description Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-        type: 'Focus',
+        type: 'focusD',
         thumbnail: Focus3,
     },
     {
@@ -40,7 +40,7 @@ export const Guides = [
         done : false,
         source : 'link',
         description : 'Description Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-        type: 'Focus',
+        type: 'focusD',
         thumbnail: Focus4,
     },
     {
@@ -49,7 +49,7 @@ export const Guides = [
         done : false,
         source : 'link',
         description : 'Description Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-        type: 'Focus',
+        type: 'focusD',
         thumbnail: Focus1,
     },
 ];
