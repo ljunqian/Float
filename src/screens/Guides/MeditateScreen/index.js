@@ -6,36 +6,102 @@ import layout from '../../../styles/componentLayout';
 import * as Progress from 'react-native-progress';
 import MedBG from '../../../assets/images/meditate-planet.png';
 import MedAvatar from '../../../assets/images/meditate-avatar.png';
-import Med from '../../../assets/images/med-1.png';
-import Med1 from '../../../assets/images/med1.png';
+import Med from '../../../assets/images/med-1.png'; 
+import Mov from '../../../assets/images/mov-1.png';
 import Med2 from '../../../assets/images/med2.png';
-import Med3 from '../../../assets/images/med3.png';
-import Sleep3 from '../../../assets/images/sleep3.png';
-import { overflow } from 'styled-system';
+import play from '../../../assets/icons/play.png';
+import { Guides } from './constants';
 
-
-const GuideCardComponent = (props) => {
+const GuideCardComponent = (props)  => {
   return (
-    <View style={[layout.guideCard, props.style, {overflow: 'hidden'}]}>
-      <Image source={props.img} style={{position: 'absolute', zIndex: 0, left: -5, width:props.width, height:props.height }}/>
-      <Text style={typo.T3}>
-        Activity
+    <TouchableOpacity style={[layout.guideCard, props.style, {overflow: 'hidden'}]} onPress={props.click}>
+      <Image source={props.img} style={{position: 'absolute', zIndex: 0, top: -6, left: -5, width:props.width, height:props.height }}/>
+      <Text style={[typo.T3, {marginBottom: 5}]}>
+        {props.title}
       </Text>
-      <MinuteView />
-    </View> 
+      <MinuteView duration={props.dur}/>
+    </TouchableOpacity>
   )
 }
 
-const MinuteView = () => {
-  return (<View style={[layout.minute]}>
-        <Text style={typo.T3}>
-          2 mins
-        </Text>
-      </View>
+// navigation params
+
+const MinuteView = (props) => {
+  let duration = props.duration;
+  let isTwoDigit = false;
+  if (duration > 9)
+    isTwoDigit = true;
+  return (
+    <View style={[layout.minute, {width: isTwoDigit? 61 : 51}]}>
+      <Text style={typo.T3}>
+        {duration} mins
+      </Text>
+    </View>
   )
 }
+
+const DLoadComponents = (props) => {
+  return(
+    <View>
+      {Guides.map(({ title, thumbnail, duration }, index) => {
+        let isActOne, isActTwo, isActThree, isActFour;
+
+        if(index < 2 && props.isRecentLeft){
+        return(
+          <GuideCardComponent key={title} style={{height: 130}} title={title} dur={duration} img={thumbnail} height={140} width={200} click={props.click}/>
+        )
+        }else if(index == 2 && props.isRecentRight){
+          return(
+            <GuideCardComponent key={title} style={{height: 272}} title={title} dur={duration} img={thumbnail} height={278} width={250} click={props.click}/>
+          )
+        }else if(props.isExploreLeft){
+          
+          if(index == 0)
+            isActOne = true;
+          else if(index == 2)
+            isActTwo = true;
+
+          return(
+            <View key={title}>
+              {isActOne && <GuideCardComponent style={{height: 130}} title={title} dur={duration} img={thumbnail} height={140} width={200} click={props.click}/>}
+              {isActTwo && <GuideCardComponent style={{height: 272}} title={title} dur={duration} img={thumbnail} height={285} width={200} click={props.click}/>}
+            </View>
+          )
+        }else if(props.isExploreRight){
+          
+          if(index == 1)
+            isActThree = true;
+          else if(index == 3)
+            isActFour = true;
+
+          return(
+            <View key={title} >
+              {isActThree && <GuideCardComponent style={{height: 194}} title={title} dur={duration} img={thumbnail} height={210} width={200} click={props.click}/>}
+              {isActFour && <GuideCardComponent style={{height: 130}} title={title} dur={duration} img={thumbnail} height={150} width={200} click={props.click}/>}
+            </View>
+          ) 
+        }
+        
+        })}
+    </View>
+  )
+}
+
+const Recent = ({array, onDetail}) => {
+  const one = array[0];
+  return (
+  <>
+      <GuideCardComponent key={title} style={{height: 130}} title={one.title} dur={duration} img={thumbnail} height={140} width={200} click={onDetail}/>
+      <GuideCardComponent key={title} style={{height: 272}} title={title} dur={duration} img={thumbnail} height={278} width={250} click={props.click}/>
+  </>
+)}
+
 
 const MeditateScreen = ({navigation}) => {
+
+  const moveToDetail = (content) => {
+    navigation.navigate('Meditate GuideDetail', {guide: content})
+  }
   return (
     <ScrollView style={{backgroundColor: '#272727'}}> 
       <ImageBackground source={MedBG}  resizeMode="cover" style={{width: '100%'}} >
@@ -53,7 +119,7 @@ const MeditateScreen = ({navigation}) => {
             progress={0.4}
             width={100}
             height={8}
-            color={'#074EE8'}
+            color={'#F57212'}
             unfilledColor={'white'}
             borderWidth={0}
           />
@@ -63,55 +129,48 @@ const MeditateScreen = ({navigation}) => {
             <Text style={typo.H1}>
               Meditation Session
             </Text>
-            <TouchableOpacity style={[layout.big_button, {backgroundColor: color.Med3, marginBottom: 30, zIndex:2}]}>
+            <TouchableOpacity style={[layout.big_button, {backgroundColor: color.Med3, marginBottom: 30, zIndex:2, flexDirection: 'row'}]}>
+                <Image source={play} style={{marginRight: 5}} />
                 <Text style={[typo.T4, {color: 'white', fontWeight: '400'}]}>
                   Play
                 </Text>
             </TouchableOpacity>
           </View>
       </View>
-      <View style={[layout.container,]}>
+      <TouchableOpacity style={[layout.container,]} onPress={() => navigation.navigate('Meditate GuideDetail', {guide: Guides[0]})}>
         <ImageBackground source={Med} style={{width:'100%'}}>
         <View style={{height: 155, display: 'flex', 
-          flexDirection: 'row',padding: 12,
+          flexDirection: 'row', padding: 12,
           borderRadius: 20,
           margin: 6, }}>
-          <View style={{flex: 1}}>
-            <Text style={[typo.T1, ]}>
+          <View style={{flex: 1}}></View>
+          <View style={{flex: 3, alignItems: 'center', justifyContent: 'center'}}>
+            <Text style={[typo.H4, {color: 'white'}]}>
               Featured
             </Text> 
           </View>
           <View style={{flex: 1, alignItems: 'flex-end'}}>
-            <MinuteView />
+            <MinuteView duration={2}/>
           </View>
         </View>
         </ImageBackground>
         
-      </View>
+      </TouchableOpacity>
       <View style={layout.container}>
-        <Text style={typo.H1}>
-          Recent
-        </Text>
-        <View style={{display: 'flex', flexDirection:'row'}}>
-          <View style={{flex:1, display: 'flex',flexDirection: 'column'}}>
-            <GuideCardComponent style={{height: 130}} img={Sleep3} height={130} width={200}/>
-            <GuideCardComponent style={{height: 200}} img={Med2} height={220} width={200}/>
-          </View>
-          <View style={{flex:1}}>
-            <GuideCardComponent style={{height: 272}} img={Med3} height={272} width={250}/>
-          </View>
-        </View>
+
+
+        <Recent array={Guides.recent} onDetail={moveToDetail}/> 
+
+
         <Text style={[typo.H1, {marginTop: 20}]}>
           Explore
         </Text>
         <View style={{display: 'flex', flexDirection: 'row'}}>
           <View style={{flex: 1, display: 'flex'}}>
-            <GuideCardComponent style={{height: 130}} img={Med} height={140} width={200}/>
-            <GuideCardComponent style={{height: 272}} img={Med2} height={320} width={200}/>
+            <DLoadComponents isExploreLeft={true} click={() => navigation.navigate('Meditate GuideDetail')}/>
           </View>
           <View style={{flex: 1, display: 'flex'}}>
-            <GuideCardComponent style={{height: 194}} img={Med3} height={200} width={200}/>
-            <GuideCardComponent style={{height: 130}} img={Med} height={150} width={200}/>
+            <DLoadComponents isExploreRight={true} click={() => navigation.navigate('Meditate GuideDetail')}/>
           </View>
         </View>
         <View style={{display: 'flex', flexDirection: 'row'}}>

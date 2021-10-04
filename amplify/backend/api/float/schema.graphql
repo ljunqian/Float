@@ -1,7 +1,5 @@
 type User @model @auth(rules: [{allow: private}]) {
   id: ID!
-  name: String!
-  email: String!
   coins: Int!
   meditateD: Int!
   sleepD: Int!
@@ -9,3 +7,4 @@ type User @model @auth(rules: [{allow: private}]) {
   focusD: Int!
   friends: [String!]
 }
+ 

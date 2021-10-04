@@ -6,8 +6,6 @@ import { ModelInit, MutableModel, PersistentModelConstructor } from "@aws-amplif
 
 export declare class User {
   readonly id: string;
-  readonly name: string;
-  readonly email: string;
   readonly coins: number;
   readonly meditateD: number;
   readonly sleepD: number;
