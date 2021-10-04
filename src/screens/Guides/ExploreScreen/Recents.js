@@ -15,8 +15,8 @@ const SearchComponent = ({userInput, setUserInput, navigation}) => {
             <TextInput 
                 style={[typo.H2, styles.searchBox]}
                 placeholder="Search"
-                onChangeText={text => {setUserInput(text)}}
-                value={userInput}   //it re-renders after every word...
+                onChangeText={text => {setUserInput(text.toLowerCase())}}
+                value={userInput}   
             />
         </View>
     )
@@ -24,22 +24,16 @@ const SearchComponent = ({userInput, setUserInput, navigation}) => {
 
 const Recents = ({ navigation }) => {
     const [userInput, setUserInput] = useState('');
-    const [guidesList, setGuidesList] = useState(Guides);
-    
 
     const ListComponent = () => {
+        let data = Guides.filter(item => 
+        item.type.toLowerCase().includes(userInput) || 
+        item.title.toLowerCase().includes(userInput) || 
+        item.description.toLowerCase().includes(userInput)); 
         return (
             <FlatList 
-                keyboardShouldPersistTaps='always'
-                keyboardDismissMode='on-drag'
-                data={guidesList}
-                extraData= {true}
-                renderItem={({ item })=>{
-                
-                if (item.type.includes(userInput) || 
-                    item.title.includes(userInput) ||
-                    item.description.includes(userInput)) {
-                    return(
+                data={data}
+                renderItem={({ item })=>(
                     <View style={{alignItems: 'center'}}>
                         <TouchableOpacity style={styles.list} onPress={()=>navigation.navigate('GuideDetail', item)}>
                             <View style={styles.imageContainer}>
@@ -53,31 +47,11 @@ const Recents = ({ navigation }) => {
                         </TouchableOpacity>
                         <View style={styles.whiteline}></View>
                     </View>
-                )}}}
+                )}
             />
-            // <ScrollView keyboardShouldPersistTaps={'always'}>
-            //     {
-            //     data.map(item => {
-            //         return(
-            //             <View style={{alignItems: 'center'}}>
-            //                 <TouchableOpacity key={item.key} style={styles.list} onPress={()=>navigation.navigate('GuideDetail', item)}>
-            //                     <View style={styles.imageContainer}>
-            //                         <Image source={item.thumbnail} style={styles.image}/>
-            //                     </View>
-            //                     <View style={styles.textBox}>
-            //                         <Text style={[typo.T1, {color: 'white'}]}>{item.title}</Text>
-            //                         <Text style={[typo.T3, {color: 'grey'}]}>{item.type} - {item.duration} min</Text>
-            //                     </View>
-            //                     <Image source={forward} style={{marginLeft: 10, marginRight: 40}}/>
-            //                 </TouchableOpacity>
-            //                 <View style={styles.whiteline}></View>
-            //             </View>
-            //         )
-            //     })
-            //     }
-            // </ScrollView>
         )
     }
+
     return (
         <View style={styles.container}>
             <View style={{marginTop: 25, marginLeft: 23}}>
@@ -107,7 +81,8 @@ const styles = StyleSheet.create({
     },
     searchBox: {
         width: 300,
-        marginHorizontal: 10
+        marginHorizontal: 10,
+        color: 'white',
     },
     list: {
         flexDirection: 'row',

@@ -57,7 +57,7 @@ const Search = ({ navigation }) => {
                     return(
                         <TouchableOpacity style={styles.filterBox} key={index} 
                             onPress={() => {
-                                setUserInput(item)
+                                setUserInput(item.toLowerCase())
                                 if(isSearching == false)
                                     setIsSearching(true)}}>
                             <Text style={[typo.T4, {color:'white'}]}>{item}</Text>
