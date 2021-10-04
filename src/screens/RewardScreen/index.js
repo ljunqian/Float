@@ -30,6 +30,7 @@ import {
 } from './assetConstants';
 
 const RewardScreen = ({ navigation }) => {
+  
   const [tab, setIsTab] = useState("Background");
   const [selected, setSelected] = useState(null);
 
@@ -38,9 +39,13 @@ const RewardScreen = ({ navigation }) => {
 
   const [modalVisible, setModalVisible] = useState(false); 
   const [modalContent, setModalContent] = useState();
+  const [modalEnoughCoins, setModalEnoughCoins] = useState();
 
   const [backgroundState, setBackgroundState] = useState(BackgroundImages);
   const [hatState, setHatState] = useState(HatImages);
+  const [accessoryState, setAccessoryState] = useState(AccessoryImages);
+  const [voucherArrayState, setVoucherArrayState] = useState(VoucherImages);
+
   /*
     {
       background: '',
@@ -52,7 +57,7 @@ const RewardScreen = ({ navigation }) => {
     return (
       <Fragment>
         <View style = {style.rewardRowContainer}>
-          {/*Populate Background Reward Cards*/}
+          {/*Populate Asset Reward Cards*/}
           {assetArray.map((asset)=>{
               return(
                 <RewardCard 
@@ -65,7 +70,7 @@ const RewardScreen = ({ navigation }) => {
                   updateAssetState ={(purchased,equipped)=>updateAssetState(type,asset.name,purchased,equipped,assetArray)} 
                   updateUser={(name)=>updateAvatar(type,name)}
                   value={selected}
-                  showModal={()=>showModal(asset)}
+                  showModal={(enough)=>showModal(asset, enough)}
                 />
               )
             })
@@ -75,13 +80,21 @@ const RewardScreen = ({ navigation }) => {
     )
   }
 
-  const showModal = (asset) => {
+  const showModal = (asset, enough) => {
     setModalContent(asset);
     setModalVisible(true);
+    setModalEnoughCoins(enough);
   }
 
 
-  const RewardPopup = () => {
+  const RewardPopup = ({enoughCoins, navigation}) => {
+    let text = "";
+    if(enoughCoins){
+      text = "You have successfully redeemed"
+    }else{
+      text = "Insufficient coins to redeem"
+    }
+
     return (
           <View style={style.centeredView}>
             <Modal
@@ -95,16 +108,38 @@ const RewardScreen = ({ navigation }) => {
             >
               <View style={style.centeredView}>
                 <View style={style.modalView}>
-                  <Text style={style.modalText}>You have successfully redeemed</Text>
+                  <Text style={style.modalText}>{text}</Text>
                   <Image source={modalContent.source} style={{marginTop:70, position: 'absolute', zIndex: -1, alignSelf: 'center', width: 164, height: 140}}/>
                   <Text style={{marginTop:210, fontWeight: "bold",position: 'absolute',alignSelf: 'center'}}>{modalContent.name}</Text>
-                  <Text style={style.text}>“The strongest people are those who win battles we know nothing about.”</Text>
-                  <Pressable
-                    style={[style.button, style.buttonClose]}
-                    onPress={() => setModalVisible(!modalVisible)}
-                  >
-                    <Text style={style.btntext}>Continue</Text>
-                  </Pressable>
+                  {enoughCoins ? (
+                    <View>
+                      <Text style={style.text}>“The strongest people are those who win battles we know nothing about.”</Text>
+                      <Pressable
+                      style={[style.button, style.buttonClose, {width: 200}]}
+                      onPress={() => setModalVisible(!modalVisible)}
+                      >
+                      <Text style={style.btntext}>Continue</Text>
+                    </Pressable>
+                  </View>
+                  ):(
+                    <View>
+                    <Text style={style.text}>Earn more coins by doing more activities</Text>
+                    <HStack>
+                        <Pressable
+                          style={[style.button, style.buttonClose, {marginRight: 6, width: 125}]}
+                          onPress={() => { navigation.navigate('Meditate'); }}
+                          >
+                          <Text style={style.btntext}>Earn Coins</Text>
+                        </Pressable>
+                        <Pressable
+                          style={[style.button, style.buttonClose, {marginLeft: 6, width: 125}]}
+                          onPress={() => setModalVisible(!modalVisible)}
+                          >
+                          <Text style={style.btntext}>Cancel </Text>
+                        </Pressable>
+                      </HStack>
+                    </View>
+                  )}
                 </View>
               </View>
             </Modal>
@@ -125,6 +160,19 @@ const RewardScreen = ({ navigation }) => {
               )}
       </View>
     )
+  }
+
+  const updateVoucherArrayState = (name, redeemed, voucherArrayState) => {
+    const newVoucherArray = voucherArrayState.map((voucher)=>{
+      if(voucher.name === name){
+        return{
+          ...voucher,
+          redeemed: redeemed
+        }
+      }
+        return voucher;
+    });
+    setVoucherArrayState(newVoucherArray);
   }
 
   const updateAssetState = (type, name, purchased, equipped, assetArray) => {
@@ -151,6 +199,8 @@ const RewardScreen = ({ navigation }) => {
     } else 
     if (type === "hat") {
       setHatState(newAssets);
+    }else{
+      setAccessoryState(newAssets);
     }
   }
 
@@ -174,9 +224,38 @@ const RewardScreen = ({ navigation }) => {
 
   const AvatarHat = ({hatName}) => {
     const hat = HatImages.find(hat => hat.name === hatName);
+    let top = 0, left = 0;
+
     if (hat) {
       return (
-        <Image source={hat.source} style={{top:15, left:110, position: 'absolute', zIndex: 2, width: 164, height: 140}}/>
+        <Image source={hat.source} style={{transform: [{ rotate: '7 deg' }], top:18, left:110, position: 'absolute', zIndex: 2, width: 164, height: 140}}/>
+      )
+    }
+    return <View />
+  }
+
+  const AvatarAccessory = ({accName}) => {
+    const acc = AccessoryImages.find(acc => acc.name === accName);
+    let top = 0, left = 0;
+
+    if (acc) {
+      if(accName === 'Eyepatch'){
+        top = 33
+        left = 142
+      }else if(accName === 'Band Aid'){
+        top = 25
+        left = 156
+      }else {
+        if (accName === 'Mustache'){
+          top = 43
+        }else{
+          top = 50
+        }
+        left = 159
+      }
+
+      return (
+        <Image source={acc.source} style={{top: top, left: left, position: 'absolute', zIndex: 3, width: 164, height: 140}}/>
       )
     }
     return <View />
@@ -193,8 +272,9 @@ const RewardScreen = ({ navigation }) => {
           }
           <AvatarBackground backgroundName={userState.background}/>
           <AvatarHat hatName={userState.hat}/>
+          <AvatarAccessory accName={userState.accessory}/>
         </View>
-        { modalVisible && <RewardPopup />}
+        { modalVisible && <RewardPopup enoughCoins = {modalEnoughCoins} navigation={navigation}/>}
         <ProfileScreen style={{position: 'absolute', zIndex: 1}}/>
       
         <HStack style={style.tabBar}>
@@ -213,26 +293,16 @@ const RewardScreen = ({ navigation }) => {
             <AssetChoices assetArray={hatState} type={"hat"}/>
             
           ) : tab === "Accessories" ? (
+            <AssetChoices assetArray= {accessoryState} type={"accessory"}/>
 
-            <Fragment>
-              {//* TODO: Use AssetChoices
-              }
-                <View style = {style.rewardRowContainer}>
-                  {AccessoryImages.map((accInfo)=>{
-                      return(
-                        <RewardCard key = {accInfo.id} img={accInfo.source} asset={accInfo.name} coinsValue={accInfo.value} purchased={accInfo.purchased} equipped={accInfo.equipped}/>
-                      )
-                    })
-                  }
-              </View>
-            </Fragment>
           ) : tab === "Vouchers" ? (
             <Fragment>
               <View style={{flex:1, display: 'flex'}}>
-                  {VoucherImages.map((voucherInfo)=>{
+                  {voucherArrayState.map((voucherInfo)=>{
                       return(
                         <VoucherCard key = {voucherInfo.id} img={voucherInfo.source} asset={voucherInfo.name} coinsValue={voucherInfo.value}
-                        redeemed={voucherInfo.redeemed}/>
+                        redeemed={voucherInfo.redeemed} showModal={(enough)=>showModal(voucherInfo, enough)}
+                        updateVoucherState ={(redeemed)=>updateVoucherArrayState(voucherInfo.name,redeemed,voucherArrayState)} />
                       )
                     })
                   }
@@ -264,7 +334,7 @@ const RewardCard = (props) => {
         //buy asset
         setIsPurchaseStatus(true);
         setIsEquippedStatus(true);
-        props.showModal();
+        props.showModal(true);
         props.updateUser(props.asset);
         props.updateAssetState(true, true);
       }else 
@@ -327,6 +397,8 @@ const VoucherCard = (props) => {
     // if my coins >= reward value
     if(redeemStatus === false){
       setIsRedeemStatus(true);
+      props.showModal(true);
+      props.updateVoucherState(true);
     }
   }
 
@@ -361,12 +433,12 @@ const CoinsValue = (props) => {
   )
 }
 
-export default () => {
+export default ({navigation}) => {
   return (
     <Store>
       <NativeBaseProvider>
         <Center flex={1}>
-          <RewardScreen/>
+          <RewardScreen navigation={navigation}/>
         </Center>
       </NativeBaseProvider>
     </Store>
