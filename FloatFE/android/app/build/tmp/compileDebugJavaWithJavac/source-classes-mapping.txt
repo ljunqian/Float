@@ -1,0 +1,14 @@
+com/floatfe/MainApplication.java
+ com.floatfe.MainApplication
+ com.floatfe.MainApplication$1
+com/floatfe/MainActivity.java
+ com.floatfe.MainActivity
+com/floatfe/BuildConfig.java
+ com.floatfe.BuildConfig
+com/facebook/react/PackageList.java
+ com.facebook.react.PackageList
+com/floatfe/ReactNativeFlipper.java
+ com.floatfe.ReactNativeFlipper
+ com.floatfe.ReactNativeFlipper$1
+ com.floatfe.ReactNativeFlipper$2
+ com.floatfe.ReactNativeFlipper$2$1

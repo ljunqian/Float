@@ -19,7 +19,6 @@ import ExploreScreen from './src/screens/Guides/ExploreScreen'
 import ProfileScreen from './src/screens/ProfileScreen/';
 import RewardScreen from './src/screens/RewardScreen/';
 import AccountSettings from './src/screens/ProfileScreen/AccountSettings.js';
-import Changeaccountinfo from './src/screens/ProfileScreen/Changeaccountinfo';
 import LoginScreen from './src/screens/Authenticate/LoginScreen';
 import SignUpScreen from './src/screens/Authenticate/SignUpScreen';
 import MeditateScreen from './src/screens/Guides/MeditateScreen';
@@ -281,49 +280,39 @@ const App = () => {
               })}
             />
 
-            <Stack.Screen name="Change Account Information" component={Changeaccountinfo}
+          <Stack.Screen name="GuideDetail" component={GuideDetail} 
+            options={()=>({
+              headerShadowVisible: false,
+              headerTitleStyle: {color:'white'},
+              headerTintColor: 'white',
+              headerTitle: '',
+              headerTransparent: true,
+              headerStyle: {
+                backgroundColor: 'transparent'
+              }
+            })}
+          />
+         
+          <Stack.Screen name="GuideActivity" component={GuideActivity} 
+            options={()=>({
+              headerShown: false
+            })}
+          />
+          <Stack.Screen name="GuideComplete" component={GuideComplete} 
+            options={()=>({
+              headerShown: false
+            })}
+          />
+            <Stack.Screen name="Change Account Information" component={editProfile}
               options={() => ({
                 headerTitleStyle: { color: 'white' },
                 headerTintColor: 'white'
               })}
             />
-
-            <Stack.Screen name="Edit Profile" component={editProfile}
+             <Stack.Screen name="Change password" component={changePass}
               options={() => ({
                 headerTitleStyle: { color: 'white' },
                 headerTintColor: 'white'
-              })}
-            />
-            <Stack.Screen name="Change Password" component={changePass}
-              options={() => ({
-                headerTitleStyle: { color: 'white' },
-                headerTintColor: 'white'
-              })}
-            />
-
-            <Stack.Screen name="Meditate GuideDetail" component={GuideDetail}
-              options={() => ({
-                headerShadowVisible: false,
-                headerTitleStyle: { color: 'white' },
-                headerTintColor: 'white',
-                headerTitle: '',
-                headerTransparent: true,
-                headerStyle: {
-                  backgroundColor: 'transparent'
-                }
-              })}
-            />
-
-            <Stack.Screen name="Meditate GuideActivity" component={GuideActivity}
-              options={() => ({
-                headerShadowVisible: false,
-                headerTitleStyle: { color: 'white' },
-                headerTintColor: 'white',
-                headerTitle: '',
-                headerTransparent: true,
-                headerStyle: {
-                  backgroundColor: 'transparent'
-                }
               })}
             />
 
@@ -332,6 +321,8 @@ const App = () => {
     </NavigationContainer>
   )
 }
+
+
 const Container = () => {
   return (
     <Store>
