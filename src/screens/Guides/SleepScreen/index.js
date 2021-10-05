@@ -51,7 +51,7 @@ const Recent = ({ array, navigation }) => {
       <View style={{display: 'flex', flexDirection:'row'}}>
         <View style={{flex:1, display: 'flex',flexDirection: 'column'}}>        
           <GuideCardComponent style={{height: 130}} title={one.title} dur={one.duration} img={one.thumbnail} height={140} width={200} click={() => navigation.navigate('GuideDetail', one)}/>
-          <GuideCardComponent style={{height: 130}} title={two.title} dur={two.duration} img={two.thumbnail} height={140} width={200} click={() => navigation.navigate('GuideDetail', two)}/>        
+          <GuideCardComponent style={{height: 195}} title={two.title} dur={two.duration} img={two.thumbnail} height={210} width={200} click={() => navigation.navigate('GuideDetail', two)}/>          
         </View>
         <View style={{flex:1}}>
           <GuideCardComponent style={{height: 272}} title={three.title} dur={three.duration} img={three.thumbnail} height={278} width={250} click={() => navigation.navigate('GuideDetail', three)}/>          

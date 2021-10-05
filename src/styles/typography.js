@@ -36,7 +36,7 @@ const typo = StyleSheet.create({
         fontSize: 12,
     },
     T4: {
-        fontFamily: 'Montserrate-Bold',
+        fontFamily: 'Montserrat-Bold',
         fontSize: 16,
     }
 })

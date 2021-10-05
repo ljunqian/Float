@@ -47,7 +47,17 @@ const layout = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 12
-  },/*
+  },
+  bigger_button: {
+    borderRadius: 48,
+    width: 180,
+    height: 48,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 12
+  },
+  
+  /*
   card: {
     borderWidth: 0.5,
     borderColor: 'rgba(0, 0, 0, 0.5)',
