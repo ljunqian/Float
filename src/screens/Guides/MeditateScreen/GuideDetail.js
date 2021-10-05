@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image, ImageBackground } from 'react-native';
 import typo from '../../../styles/typography';
 import { Guides } from './constants';
@@ -10,48 +10,57 @@ import Med from '../../../assets/images/med-1.png';
 
 
 const GuideDetail = ({ navigation, props, route }) => {
+    {
+        /*TODO:
+        1. Import heart (white) icon and replace loveyellow icon
+        2. Import clock icon and replace play icon
+        */
+    }
 
-    const detail = route.params;       // get object passed from previous activity 
+    const source = route.params.text;
 
     return (
         <View style={{display: 'flex'}}> 
             {/*IMAGE DIV*/}
             <View style={styles.imgContainer}>
-                <Image source={detail.thumbnail} style={{position: 'absolute', zIndex: 0, top: -7, left: -8, width:427, height:260 }} />
+                <Image source={Med} style={{position: 'absolute', zIndex: 0, left: 0, width:412, height:252 }} />
             </View>
 
             {/*CONTENT DIV*/}
             <View style={styles.cntContainer}>
-                {/* Title */}
-                <View style={{flexDirection: 'row', display: 'flex', justifyContent:'space-between'}}>
-                    <Text style={[typo.H4, {color: 'white', flex: 10}]}>
-                        {/* Title of the activity */}
-                        { detail.title }
+                {/*Todo: #2*/}
+                <View style={{flexDirection: 'row'}}>
+                    <Text style={[typo.H4, {color: 'white'}]}>
+                        Title of the activity
                     </Text>
-                    <View style={{flex: 1}}>
-                        <Image source={heart} style={{ top: 10, left:0, zIndex: 0,}} />
+                    <View style={{alignItems: 'center', justifyContent: 'center'}}>
+                        <Image source={heart} style={{ top: 10, left: 40, zIndex: 0, position: 'absolute'}} />
                     </View>
                 </View>
-                {/* Type/Duration */}
                 <View style={{ marginBottom: 20, flexDirection: 'row'}}>
                     <Text style={[typo.T3, {color: 'white', marginTop: 3}]}>
-                        { detail.type }
+                        Meditation
                     </Text>
-                    <Image source={clock} style={{ top: 3, marginLeft: 10}} />
-                    <Text style={[typo.T3, {color: 'white', marginLeft: 10, marginTop: 3}]}>
-                        { detail.duration } min
-                    </Text>
+                    <Image source={clock} style={{ top: 3, left: 80, zIndex: 0, position: 'absolute'}} />
+                    <Text style={[typo.T3, {color: 'white', marginLeft: 35, marginTop: 3}]}>1 min</Text>
                 </View>
-                {/* Description */}
                 <Text style={[typo.T3, {color: 'white'}]}>                   
-                    { detail.description }
+                    { source
+                    /* {Guides[0].description */
+                    /*Guides.map(({description})=>
+                        {
+                            console.log(description);
+                            return (Guides[0].description)
+                        }
+                    )*/
+                    }
                 </Text>
             </View>
 
             {/*BUTTON DIV*/}
             <TouchableOpacity style={styles.btnContainer}>
-                {/* Begin */}
-                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('GuideActivity', detail)}>
+                {/*Todo: #1*/}
+                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Meditate GuideActivity')}>
                     <Text style={[typo.H3, {color: 'white'}]}>Begin</Text> 
                 </TouchableOpacity>    
             </TouchableOpacity>

@@ -13,26 +13,29 @@ export const Guides = [
         done : false,
         source : 'link',
         description : 'Description Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-        type: 'meditateD',
+        type: 'meditate',
         thumbnail: Med2,
+        //key: 1
     },
     {
         title : 'Activity 3',
-        duration : 10,
+        duration : 20,
         done : false,
         source : 'link',
         description : 'Description Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-        type: 'meditateD',
+        type: 'meditate',
         thumbnail: Med1,
+        //key: 3
     },
     {
         title : 'Activity 2',
-        duration : 5,
+        duration : 2,
         done : false,
         source : 'link',
         description : 'Description Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-        type: 'meditateD',
+        type: 'meditate',
         thumbnail: Med3,
+        //key: 2
     },
     {
         title : 'Activity 4',
@@ -40,8 +43,9 @@ export const Guides = [
         done : false,
         source : 'link',
         description : 'Description Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-        type: 'meditateD',
+        type: 'meditate',
         thumbnail: Med2,
+        //key: 4
     },
 ];
 

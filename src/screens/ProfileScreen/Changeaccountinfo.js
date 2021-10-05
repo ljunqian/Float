@@ -15,6 +15,7 @@ DataStore.configure({
 
 const AccountSettings = ({ navigation }) => {
     const [info, setInfo] = useState({
+        name: '',
         email: '',
         phone: '',
         gender: '',
@@ -24,12 +25,14 @@ const AccountSettings = ({ navigation }) => {
 
     const getUserInfo = async () => {
         try {
-            const user = await Auth.currentAuthenticatedUser();
+            const { attributes } = await Auth.currentAuthenticatedUser();
+            console.log(attributes);
             setInfo({
-                email: user.attributes.email,
-                phone: user.attributes["custom:phone"],
-                gender: user.attributes["custom:gender"],
-                date: user.attributes["custom:birthday"]
+                name: attributes.name,
+                email: attributes.email,
+                phone: attributes.email,
+                gender: attributes.email,
+                date: attributes.email
             });
         } catch (error) {
             console.log("Error saving post", error);
@@ -39,51 +42,21 @@ const AccountSettings = ({ navigation }) => {
     async function handleupdate() {
         try {
             let user = await Auth.currentAuthenticatedUser();
+            console.log(user);
 
-            let result = await Auth.updateUserAttributes(user, {
-                'email': email,
-                'custom:birthday': date,
-                'custom:gender': gender,
-                'custom:phone': phone
-            });
-            console.log(result); // SUCCESS
+ // SUCCESS
         } catch (error) {
             console.log(error);
         }
     }
 
-    useEffect(() => {
-        getUserInfo();
-    }, []);
-
     return (
         <View>
-            <TextInput
-                onChangeText={setInfo({})}
-                value={info.email}
-                keyboardType="email-address"
-            />
-            <TextInput
-                onChangeText={setInfo({})}
-                value={info.phone}
-                keyboardType="phone-pad"
-            />
-            <TextInput
-                onChangeText={setInfo({})}
-                value={info.gender}
-
-                keyboardType="default"
-            />
-            <TextInput
-                onChangeText={setInfo({})}
-                value={info.date}
-                keyboardType="default"
-            />
-            <TextInput value={info.name} onChangeText={text => setInfo(text)}></TextInput>
-            <TextInput value={info.email} onChangeText={text => setInfo(text)}></TextInput>
-            <TextInput value={info.phone} onChangeText={text => setInfo(text)}></TextInput>
-            <TextInput value={info.gender} onChangeText={text => setInfo(text)}></TextInput>
-            <TextInput value={info.date} onChangeText={text => setInfo(text)}></TextInput>
+            <TextInput placeholder={info.name} onChangeText={text => setUsername(text)}></TextInput>
+            <TextInput placeholder={info.email} onChangeText={text => setEmail(text)}></TextInput>
+            <TextInput placeholder={info.email} onChangeText={text => setEmail(text)}></TextInput>
+            <TextInput placeholder={info.email} onChangeText={text => setEmail(text)}></TextInput>
+            <TextInput placeholder={info.email} onChangeText={text => setEmail(text)}></TextInput>
             <Button
                 onPress={() => { handleupdate() }}
                 title="Update"
@@ -105,5 +78,6 @@ const style = StyleSheet.create({
         height: '40px'
     }
 })
+
 
 export default AccountSettings;
