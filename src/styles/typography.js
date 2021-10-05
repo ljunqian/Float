@@ -1,8 +1,14 @@
 import {StyleSheet} from 'react-native';
 const typo = StyleSheet.create({
+    H0: {
+        fontFamily: 'FredokaOne-Regular',
+        fontSize: 48,
+        color: 'white',
+    },
     H1: {
         fontFamily: 'FredokaOne-Regular',
         fontSize: 28,
+        color: 'white',
     },
     H2: {
         fontFamily: 'FredokaOne-Regular',
@@ -11,6 +17,10 @@ const typo = StyleSheet.create({
     H3: {
         fontFamily: 'FredokaOne-Regular',
         fontSize: 14,
+    },
+    H4: {
+        fontFamily: 'FredokaOne-Regular',
+        fontSize: 32,
     },
     T1: {
         fontFamily: 'Montserrat-Bold',

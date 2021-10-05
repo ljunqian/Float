@@ -1,12 +1,12 @@
 {
   "auth": {
-    "float8e79b21a": {
+    "float5f5df824": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [
         {
           "category": "function",
-          "resourceName": "float8e79b21aPostConfirmation",
+          "resourceName": "float5f5df824PostConfirmation",
           "triggerProvider": "Cognito",
           "attributes": [
             "Arn",
@@ -17,7 +17,8 @@
       "customAuth": false,
       "frontendAuthConfig": {
         "loginMechanisms": [
-          "EMAIL"
+          "EMAIL",
+          "PREFERRED_USERNAME"
         ],
         "signupAttributes": [
           "EMAIL"
@@ -42,7 +43,7 @@
           "defaultAuthentication": {
             "authenticationType": "AMAZON_COGNITO_USER_POOLS",
             "userPoolConfig": {
-              "userPoolId": "authfloat8e79b21a"
+              "userPoolId": "authfloat5f5df824"
             }
           },
           "additionalAuthenticationProviders": [
@@ -62,10 +63,18 @@
     }
   },
   "function": {
-    "float8e79b21aPostConfirmation": {
+    "float5f5df824PostConfirmation": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     }
-  }
+  },
+  "video": {},
+  "storage": {
+    "s3160b8850": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation"
+    }
+  },
+  "hosting": {}
 }

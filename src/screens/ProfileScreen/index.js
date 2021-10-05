@@ -1,5 +1,4 @@
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Text, View, StyleSheet, ScrollView, TouchableOpacity, Image } from 'react-native';
 
 import ProfileScreen from './profile';
@@ -72,38 +71,42 @@ const FriendComponent = ({ img, name }) => {
 const MainProf = ({ navigation }) => {
   const [active, setActive] = useState(true);
   const [info, setInfo] = useState({
-    name: '',
-    email: '',
     coins: '',
     meditateD: '',
     sleepD: '',
-    moveD: '',
-    friends: []
+    moveD: ''
   });
+
   const getUserInfo = async () => {
     try {
-      //const post = await DataStore.query(User, Auth.currentAuthenticatedUser());
-      const { attributes } = await Auth.currentAuthenticatedUser();
-      const post = await DataStore.query(User, attributes.sub);
-      //onsole.log(post.email);
+      const user = await Auth.currentAuthenticatedUser();
+      const query = await DataStore.query(User, user.attributes.sub);
       setInfo({
-        name: post.name,
-        email: post.email,
-        coins: post.coins,
-        meditateD: post.meditateD,
-        sleepD: post.sleepD,
-        moveD: post.moveD,
-        focusD: post.focusD,
-        friends: post.friends
+        meditateD: secondsToHms(query.meditateD),
+        sleepD: secondsToHms(query.sleepD),
+        moveD: secondsToHms(query.moveD),
+        focusD: secondsToHms(query.focusD)
       });
     } catch (error) {
       console.log("Error saving post", error);
     }
   }
 
-  /*useEffect(() => {
+  function secondsToHms(d) {
+    d = Number(d);
+    var h = Math.floor(d / 3600);
+    var m = Math.floor(d % 3600 / 60);
+    var s = Math.floor(d % 3600 % 60);
+
+    var hDisplay = h + (h == 1 ? " H " : " H ");
+    var mDisplay = m + (m == 1 ? " Min " : " Min ");
+    var sDisplay = s + (s == 1 ? " Sec" : " Sec");
+    return hDisplay + mDisplay + sDisplay;
+  }
+
+  useEffect(() => {
     getUserInfo();
-  }, []);*/
+  }, []);
 
   return (
     <ScrollView style={{ backgroundColor: color.bg, color: 'white' }}>
@@ -130,33 +133,6 @@ const MainProf = ({ navigation }) => {
           <Text style={[typo.H2, { marginTop: 10, alignSelf: 'center' }]}>Journey</Text>
         </TouchableOpacity>
       </View>
-      <View style={{
-        flexDirection: "row", paddingLeft: 5, paddingBottom: 5, paddingRight: 5
-      }}>
-        <TouchableOpacity
-                  onPress={() => { navigation.navigate('Chat Screen') }}
-                  style={{
-
-                    flex: 1, height: 45, margin: 5,
-                    borderRadius: 5, backgroundColor: '#FF9F00',
-
-                                                     borderRadius: 35
-                  }}>
-                  <Text style={{ color:'white',marginTop: 12, alignSelf: 'center', justifyContent:'center' , fontFamily:'Montserrat-Bold'}}>
-                  Listen to Others</Text>
-                </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => { navigation.navigate('Chat Screen') }}
-          style={{
-
-            flex: 1, height: 45, margin: 5,
-            borderRadius: 5, backgroundColor: '#FF9F00',
-
-                                             borderRadius: 35
-          }}>
-          <Text style={{ color:'white',marginTop: 12, alignSelf: 'center', justifyContent:'center' , fontFamily:'Montserrat-Bold'}}>Share your Story</Text>
-        </TouchableOpacity>
-      </View>
       {active ? (
         <View style={{
           flexDirection: "column", paddingTop: 10, paddingLeft: 5, paddingBottom: 25
@@ -172,10 +148,10 @@ const MainProf = ({ navigation }) => {
         <View style={{
           flexDirection: "column", paddingTop: 10, paddingLeft: 5, paddingBottom: 25
         }}>
-          <JourneyComponent action="Total Time Meditated:" time="20mins" />
-          <JourneyComponent action="Total Time Slept:" time="20mins" />
-          <JourneyComponent action="Total Sessions Completed:" time="20mins" />
-          <JourneyComponent action="Average Time Spent Per Session:" time="20mins" />
+          <JourneyComponent action="Total Time Meditated:" time={info.meditateD} />
+          <JourneyComponent action="Total Time Slept:" time={info.sleepD} />
+          <JourneyComponent action="Total Sessions Completed:" time={info.moveD} />
+          <JourneyComponent action="Average Time Spent Per Session:" time={info.focusD} />
         </View>
 
       )}
