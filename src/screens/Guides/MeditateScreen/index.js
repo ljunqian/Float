@@ -88,7 +88,6 @@ const Explore = ({ array, navigation }) => {
   )
 }
 const MeditateScreen = ({navigation}) => {
-
   return (
     <ScrollView style={{backgroundColor: '#272727'}}> 
       <ImageBackground source={MedBG}  resizeMode="cover" style={{width: '100%'}} >
@@ -145,7 +144,6 @@ const MeditateScreen = ({navigation}) => {
         
       </TouchableOpacity>
       <View style={layout.container}>
-
         <Recent array={Guides} navigation={navigation}/>
         <Explore array={Guides} navigation={navigation}/>
 

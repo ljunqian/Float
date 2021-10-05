@@ -2,7 +2,7 @@
 // https://aboutreact.com/react-native-datepicker/
 
 // import React in our code
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 
 // import all the components we are going to use
 import {
@@ -16,7 +16,8 @@ import {
 import DatePicker from 'react-native-datepicker';
 
 const BirthDate = () => {
-  const [date, setDate] = useState('')
+  const [date, setDate] = useState(new Date())
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
@@ -30,7 +31,7 @@ const BirthDate = () => {
           placeholder="select date"
           format="DD-MM-YYYY"
           minDate="01-01-1940"
-          maxDate="01-01-2100"
+          maxDate="29-09-2021"
           confirmBtnText="Confirm"
           cancelBtnText="Cancel"
           customStyles={{
@@ -42,9 +43,9 @@ const BirthDate = () => {
               marginLeft: 0,
             },
             dateInput: {
-              borderWidth: 1,
-              backgroundColor: 'white',
-              color: 'white',
+            borderWidth:1,
+            backgroundColor:'white',
+            color:'white',
               marginLeft: 0,
             },
           }}
@@ -67,16 +68,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
-    color: 'white',
+    color:'white',
     textAlign: 'center',
     fontSize: 20,
     fontWeight: 'bold',
     right: 140
   },
   datePickerStyle: {
-    borderColor: 'blue',
+    borderColor:'blue',
     width: 320,
-    marginLeft: -40,
+    marginLeft:-40,
     marginTop: 20,
   },
 });
