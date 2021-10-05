@@ -1,32 +1,32 @@
-import React, { useState } from 'react';
-import { View, Image, StyleSheet, Text, KeyboardAvoidingView, TouchableOpacity } from 'react-native';
-import { Input, Center, NativeBaseProvider, Button } from "native-base";
+import React, { useState } from 'react'
+import { View, Image, StyleSheet, Text, KeyboardAvoidingView, TouchableOpacity } from 'react-native'
+import { Input, Center, NativeBaseProvider, Button } from "native-base"
 import { Auth } from 'aws-amplify';
 import typo from '../../styles/typography';
-
+import OtpCode from './otpcode'
 import FloatLogo from '../../assets/images/float.png';
 import { color } from '../../styles/theme';
 import { Context } from './store';
 const initialState = { name: '', description: '' }
 
-const LoginScreen = ({ navigation }) => {
+const otp = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorstate, seterrorState] = useState(false);
   const [errorMessage, seterrorMessage] = useState('');
   const [state, dispatch] = React.useContext(Context);
-  
+
   async function signIn() {
     try {
       const user = await Auth.signIn(email, password);
       if (user) {dispatch({type: 'SIGN_IN', payload: true});}
-      // TODO: set false 
+      // TODO: set false
     } catch (error) {
       console.log('error signing in', error);
       seterrorState(true);
       seterrorMessage(error.message)
     }
-  } 
+  }
 
   return (
     <NativeBaseProvider>
@@ -37,65 +37,44 @@ const LoginScreen = ({ navigation }) => {
           <View style={{width:'100%',
           justifyContent: 'center',
           alignItems: 'center'}}>
-
-            <Image source={FloatLogo} style={{ width: 160, height: 160 }} />
                 <Text style={[typo.H0]}>
-                    Float
+                    Verification
                 </Text>
+               <Text style={[typo.H2, { color: 'white', fontFamily:'Montserrat-Bold', marginTop:20 }]}>
+                             We've sent a code to
+                           </Text>
+                           <Text style={[typo.H2, { color: 'white',  fontFamily:'Montserrat-Bold' }]}>
+                                                        EMAIL
+                                                      </Text>
+                           <OtpCode/>
+
           </View>
           <KeyboardAvoidingView
             behavior="position"
             style={{ margin: 20, justifyContent: 'flex-start', display: 'flex', width: '100%', }}
           >
-            <Text style={[typo.H2, { color: 'white' }]}>
-              Email
-            </Text>
-            <Input
-              style = {{width:331, height:40}}
-              value={email}
-              onChangeText={setEmail}
-              variant="underlined"
-              placeholder="Your Email Address"
-              color='white'
-            />
-            <Text style={[typo.H2, { color: 'white', paddingTop:20 }]}>
-              Password
-            </Text>
-            <Input
-                style = {{width:331, height:40}}
-              value={password}
-              onChangeText={setPassword}
-              variant="underlined"
-              placeholder="Password"
-              type="password"
-              color='white'
-            />
+
           </KeyboardAvoidingView>
 
 
 
-          <TouchableOpacity onPress={() => {signIn()}}>
+          <TouchableOpacity onPress={() => {}}>
             <View style={{
                 marginLeft:20,
                 marginRight:20,
                 height: 48,
-                backgroundColor: '#4263DD',
+                backgroundColor: '#FF9F00',
                 alignItems: 'center',
                 justifyContent: 'center',
                 borderRadius: 35
               }}
             >
-              <Text style={{ color: 'white' }}>Login</Text>
+              <Text style={{ color: 'white',  fontFamily:'Montserrat-Bold' }}>Verify</Text>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity>
-            <Text style={styles.forgotButton}>
-              Forgot password?
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => { navigation.navigate('Signup') }} >
+          <TouchableOpacity onPress={() => { navigation.navigate('Signup') }} style={{marginTop:20,}}>
             <Text style={styles.navButtonText} >
-              Don't have an account? Create here
+              Didn't receive code? Resend code
             </Text>
           </TouchableOpacity>
           {errorstate && (<Text style={styles.errorText}>{errorMessage}</Text>)}
@@ -110,13 +89,14 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     marginLeft:20,
     color: 'white',
+    fontFamily: 'Montserrat-Bold',
   },
   navButtonText: {
   marginLeft:20,
     fontSize: 14,
     fontWeight: '500',
     color: 'white',
-    fontFamily: 'Lato-Regular',
+    fontFamily: 'Montserrat-Regular',
   },
   errorText: {
   marginTop:30,
@@ -124,9 +104,13 @@ const styles = StyleSheet.create({
       fontSize: 14,
       fontWeight: '500',
       color: 'red',
-      fontFamily: 'Lato-Regular',
+      fontFamily: 'Montserrat',
     },
-
+  code:{backgroundColor: "#BBBBBB",
+        width: 50,
+        height: 60,
+        margin: 4,
+        borderRadius:10}
 })
 
-export default LoginScreen;
+export default otp;
