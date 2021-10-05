@@ -186,10 +186,10 @@ const FavComponent = ({ isFav }) => {
 }
 
 const backgrounds = {
-    Meditate: MedBG1,
-    Sleep: SleepBG,
-    Move: MoveBG,
-    Focus: FocusBG 
+    meditateD: MedBG1,
+    sleepD: SleepBG,
+    moveD: MoveBG,
+    focusD: FocusBG
 }
 
 const styles = StyleSheet.create({
