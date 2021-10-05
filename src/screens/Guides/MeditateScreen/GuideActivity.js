@@ -116,26 +116,16 @@ const VideoComponent = ({ array, navigation }) => {
                     onError={err => { console.log(err) }}
                 />
             </SafeAreaView>
-
-            {/* <TouchableOpacity style={{backgroundColor: 'transparent', justifyContent: 'center', alignItems: 'center'}} 
-                onPress={() => {
-                    getTime()
-                    navigation.navigate('GuideComplete', detail)
-                    }}
-                    >
-                <Image source={Bigplay} />
-                
-            </TouchableOpacity> */}
         </View>
 
     )
 }
 
 const backgrounds = {
-    Meditate: MedBG1,
-    Sleep: SleepBG,
-    Move: MoveBG,
-    Focus: FocusBG
+    meditateD: MedBG1,
+    sleepD: SleepBG,
+    moveD: MoveBG,
+    focusD: FocusBG
 }
 
 const styles = StyleSheet.create({

@@ -29,7 +29,7 @@ export const Guides = [
         description : 'In just 5 minutes you can reset your day in a positive way.',
         type: 'meditateD',
         thumbnail: Med2,
-        //key: 0
+        key: 0
     },
 
     {
@@ -40,7 +40,7 @@ export const Guides = [
         description : 'A 5 minute guided meditation to be used before you sleep.',
         type: 'meditateD',
         thumbnail: Med1,
-        //key: 1
+        key: 1
     },
 
     {
@@ -51,7 +51,7 @@ export const Guides = [
         description : '10 Minute Meditation For Beginners.',
         type: 'meditateD',
         thumbnail: Med3,
-        //key: 2
+        key: 2
     },
 
     {
@@ -62,7 +62,7 @@ export const Guides = [
         description : 'This easy 10-minute meditation is the perfect way to start your day off right.',
         type: 'meditateD',
         thumbnail: Med2,
-        //key: 3
+        key: 3
     },
 
     {
@@ -73,7 +73,7 @@ export const Guides = [
         description : 'Mindfulness meditation to powerfully restore and re-connect with the present.',
         type: 'meditateD',
         thumbnail: Med1,
-        //key: 4
+        key: 4
     },
 
     {
@@ -84,7 +84,7 @@ export const Guides = [
         description : '5 Minutes of Meditation Music for positive energy and relaxation.',
         type: 'meditateD',
         thumbnail: Med3,
-        //key: 5
+        key: 5
     },
 
     {
@@ -95,7 +95,7 @@ export const Guides = [
         description : 'Short 5 minute guided meditation designed to help you improve your focus.',
         type: 'meditateD',
         thumbnail: Med2,
-        //key: 6
+        key: 6
     },
 
     // Sleep Videos
@@ -108,7 +108,7 @@ export const Guides = [
         description : 'If you are feeling restless, listen to this guided meditation to ease your mind and body into falling asleep.',
         type: 'sleepD',
         thumbnail: Sleep3,
-        //key: 7
+        key: 7
     },
 
     {
@@ -119,7 +119,7 @@ export const Guides = [
         description : 'If you are feeling restless, listen to this guided meditation to ease your mind and body into falling asleep.',
         type: 'sleepD',
         thumbnail: Med2,
-        //key: 8
+        key: 8
     },
 
     {
@@ -130,7 +130,7 @@ export const Guides = [
         description : 'In order to sleep better, and wake up early, you need to learn about the circadian rhythm - and why it’s important to wake up at a regular time.',
         type: 'sleepD',
         thumbnail: Sleep2,
-        //key: 9
+        key: 9
     },
 
     {
@@ -141,7 +141,7 @@ export const Guides = [
         description : 'Entrepreneur Dave Asprey explains why eating raw honey, using incandescent or halogen lights, and modifying your smartphone’s LED display can help you sleep better.',
         type: 'sleepD',
         thumbnail: Sleep3,
-        //key: 10
+        key: 10
     },
 
     {
@@ -152,7 +152,7 @@ export const Guides = [
         description : 'In this book, the first of its kind written by a scientific expert, Professor Matthew Walker explores twenty years of cutting-edge research to solve the mystery of why sleep matters',
         type: 'sleepD',
         thumbnail: Med2,
-        //key: 11
+        key: 11
     },
 
     {
@@ -163,7 +163,7 @@ export const Guides = [
         description : 'Cant fall asleep? These sleep tips are better than ASMR!',
         type: 'sleepD',
         thumbnail: Sleep1,
-        //key: 12
+        key: 12
     },
 
     // Move Videos
@@ -176,7 +176,7 @@ export const Guides = [
         description : 'This is a 15-minute restorative practice emphasizing wrist & spine mobility...also slowing your roll for a few minutes to be mindful of your movement and check-in with your body. ',
         type: 'moveD',
         thumbnail: Move1,
-        //key: 13
+        key: 13
     },
 
     {
@@ -187,7 +187,7 @@ export const Guides = [
         description : 'In this video we discuss how to improve your cardiovascular system, which can improve your endurance, overall health, and overall fitness.',
         type: 'moveD',
         thumbnail: Move2,
-        //key: 14
+        key: 14
     },
 
     {
@@ -198,7 +198,7 @@ export const Guides = [
         description : 'Do These 6 Exercises to Increase Your Mobility & Flexibility',
         type: 'moveD',
         thumbnail: Move3,
-        //key: 15
+        key: 15
     },
 
     {
@@ -209,7 +209,7 @@ export const Guides = [
         description : 'By the end of the video, you’ll have a personalized mobility routine based on the body areas you could use the most work.',
         type: 'moveD',
         thumbnail: Move1,
-        //key: 16
+        key: 16
     },
 
     {
@@ -220,7 +220,7 @@ export const Guides = [
         description : 'The BEST Mobility Exercises For Each Joint!',
         type: 'moveD',
         thumbnail: Mov,
-        //key: 17
+        key: 17
     },
 
     // Focus Videos
@@ -233,7 +233,7 @@ export const Guides = [
         description : 'How To Stay Focused Longer',
         type: 'focusD',
         thumbnail: Focus4,
-        //key: 18
+        key: 18
     },
 
     {
@@ -244,7 +244,7 @@ export const Guides = [
         description : 'So how exactly do you stay focused? Here are 11 ways. Focus better. Focus on your goals. Get focused. Be more Focused. Here we go. ',
         type: 'focusD',
         thumbnail: Focus2,
-        //key: 19
+        key: 19
     },
     
     {
@@ -255,7 +255,7 @@ export const Guides = [
         description : 'If your studying gets interrupted often by distractions or the temptation to multi-task, try these methods of building your ability to focus.',
         type: 'focusD',
         thumbnail: Focus3,
-        //key: 20
+        key: 20
     },
 
     {
@@ -266,7 +266,7 @@ export const Guides = [
         description : 'How To Improve Focus and Concentration',
         type: 'focusD',
         thumbnail: Focus4,
-        //key: 21
+        key: 21
     },
 
     {
@@ -277,7 +277,7 @@ export const Guides = [
         description : 'Our attention spans are getting shorter. We’re distracted 𝘢 𝘭𝘰𝘵. More than we realize really.',
         type: 'focusD',
         thumbnail: Focus2,
-        //key: 22
+        key: 22
     },
 
     {
@@ -288,7 +288,7 @@ export const Guides = [
         description : 'This video outlines some proven ways to increase your brain power using simple brain training exercises!.',
         type: 'focusD',
         thumbnail: Focus3,
-        //key: 23
+        key: 23
     },
 
     {
@@ -299,7 +299,7 @@ export const Guides = [
         description : 'Watch this video as Rashmi shows you simple and easy natural methods to get rid of this major problem by way of yoga that helps you to focus and concentrate and make you more aware.',
         type: 'focusD',
         thumbnail: Focus4,
-        //key: 24
+        key: 24
     },
 
     {
@@ -310,6 +310,6 @@ export const Guides = [
         description : 'How to Improve Your Concentration and Focus at Work.',
         type: 'focusD',
         thumbnail: Focus1,
-        //key: 25
+        key: 25
     },
 ];

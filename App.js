@@ -15,8 +15,11 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import changePass from './src/screens/ProfileScreen/changePass';
 import editProfile from './src/screens/ProfileScreen/editProfile';
-import ExploreScreen from './src/screens/Guides/ExploreScreen'
+import ExploreScreen from './src/screens/Guides/ExploreScreen';
+import Recents from './src/screens/Guides/ExploreScreen/Recents.js';
+import Favourites from './src/screens/Guides/ExploreScreen/Favourites.js';
 import ProfileScreen from './src/screens/ProfileScreen/';
+import SearchScreen from './src/screens/SearchScreen/';
 import RewardScreen from './src/screens/RewardScreen/';
 import AccountSettings from './src/screens/ProfileScreen/AccountSettings.js';
 import LoginScreen from './src/screens/Authenticate/LoginScreen';
@@ -229,7 +232,7 @@ const App = () => {
               options={({ navigation }) => ({
                 headerRight: () => (
                   <TouchableOpacity
-                    onPress={() => Auth.currentAuthenticatedUser().then(console.log)}
+                    onPress={() => navigation.navigate('Search')}
                   >
                     <Image source={MagnifyIcon} />
                   </TouchableOpacity>
@@ -256,6 +259,11 @@ const App = () => {
                 headerTitle: () => (<View />),
                 headerTintColor: 'white'
               })}
+            />
+            <Stack.Screen name="Search" component={SearchScreen} 
+            options={()=>({
+              headerShown: false
+            })}
             />
             <Stack.Screen name="Reward" component={RewardScreen}
               options={({ navigation }) => ({
@@ -299,6 +307,16 @@ const App = () => {
             })}
           />
           <Stack.Screen name="GuideComplete" component={GuideComplete} 
+            options={()=>({
+              headerShown: false
+            })}
+          />
+          <Stack.Screen name="Recents" component={Recents} 
+            options={()=>({
+              headerShown: false
+            })}
+          />
+          <Stack.Screen name="Favourites" component={Favourites} 
             options={()=>({
               headerShown: false
             })}
