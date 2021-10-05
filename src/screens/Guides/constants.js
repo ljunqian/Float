@@ -298,7 +298,7 @@ export const Guides = [
         source : '6tH5RIG0foU',
         description : 'Watch this video as Rashmi shows you simple and easy natural methods to get rid of this major problem by way of yoga that helps you to focus and concentrate and make you more aware.',
         type: 'focusD',
-        thumbnail: Focus4,
+        thumbnail: Focus4, 
         key: 24
     },
 

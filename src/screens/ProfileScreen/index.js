@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Button, Text, View, StyleSheet, ScrollView, TouchableOpacity, Image } from 'react-native';
 
@@ -182,5 +181,4 @@ const style = StyleSheet.create({
     display: 'flex', flexDirection: 'row',
     alignItems: 'center'
   }
-
 })
