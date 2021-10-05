@@ -58,7 +58,7 @@ const otp = ({ navigation }) => {
 
 
 
-          <TouchableOpacity onPress={() => {signIn()}}>
+          <TouchableOpacity onPress={() => {}}>
             <View style={{
                 marginLeft:20,
                 marginRight:20,

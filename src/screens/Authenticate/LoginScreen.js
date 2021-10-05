@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
-import { View, Image, StyleSheet, Text, KeyboardAvoidingView, TouchableOpacity } from 'react-native'
-import { Input, Center, NativeBaseProvider, Button } from "native-base"
+import React, { useState } from 'react';
+import { View, Image, StyleSheet, Text, KeyboardAvoidingView, TouchableOpacity } from 'react-native';
+import { Input, Center, NativeBaseProvider, Button } from "native-base";
 import { Auth } from 'aws-amplify';
 import typo from '../../styles/typography';
 
