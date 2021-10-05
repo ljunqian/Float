@@ -128,6 +128,7 @@ const backgrounds = {
     focusD: FocusBG
 }
 
+
 const styles = StyleSheet.create({
 
     container: {

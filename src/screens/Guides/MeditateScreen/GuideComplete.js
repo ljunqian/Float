@@ -48,7 +48,7 @@ const ExpCoinsComponent = ({ styles, isTotal }) => {
     )
 }
 
-const MidComponent = ({style, navigation}) => {
+const MidComponent = ({style, navigation, detail}) => {
     
     const [isCombined, setIsCombined] = useState(false);
     const fadeAnim = useRef(new Animated.Value(0)).current  // Initial value for opacity: 0
@@ -101,7 +101,7 @@ const MidComponent = ({style, navigation}) => {
             </View>            
 
             <View style={{flex: 3, marginTop: 55}}>
-                <TouchableOpacity style={styles.button} onPress={() => navigation.popToTop()}>
+                <TouchableOpacity style={[styles.button, {backgroundColor: buttoncolour[detail.type] }]} onPress={() => navigation.popToTop()}>
                     <Text style={[typo.H3, {color: 'white'}]}>Done</Text> 
                 </TouchableOpacity>    
             </View>
@@ -131,7 +131,7 @@ const Complete = ({ navigation, route }) => {
                     </View>
                 </View>
                 
-                <MidComponent style={{flex: 6, marginTop: 70, alignItems: 'center'}} navigation={navigation}/>
+                <MidComponent style={{flex: 6, marginTop: 70, alignItems: 'center'}} navigation={navigation} detail={detail}/>
 
                 {/* <ExpCoinsComponent styles={{flex: 1, marginTop: 70}} />
                 
@@ -190,6 +190,13 @@ const backgrounds = {
     sleepD: SleepBG,
     moveD: MoveBG,
     focusD: FocusBG
+}
+
+const buttoncolour = {
+    Meditate: color.Med1,
+    Sleep: color.Sleep2,
+    Move: color.Move1,
+    Focus: color.Focus1
 }
 
 const styles = StyleSheet.create({

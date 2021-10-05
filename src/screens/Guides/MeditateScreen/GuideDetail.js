@@ -51,13 +51,20 @@ const GuideDetail = ({ navigation, props, route }) => {
             {/*BUTTON DIV*/}
             <TouchableOpacity style={styles.btnContainer}>
                 {/* Begin */}
-                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('GuideActivity', detail)}>
+                <TouchableOpacity style={[styles.button, {backgroundColor: buttoncolour[detail.type] }]} onPress={() => navigation.navigate('GuideActivity', detail)}>
                     <Text style={[typo.H3, {color: 'white'}]}>Begin</Text> 
                 </TouchableOpacity>    
             </TouchableOpacity>
             
         </View>
     )
+}
+
+const buttoncolour = {
+    Meditate: color.Med1,
+    Sleep: color.Sleep2,
+    Move: color.Move1,
+    Focus: color.Focus1
 }
 
 const styles = StyleSheet.create({
@@ -85,7 +92,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',   
         justifyContent: 'center',
         borderRadius: 48, 
-        backgroundColor: color.Med3,
+        
     }
 })
 
