@@ -29,7 +29,7 @@ const Coins = ({ navigation }) => {
       }}>
 
       <Text style={typo.H3}>
-        My Coins Amount: 999
+        My Coins Amount: 499
       </Text>
       <View
         style={{ alignSelf: 'center', backgroundColor: '#CD5959', borderRadius: 8, marginLeft: 5, padding: 5, }}
@@ -72,6 +72,7 @@ const FriendComponent = ({ img, name }) => {
 const MainProf = ({ navigation }) => {
   const [active, setActive] = useState(true);
   const [info, setInfo] = useState({
+    username: '',
     coins: '',
     meditateD: '',
     sleepD: '',
@@ -86,7 +87,8 @@ const MainProf = ({ navigation }) => {
         meditateD: secondsToHms(query.meditateD),
         sleepD: secondsToHms(query.sleepD),
         moveD: secondsToHms(query.moveD),
-        focusD: secondsToHms(query.focusD)
+        focusD: secondsToHms(query.focusD),
+        username: user.username,
       });
     } catch (error) {
       console.log("Error saving post", error);
@@ -112,7 +114,7 @@ const MainProf = ({ navigation }) => {
   return (
     <ScrollView style={{ backgroundColor: color.bg, color: 'white' }}>
       <ProfileScreen />
-      <Text style={[typo.H1, { textAlign: 'center' }]}>Username</Text>
+      <Text style={[typo.H1, { textAlign: 'center' }]}>{info.username}</Text>
       <Coins navigation={navigation} />
       <View style={{
         flexDirection: "row", paddingLeft: 5, paddingBottom: 5, paddingRight: 5
