@@ -274,7 +274,7 @@ const RewardScreen = ({ navigation }) => {
           <AvatarHat hatName={userState.hat}/>
           <AvatarAccessory accName={userState.accessory}/>
         </View>
-        { modalVisible && <RewardPopup enoughCoins = {modalEnoughCoins} navigation={navigation}/>}
+        { modalVisible && <RewardPopup enoughCoins={modalEnoughCoins} navigation={navigation}/>}
         <ProfileScreen style={{position: 'absolute', zIndex: 1}}/>
       
         <HStack style={style.tabBar}>

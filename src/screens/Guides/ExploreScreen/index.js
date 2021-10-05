@@ -64,13 +64,13 @@ const ExploreScreen = ({ navigation }) => {
       </Text>
       <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
 
-        <TouchableOpacity style={style.button}>
+        <TouchableOpacity style={style.button} onPress={() => navigation.navigate('Favourites') }>
           <Image source={LoveRed} style={{marginRight: 10}}/>
           <Text>
             Favourites
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={style.button}>
+        <TouchableOpacity style={style.button} onPress={() => navigation.navigate('Recents') }>
           <Image source={LoveYellow} style={{marginRight: 10}}/>
           <Text>
             Recents
