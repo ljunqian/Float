@@ -114,6 +114,7 @@ const backgrounds = {
     Focus: FocusBG 
 }
 
+
 const styles = StyleSheet.create({
 
     container : {
