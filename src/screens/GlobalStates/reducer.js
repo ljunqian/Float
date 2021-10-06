@@ -15,6 +15,14 @@ const AvatarReducer = (prevState, action) => {
           ...prevState,
           accessory: action.payload,
         };
+      case 'UPDATE_AVATAdR':
+        console.log("hello",action)
+        return {
+          background: "Mountain",
+          hat: action.payload.hat,
+          accessory: action.payload.accessory,
+          ...prevState,
+        }
       default:
           return {...prevState};
     }

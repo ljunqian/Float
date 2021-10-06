@@ -1,5 +1,5 @@
 
-import React, {Fragment, useContext, useState} from 'react';
+import React, {Fragment, useContext, useEffect, useState} from 'react';
 import { Center, NativeBaseProvider, HStack, Box, VStack, usePropsResolution, Flex } from 'native-base';
 import { Button, Text, View, ScrollView, TouchableOpacity, Image, Modal, Alert, Pressable } from 'react-native';
 
@@ -13,13 +13,9 @@ import CoinIcon from '../../assets/icons/coins.png';
 import { TabClicked } from './component';
 import { TabNotClicked } from './component';
 
-
+import {connect, useSelector, useDispatch} from 'react-redux';
 import Store, {Context} from '../GlobalStates/store';
-import {
-  CHANGE_BACKGROUND,
-  CHANGE_HAT,
-  CHANGE_ACCESSORY,
-} from '../GlobalStates/type'
+import {updateAvatarState} from '../GlobalStates/RewardAction';
 
 import { 
   BackgroundImages,
@@ -34,7 +30,7 @@ const RewardScreen = ({ navigation }) => {
   const [tab, setIsTab] = useState("Background");
   const [selected, setSelected] = useState(null);
 
-  const [userData, dispatch] = React.useContext(Context);
+  const userData = useSelector((state)=> state.reward);
   const [userState, setUserState] = useState(userData);
 
   const [modalVisible, setModalVisible] = useState(false); 
@@ -46,13 +42,7 @@ const RewardScreen = ({ navigation }) => {
   const [accessoryState, setAccessoryState] = useState(AccessoryImages);
   const [voucherArrayState, setVoucherArrayState] = useState(VoucherImages);
 
-  /*
-    {
-      background: '',
-      hat: '',
-      accessory: '',
-    } 
-  */
+  const dispatch = useDispatch();
   const AssetChoices = ({assetArray, type}) => {
     return (
       <Fragment>
@@ -205,12 +195,12 @@ const RewardScreen = ({ navigation }) => {
   }
 
   const updateAvatar = (type, name) =>{
+    dispatch(updateAvatarState(type,name));
     setUserState({
       ...userState,
       [type]: name,
     })
   }
-
 
   const AvatarBackground = ({backgroundName}) => {
     const bg = BackgroundImages.find(background => background.name === backgroundName);
@@ -263,18 +253,7 @@ const RewardScreen = ({ navigation }) => {
 
   return (
       <VStack style={{backgroundColor: color.bg}}>
-
-        <View>
-          {
-            // Avatar Assets
-            // TODO: fix hat alignment and create an accessory component
-            // TODO: move components to be part of <ProfileScreen />
-          }
-          <AvatarBackground backgroundName={userState.background}/>
-          <AvatarHat hatName={userState.hat}/>
-          <AvatarAccessory accName={userState.accessory}/>
-        </View>
-        { modalVisible && <RewardPopup enoughCoins = {modalEnoughCoins} navigation={navigation}/>}
+        { modalVisible && <RewardPopup enoughCoins={modalEnoughCoins} navigation={navigation}/>}
         <ProfileScreen style={{position: 'absolute', zIndex: 1}}/>
       
         <HStack style={style.tabBar}>
@@ -435,12 +414,10 @@ const CoinsValue = (props) => {
 
 export default ({navigation}) => {
   return (
-    <Store>
       <NativeBaseProvider>
         <Center flex={1}>
           <RewardScreen navigation={navigation}/>
         </Center>
       </NativeBaseProvider>
-    </Store>
   )
 }
