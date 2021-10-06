@@ -86,8 +86,10 @@ const Explore = ({ array, navigation }) => {
           <GuideCardComponent style={{height: 130}} title={four.title} dur={four.duration} img={four.thumbnail} height={150} width={200} click={() => navigation.navigate('GuideDetail', four)}/>
         </View>
       </View>
+    </View>
   )
 }
+
 const MeditateScreen = ({navigation}) => {
   return (
     <ScrollView sourcestyle={{backgroundColor: '#272727'}}> 
