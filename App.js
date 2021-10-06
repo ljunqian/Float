@@ -44,7 +44,12 @@ import { Icon } from 'react-native-elements';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { withAuthenticator } from 'aws-amplify-react-native';
-import Store, {Context} from './src/screens/Authenticate/store';
+
+import Store, { Context } from './src/screens/Authenticate/store';
+import { Provider } from 'react-redux';
+import NewStore from './src/screens/GlobalStates/GlobalStore';
+import { createStore } from 'redux';
+import RewardReducer from './src/screens/GlobalStates/RewardReducer';
 
 import { Auth } from 'aws-amplify';
 import Amplify from 'aws-amplify';
@@ -344,12 +349,13 @@ const App = () => {
     )
 }
 
-
 const Container = () => {
   return (
-    <Store>
-      <App/>
-    </Store>
+    <Provider store={NewStore}>
+      <Store>
+        <App />
+      </Store>
+    </Provider>
   )
 }
 

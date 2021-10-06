@@ -1,5 +1,5 @@
 
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Image, Text, View, StyleSheet, ScrollView, TouchableOpacity} from 'react-native';
 import typo from '../../../styles/typography';
 import theme, {color} from '../../../styles/theme';
@@ -24,6 +24,7 @@ const ExploreScreen = ({ navigation }) => {
   
   const [info, setInfo] = useState({
     name: '',
+    username: '',
     email: '',
     coins: '',
     meditateD: '',
@@ -34,10 +35,11 @@ const ExploreScreen = ({ navigation }) => {
 
   const getUserInfo = async () => {
     try {
-      const { attributes } = await Auth.currentAuthenticatedUser();
+      const { attributes, username } = await Auth.currentAuthenticatedUser();
       const post = await DataStore.query(User, attributes.sub);
       setInfo({
         name: post.name,
+        username: username,
         email: post.email,
         coins: post.coins,
         meditateD: post.meditateD,
@@ -51,26 +53,26 @@ const ExploreScreen = ({ navigation }) => {
     }
   }
 
-/*
+
   useEffect(() => {
     getUserInfo();
   }, []);
-  */
+
   return (
 
     <ScrollView style={theme.container}> 
       <Text style={[typo.H1, {color: 'white'}]}>
-        Good morning, User {info.name}
+        Good afternoon, {info.username}
       </Text>
       <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
 
-        <TouchableOpacity style={style.button}>
+        <TouchableOpacity style={style.button} onPress={() => navigation.navigate('Favourites') }>
           <Image source={LoveRed} style={{marginRight: 10}}/>
           <Text>
             Favourites
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={style.button}>
+        <TouchableOpacity style={style.button} onPress={() => navigation.navigate('Recents') }>
           <Image source={LoveYellow} style={{marginRight: 10}}/>
           <Text>
             Recents

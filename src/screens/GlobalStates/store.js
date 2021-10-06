@@ -19,4 +19,5 @@ const Store = ({children}) => {
 };
 
 export const Context = createContext(initialState);
+export const RewardContext = createContext([{}, function(){}]);
 export default Store;

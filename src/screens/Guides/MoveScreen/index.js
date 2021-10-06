@@ -5,6 +5,7 @@ import { color } from '../../../styles/theme';
 import layout from '../../../styles/componentLayout';
 import * as Progress from 'react-native-progress';
 import MoveBG from '../../../assets/images/move-planet.png';
+import StarsBG from '../../../assets/images/stars.png';
 import MedAvatar from '../../../assets/images/meditate-avatar.png';
 import Mov from '../../../assets/images/mov-1.png';
 import { overflow } from 'styled-system';
@@ -44,22 +45,21 @@ const Recent = ({ array, navigation }) => {
 
   return (
     <View>
-      <Text style={typo.H1}>
+        <Text style={[typo.H1, {left:10}]}>
         Recent
       </Text>
       <View style={{display: 'flex', flexDirection:'row'}}>
         <View style={{flex:1, display: 'flex',flexDirection: 'column'}}>        
           <GuideCardComponent style={{height: 130}} title={one.title} dur={one.duration} img={one.thumbnail} height={140} width={200} click={() => navigation.navigate('GuideDetail', one)}/>
-          <GuideCardComponent style={{height: 130}} title={two.title} dur={two.duration} img={two.thumbnail} height={140} width={200} click={() => navigation.navigate('GuideDetail', two)}/>        
+          <GuideCardComponent style={{height: 195}} title={two.title} dur={two.duration} img={two.thumbnail} height={210} width={200} click={() => navigation.navigate('GuideDetail', two)}/>        
         </View>
         <View style={{flex:1}}>
-          <GuideCardComponent style={{height: 272}} title={three.title} dur={three.duration} img={three.thumbnail} height={278} width={250} click={() => navigation.navigate('GuideDetail', three)}/>          
+          <GuideCardComponent style={{height: 272}} title={three.title} dur={three.duration} img={three.thumbnail} height={285} width={200} click={() => navigation.navigate('GuideDetail', three)}/>          
          </View>
       </View>
     </View>
   )
 }
-
 const Explore = ({ array, navigation }) => {
   const one = array[16];
   const two = array[14];
@@ -88,15 +88,17 @@ const Explore = ({ array, navigation }) => {
 const MoveScreen = ({navigation}) => {
   return (
     <ScrollView style={{backgroundColor: '#272727'}}> 
-      <ImageBackground source={MoveBG}  resizeMode="cover" style={{width: '100%'}} >
+      <ImageBackground source={StarsBG}  resizeMode="cover" style={{width: '100%'}} >
+      <Image source={MoveBG} style={{ top: -1175, left: -45, zIndex: 0, transform:[{scaleY:-1}], position: 'absolute', width: '110%'}}/>
+     
       <View style={layout.header}>
         <View style={{height: 200}}>
           
-        <Text style={[typo.H0]}>
+        <Text style={[typo.H0, {left:20}]}>
           Move
         </Text>
         
-          <Text style={[typo.T2, {color:'white'}]}>
+        <Text style={[typo.T2, {color:'white', left:20}]}>
             Level 1
           </Text>
           <Progress.Bar 
@@ -106,6 +108,8 @@ const MoveScreen = ({navigation}) => {
             color={color.Move3}
             unfilledColor={'white'}
             borderWidth={0}
+            top={10}
+            left={20}
           />
           <Image source={MedAvatar} style={{ top: 20, left: 20,zIndex: 0, position: 'absolute'}}/>
         </View>
