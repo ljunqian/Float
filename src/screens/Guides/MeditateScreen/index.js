@@ -96,7 +96,7 @@ const MeditateScreen = ({navigation}) => {
     <ScrollView sourcestyle={{backgroundColor: '#272727'}}> 
       {/* <Image source={oldMedBG} style={{marginRight: 5, position: 'absolute'}} /> */}
       <ImageBackground source={StarsBG}  resizeMode="cover" style={{width: '100%'}} >
-      <Image source={newMedBG} style={{ top: -1175, left: -45, zIndex: 0, transform:[{scaleY:-1}], position: 'absolute', width: '110%'}}/>
+      <Image source={oldMedBG} style={{ top: -1175, left: -45, zIndex: 0, transform:[{scaleY:-1}], position: 'absolute', width: '110%'}}/>
       <View style={layout.header}>
         <View style={{height: 200}}>
         

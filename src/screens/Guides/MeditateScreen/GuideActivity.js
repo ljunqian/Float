@@ -82,7 +82,8 @@ const VideoComponent = ({ array, navigation }) => {
     console.log(detail);
     const getTime = function () {
         playerRef.current?.getCurrentTime().then(
-            currentTime => handleDuration(parseInt(currentTime), detail.type)
+            // currentTime => handleDuration(parseInt(currentTime), detail.type)
+            currentTime => console.log({ currentTime })
         )
         playerRef.current?.getDuration().then(
             getDuration => console.log({ getDuration })
@@ -116,11 +117,18 @@ const VideoComponent = ({ array, navigation }) => {
     )
 }
 
+const types = {
+    meditate: 'Meditate',
+    sleep: 'Sleep',
+    move: 'Move',
+    focus: 'Focus'
+}
+
 const backgrounds = {
-    meditateD: MedBG1,
-    sleepD: SleepBG,
-    moveD: MoveBG,
-    focusD: FocusBG
+    meditate: MedBG1,
+    sleep: SleepBG,
+    move: MoveBG,
+    focus: FocusBG
 }
 
 

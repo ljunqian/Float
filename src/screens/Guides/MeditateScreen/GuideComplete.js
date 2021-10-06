@@ -15,7 +15,6 @@ import redheart from '../../../assets/icons/redheart.png';
 import heart from '../../../assets/icons/heart.png';
 import { Guides } from './constants';
 
-
 const ActDetailComponent = ({ detail }) => {
     return(
         <View style={styles.title}>
@@ -113,7 +112,6 @@ const Complete = ({ navigation, route }) => {
     const detail = route.params;
     const [isFavourite, setFav] = useState(false);
     
-
     return  (
 
         <View style={styles.container}> 
@@ -185,18 +183,25 @@ const FavComponent = ({ isFav }) => {
     )
 }
 
+const types = {
+    meditate: 'Meditate',
+    sleep: 'Sleep',
+    move: 'Move',
+    focus: 'Focus'
+}
+
 const backgrounds = {
-    meditateD: MedBG1,
-    sleepD: SleepBG,
-    moveD: MoveBG,
-    focusD: FocusBG
+    meditate: MedBG1,
+    sleep: SleepBG,
+    move: MoveBG,
+    focus: FocusBG
 }
 
 const buttoncolour = {
-    Meditate: color.Med1,
-    Sleep: color.Sleep2,
-    Move: color.Move1,
-    Focus: color.Focus1
+    meditate: color.Med1,
+    sleep: color.Sleep2,
+    move: color.Move1,
+    focus: color.Focus1
 }
 
 const styles = StyleSheet.create({

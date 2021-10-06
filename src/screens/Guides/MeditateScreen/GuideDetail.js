@@ -8,6 +8,19 @@ import heart from '../../../assets/icons/heart.png';
 import clock from '../../../assets/icons/clock.png';
 import Med from '../../../assets/images/med-1.png';
 
+const types = {
+    meditate: 'Meditate',
+    sleep: 'Sleep',
+    move: 'Move',
+    focus: 'Focus'
+}
+
+const buttoncolour = {
+    meditate: color.Med1,
+    sleep: color.Sleep2,
+    move: color.Move1,
+    focus: color.Focus1
+}
 
 const GuideDetail = ({ navigation, props, route }) => {
 
@@ -35,7 +48,8 @@ const GuideDetail = ({ navigation, props, route }) => {
                 {/* Type/Duration */}
                 <View style={{ marginBottom: 20, flexDirection: 'row'}}>
                     <Text style={[typo.T3, {color: 'white', marginTop: 3}]}>
-                        { types[detail.type] }
+                        { types[detail.type]
+                         }
                     </Text>
                     <Image source={clock} style={{ top: 3, marginLeft: 10}} />
                     <Text style={[typo.T3, {color: 'white', marginLeft: 10, marginTop: 3}]}>
@@ -58,20 +72,6 @@ const GuideDetail = ({ navigation, props, route }) => {
             
         </View>
     )
-}
-
-const types = {
-    meditateD: 'Meditate',
-    sleepD: 'Sleep',
-    moveD: 'Move',
-    focusD: 'Focus'
-}
-
-const buttoncolour = {
-    meditateD: color.Med1,
-    sleepD: color.Sleep2,
-    moveD: color.Move1,
-    focusD: color.Focus1
 }
 
 const styles = StyleSheet.create({
