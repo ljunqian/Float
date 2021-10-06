@@ -35,7 +35,7 @@ const GuideDetail = ({ navigation, props, route }) => {
                 {/* Type/Duration */}
                 <View style={{ marginBottom: 20, flexDirection: 'row'}}>
                     <Text style={[typo.T3, {color: 'white', marginTop: 3}]}>
-                        { detail.type }
+                        { types[detail.type] }
                     </Text>
                     <Image source={clock} style={{ top: 3, marginLeft: 10}} />
                     <Text style={[typo.T3, {color: 'white', marginLeft: 10, marginTop: 3}]}>
@@ -60,11 +60,18 @@ const GuideDetail = ({ navigation, props, route }) => {
     )
 }
 
+const types = {
+    meditateD: 'Meditate',
+    sleepD: 'Sleep',
+    moveD: 'Move',
+    focusD: 'Focus'
+}
+
 const buttoncolour = {
-    Meditate: color.Med1,
-    Sleep: color.Sleep2,
-    Move: color.Move1,
-    Focus: color.Focus1
+    meditateD: color.Med1,
+    sleepD: color.Sleep2,
+    moveD: color.Move1,
+    focusD: color.Focus1
 }
 
 const styles = StyleSheet.create({

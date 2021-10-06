@@ -43,16 +43,11 @@ const Activity = ({ navigation, route }) => {
                     </View>
 
                     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-
                         <VideoComponent navigation={navigation} array={detail} />
-
-                        {/* <Text style={[typo.H2, {marginTop: 10, color: 'white', fontWeight: '400'}]}>
-                        13:42
-                    </Text> */}
                     </View>
 
                     <View style={{ flex: 5, backgroundColor: 'white' }}>
-                        {/* <Text>This is the bottom space </Text> */}
+                        {/* This is the bottom space  */}
                     </View>
 
 
@@ -102,7 +97,7 @@ const VideoComponent = ({ array, navigation }) => {
                     height={231}
                     width={410}
                     play={false}
-                    videoId={detail.source} // videoId to be loaded from `detail` received
+                    videoId={detail.source} 
                     onChangeState={event => {
                         if (event === 'ended') {
                             // auto navigate upon completion
