@@ -4,19 +4,20 @@ import typo from '../../../styles/typography';
 import { color } from '../../../styles/theme';
 import layout from '../../../styles/componentLayout';
 import * as Progress from 'react-native-progress';
-import MedBG from '../../../assets/images/meditate-planet.png';
+import oldMedBG from '../../../assets/images/meditate-planet.png';
+import MedBG from '../../../assets/images/mediitatebgnew.png';
+import StarsBG from '../../../assets/images/stars.png';
 import MedAvatar from '../../../assets/images/meditate-avatar.png';
 import Med from '../../../assets/images/med-1.png'; 
 import Mov from '../../../assets/images/mov-1.png';
 import Med2 from '../../../assets/images/med2.png';
 import play from '../../../assets/icons/play.png';
-import { overflow } from 'styled-system';
 import { Guides } from '../constants';
 
 const GuideCardComponent = (props)  => {
   return (
     <TouchableOpacity style={[layout.guideCard, props.style, {overflow: 'hidden'}]} onPress={props.click}>
-      <Image source={props.img} style={{position: 'absolute', zIndex: 0, top: -8, left: -5, width:props.width, height:props.height }}/>
+      <Image source={props.img} style={{position: 'absolute', zIndex: 0, top: -6, left: -5, width:props.width, height:props.height }}/>
       <Text style={[typo.T3, {marginBottom: 5}]}>
         {props.title}
       </Text>
@@ -48,7 +49,7 @@ const Recent = ({ array, navigation }) => {
 
   return (
     <View>
-        <Text style={typo.H1}>
+        <Text style={[typo.H1, {left:10}]}>
         Recent
       </Text>
       <View style={{display: 'flex', flexDirection:'row'}}>
@@ -71,7 +72,7 @@ const Explore = ({ array, navigation }) => {
   const four = array[6];
     return (
       <View> 
-        <Text style={[typo.H1, {marginTop: 20}]}>
+        <Text style={[typo.H1, {marginTop: 20,left:10}]}>
           Explore
         </Text>
         <View style={{display: 'flex', flexDirection: 'row'}}>
@@ -90,15 +91,16 @@ const Explore = ({ array, navigation }) => {
 const MeditateScreen = ({navigation}) => {
   return (
     <ScrollView style={{backgroundColor: '#272727'}}> 
-      <ImageBackground source={MedBG}  resizeMode="cover" style={{width: '100%'}} >
+      <ImageBackground source={StarsBG}  resizeMode="cover" style={{width: '100%'}} >
+      <Image source={oldMedBG} style={{ top: -1175, left: -45, zIndex: 0, transform:[{scaleY:-1}], position: 'absolute', width: '110%'}}/>
       <View style={layout.header}>
         <View style={{height: 200}}>
           
-        <Text style={[typo.H0]}>
+        <Text style={[typo.H0,{left:20}]}>
           Meditation
         </Text>
         
-          <Text style={[typo.T2, {color:'white'}]}>
+        <Text style={[typo.T2, {color:'white', left:20 }]}>
             Level 1
           </Text>
           <Progress.Bar 
@@ -115,7 +117,7 @@ const MeditateScreen = ({navigation}) => {
             <Text style={typo.H1}>
               Meditation Session
             </Text>
-            <TouchableOpacity style={[layout.big_button, {backgroundColor: color.Med3, marginBottom: 30, zIndex:2, flexDirection: 'row'}]}>
+            <TouchableOpacity style={[layout.big_button, {backgroundColor: color.Med1, marginBottom: 30, zIndex:2, flexDirection: 'row'}]}>
                 <Image source={play} style={{marginRight: 5}} />
                 <Text style={[typo.T4, {color: 'white', fontWeight: '400'}]}>
                   Play
@@ -124,46 +126,27 @@ const MeditateScreen = ({navigation}) => {
           </View>
       </View>
       <TouchableOpacity style={[layout.container,]} onPress={() => navigation.navigate('GuideDetail', Guides[1])}>
-      
-      <View style={{height: 155, display: 'flex', 
-        flexDirection: 'row', padding: 12,
-        borderRadius: 20,
-        margin: 6, overflow:'hidden'}}>
-        <ImageBackground source={Med} style={{width:'108%', height: 155, top:-12, left:-16, flexDirection:'row', padding: 12}}>  
-        <View style={{flex: 1}}></View>
-        <View style={{flex: 3, alignItems: 'center', justifyContent: 'center'}}>
-          <Text style={[typo.H4, {color: 'white'}]}>
-            Featured
-          </Text> 
-        </View>
-        <View style={{flex: 1, alignItems: 'flex-end'}}>
-          <MinuteView duration={Guides[1].duration}/>
+        <ImageBackground source={Med} style={{width:'100%'}}>
+        <View style={{height: 155, display: 'flex', 
+          flexDirection: 'row', padding: 12,
+          borderRadius: 20,
+          margin: 6, }}>
+          <View style={{flex: 1}}></View>
+          <View style={{flex: 3, alignItems: 'center', justifyContent: 'center'}}>
+            <Text style={[typo.H4, {color: 'white' }]}>
+              Featured
+            </Text> 
+          </View>
+          <View style={{flex: 1, alignItems: 'flex-end'}}>
+            <MinuteView duration={2}/>
+          </View>
         </View>
         </ImageBackground>
-      </View>
         
       </TouchableOpacity>
       <View style={layout.container}>
         <Recent array={Guides} navigation={navigation}/>
         <Explore array={Guides} navigation={navigation}/>
-
-        <View style={{display: 'flex', flexDirection: 'row'}}>
-          <View style={{flex: 1}}>
-            <Text style={[typo.H4, {marginTop: 20, color: 'white'}]}>
-              Group Meditation
-            </Text>
-            <TouchableOpacity style={[layout.bigger_button, {backgroundColor: color.Med3}]}>
-              <Text style={[typo.T4, {color: 'white'}]}>
-                Join
-              </Text>
-            </TouchableOpacity>
-          </View>
-          <View style={{flex: 1, marginTop: 20}}>
-            <View style={[layout.imageCard, {overflow: 'hidden'}]}>
-              <Image source={Med2} style={{top: -15, left: -20}}/>
-            </View>
-          </View>
-        </View>
       </View>
       </ImageBackground>
     </ScrollView>

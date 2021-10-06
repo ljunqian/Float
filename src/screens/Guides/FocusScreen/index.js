@@ -5,6 +5,7 @@ import layout from '../../../styles/componentLayout';
 import { color } from '../../../styles/theme';
 import * as Progress from 'react-native-progress';
 import FocusBG from '../../../assets/images/focus-planet.png';
+import StarsBG from '../../../assets/images/stars.png';
 import SleepAvatar from '../../../assets/images/sleep-avatar.png';
 import Focus1 from '../../../assets/images/focus-1.png';
 import play from '../../../assets/icons/play.png';
@@ -44,16 +45,16 @@ const Recent = ({ array, navigation }) => {
 
   return (
     <View>
-      <Text style={typo.H1}>
+        <Text style={[typo.H1, {left:10}]}>
         Recent
       </Text>
       <View style={{display: 'flex', flexDirection:'row'}}>
         <View style={{flex:1, display: 'flex',flexDirection: 'column'}}>        
           <GuideCardComponent style={{height: 130}} title={one.title} dur={one.duration} img={one.thumbnail} height={140} width={200} click={() => navigation.navigate('GuideDetail', one)}/>
-          <GuideCardComponent style={{height: 195}} title={two.title} dur={two.duration} img={two.thumbnail} height={210} width={200} click={() => navigation.navigate('GuideDetail', two)}/>          
+          <GuideCardComponent style={{height: 195}} title={two.title} dur={two.duration} img={two.thumbnail} height={210} width={200} click={() => navigation.navigate('GuideDetail', two)}/>        
         </View>
         <View style={{flex:1}}>
-          <GuideCardComponent style={{height: 272}} title={three.title} dur={three.duration} img={three.thumbnail} height={295} width={190} click={() => navigation.navigate('GuideDetail', three)}/>          
+          <GuideCardComponent style={{height: 272}} title={three.title} dur={three.duration} img={three.thumbnail} height={285} width={200} click={() => navigation.navigate('GuideDetail', three)}/>          
          </View>
       </View>
     </View>
@@ -68,16 +69,16 @@ const Explore = ({ array, navigation }) => {
 
   return (
     <View> 
-      <Text style={[typo.H1, {marginTop: 20}]}>
+      <Text style={[typo.H1, {marginTop: 20, left:10}]}>
         Explore
       </Text>
       <View style={{display: 'flex', flexDirection: 'row'}}>
         <View style={{flex: 1, display: 'flex'}}>
           <GuideCardComponent style={{height: 130}} title={one.title} dur={one.duration} img={one.thumbnail} height={140} width={200} click={() => navigation.navigate('GuideDetail', one)}/>
-          <GuideCardComponent style={{height: 272}} title={three.title} dur={three.duration} img={three.thumbnail} height={295} width={190} click={() => navigation.navigate('GuideDetail', three)}/>
+          <GuideCardComponent style={{height: 272}} title={three.title} dur={three.duration} img={three.thumbnail} height={285} width={200} click={() => navigation.navigate('GuideDetail', three)}/>
         </View>
         <View style={{flex: 1, display: 'flex'}}>
-          <GuideCardComponent style={{height: 195}} title={two.title} dur={two.duration} img={two.thumbnail} height={210} width={200} click={() => navigation.navigate('GuideDetail', two)}/>
+          <GuideCardComponent style={{height: 195}} title={two.title} dur={two.duration} img={two.thumbnail} height={220} width={200} click={() => navigation.navigate('GuideDetail', two)}/>
           <GuideCardComponent style={{height: 130}} title={four.title} dur={four.duration} img={four.thumbnail} height={150} width={200} click={() => navigation.navigate('GuideDetail', four)}/>
         </View>
       </View>
@@ -88,7 +89,8 @@ const Explore = ({ array, navigation }) => {
 const FocusScreen = ({navigation}) => {
   return (
     <ScrollView style={{backgroundColor: '#272727'}}> 
-      <ImageBackground source={FocusBG}  resizeMode="cover" style={{width: '100%'}} >
+      <ImageBackground source={StarsBG}  resizeMode="cover" style={{width: '100%'}} >
+      <Image source={FocusBG} style={{ top: -1175, left: -45, zIndex: 0, transform:[{scaleY:-1}], position: 'absolute', width: '110%'}}/>
       <View style={layout.header}>
         <View style={{height: 200}}>
           
