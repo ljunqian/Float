@@ -1,7 +1,7 @@
 
 import React, { Fragment, useContext, useEffect, useState } from 'react';
-import { Center, NativeBaseProvider, HStack, Box, VStack, usePropsResolution, Flex } from 'native-base';
-import { Button, Text, View, ScrollView, TouchableOpacity, Image, Modal, Alert, Pressable } from 'react-native';
+import { Center, NativeBaseProvider, HStack, Box, VStack,} from 'native-base';
+import { Button, Text, View, ScrollView, TouchableOpacity, Image, } from 'react-native';
 
 import typo from '../../styles/typography';
 import { color } from '../../styles/theme';
@@ -14,12 +14,7 @@ import { TabClicked, TabNotClicked, RewardPopup } from './component';
 
 import {connect, useSelector, useDispatch} from 'react-redux';
 import {updateAvatarState, purchaseAsset} from './Redux/RewardAction';
-
-
-import {
-  VoucherImages,
-  rewardTabs,
-} from './assetConstants';
+import { rewardTabs } from './assetConstants';
 
 const RewardScreen = ({ navigation }) => {
   const [isTab, setIsTab] = useState("Background");
@@ -176,7 +171,7 @@ const RewardCard = (props) => {
 
 const VoucherCard = (props) => {
   const redeemStatus = props.redeemed;
-  
+
   const redeemVoucher = () => {
     // if my coins >= reward value
     if (redeemStatus === false) {
