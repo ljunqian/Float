@@ -13,7 +13,7 @@ import CoinIcon from '../../assets/icons/coins.png';
 import { TabClicked, TabNotClicked, RewardPopup } from './component';
 
 import {connect, useSelector, useDispatch} from 'react-redux';
-import {updateAvatarState} from '../GlobalStates/RewardAction';
+import {updateAvatarState, purchaseAsset} from './Redux/RewardAction';
 
 
 import {
@@ -29,15 +29,11 @@ const RewardScreen = ({ navigation }) => {
   const [selected, setSelected] = useState(null);
 
   const userData = useSelector((state) => state.reward);
-  const [userState, setUserState] = useState(userData);
 
   const [modalVisible, setModalVisible] = useState(false);
   const [modalContent, setModalContent] = useState();
   const [modalEnoughCoins, setModalEnoughCoins] = useState();
 
-  const [backgroundState, setBackgroundState] = useState(BackgroundImages);
-  const [hatState, setHatState] = useState(HatImages);
-  const [accessoryState, setAccessoryState] = useState(AccessoryImages);
   const [voucherArrayState, setVoucherArrayState] = useState(VoucherImages);
 
   const dispatch = useDispatch();
@@ -55,8 +51,8 @@ const RewardScreen = ({ navigation }) => {
                 asset={asset.name}
                 coinsValue={asset.value}
                 purchased={asset.purchased}
-                equipped={asset.equipped}
-                updateAssetState={(purchased, equipped) => updateAssetState(type, asset.name, purchased, equipped, assetArray)}
+                equipped={asset.name === userData[type]}
+                buyAsset={() => dispatch(purchaseAsset(type, asset.name))}
                 updateUser={(name) => updateAvatar(type, name)}
                 value={selected}
                 showModal={(enough) => showModal(asset, enough)}
@@ -88,40 +84,9 @@ const RewardScreen = ({ navigation }) => {
     setVoucherArrayState(newVoucherArray);
   }
 
-  const updateAssetState = (type, name, purchased, equipped, assetArray) => {
-    const newAssets = assetArray.map((asset) => {
-      if (asset.name === name) {
-        return {
-          ...asset,
-          purchased: purchased,
-          equipped: equipped,
-        }
-      } else {
-        if (equipped) {
-          return {
-            ...asset,
-            equipped: false
-          }
-        }
-        return asset;
-      }
-    });
-    if (type === "background") {
-      setBackgroundState(newAssets);
-    } else
-      if (type === "hat") {
-        setHatState(newAssets);
-      } else {
-        setAccessoryState(newAssets);
-      }
-  }
-
+  
   const updateAvatar = (type, name) => {
     dispatch(updateAvatarState(type, name));
-    setUserState({
-      ...userState,
-      [type]: name,
-    })
   }
 
   return (
@@ -149,13 +114,13 @@ const RewardScreen = ({ navigation }) => {
 
         <ScrollView showsVerticalScrollIndicator={false}>
           {isTab === "Background" ? (
-            <AssetChoices assetArray={backgroundState} type={"background"} />
+            <AssetChoices assetArray={userData.backgroundList} type={"background"} />
           ) 
           : isTab === "Hats" ? (
-            <AssetChoices assetArray={hatState} type={"hat"}/>
+            <AssetChoices assetArray={userData.hatList} type={"hat"}/>
             
           ) : isTab === "Accessories" ? (
-            <AssetChoices assetArray= {accessoryState} type={"accessory"}/>
+            <AssetChoices assetArray= {userData.accessoryList} type={"accessory"}/>
 
           ) : isTab === "Vouchers" ? (
             <Fragment>
@@ -181,9 +146,10 @@ const RewardScreen = ({ navigation }) => {
 
 
 const RewardCard = (props) => {
-  const [purchasestatus, setIsPurchaseStatus] = useState(props.purchased);
-  const [equippedstatus, setIsEquippedStatus] = useState(props.equipped);
-
+  //const [purchasestatus, setIsPurchaseStatus] = useState(props.purchased);
+  //const [equippedstatus, setIsEquippedStatus] = useState(props.equipped);
+  const purchasestatus = props.purchased;
+  const equippedstatus = props.equipped;
   let bgColour = 'white';
 
   if (equippedstatus === true) {
@@ -193,25 +159,15 @@ const RewardCard = (props) => {
   const purchaseOrEquip = () => {
     // if my coins >= asset value
     if (!purchasestatus && !equippedstatus) {
-      //buy asset
-      setIsPurchaseStatus(true);
-      setIsEquippedStatus(true);
+      props.buyAsset();
       props.showModal(true);
-      props.updateUser(props.asset);
-      props.updateAssetState(true, true);
     } else
-      if (purchasestatus && !equippedstatus) {
-        //add asset onto avatar
-        setIsEquippedStatus(true);
-        props.updateUser(props.asset);
-        props.updateAssetState(purchasestatus, true);
-      } else
-        if (purchasestatus && equippedstatus) {
-          //remove asset from avatar
-          setIsEquippedStatus(false);
-          props.updateUser("Remove Asset");
-          props.updateAssetState(purchasestatus, false);
-        }
+    if (purchasestatus && !equippedstatus) {
+      props.updateUser(props.asset);
+    } else
+    if (purchasestatus && equippedstatus) {
+      props.updateUser("Remove Asset");
+    }
   }
 
   return (

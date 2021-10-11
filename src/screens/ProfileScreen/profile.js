@@ -14,8 +14,6 @@ import {
 const ProfileScreen = (props) => {
 
   const userState = useSelector((state)=> state.reward);
-  console.log("status cc", userState.reward);
-  
 
   const AvatarBackground = ({backgroundName}) => {
     const bg = BackgroundImages.find(background => background.name === backgroundName);

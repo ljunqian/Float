@@ -4,7 +4,7 @@ import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 //* Reducers
-import RewardReducer from './RewardReducer'
+import RewardReducer from '../RewardScreen/Redux/RewardReducer'
 import UserReducer from './UserReducer'
 
 //create middleware
