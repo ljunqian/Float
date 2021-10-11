@@ -1,4 +1,3 @@
-import {connect, useSelector, useDispatch} from 'react-redux';
 import {
   CHANGE_ACCESSORY,
   CHANGE_BACKGROUND,

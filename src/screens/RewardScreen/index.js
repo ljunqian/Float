@@ -17,24 +17,18 @@ import {updateAvatarState, purchaseAsset} from './Redux/RewardAction';
 
 
 import {
-  BackgroundImages,
-  HatImages,
-  AccessoryImages,
   VoucherImages,
   rewardTabs,
 } from './assetConstants';
 
 const RewardScreen = ({ navigation }) => {
   const [isTab, setIsTab] = useState("Background");
-  const [selected, setSelected] = useState(null);
 
   const userData = useSelector((state) => state.reward);
 
   const [modalVisible, setModalVisible] = useState(false);
   const [modalContent, setModalContent] = useState();
   const [modalEnoughCoins, setModalEnoughCoins] = useState();
-
-  const [voucherArrayState, setVoucherArrayState] = useState(VoucherImages);
 
   const dispatch = useDispatch();
   
@@ -54,7 +48,6 @@ const RewardScreen = ({ navigation }) => {
                 equipped={asset.name === userData[type]}
                 buyAsset={() => dispatch(purchaseAsset(type, asset.name))}
                 updateUser={(name) => updateAvatar(type, name)}
-                value={selected}
                 showModal={(enough) => showModal(asset, enough)}
               />
             )
@@ -70,20 +63,6 @@ const RewardScreen = ({ navigation }) => {
     setModalVisible(true);
     setModalEnoughCoins(enough);
   }
-
-  const updateVoucherArrayState = (name, redeemed, voucherArrayState) => {
-    const newVoucherArray = voucherArrayState.map((voucher) => {
-      if (voucher.name === name) {
-        return {
-          ...voucher,
-          redeemed: redeemed
-        }
-      }
-      return voucher;
-    });
-    setVoucherArrayState(newVoucherArray);
-  }
-
   
   const updateAvatar = (type, name) => {
     dispatch(updateAvatarState(type, name));
@@ -125,11 +104,11 @@ const RewardScreen = ({ navigation }) => {
           ) : isTab === "Vouchers" ? (
             <Fragment>
               <View style={{ flex: 1, display: 'flex' }}>
-                {voucherArrayState.map((voucherInfo) => {
+                {userData.voucherList.map((voucherInfo) => {
                   return (
                     <VoucherCard key={voucherInfo.id} img={voucherInfo.source} asset={voucherInfo.name} coinsValue={voucherInfo.value}
-                      redeemed={voucherInfo.redeemed} showModal={(enough) => showModal(voucherInfo, enough)}
-                      updateVoucherState={(redeemed) => updateVoucherArrayState(voucherInfo.name, redeemed, voucherArrayState)} />
+                      redeemed={voucherInfo.purchased} showModal={(enough) => showModal(voucherInfo, enough)}
+                      buyVoucher={()=>dispatch(purchaseAsset('voucher', voucherInfo.name))} />
                   )
                 })
                 }
@@ -146,15 +125,8 @@ const RewardScreen = ({ navigation }) => {
 
 
 const RewardCard = (props) => {
-  //const [purchasestatus, setIsPurchaseStatus] = useState(props.purchased);
-  //const [equippedstatus, setIsEquippedStatus] = useState(props.equipped);
   const purchasestatus = props.purchased;
   const equippedstatus = props.equipped;
-  let bgColour = 'white';
-
-  if (equippedstatus === true) {
-    bgColour = '#A5A6F6'
-  }
 
   const purchaseOrEquip = () => {
     // if my coins >= asset value
@@ -174,7 +146,7 @@ const RewardCard = (props) => {
     <View>
       <TouchableOpacity onPress={() => { purchaseOrEquip(); }}>
         <VStack>
-          <View style={[style.rewardCardContainer, { backgroundColor: bgColour }]}>
+          <View style={[style.rewardCardContainer, { backgroundColor: equippedstatus? '#A5A6F6' : 'white' }]}>
             <Image source={props.img} style={style.rewardItemImage} />
             <HStack>
               <Text style={{ marginTop: 5, marginLeft: 5, fontSize: 14, fontFamily: 'Montserrat-Bold' }}>
@@ -203,27 +175,20 @@ const RewardCard = (props) => {
 }
 
 const VoucherCard = (props) => {
-  const [redeemStatus, setIsRedeemStatus] = useState(props.redeemed);
-
-  let bgColour = 'white';
-
-  if (redeemStatus === true) {
-    bgColour = '#A5A6F6'
-  }
-
+  const redeemStatus = props.redeemed;
+  
   const redeemVoucher = () => {
     // if my coins >= reward value
     if (redeemStatus === false) {
-      setIsRedeemStatus(true);
       props.showModal(true);
-      props.updateVoucherState(true);
+      props.buyVoucher();
     }
   }
 
   return (
     <Fragment>
-      <TouchableOpacity onPress={redeemVoucher} disabled={redeemStatus == true ? true : false} >
-        <View style={{ backgroundColor: bgColour, height: 100, marginHorizontal: 20, marginBottom: 16, borderRadius: 10, flexDirection: 'row' }}>
+      <TouchableOpacity onPress={redeemVoucher} disabled={redeemStatus} >
+        <View style={{ backgroundColor: redeemStatus ? '#A5A6F6': 'white', height: 100, marginHorizontal: 20, marginBottom: 16, borderRadius: 10, flexDirection: 'row' }}>
           <Image source={props.img} style={{ marginLeft: 14, marginVertical: 10 }} />
           <View style={{ flexDirection: 'column', justifyContent: 'center', marginLeft: 22 }}>
             <Text style={typo.T1}>{props.asset}</Text>
