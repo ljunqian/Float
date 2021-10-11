@@ -9,6 +9,13 @@ import { color } from '../../styles/theme';
 import Friend1 from '../../assets/images/friend1.png';
 import Friend2 from '../../assets/images/friend2.png';
 import Friend3 from '../../assets/images/friend3.png';
+import JourneyBG from '../../assets/images/journeybg-1.gif';
+import Vector9 from '../../assets/images/Vector9.png';
+import mappin from '../../assets/images/mappin.png';
+import mappin1 from '../../assets/images/mappin-1.png';
+import mappin2 from '../../assets/images/mappin-2.png';
+import mappin3 from '../../assets/images/mappin-3.png';
+
 import { Auth } from 'aws-amplify';
 import { DataStore } from '@aws-amplify/datastore';
 import { SQLiteAdapter } from '@aws-amplify/datastore-storage-adapter';
@@ -81,10 +88,47 @@ const CurrentJourney = ({ info }) => {
 }
 
 const NewJourney = () => {
+
+  const JourneyBtn = ({ text, colour, top, left }) => {
+    return(
+      <TouchableOpacity style={[style.journeyButton, {top: top, left: left}]}> 
+        <Text style={[typo.H2, {color: colour}]}>
+          {text}
+        </Text>
+      </TouchableOpacity>
+    )
+  }
+  
+  const MapPin = ({ src, top, left }) => {
+    return <Image source={src} style={{position: 'absolute', top: top, left: left}}/>
+  }
+
+  const JourneyBgImg = () => {
+    return(
+      <>
+        <Image source={JourneyBG} style={{width: 411, height: 731, position: 'absolute'}}/>
+        <Image source={Vector9} style={{width: 300, height: 636.5, position: 'absolute', left: '15%'}}/>
+        <MapPin src={mappin} top={'22%'} left={'78%'}/>
+        <MapPin src={mappin1} top={'50%'} left={'10%'}/>
+        <MapPin src={mappin2} top={'69.5%'} left={'60%'}/>
+        <MapPin src={mappin3} top={'83%'} left={'28%'}/>
+      </>
+    )
+  }
+
   return(
-    <>
-      
-    </>
+    <View style={{display: 'flex', width: 411, height: 731}}>
+      <JourneyBgImg />
+      <View style={{marginTop: 33, alignSelf: 'center'}}>
+        <Text style={typo.H0}>
+          My Journey
+        </Text>
+      </View>
+      <JourneyBtn text={'Meditation'} colour={color.Med1} top={'23%'} left={'43%'}/>
+      <JourneyBtn text={'Sleep'} colour={color.Sleep2} top={'51%'} left={'25%'}/>
+      <JourneyBtn text={'Focus'} colour={color.Focus1} top={'70.5%'} left={'37%'}/>
+      <JourneyBtn text={'Move'} colour={color.Move1} top={'84%'} left={'43%'}/>
+    </View>
   )
 }
 
@@ -168,9 +212,9 @@ const MainProf = ({ navigation }) => {
         </View>
       ) : (
         <View style={{
-          flexDirection: "column", paddingTop: 10, paddingLeft: 5, paddingBottom: 25
+          flexDirection: "column", paddingTop: 10,
         }}>
-          <CurrentJourney info={info}/>
+          <NewJourney info={info}/>
         </View>
 
       )}
@@ -199,6 +243,15 @@ const style = StyleSheet.create({
     backgroundColor: 'white', padding: 12,
     display: 'flex', flexDirection: 'row',
     alignItems: 'center'
+  },
+  journeyButton: {
+    backgroundColor: 'white',
+    height: 40,
+    justifyContent: 'center',
+    alignSelf: 'flex-start',
+    paddingHorizontal: 15,
+    borderRadius: 20,
+    position: 'absolute'
   }
 
 })
