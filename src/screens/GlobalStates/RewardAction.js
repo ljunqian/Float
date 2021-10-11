@@ -22,9 +22,9 @@ const types = {
     accessory: 'CHANGE_ACCESSORY',
 
 }
-  export const updateAvatarState = (type,payload) => (
-    { 
-        type: types[type], 
-        payload: payload,
-    }
-  )
+export const updateAvatarState = (type,payload) => (
+  { 
+      type: types[type], 
+      payload: payload,
+  }
+)

@@ -14,7 +14,6 @@ import { TabClicked } from './component';
 import { TabNotClicked } from './component';
 
 import {connect, useSelector, useDispatch} from 'react-redux';
-import Store, {Context} from '../GlobalStates/store';
 import {updateAvatarState} from '../GlobalStates/RewardAction';
 
 import { 
@@ -200,55 +199,6 @@ const RewardScreen = ({ navigation }) => {
       ...userState,
       [type]: name,
     })
-  }
-
-  const AvatarBackground = ({backgroundName}) => {
-    const bg = BackgroundImages.find(background => background.name === backgroundName);
-    if (bg) {
-      return (
-        <Image source={bg.source} style={{width: 200, marginLeft: 120, height: 200, zIndex: -1, position:'absolute'}}/>
-      )
-    }
-    return <View/>
-  }
-
-  const AvatarHat = ({hatName}) => {
-    const hat = HatImages.find(hat => hat.name === hatName);
-    let top = 0, left = 0;
-
-    if (hat) {
-      return (
-        <Image source={hat.source} style={{transform: [{ rotate: '7 deg' }], top:18, left:110, position: 'absolute', zIndex: 2, width: 164, height: 140}}/>
-      )
-    }
-    return <View />
-  }
-
-  const AvatarAccessory = ({accName}) => {
-    const acc = AccessoryImages.find(acc => acc.name === accName);
-    let top = 0, left = 0;
-
-    if (acc) {
-      if(accName === 'Eyepatch'){
-        top = 33
-        left = 142
-      }else if(accName === 'Band Aid'){
-        top = 25
-        left = 156
-      }else {
-        if (accName === 'Mustache'){
-          top = 43
-        }else{
-          top = 50
-        }
-        left = 159
-      }
-
-      return (
-        <Image source={acc.source} style={{top: top, left: left, position: 'absolute', zIndex: 3, width: 164, height: 140}}/>
-      )
-    }
-    return <View />
   }
 
   return (
