@@ -13,7 +13,6 @@ import CoinIcon from '../../assets/icons/coins.png';
 import { TabClicked, TabNotClicked, RewardPopup } from './component';
 
 import {connect, useSelector, useDispatch} from 'react-redux';
-import Store, {Context} from '../GlobalStates/store';
 import {updateAvatarState} from '../GlobalStates/RewardAction';
 
 import { 
@@ -26,7 +25,7 @@ import {
 
 const RewardScreen = ({ navigation }) => {
   
-  const [tab, setIsTab] = useState("Background");
+  const [isTab, setIsTab] = useState("Background");
   const [selected, setSelected] = useState(null);
 
   const userData = useSelector((state)=> state.reward);
@@ -42,6 +41,7 @@ const RewardScreen = ({ navigation }) => {
   const [voucherArrayState, setVoucherArrayState] = useState(VoucherImages);
 
   const dispatch = useDispatch();
+
   const AssetChoices = ({assetArray, type}) => {
     return (
       <Fragment>
@@ -73,19 +73,6 @@ const RewardScreen = ({ navigation }) => {
     setModalContent(asset);
     setModalVisible(true);
     setModalEnoughCoins(enough);
-  }
-
-
-  const TabView = (props) => {
-    return(
-      <View style = {{alignItems: 'center', justifyContent: 'center'}}>
-              {tab === props.reward ? (
-                <TabClicked img={props.imgClicked} text={props.reward}/>
-              ) : (
-                <TabNotClicked img={props.imgNotCLicked} text={props.reward}/>
-              )}
-      </View>
-    )
   }
 
   const updateVoucherArrayState = (name, redeemed, voucherArrayState) => {
@@ -151,22 +138,27 @@ const RewardScreen = ({ navigation }) => {
         <HStack style={style.tabBar}>
           {rewardTabs.map((tab)=>(
             <TouchableOpacity onPress= { () => {setIsTab(tab.title)}} key={tab.title}>
-              <TabView reward={tab.title} imgClicked={tab.imgClicked} imgNotCLicked={tab.imgNotCLicked}/>
+              <View style = {{alignItems: 'center', justifyContent: 'center'}}>
+              { isTab === tab.title ?
+                <TabClicked img={tab.imgClicked} text={tab.title}/>
+                : <TabNotClicked img={tab.imgNotCLicked} text={tab.title}/>
+              }
+              </View>
             </TouchableOpacity>
           ))}
         </HStack>
 
         <ScrollView showsVerticalScrollIndicator={false}>
-          {tab === "Background" ? (
+          {isTab === "Background" ? (
             <AssetChoices assetArray={backgroundState} type={"background"} />
           ) 
-          : tab === "Hats" ? (
+          : isTab === "Hats" ? (
             <AssetChoices assetArray={hatState} type={"hat"}/>
             
-          ) : tab === "Accessories" ? (
+          ) : isTab === "Accessories" ? (
             <AssetChoices assetArray= {accessoryState} type={"accessory"}/>
 
-          ) : tab === "Vouchers" ? (
+          ) : isTab === "Vouchers" ? (
             <Fragment>
               <View style={{flex:1, display: 'flex'}}>
                   {voucherArrayState.map((voucherInfo)=>{
