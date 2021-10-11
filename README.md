@@ -2,4 +2,5 @@
 
 NTU Design & Innovation Project
 
-Test123
+This project aims to recreate and improve existing app Headspace.
+
