@@ -69,6 +69,25 @@ const FriendComponent = ({ img, name }) => {
   )
 }
 
+const CurrentJourney = ({ info }) => {
+  return(
+    <>
+      <JourneyComponent action="Total Time Meditated:" time={info.meditateD} />
+      <JourneyComponent action="Total Time Slept:" time={info.sleepD} />
+      <JourneyComponent action="Total Sessions Completed:" time={info.moveD} />
+      <JourneyComponent action="Average Time Spent Per Session:" time={info.focusD} />
+    </>
+  )
+}
+
+const NewJourney = () => {
+  return(
+    <>
+      
+    </>
+  )
+}
+
 const MainProf = ({ navigation }) => {
   const [active, setActive] = useState(true);
   const [info, setInfo] = useState({
@@ -151,10 +170,7 @@ const MainProf = ({ navigation }) => {
         <View style={{
           flexDirection: "column", paddingTop: 10, paddingLeft: 5, paddingBottom: 25
         }}>
-          <JourneyComponent action="Total Time Meditated:" time={info.meditateD} />
-          <JourneyComponent action="Total Time Slept:" time={info.sleepD} />
-          <JourneyComponent action="Total Sessions Completed:" time={info.moveD} />
-          <JourneyComponent action="Average Time Spent Per Session:" time={info.focusD} />
+          <CurrentJourney info={info}/>
         </View>
 
       )}
