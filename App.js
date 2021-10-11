@@ -13,6 +13,7 @@ import typo from './src/styles/typography';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
+// Screens
 import changePass from './src/screens/ProfileScreen/changePass';
 import editProfile from './src/screens/ProfileScreen/editProfile';
 import ExploreScreen from './src/screens/Guides/ExploreScreen';
@@ -31,6 +32,9 @@ import GuideComplete from './src/screens/Guides/MeditateScreen/GuideComplete.js'
 import FocusScreen from './src/screens/Guides/FocusScreen';
 import SleepScreen from './src/screens/Guides/SleepScreen';
 import MoveScreen from './src/screens/Guides/MoveScreen';
+
+// Icon
+import { Icon } from 'react-native-elements';
 import CoinIcon from './src/assets/icons/coins.png';
 import UserIcon from './src/assets/icons/user.png';
 import MoveIcon from './src/assets/icons/move.png';
@@ -41,15 +45,12 @@ import MagnifyIcon from './src/assets/icons/magnifier.png';
 import Stars from './src/assets/images/stars.png';
 import Float from './src/assets/images/float.png';
 
-import { Icon } from 'react-native-elements';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { withAuthenticator } from 'aws-amplify-react-native';
 import Store, { Context } from './src/screens/Authenticate/store';
 import { Provider } from 'react-redux';
 import NewStore from './src/screens/GlobalStates/GlobalStore';
-import { createStore } from 'redux';
-import RewardReducer from './src/screens/GlobalStates/RewardReducer';
 
 import { Auth } from 'aws-amplify';
 import Amplify from 'aws-amplify';
@@ -158,7 +159,7 @@ const App = () => {
   async function isUserAuthenticated() {
     try {
       const user = await Auth.currentAuthenticatedUser();
-      //console.log('user is',user);
+      console.log('user is',user);
       if (user) {
         setisNotSignedIn(false);
         dispatch({ type: 'SIGN_IN', payload: true });

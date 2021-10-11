@@ -4,8 +4,6 @@ import Avatar from '../../assets/images/avatar.png';
 
 import {bindActionCreators} from 'redux';
 import {connect, useSelector, useDispatch} from 'react-redux';
-import { testAddAvatar } from '../GlobalStates/RewardAction';
-import Store, {Context} from '../GlobalStates/store';
 import { 
   BackgroundImages,
   HatImages,
@@ -16,8 +14,6 @@ import {
 const ProfileScreen = (props) => {
 
   const userState = useSelector((state)=> state.reward);
-  console.log("status cc", userState.reward);
-  
 
   const AvatarBackground = ({backgroundName}) => {
     const bg = BackgroundImages.find(background => background.name === backgroundName);
