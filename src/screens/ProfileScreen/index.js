@@ -9,17 +9,10 @@ import { color } from '../../styles/theme';
 import Friend1 from '../../assets/images/friend1.png';
 import Friend2 from '../../assets/images/friend2.png';
 import Friend3 from '../../assets/images/friend3.png';
-import { Auth } from 'aws-amplify';
-import { DataStore } from '@aws-amplify/datastore';
-import { SQLiteAdapter } from '@aws-amplify/datastore-storage-adapter';
-import { User } from "../../../src/models";
+import { API, Auth, graphqlOperation } from 'aws-amplify';
+import { getUser } from "../../graphql/queries"
 
-DataStore.configure({
-  storageAdapter: SQLiteAdapter
-});
-
-
-const Coins = ({ navigation }) => {
+const Coins = ({ navigation, i }) => {
   return (
     <TouchableOpacity
       onPress={() => { navigation.navigate('Reward'); }}
@@ -29,7 +22,7 @@ const Coins = ({ navigation }) => {
       }}>
 
       <Text style={typo.H3}>
-        My Coins Amount: 499
+        My Coins Amount: {i.coins}
       </Text>
       <View
         style={{ alignSelf: 'center', backgroundColor: '#CD5959', borderRadius: 8, marginLeft: 5, padding: 5, }}
@@ -73,7 +66,7 @@ const MainProf = ({ navigation }) => {
   const [active, setActive] = useState(true);
   const [info, setInfo] = useState({
     username: '',
-    coins: '',
+    coins: 0,
     meditateD: '',
     sleepD: '',
     moveD: ''
@@ -82,16 +75,18 @@ const MainProf = ({ navigation }) => {
   const getUserInfo = async () => {
     try {
       const user = await Auth.currentAuthenticatedUser();
-      const query = await DataStore.query(User, user.attributes.sub);
+      const {data} = await API.graphql(graphqlOperation(getUser, { id: user.attributes.sub }));
+      console.log(data);
       setInfo({
-        meditateD: secondsToHms(query.meditateD),
-        sleepD: secondsToHms(query.sleepD),
-        moveD: secondsToHms(query.moveD),
-        focusD: secondsToHms(query.focusD),
-        username: user.username,
+        meditateD: secondsToHms(data.getUser.meditateD),
+        sleepD: secondsToHms(data.getUser.sleepD),
+        moveD: secondsToHms(data.getUser.moveD),
+        focusD: secondsToHms(data.getUser.focusD),
+        coins: data.getUser.coins,
+        username: user.username
       });
     } catch (error) {
-      console.log("Error saving post", error);
+      console.log(error);
     }
   }
 
@@ -115,7 +110,7 @@ const MainProf = ({ navigation }) => {
     <ScrollView style={{ backgroundColor: color.bg, color: 'white' }}>
       <ProfileScreen />
       <Text style={[typo.H1, { textAlign: 'center' }]}>{info.username}</Text>
-      <Coins navigation={navigation} />
+      <Coins navigation={navigation} i={info} />
       <View style={{
         flexDirection: "row", paddingLeft: 5, paddingBottom: 5, paddingRight: 5
       }}>

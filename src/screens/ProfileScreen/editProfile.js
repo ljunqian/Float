@@ -7,7 +7,7 @@ import { Auth } from 'aws-amplify';
 import ProfileScreen from './profile';
 import { color } from '../../styles/theme';
 import BirthDate from '../Authenticate/BirthDate'
-import { Input, Center,Select, NativeBaseProvider } from "native-base"
+import { Input, Center, Select, NativeBaseProvider } from "native-base"
 
 const editProfile = ({ navigation, route }) => {
   const [state, dispatch] = React.useContext(Context);
@@ -19,102 +19,117 @@ const editProfile = ({ navigation, route }) => {
   const [errorstate, seterrorState] = useState(false);
   const [errorMessage, seterrorMessage] = useState('');
   const [gender, setGender] = useState('M');
-useEffect(()=> {
-  console.log('context',state);
-}, [])
+
+
+  const handlechange = async () => {
+    try {
+      let user = await Auth.currentAuthenticatedUser();
+
+      let result = await Auth.updateUserAttributes(user, {
+        'email': 'me@anotherdomain.com',
+        'family_name': 'Lastname'
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    console.log('context', state);
+  }, [])
+
   return (
-  <NativeBaseProvider>
-    <View style={{ backgroundColor: color.bg, minHeight: '100%' }}>
-      <View style={{marginLeft:50}}>
-        <Input
-                  style = {{width:331, height:40}}
-                  value={name}
-                  onChangeText={setName}
-                  variant="underlined"
-                  placeholder="Name"
-                  color='white'
-                />
-        <Input
-                  style = {{width:331, height:40}}
-                  value={username}
-                  onChangeText={setUsername}
-                  variant="underlined"
-                  placeholder="Username"
-                  color='white'
-                />
-        <Input
-                  style = {{width:331, height:40}}
-                  value={email}
-                  onChangeText={setEmail}
-                  variant="underlined"
-                  placeholder="Your Email Address"
-                  color='white'
-                />
-        <Input
-                  style = {{width:331, height:40}}
-                  value={phone}
-                  onChangeText={setPhone}
-                  variant="underlined"
-                  placeholder="Phone Number"
-                  color='white'
-                />
-        <View
-                    style={{width:331, height:45}}>
-                    <Select
+    <NativeBaseProvider>
+      <View style={{ backgroundColor: color.bg, minHeight: '100%' }}>
+        <View style={{ marginLeft: 50 }}>
+          <Input
+            style={{ width: 331, height: 40 }}
+            value={name}
+            onChangeText={setName}
+            variant="underlined"
+            placeholder="Name"
+            color='white'
+          />
+          <Input
+            style={{ width: 331, height: 40 }}
+            value={username}
+            onChangeText={setUsername}
+            variant="underlined"
+            placeholder="Username"
+            color='white'
+          />
+          <Input
+            style={{ width: 331, height: 40 }}
+            value={email}
+            onChangeText={setEmail}
+            variant="underlined"
+            placeholder="Your Email Address"
+            color='white'
+          />
+          <Input
+            style={{ width: 331, height: 40 }}
+            value={phone}
+            onChangeText={setPhone}
+            variant="underlined"
+            placeholder="Phone Number"
+            color='white'
+          />
+          <View
+            style={{ width: 331, height: 45 }}>
+            <Select
 
-                      selectedValue={gender}
-                      minWidth={200}
-                      accessibilityLabel="Gender"
-                      placeholder="Gender"
-                      onValueChange={(itemValue) => setGender(itemValue)}
-                      _selectedItem={{
-                        bg: "cyan.600",
-                      }}
-                      _light={{ color: "white", }}
-                      _dark={{ color: "white", }}
-                    >
-                      <Select.Item label="Female" value="F" />
-                      <Select.Item label="Male" value="M" />
-                      <Select.Item label="Others" value="NA" />
-                    </Select></View>
-                    <View style={{marginBottom:100}}>
-                        <BirthDate />
-                    </View>
-        <TouchableOpacity onPress={() => {navigation.navigate('Change Password')}}>
-                <View style={{
-                              marginTop:10,
-                              marginRight:46,
-                              height: 40,
-                              backgroundColor: '#4263DD',
-                              alignItems: 'center',
-                              justifyContent: 'center',
-                              borderRadius: 35
-                              }}>
-                    <Text style={{ color: 'white' }}>Change Password</Text>
-                </View>
-              </TouchableOpacity>
-       <TouchableOpacity onPress={() => {}}>
-               <View style={{
-                             marginTop:10,
-                             marginRight:46,
-                             height: 40,
-                             backgroundColor: '#4263DD',
-                             alignItems: 'center',
-                             justifyContent: 'center',
-                             borderRadius: 35
-                             }}>
-                   <Text style={{ color: 'white' }}>Save Account Settings</Text>
-               </View>
-             </TouchableOpacity>
-       </View>
+              selectedValue={gender}
+              minWidth={200}
+              accessibilityLabel="Gender"
+              placeholder="Gender"
+              onValueChange={(itemValue) => setGender(itemValue)}
+              _selectedItem={{
+                bg: "cyan.600",
+              }}
+              _light={{ color: "white", }}
+              _dark={{ color: "white", }}
+            >
+              <Select.Item label="Female" value="F" />
+              <Select.Item label="Male" value="M" />
+              <Select.Item label="Others" value="NA" />
+            </Select></View>
+          <View style={{ marginBottom: 100 }}>
+            <BirthDate />
+          </View>
+          <TouchableOpacity onPress={() => { navigation.navigate('Change Password') }}>
+            <View style={{
+              marginTop: 10,
+              marginRight: 46,
+              height: 40,
+              backgroundColor: '#4263DD',
+              alignItems: 'center',
+              justifyContent: 'center',
+              borderRadius: 35
+            }}>
+              <Text style={{ color: 'white' }}>Change Password</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => { }}>
+            <View style={{
+              marginTop: 10,
+              marginRight: 46,
+              height: 40,
+              backgroundColor: '#4263DD',
+              alignItems: 'center',
+              justifyContent: 'center',
+              borderRadius: 35
+            }}>
+              <Text style={{ color: 'white' }}>Save Account Settings</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
 
-    </View>
+      </View>
 
     </NativeBaseProvider>
 
   )
 }
-
 
 export default editProfile;
 
