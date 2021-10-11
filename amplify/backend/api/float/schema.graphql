@@ -1,3 +1,11 @@
+type MTX @model @auth(rules: [{allow: private}]) {
+  id: ID!
+  type: String!
+  title: String!
+  price: Int!
+  filePath: String!
+}
+
 type User @model @auth(rules: [{allow: private}]) {
   id: ID!
   coins: Int!
@@ -6,5 +14,8 @@ type User @model @auth(rules: [{allow: private}]) {
   moveD: Int!
   focusD: Int!
   friends: [String!]
+  accessoryEquipped: String!
+  backgroundEquipped: String!
+  hatEquipped: String!
 }
  

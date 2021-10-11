@@ -325,7 +325,7 @@ const App = () => {
               headerShown: false
             })}
           />
-            <Stack.Screen name="Change Account Information" component={editProfile}
+            <Stack.Screen name="Edit Profile" component={editProfile}
               options={() => ({
                 headerTitleStyle: { color: 'white' },
                 headerTintColor: 'white'
