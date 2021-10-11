@@ -126,6 +126,7 @@ android/.gradle/buildOutputCleanup/outputFiles.bin
 android/.gradle/checksums/checksums.lock
 android/.gradle/checksums/md5-checksums.bin
 android/.gradle/checksums/sha1-checksums.bin
+android/app/build/intermediates/
 android/app/build/intermediates/desugar_graph/debug/out/currentProject/dirs_bucket_0/graph.bin
 android/app/build/intermediates/desugar_graph/debug/out/currentProject/dirs_bucket_1/graph.bin
 android/app/build/intermediates/desugar_graph/debug/out/currentProject/dirs_bucket_3/graph.bin
@@ -378,3 +379,4 @@ android/app/build/intermediates/res/merged/debug/values-zh-rHK_values-zh-rHK.ars
 android/app/build/intermediates/res/merged/debug/values-zh-rTW_values-zh-rTW.arsc.flat
 android/app/build/intermediates/res/merged/debug/values-zu_values-zu.arsc.flat
 android/app/build/outputs/logs/manifest-merger-debug-report.txt
+android/app/build/intermediates/incremental/mergeDebugAssets/merger.xml
