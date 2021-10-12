@@ -91,7 +91,7 @@ const SleepScreen = ({navigation}) => {
   return (
     <ScrollView style={{backgroundColor: '#272727'}}> 
       <ImageBackground source={StarsBG}  resizeMode="cover" style={{width: '100%'}} >
-      <Image source={SleepBG} style={{ top: -1175, left: -45, zIndex: 0, transform:[{scaleY:-1}], position: 'absolute', width: '110%'}}/>
+      <Image source={SleepBG} style={{ top: -900, left: -20, zIndex: 0, transform:[{scaleY:-1}], position: 'absolute', width: '110%', resizeMode: "contain"}}/>
       <View style={layout.header}>
         <View style={{height: 200}}>
           
