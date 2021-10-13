@@ -264,6 +264,10 @@ const App = () => {
                 </TouchableOpacity>
               ),
               headerTitle: () => (<View />),
+              headerStyle: {
+                backgroundColor: 'none',
+              },
+              headerShadowVisible: false,
             })}
           />
           <Stack.Screen name="Profile" component={ProfileScreen}
