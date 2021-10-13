@@ -16,6 +16,9 @@ import {connect, useSelector, useDispatch} from 'react-redux';
 import {updateAvatarState, purchaseAsset} from './Redux/RewardAction';
 import { rewardTabs } from './assetConstants';
 
+import { API, Auth, graphqlOperation } from 'aws-amplify';
+import { getUser } from "../../graphql/queries"
+
 const RewardScreen = ({ navigation }) => {
   const [isTab, setIsTab] = useState("Background");
 
