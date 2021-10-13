@@ -6,13 +6,15 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 //* Reducers
 import RewardReducer from '../RewardScreen/Redux/RewardReducer'
 import UserReducer from './UserReducer'
+import GuidesReducer from '../Guides/Redux/GuidesReducer'
 
 //create middleware
 const middleware = composeWithDevTools(applyMiddleware(thunk));
 
 const rootReducer = combineReducers({
     reward: RewardReducer, //calling the reducer file
-    user: UserReducer
+    user: UserReducer,
+    guide: GuidesReducer,
 });
 
 export default createStore(rootReducer, middleware);

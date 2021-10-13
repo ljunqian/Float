@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image, ImageBackground } from 'react-native';
 import typo from '../../../styles/typography';
 import { Guides } from './constants';
@@ -7,6 +7,8 @@ import { color } from '../../../styles/theme';
 import heart from '../../../assets/icons/heart.png';
 import clock from '../../../assets/icons/clock.png';
 import Med from '../../../assets/images/med-1.png';
+import { addRecent } from '../Redux/GuidesAction';
+import { useDispatch } from 'react-redux';
 
 const types = {
     meditate: 'Meditate',
@@ -25,6 +27,12 @@ const buttoncolour = {
 const GuideDetail = ({ navigation, props, route }) => {
 
     const detail = route.params;       // get object passed from previous activity 
+
+    const dispatch = useDispatch();
+    useEffect(()=>{
+        console.log('in detail', detail)
+        dispatch(addRecent({guide: detail}));
+    }, [detail]);
 
     return (
         <View style={{display: 'flex'}}> 

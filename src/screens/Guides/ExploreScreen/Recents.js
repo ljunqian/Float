@@ -5,6 +5,7 @@ import typo from '../../../styles/typography';
 import back from '../../../assets/icons/backbutton.png';
 import forward from '../../../assets/icons/forwardarrow.png';
 import { Guides } from '../constants';
+import { useSelector } from 'react-redux';
 
 const SearchComponent = ({userInput, setUserInput, navigation}) => {
     return (
@@ -24,9 +25,10 @@ const SearchComponent = ({userInput, setUserInput, navigation}) => {
 
 const Recents = ({ navigation }) => {
     const [userInput, setUserInput] = useState('');
+    const {recents} = useSelector((state) => state.guide);
 
     const ListComponent = () => {
-        let data = Guides.filter(item => 
+        let data = recents.filter(item => 
         item.type.toLowerCase().includes(userInput) || 
         item.title.toLowerCase().includes(userInput) || 
         item.description.toLowerCase().includes(userInput)); 
@@ -34,7 +36,7 @@ const Recents = ({ navigation }) => {
             <FlatList 
                 data={data}
                 renderItem={({ item })=>(
-                    <View style={{alignItems: 'center'}}>
+                    <View style={{alignItems: 'center'}} key={item.source}>
                         <TouchableOpacity style={styles.list} onPress={()=>navigation.navigate('GuideDetail', item)}>
                             <View style={styles.imageContainer}>
                                 <Image source={item.thumbnail} style={styles.image}/>
