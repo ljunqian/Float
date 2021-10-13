@@ -79,7 +79,6 @@ const VideoComponent = ({ array, navigation }) => {
 
     const playerRef = useRef();
     const detail = array;
-    console.log(detail);
     const getTime = function () {
         playerRef.current?.getCurrentTime().then(
             // currentTime => handleDuration(parseInt(currentTime), detail.type)

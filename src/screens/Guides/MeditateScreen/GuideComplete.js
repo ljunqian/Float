@@ -15,6 +15,8 @@ import redheart from '../../../assets/icons/redheart.png';
 import heart from '../../../assets/icons/heart.png';
 import { Guides } from './constants';
 
+import { useSelector } from 'react-redux';
+
 const ActDetailComponent = ({ detail }) => {
     return(
         <View style={styles.title}>
@@ -29,11 +31,12 @@ const ActDetailComponent = ({ detail }) => {
 }
 
 const ExpCoinsComponent = ({ styles, isTotal }) => {
+    const userCoins = useSelector((state) => state.user.userData.coins);
     return(
         <View style={[styles, {alignItems: 'center'}]}>
             <View style={{flexDirection: 'row', alignItems: 'center' }}>
                 <Text style={[typo.H2,{ color: 'white', fontWeight:'400'}]}>
-                    {isTotal?'4510':'+ 10'} 
+                    {isTotal? userCoins+10 :'+ 10'} 
                 </Text>
                 <View style={{alignItems: 'center', justifyContent: 'center'}}>
                     <Image source={coins} style={{left: 5, zIndex: 0}} />

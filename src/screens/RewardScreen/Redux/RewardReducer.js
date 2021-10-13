@@ -91,7 +91,6 @@ const RewardReducer = (prevState = INITIAL_STATE, action) => {
         }
       }
       case PURCHASE_VOUCHER: {
-        console.log("buy voucher ", action.payload);
         const newVoucher = updateAssetList(prevState.voucherList, action.payload);
         return {
           ...prevState,
