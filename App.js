@@ -252,7 +252,7 @@ const App = () => {
             options={({ navigation }) => ({
               headerRight: () => (
                 <TouchableOpacity
-                  onPress={() => Auth.currentAuthenticatedUser().then(console.log)}
+                  onPress={() => navigation.navigate('Search')}
                 >
                   <Image source={MagnifyIcon} />
                 </TouchableOpacity>
