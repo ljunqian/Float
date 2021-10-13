@@ -8,6 +8,19 @@ import heart from '../../../assets/icons/heart.png';
 import clock from '../../../assets/icons/clock.png';
 import Med from '../../../assets/images/med-1.png';
 
+const types = {
+    meditate: 'Meditate',
+    sleep: 'Sleep',
+    move: 'Move',
+    focus: 'Focus'
+}
+
+const buttoncolour = {
+    meditate: color.Med1,
+    sleep: color.Sleep2,
+    move: color.Move1,
+    focus: color.Focus1
+}
 
 const GuideDetail = ({ navigation, props, route }) => {
 
@@ -35,7 +48,8 @@ const GuideDetail = ({ navigation, props, route }) => {
                 {/* Type/Duration */}
                 <View style={{ marginBottom: 20, flexDirection: 'row'}}>
                     <Text style={[typo.T3, {color: 'white', marginTop: 3}]}>
-                        { detail.type }
+                        { types[detail.type]
+                         }
                     </Text>
                     <Image source={clock} style={{ top: 3, marginLeft: 10}} />
                     <Text style={[typo.T3, {color: 'white', marginLeft: 10, marginTop: 3}]}>
@@ -51,7 +65,7 @@ const GuideDetail = ({ navigation, props, route }) => {
             {/*BUTTON DIV*/}
             <TouchableOpacity style={styles.btnContainer}>
                 {/* Begin */}
-                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('GuideActivity', detail)}>
+                <TouchableOpacity style={[styles.button, {backgroundColor: buttoncolour[detail.type] }]} onPress={() => navigation.navigate('GuideActivity', detail)}>
                     <Text style={[typo.H3, {color: 'white'}]}>Begin</Text> 
                 </TouchableOpacity>    
             </TouchableOpacity>
@@ -85,7 +99,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',   
         justifyContent: 'center',
         borderRadius: 48, 
-        backgroundColor: color.Med3,
+        
     }
 })
 

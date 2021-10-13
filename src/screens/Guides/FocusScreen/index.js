@@ -5,6 +5,7 @@ import layout from '../../../styles/componentLayout';
 import { color } from '../../../styles/theme';
 import * as Progress from 'react-native-progress';
 import FocusBG from '../../../assets/images/focus-planet.png';
+import StarsBG from '../../../assets/images/stars.png';
 import SleepAvatar from '../../../assets/images/sleep-avatar.png';
 import Focus1 from '../../../assets/images/focus-1.png';
 import play from '../../../assets/icons/play.png';
@@ -44,7 +45,7 @@ const Recent = ({ array, navigation }) => {
 
   return (
     <View>
-      <Text style={typo.H1}>
+      <Text style={[typo.H1, {left:10}]}>
         Recent
       </Text>
       <View style={{display: 'flex', flexDirection:'row'}}>
@@ -53,7 +54,7 @@ const Recent = ({ array, navigation }) => {
           <GuideCardComponent style={{height: 195}} title={two.title} dur={two.duration} img={two.thumbnail} height={210} width={200} click={() => navigation.navigate('GuideDetail', two)}/>          
         </View>
         <View style={{flex:1}}>
-          <GuideCardComponent style={{height: 272}} title={three.title} dur={three.duration} img={three.thumbnail} height={295} width={190} click={() => navigation.navigate('GuideDetail', three)}/>          
+          <GuideCardComponent style={{height: 272}} title={three.title} dur={three.duration} img={three.thumbnail} height={288} width={200} click={() => navigation.navigate('GuideDetail', three)}/>          
          </View>
       </View>
     </View>
@@ -68,13 +69,13 @@ const Explore = ({ array, navigation }) => {
 
   return (
     <View> 
-      <Text style={[typo.H1, {marginTop: 20}]}>
+      <Text style={[typo.H1, {marginTop: 20, left:10}]}>
         Explore
       </Text>
       <View style={{display: 'flex', flexDirection: 'row'}}>
         <View style={{flex: 1, display: 'flex'}}>
           <GuideCardComponent style={{height: 130}} title={one.title} dur={one.duration} img={one.thumbnail} height={140} width={200} click={() => navigation.navigate('GuideDetail', one)}/>
-          <GuideCardComponent style={{height: 272}} title={three.title} dur={three.duration} img={three.thumbnail} height={295} width={190} click={() => navigation.navigate('GuideDetail', three)}/>
+          <GuideCardComponent style={{height: 272}} title={three.title} dur={three.duration} img={three.thumbnail} height={293} width={200} click={() => navigation.navigate('GuideDetail', three)}/>
         </View>
         <View style={{flex: 1, display: 'flex'}}>
           <GuideCardComponent style={{height: 195}} title={two.title} dur={two.duration} img={two.thumbnail} height={210} width={200} click={() => navigation.navigate('GuideDetail', two)}/>
@@ -88,15 +89,16 @@ const Explore = ({ array, navigation }) => {
 const FocusScreen = ({navigation}) => {
   return (
     <ScrollView style={{backgroundColor: '#272727'}}> 
-      <ImageBackground source={FocusBG}  resizeMode="cover" style={{width: '100%'}} >
+      <ImageBackground source={StarsBG}  resizeMode="cover" style={{width: '100%'}} >
+      <Image source={FocusBG} style={{ top: -1175, left: -45, zIndex: 0, transform:[{scaleY:-1}], position: 'absolute', width: '110%'}}/>
       <View style={layout.header}>
         <View style={{height: 200}}>
           
-        <Text style={[typo.H0]}>
+        <Text style={[typo.H0, {left:20}]}>
           Focus 
         </Text>
         
-          <Text style={[typo.T2, {color:'white'}]}>
+          <Text style={[typo.T2, {color:'white', left:20}]}>
             Level 2
           </Text>
           <Progress.Bar 
@@ -106,6 +108,8 @@ const FocusScreen = ({navigation}) => {
             color={color.Focus3}
             unfilledColor={'white'}
             borderWidth={0}
+            top={10}
+            left={20}
           />
           <Image source={SleepAvatar} style={{ top: 20, left: 20,zIndex: 0, position: 'absolute'}}/>
         </View>
@@ -114,7 +118,7 @@ const FocusScreen = ({navigation}) => {
               Focus Session
             </Text>
 
-            <TouchableOpacity style={[layout.big_button, {backgroundColor: color.Focus3, marginBottom: 30, zIndex:2, flexDirection: 'row'}]}>
+            <TouchableOpacity style={[layout.big_button, {backgroundColor: color.Focus1, marginBottom: 30, zIndex:2, flexDirection: 'row'}]}>
                 <Image source={play} style={{marginRight: 5}} />
                 <Text style={[typo.T4, {color: 'white', fontWeight: '400'}]}>
                   Play
