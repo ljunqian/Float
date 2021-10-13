@@ -1,3 +1,5 @@
 export const CHANGE_BACKGROUND = "CHANGE_BACKGROUND";
 export const CHANGE_HAT = "CHANGE_HAT";
 export const CHANGE_ACCESSORY = "CHANGE_ACCESSORY";
+
+export const SET_USER_DATA = "SET_USER_DATA";

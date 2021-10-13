@@ -71,8 +71,8 @@ const style = StyleSheet.create({
       marginHorizontal: 5
     },
 
-
     centeredView: {
+      display: 'flex',
       flex: 1,
       justifyContent: "center",
       alignItems: "center",

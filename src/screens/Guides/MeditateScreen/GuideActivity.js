@@ -43,16 +43,11 @@ const Activity = ({ navigation, route }) => {
                     </View>
 
                     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-
                         <VideoComponent navigation={navigation} array={detail} />
-
-                        {/* <Text style={[typo.H2, {marginTop: 10, color: 'white', fontWeight: '400'}]}>
-                        13:42
-                    </Text> */}
                     </View>
 
                     <View style={{ flex: 5, backgroundColor: 'white' }}>
-                        {/* <Text>This is the bottom space </Text> */}
+                        {/* This is the bottom space  */}
                     </View>
 
 
@@ -87,7 +82,8 @@ const VideoComponent = ({ array, navigation }) => {
     console.log(detail);
     const getTime = function () {
         playerRef.current?.getCurrentTime().then(
-            currentTime => handleDuration(parseInt(currentTime), detail.type)
+            // currentTime => handleDuration(parseInt(currentTime), detail.type)
+            currentTime => console.log({ currentTime })
         )
         playerRef.current?.getDuration().then(
             getDuration => console.log({ getDuration })
@@ -102,7 +98,7 @@ const VideoComponent = ({ array, navigation }) => {
                     height={231}
                     width={410}
                     play={false}
-                    videoId={detail.source} // videoId to be loaded from `detail` received
+                    videoId={detail.source} 
                     onChangeState={event => {
                         if (event === 'ended') {
                             // auto navigate upon completion
@@ -121,12 +117,20 @@ const VideoComponent = ({ array, navigation }) => {
     )
 }
 
-const backgrounds = {
-    meditateD: MedBG1,
-    sleepD: SleepBG,
-    moveD: MoveBG,
-    focusD: FocusBG
+const types = {
+    meditate: 'Meditate',
+    sleep: 'Sleep',
+    move: 'Move',
+    focus: 'Focus'
 }
+
+const backgrounds = {
+    meditate: MedBG1,
+    sleep: SleepBG,
+    move: MoveBG,
+    focus: FocusBG
+}
+
 
 const styles = StyleSheet.create({
 

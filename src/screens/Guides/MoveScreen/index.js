@@ -45,7 +45,7 @@ const Recent = ({ array, navigation }) => {
 
   return (
     <View>
-        <Text style={[typo.H1, {left:10}]}>
+      <Text style={[typo.H1, {left:10}]}>
         Recent
       </Text>
       <View style={{display: 'flex', flexDirection:'row'}}>
@@ -68,7 +68,7 @@ const Explore = ({ array, navigation }) => {
 
   return (
     <View> 
-      <Text style={[typo.H1, {marginTop: 20}]}>
+      <Text style={[typo.H1, {marginTop: 20, left:10}]}>
         Explore
       </Text>
       <View style={{display: 'flex', flexDirection: 'row'}}>
@@ -90,7 +90,6 @@ const MoveScreen = ({navigation}) => {
     <ScrollView style={{backgroundColor: '#272727'}}> 
       <ImageBackground source={StarsBG}  resizeMode="cover" style={{width: '100%'}} >
       <Image source={MoveBG} style={{ top: -1175, left: -45, zIndex: 0, transform:[{scaleY:-1}], position: 'absolute', width: '110%'}}/>
-     
       <View style={layout.header}>
         <View style={{height: 200}}>
           
@@ -98,7 +97,7 @@ const MoveScreen = ({navigation}) => {
           Move
         </Text>
         
-        <Text style={[typo.T2, {color:'white', left:20}]}>
+          <Text style={[typo.T2, {color:'white', left:20}]}>
             Level 1
           </Text>
           <Progress.Bar 
@@ -118,7 +117,7 @@ const MoveScreen = ({navigation}) => {
               Move Session
             </Text>
 
-            <TouchableOpacity style={[layout.big_button, {backgroundColor: color.Move3, marginBottom: 30, zIndex:2, flexDirection: 'row'}]}>
+            <TouchableOpacity style={[layout.big_button, {backgroundColor: color.Move1, marginBottom: 30, zIndex:2, flexDirection: 'row'}]}>
                 <Image source={play} style={{marginRight: 5}} />
                 <Text style={[typo.T4, {color: 'white', fontWeight: '400'}]}>
                   Play

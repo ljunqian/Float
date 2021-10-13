@@ -158,7 +158,7 @@ export const VoucherImages = [
         source: Voucher1,
         value: '200',
         id: 'Voucher BBQ',
-        redeemed: false
+        purchased: false
     },
 
     {
@@ -166,7 +166,7 @@ export const VoucherImages = [
         source: Voucher2,
         value: 'Voucher Lunch',
         id: '2',
-        redeemed: false
+        purchased: false
     },
 
     {
@@ -174,6 +174,6 @@ export const VoucherImages = [
         source: Voucher3,
         value: '200',
         id: 'Voucher 50%',
-        redeemed: false
+        purchased: false
     },
 ]

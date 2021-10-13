@@ -15,7 +15,6 @@ import redheart from '../../../assets/icons/redheart.png';
 import heart from '../../../assets/icons/heart.png';
 import { Guides } from './constants';
 
-
 const ActDetailComponent = ({ detail }) => {
     return(
         <View style={styles.title}>
@@ -48,7 +47,7 @@ const ExpCoinsComponent = ({ styles, isTotal }) => {
     )
 }
 
-const MidComponent = ({style, navigation}) => {
+const MidComponent = ({style, navigation, detail}) => {
     
     const [isCombined, setIsCombined] = useState(false);
     const fadeAnim = useRef(new Animated.Value(0)).current  // Initial value for opacity: 0
@@ -84,9 +83,6 @@ const MidComponent = ({style, navigation}) => {
             // end screen 1
             <Animated.View style={[styles.actComponent, style, {opacity: fadeAnim}]}>
                 <ExpCoinsComponent styles={{flex: 1}} isTotal={false} />
-                <View style={styles.food}>
-                    <Text style={typo.T3}>food</Text>
-                </View>
                 <View style={{flex: 2}}></View>
             </Animated.View>
         )
@@ -101,7 +97,7 @@ const MidComponent = ({style, navigation}) => {
             </View>            
 
             <View style={{flex: 3, marginTop: 55}}>
-                <TouchableOpacity style={styles.button} onPress={() => navigation.popToTop()}>
+                <TouchableOpacity style={[styles.button, {backgroundColor: buttoncolour[detail.type] }]} onPress={() => navigation.popToTop()}>
                     <Text style={[typo.H3, {color: 'white'}]}>Done</Text> 
                 </TouchableOpacity>    
             </View>
@@ -113,7 +109,6 @@ const Complete = ({ navigation, route }) => {
     const detail = route.params;
     const [isFavourite, setFav] = useState(false);
     
-
     return  (
 
         <View style={styles.container}> 
@@ -131,7 +126,7 @@ const Complete = ({ navigation, route }) => {
                     </View>
                 </View>
                 
-                <MidComponent style={{flex: 6, marginTop: 70, alignItems: 'center'}} navigation={navigation}/>
+                <MidComponent style={{flex: 6, marginTop: 70, alignItems: 'center'}} navigation={navigation} detail={detail}/>
 
                 {/* <ExpCoinsComponent styles={{flex: 1, marginTop: 70}} />
                 
@@ -185,11 +180,25 @@ const FavComponent = ({ isFav }) => {
     )
 }
 
+const types = {
+    meditate: 'Meditate',
+    sleep: 'Sleep',
+    move: 'Move',
+    focus: 'Focus'
+}
+
 const backgrounds = {
-    meditateD: MedBG1,
-    sleepD: SleepBG,
-    moveD: MoveBG,
-    focusD: FocusBG
+    meditate: MedBG1,
+    sleep: SleepBG,
+    move: MoveBG,
+    focus: FocusBG
+}
+
+const buttoncolour = {
+    meditate: color.Med1,
+    sleep: color.Sleep2,
+    move: color.Move1,
+    focus: color.Focus1
 }
 
 const styles = StyleSheet.create({

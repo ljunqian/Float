@@ -5,9 +5,9 @@ import layout from '../../../styles/componentLayout';
 import { color } from '../../../styles/theme';
 import * as Progress from 'react-native-progress';
 import SleepBG from '../../../assets/images/sleep-planet.png';
+import StarsBG from '../../../assets/images/stars.png';
 import SleepAvatar from '../../../assets/images/sleep-avatar.png';
 import Sleep1 from '../../../assets/images/sleep1.png';
-import StarsBG from '../../../assets/images/stars.png';
 // import Sleep2 from '../../../assets/images/sleep2.png';
 // import Sleep3 from '../../../assets/images/sleep3.png';
 import play from '../../../assets/icons/play.png';
@@ -46,7 +46,7 @@ const Recent = ({ array, navigation }) => {
 
   return (
     <View>
-        <Text style={[typo.H1, {left:10}]}>
+      <Text style={[typo.H1, {left:10}]}>
         Recent
       </Text>
       <View style={{display: 'flex', flexDirection:'row'}}>
@@ -99,7 +99,7 @@ const SleepScreen = ({navigation}) => {
           Sleep 
         </Text>
         
-        <Text style={[typo.T2, {color:'white', left:20}]}>
+          <Text style={[typo.T2, {color:'white', left:20}]}>
             Level 2
           </Text>
           <Progress.Bar 
@@ -118,7 +118,7 @@ const SleepScreen = ({navigation}) => {
             <Text style={typo.H1}>
               Sleep Session
             </Text>
-            <TouchableOpacity style={[layout.big_button, {backgroundColor: color.Sleep3, marginBottom: 30, zIndex:2, flexDirection: 'row'}]}>
+            <TouchableOpacity style={[layout.big_button, {backgroundColor: color.Sleep2, marginBottom: 30, zIndex:2, flexDirection: 'row'}]}>
                 <Image source={play} style={{marginRight: 5}} />
                 <Text style={[typo.T4, {color: 'white', fontWeight: '400'}]}>
                   Play

@@ -13,23 +13,35 @@ import typo from './src/styles/typography';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import chatScreen from './src/screens/ProfileScreen/chatScreen';
-import changePass from './src/screens/ProfileScreen/changePass';
-import editProfile from './src/screens/ProfileScreen/editProfile';
-import ExploreScreen from './src/screens/Guides/ExploreScreen'
-import ProfileScreen from './src/screens/ProfileScreen/';
-import RewardScreen from './src/screens/RewardScreen/';
-import AccountSettings from './src/screens/ProfileScreen/AccountSettings.js';
-import Changeaccountinfo from './src/screens/ProfileScreen/Changeaccountinfo';
-import LoginScreen from './src/screens/Authenticate/LoginScreen';
-import SignUpScreen from './src/screens/Authenticate/SignUpScreen';
+
+//* Guides
+import ExploreScreen from './src/screens/Guides/ExploreScreen';
+import Recents from './src/screens/Guides/ExploreScreen/Recents.js';
+import Favourites from './src/screens/Guides/ExploreScreen/Favourites.js';
+import SearchScreen from './src/screens/SearchScreen/';
+import GuideComplete from './src/screens/Guides/MeditateScreen/GuideComplete.js';
+
 import MeditateScreen from './src/screens/Guides/MeditateScreen';
 import GuideDetail from './src/screens/Guides/MeditateScreen/GuideDetail.js';
 import GuideActivity from './src/screens/Guides/MeditateScreen/GuideActivity.js';
 import FocusScreen from './src/screens/Guides/FocusScreen';
 import SleepScreen from './src/screens/Guides/SleepScreen';
 import MoveScreen from './src/screens/Guides/MoveScreen';
+
+//* Profile
+import chatScreen from './src/screens/ProfileScreen/chatScreen';
+import changePass from './src/screens/ProfileScreen/changePass';
+import editProfile from './src/screens/ProfileScreen/editProfile';
+import ProfileScreen from './src/screens/ProfileScreen/';
+import RewardScreen from './src/screens/RewardScreen/';
+import AccountSettings from './src/screens/ProfileScreen/AccountSettings.js';
+import Changeaccountinfo from './src/screens/ProfileScreen/Changeaccountinfo';
+import LoginScreen from './src/screens/Authenticate/LoginScreen';
+import SignUpScreen from './src/screens/Authenticate/SignUpScreen';
 import otp from './src/screens/Authenticate/otp.js';
+
+//* icons
+import { Icon } from 'react-native-elements';
 import CoinIcon from './src/assets/icons/coins.png';
 import UserIcon from './src/assets/icons/user.png';
 import MoveIcon from './src/assets/icons/move.png';
@@ -40,7 +52,6 @@ import MagnifyIcon from './src/assets/icons/magnifier.png';
 import Stars from './src/assets/images/stars.png';
 import Float from './src/assets/images/float.png';
 
-import { Icon } from 'react-native-elements';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { withAuthenticator } from 'aws-amplify-react-native';
@@ -48,8 +59,6 @@ import { withAuthenticator } from 'aws-amplify-react-native';
 import Store, { Context } from './src/screens/Authenticate/store';
 import { Provider } from 'react-redux';
 import NewStore from './src/screens/GlobalStates/GlobalStore';
-import { createStore } from 'redux';
-import RewardReducer from './src/screens/GlobalStates/RewardReducer';
 
 import { Auth } from 'aws-amplify';
 import Amplify from 'aws-amplify';
@@ -316,8 +325,12 @@ const App = () => {
               headerTintColor: 'white'
             })}
           />
-
-          <Stack.Screen name="Meditate GuideDetail" component={GuideDetail} 
+          <Stack.Screen name="Search" component={SearchScreen} 
+            options={()=>({
+              headerShown: false
+            })}
+          />
+          <Stack.Screen name="GuideDetail" component={GuideDetail} 
             options={()=>({
               headerShadowVisible: false,
               headerTitleStyle: {color:'white'},
@@ -330,16 +343,24 @@ const App = () => {
             })}
           />
          
-          <Stack.Screen name="Meditate GuideActivity" component={GuideActivity} 
+          <Stack.Screen name="GuideActivity" component={GuideActivity} 
             options={()=>({
-              headerShadowVisible: false,
-              headerTitleStyle: {color:'white'},
-              headerTintColor: 'white',
-              headerTitle: '',
-              headerTransparent: true,
-              headerStyle: {
-                backgroundColor: 'transparent'
-              }
+              headerShown: false
+            })}
+          />
+          <Stack.Screen name="GuideComplete" component={GuideComplete} 
+            options={()=>({
+              headerShown: false
+            })}
+          />
+          <Stack.Screen name="Recents" component={Recents} 
+            options={()=>({
+              headerShown: false
+            })}
+          />
+          <Stack.Screen name="Favourites" component={Favourites} 
+            options={()=>({
+              headerShown: false
             })}
           />
 

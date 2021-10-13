@@ -7,64 +7,64 @@ import { Auth } from 'aws-amplify';
 import ProfileScreen from './profile';
 import { color } from '../../styles/theme';
 import BirthDate from '../Authenticate/BirthDate'
-import { Input, Center,Select, NativeBaseProvider } from "native-base"
+import { Input, Center, Select, NativeBaseProvider } from "native-base"
 
 const changePass = ({ navigation, route }) => {
   const [state, dispatch] = React.useContext(Context);
   const [password, setPassword] = useState('testing123');
   const [newpassword, setNewPassword] = useState('');
   const [confirmpassword, setConfirmPassword] = useState('');
-useEffect(()=> {
-  console.log('context',state);
-}, [])
+  useEffect(() => {
+    console.log('context', state);
+  }, [])
   return (
-  <NativeBaseProvider>
-    <View style={{ backgroundColor: color.bg, minHeight: '100%' }}>
-      <View style={{marginLeft:50}}>
-        <Input
-                        style = {{width:331, height:40}}
-                      value={password}
-                      onChangeText={setPassword}
-                      variant="underlined"
-                      placeholder="Password"
-                      type="password"
-                      color='white'
-                    />
-        <Input
-                        style = {{width:331, height:40}}
-                      value={newpassword}
-                      onChangeText={setNewPassword}
-                      variant="underlined"
-                      placeholder="New Password"
-                      type="password"
-                      color='white'
-                    />
-        <Input
-                        style = {{width:331, height:40}}
-                      value={confirmpassword}
-                      onChangeText={setConfirmPassword}
-                      variant="underlined"
-                      placeholder="Confirm New Password"
-                      type="password"
-                      color='white'
-                    />
+    <NativeBaseProvider>
+      <View style={{ backgroundColor: color.bg, minHeight: '100%' }}>
+        <View style={{ marginLeft: 50 }}>
+          <Input
+            style={{ width: 331, height: 40 }}
+            value={password}
+            onChangeText={setPassword}
+            variant="underlined"
+            placeholder="Password"
+            type="password"
+            color='white'
+          />
+          <Input
+            style={{ width: 331, height: 40 }}
+            value={newpassword}
+            onChangeText={setNewPassword}
+            variant="underlined"
+            placeholder="New Password"
+            type="password"
+            color='white'
+          />
+          <Input
+            style={{ width: 331, height: 40 }}
+            value={confirmpassword}
+            onChangeText={setConfirmPassword}
+            variant="underlined"
+            placeholder="Confirm New Password"
+            type="password"
+            color='white'
+          />
 
-       <TouchableOpacity onPress={() => {}}>
-               <View style={{
-                             marginTop:10,
-                             marginRight:46,
-                             height: 40,
-                             backgroundColor: '#4263DD',
-                             alignItems: 'center',
-                             justifyContent: 'center',
-                             borderRadius: 35
-                             }}>
-                   <Text style={{ color: 'white' }}>Save Account Settings</Text>
-               </View>
-             </TouchableOpacity>
-       </View>
+          <TouchableOpacity onPress={() => { }}>
+            <View style={{
+              marginTop: 10,
+              marginRight: 46,
+              height: 40,
+              backgroundColor: '#4263DD',
+              alignItems: 'center',
+              justifyContent: 'center',
+              borderRadius: 35
+            }}>
+              <Text style={{ color: 'white' }}>Save Account Settings</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
 
-    </View>
+      </View>
 
     </NativeBaseProvider>
 
