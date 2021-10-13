@@ -225,6 +225,7 @@ const App = () => {
             },
             headerLeft: null,
             headerTitle: () => (<View />),
+            headerShadowVisible: false,
           })}
           >
         {state.isSignout ? (
@@ -264,9 +265,6 @@ const App = () => {
                 </TouchableOpacity>
               ),
               headerTitle: () => (<View />),
-              headerStyle: {
-                backgroundColor: 'none',
-              },
               headerShadowVisible: false,
             })}
           />
@@ -280,7 +278,8 @@ const App = () => {
                 </TouchableOpacity>
               ),
               headerTitle: () => (<View />),
-              headerTintColor: 'white'
+              headerTintColor: 'white',
+              headerShadowVisible: false,
             })}
           />
           <Stack.Screen name="Edit Profile" component={editProfile}
