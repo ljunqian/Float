@@ -265,7 +265,7 @@ const App = () => {
               ),
               headerTitle: () => (<View />),
               headerStyle: {
-                backgroundColor: 'none',
+                backgroundColor: '#272727',
               },
               headerShadowVisible: false,
             })}
