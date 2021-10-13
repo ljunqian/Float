@@ -1,8 +1,8 @@
 
-import React, {useState, useEffect} from 'react';
-import {Image, Text, View, StyleSheet, ScrollView, TouchableOpacity} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { Image, Text, View, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import typo from '../../../styles/typography';
-import theme, {color} from '../../../styles/theme';
+import theme, { color } from '../../../styles/theme';
 import { Icon } from 'react-native-elements';
 import LoveRed from '../../../assets/icons/lovered.png';
 import LoveYellow from '../../../assets/icons/loveyellow.png';
@@ -12,42 +12,14 @@ import Explore3 from '../../../assets/images/explore3.png';
 import Explore4 from '../../../assets/images/explore4.png';
 
 import { Auth } from 'aws-amplify';
-import { DataStore } from '@aws-amplify/datastore';
-import { SQLiteAdapter } from '@aws-amplify/datastore-storage-adapter';
-import { User } from "../../../models";
-
-DataStore.configure({
-  storageAdapter: SQLiteAdapter
-});
 
 const ExploreScreen = ({ navigation }) => {
-  
-  const [info, setInfo] = useState({
-    name: '',
-    username: '',
-    email: '',
-    coins: '',
-    meditateD: '',
-    sleepD: '',
-    moveD: '',
-    friends: []
-  });
+  const [name, setName] = useState('');
 
   const getUserInfo = async () => {
     try {
-      const { attributes, username } = await Auth.currentAuthenticatedUser();
-      const post = await DataStore.query(User, attributes.sub);
-      setInfo({
-        name: post.name,
-        username: username,
-        email: post.email,
-        coins: post.coins,
-        meditateD: post.meditateD,
-        sleepD: post.sleepD,
-        moveD: post.moveD,
-        focusD: post.focusD,
-        friends: post.friends
-      });
+      const { username } = await Auth.currentAuthenticatedUser();
+      setName(username)
     } catch (error) {
       console.log("Error saving post", error);
     }
@@ -58,21 +30,21 @@ const ExploreScreen = ({ navigation }) => {
   }, []);
 
   return (
-    <ScrollView style={theme.container}> 
-      <Text style={[typo.H1, {color: 'white'}]}>
-        Good afternoon, {info.username}
+    <ScrollView style={theme.container}>
+      <Text style={[typo.H1, { color: 'white' }]}>
+        Good afternoon, {name}
       </Text>
-      <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
-        
+      <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
 
-        <TouchableOpacity style={style.button} onPress={() => navigation.navigate('Favourites') }>
-          <Image source={LoveRed} style={{marginRight: 10}}/>
+
+        <TouchableOpacity style={style.button} onPress={() => navigation.navigate('Favourites')}>
+          <Image source={LoveRed} style={{ marginRight: 10 }} />
           <Text>
             Favourites
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={style.button} onPress={() => navigation.navigate('Recents') }>
-          <Image source={LoveYellow} style={{marginRight: 10}}/>
+        <TouchableOpacity style={style.button} onPress={() => navigation.navigate('Recents')}>
+          <Image source={LoveYellow} style={{ marginRight: 10 }} />
           <Text>
             Recents
           </Text>
@@ -81,32 +53,32 @@ const ExploreScreen = ({ navigation }) => {
       <Text style={[style.header, typo.H2]}>
         Start your day
       </Text>
-        <CardComponent img={Explore1} title={"Meditate Session"}/>
-        <CardComponent img={Explore2} title={"Focus Session"}/>
-    
+      <CardComponent img={Explore1} title={"Meditate Session"} />
+      <CardComponent img={Explore2} title={"Focus Session"} />
+
       <Text style={[style.header, typo.H2]}>
         Your afternoon lift
       </Text>
-        <CardComponent img={Explore3} title={"Move Session"}/>
+      <CardComponent img={Explore3} title={"Move Session"} />
 
       <Text style={[style.header, typo.H2]}>
         At night
       </Text>
-        <CardComponent img={Explore1} title={"Meditate Session"}/>
-        <CardComponent img={Explore4} title={"Sleep Session"}/>
+      <CardComponent img={Explore1} title={"Meditate Session"} />
+      <CardComponent img={Explore4} title={"Sleep Session"} />
 
     </ScrollView>
   )
 }
 
-const CardComponent = ({img, title}) => {
+const CardComponent = ({ img, title }) => {
   return (
 
-    <TouchableOpacity style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
-      <Icon name="radio-button-unchecked" size={30} color="white"/>
+    <TouchableOpacity style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+      <Icon name="radio-button-unchecked" size={30} color="white" />
       <View style={style.card}>
-          <Text style={typo.T1}>{title}</Text>
-          <Image source={img} style={{backgroundColor: '#EEEEEE', width: 80, height: 80}} />
+        <Text style={typo.T1}>{title}</Text>
+        <Image source={img} style={{ backgroundColor: '#EEEEEE', width: 80, height: 80 }} />
       </View>
     </TouchableOpacity>
   )
@@ -131,7 +103,7 @@ const style = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     margin: 5,
-    
+
   },
   card: {
     borderWidth: 0.5,
@@ -146,8 +118,8 @@ const style = StyleSheet.create({
     justifyContent: 'space-between',
     flexDirection: 'row'
   },
-  header: {marginTop: 20, color: 'white'},
-  
+  header: { marginTop: 20, color: 'white' },
+
 })
 
 export default ExploreScreen;
