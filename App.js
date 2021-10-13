@@ -25,6 +25,9 @@ import RewardScreen from './src/screens/RewardScreen/';
 import AccountSettings from './src/screens/ProfileScreen/AccountSettings.js';
 import LoginScreen from './src/screens/Authenticate/LoginScreen';
 import SignUpScreen from './src/screens/Authenticate/SignUpScreen';
+import otp from './src/screens/Authenticate/otp.js';
+import forgetpass from './src/screens/Authenticate/forgetpass';
+import confirmpass from './src/screens/Authenticate/confirmpass';
 import MeditateScreen from './src/screens/Guides/MeditateScreen';
 import GuideDetail from './src/screens/Guides/MeditateScreen/GuideDetail.js';
 import GuideActivity from './src/screens/Guides/MeditateScreen/GuideActivity.js';
@@ -153,19 +156,17 @@ const App = () => {
   Analytics.configure({ disabled: true })
   const [verticalVal, setVerticalVal] = useState(new Animated.Value(1));
   const [isSplash, setIsSplash] = useState(true);
-  const [isNotSignedIn, setisNotSignedIn] = useState(true);
   const [state, dispatch] = React.useContext(Context);
 
   async function isUserAuthenticated() {
     try {
       const user = await Auth.currentAuthenticatedUser();
-      console.log('user is',user);
+      console.log('user is', user);
       if (user) {
-        setisNotSignedIn(false);
         dispatch({ type: 'SIGN_IN', payload: true });
+        console.log('context', state);
       } else {
-        { user === 'The user is not authenticated' && (setisNotSignedIn(true)) };
-
+        { user === 'The user is not authenticated' };
       }
     } catch (error) {
       console.log(error);
@@ -173,7 +174,7 @@ const App = () => {
   }
 
   useEffect(() => {
-    isUserAuthenticated()
+    isUserAuthenticated();
     setTimeout(() => {
       setIsSplash(false);
     }, 6000)
@@ -230,6 +231,21 @@ const App = () => {
                 headerShown: false
               })}
             />
+            <Stack.Screen name="otp" component={otp}
+              options={({ navigation }) => ({
+                headerShown: false
+              })}
+            />
+            <Stack.Screen name="forget password" component={forgetpass}
+              options={({ navigation }) => ({
+                headerShown: false
+              })}
+            />
+            <Stack.Screen name="confirm password" component={confirmpass}
+              options={({ navigation }) => ({
+                headerShown: false
+              })}
+            />
           </>
         ) : (
           <>
@@ -265,10 +281,10 @@ const App = () => {
                 headerTintColor: 'white'
               })}
             />
-            <Stack.Screen name="Search" component={SearchScreen} 
-            options={()=>({
-              headerShown: false
-            })}
+            <Stack.Screen name="Search" component={SearchScreen}
+              options={() => ({
+                headerShown: false
+              })}
             />
             <Stack.Screen name="Reward" component={RewardScreen}
               options={({ navigation }) => ({
@@ -293,52 +309,51 @@ const App = () => {
               })}
             />
 
-          <Stack.Screen name="GuideDetail" component={GuideDetail} 
-            options={()=>({
-              headerShadowVisible: false,
-              headerTitleStyle: {color:'white'},
-              headerTintColor: 'white',
-              headerTitle: '',
-              headerTransparent: true,
-              headerStyle: {
-                backgroundColor: 'transparent'
-              }
-            })}
-          />
-         
-          <Stack.Screen name="GuideActivity" component={GuideActivity} 
-            options={()=>({
-              headerShown: false
-            })}
-          />
-          <Stack.Screen name="GuideComplete" component={GuideComplete} 
-            options={()=>({
-              headerShown: false
-            })}
-          />
-          <Stack.Screen name="Recents" component={Recents} 
-            options={()=>({
-              headerShown: false
-            })}
-          />
-          <Stack.Screen name="Favourites" component={Favourites} 
-            options={()=>({
-              headerShown: false
-            })}
-          />
+            <Stack.Screen name="GuideDetail" component={GuideDetail}
+              options={() => ({
+                headerShadowVisible: false,
+                headerTitleStyle: { color: 'white' },
+                headerTintColor: 'white',
+                headerTitle: '',
+                headerTransparent: true,
+                headerStyle: {
+                  backgroundColor: 'transparent'
+                }
+              })}
+            />
+
+            <Stack.Screen name="GuideActivity" component={GuideActivity}
+              options={() => ({
+                headerShown: false
+              })}
+            />
+            <Stack.Screen name="GuideComplete" component={GuideComplete}
+              options={() => ({
+                headerShown: false
+              })}
+            />
+            <Stack.Screen name="Recents" component={Recents}
+              options={() => ({
+                headerShown: false
+              })}
+            />
+            <Stack.Screen name="Favourites" component={Favourites}
+              options={() => ({
+                headerShown: false
+              })}
+            />
             <Stack.Screen name="Edit Profile" component={editProfile}
               options={() => ({
                 headerTitleStyle: { color: 'white' },
                 headerTintColor: 'white'
               })}
             />
-             <Stack.Screen name="Change password" component={changePass}
+            <Stack.Screen name="Change password" component={changePass}
               options={() => ({
                 headerTitleStyle: { color: 'white' },
                 headerTintColor: 'white'
               })}
             />
-
           </>)}
       </Stack.Navigator>
     </NavigationContainer>

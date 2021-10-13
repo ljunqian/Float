@@ -53,18 +53,17 @@ const ExploreScreen = ({ navigation }) => {
     }
   }
 
-
   useEffect(() => {
     getUserInfo();
   }, []);
 
   return (
-
     <ScrollView style={theme.container}> 
       <Text style={[typo.H1, {color: 'white'}]}>
         Good afternoon, {info.username}
       </Text>
       <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
+        
 
         <TouchableOpacity style={style.button} onPress={() => navigation.navigate('Favourites') }>
           <Image source={LoveRed} style={{marginRight: 10}}/>

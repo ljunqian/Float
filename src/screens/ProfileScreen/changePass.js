@@ -1,32 +1,53 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Text, View, StyleSheet, Image, TextInputField, TouchableOpacity } from 'react-native';
-import Nav from './Nav';
-import Changeaccountinfo from '../../screens/ProfileScreen/Changeaccountinfo';
+import { Button, Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Context } from '../Authenticate/store';
 import { Auth } from 'aws-amplify';
 import ProfileScreen from './profile';
 import { color } from '../../styles/theme';
-import BirthDate from '../Authenticate/BirthDate'
 import { Input, Center, Select, NativeBaseProvider } from "native-base"
 
 const changePass = ({ navigation, route }) => {
   const [state, dispatch] = React.useContext(Context);
-  const [password, setPassword] = useState('testing123');
+  const [oldpassword, setoldPassword] = useState('');
   const [newpassword, setNewPassword] = useState('');
   const [confirmpassword, setConfirmPassword] = useState('');
+  const [errorstate, seterrorState] = useState(false);
+  const [errorMessage, seterrorMessage] = useState('');
+
+  const handlepassword = () => {
+    if (newpassword == confirmpassword) {
+      Auth.currentAuthenticatedUser()
+        .then(user => {
+          return Auth.changePassword(user, 'oldPassword', 'newPassword');
+        })
+        .then(data => console.log(data))
+        .catch(err => {
+          console.log(err.toString())
+          seterrorState(true);
+          seterrorMessage(err.toString());
+        });
+    }
+    else {
+      seterrorState(true);
+      seterrorMessage("Password and confirm password is not matching");
+    }
+
+  }
+
   useEffect(() => {
     console.log('context', state);
   }, [])
+
   return (
     <NativeBaseProvider>
       <View style={{ backgroundColor: color.bg, minHeight: '100%' }}>
         <View style={{ marginLeft: 50 }}>
+          {errorstate && (<Text style={style.errorText}>{errorMessage}</Text>)}
           <Input
             style={{ width: 331, height: 40 }}
-            value={password}
-            onChangeText={setPassword}
+            onChangeText={setoldPassword}
             variant="underlined"
-            placeholder="Password"
+            placeholder="Old password"
             type="password"
             color='white'
           />
@@ -49,7 +70,7 @@ const changePass = ({ navigation, route }) => {
             color='white'
           />
 
-          <TouchableOpacity onPress={() => { }}>
+          <TouchableOpacity onPress={() => { handlepassword() }}>
             <View style={{
               marginTop: 10,
               marginRight: 46,
@@ -71,7 +92,6 @@ const changePass = ({ navigation, route }) => {
   )
 }
 
-
 export default changePass;
 
 const style = StyleSheet.create({
@@ -81,5 +101,9 @@ const style = StyleSheet.create({
   },
   warnStyle: {
     height: '40px'
+  },
+  errorText: {
+    color: 'red',
+    marginTop: 15
   }
 })
