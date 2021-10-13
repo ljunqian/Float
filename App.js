@@ -57,8 +57,9 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { withAuthenticator } from 'aws-amplify-react-native';
 
 import Store, { Context } from './src/screens/Authenticate/store';
-import { Provider } from 'react-redux';
+import { Provider, useSelector } from 'react-redux';
 import NewStore from './src/screens/GlobalStates/GlobalStore';
+import { getUserInfo } from './src/screens/GlobalStates/UserAction';
 
 import { Auth } from 'aws-amplify';
 import Amplify from 'aws-amplify';
@@ -164,13 +165,16 @@ const App = () => {
   const [isNotSignedIn, setisNotSignedIn] = useState(true);
   const [state, dispatch] = React.useContext(Context);
 
+  const {coins} = useSelector((state) => state.user.userData);
   async function isUserAuthenticated() {
     try {
       const user = await Auth.currentAuthenticatedUser();
       //console.log('user is',user);
       if (user) {
         setisNotSignedIn(false);
+
         dispatch({type: 'SIGN_IN', payload: true});
+       
       } else {
         {user === 'The user is not authenticated' && (setisNotSignedIn(true))};
 
@@ -311,7 +315,7 @@ const App = () => {
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                   <Image source={CoinIcon} style={{ marginRight: 4 }} />
                   <Text style={{ fontSize: 18, fontFamily: 'FredokaOne-Regular', color: 'white' }}>
-                    499
+                    {coins}
                     {/* {info.meditateD} */}
                   </Text>
                 </View>

@@ -5,6 +5,7 @@ import { Button, Text, View, StyleSheet, ScrollView, TouchableOpacity, Image, Im
 import ProfileScreen from './profile';
 import typo from '../../styles/typography';
 import { color } from '../../styles/theme';
+import {useSelector} from 'react-redux';
 
 import Friend1 from '../../assets/images/friend1.png';
 import Friend2 from '../../assets/images/friend2.png';
@@ -24,6 +25,7 @@ import FocusBG from '../../assets/images/focus-planet.png';
 
 
 const Coins = ({ navigation, i }) => {
+  const {coins} = useSelector((state) => state.user.userData);
   return (
     <TouchableOpacity
       onPress={() => { navigation.navigate('Reward'); }}
@@ -33,7 +35,9 @@ const Coins = ({ navigation, i }) => {
       }}>
 
       <Text style={typo.H3}>
-        My Coins Amount: {i.coins}
+        My Coins Amount: {coins}
+        {//i.coins
+        }
       </Text>
       <View
         style={{ alignSelf: 'center', backgroundColor: '#CD5959', borderRadius: 8, marginLeft: 5, padding: 5, }}
