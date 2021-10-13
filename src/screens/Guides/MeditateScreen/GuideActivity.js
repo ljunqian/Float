@@ -12,14 +12,10 @@ import { Guides } from './constants';
 import { color } from '../../../styles/theme';
 import YoutubePlayer, { YoutubeIframeRef } from 'react-native-youtube-iframe';
 
-import { Auth } from 'aws-amplify'
-import { DataStore } from 'aws-amplify';
-import { SQLiteAdapter } from '@aws-amplify/datastore-storage-adapter';
-import { User } from "../../../../src/models";
+import { API, Auth, graphqlOperation } from 'aws-amplify'
 
-DataStore.configure({
-    storageAdapter: SQLiteAdapter
-});
+import { updateUser } from "../../../graphql/mutations"
+import { getUser } from "../../../graphql/queries"
 
 const Activity = ({ navigation, route }) => {
 
@@ -41,40 +37,33 @@ const Activity = ({ navigation, route }) => {
                             {detail.title}
                         </Text>
                     </View>
-
                     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-
                         <VideoComponent navigation={navigation} array={detail} />
-
                         {/* <Text style={[typo.H2, {marginTop: 10, color: 'white', fontWeight: '400'}]}>
                         13:42
                     </Text> */}
                     </View>
-
                     <View style={{ flex: 5, backgroundColor: 'white' }}>
                         {/* <Text>This is the bottom space </Text> */}
                     </View>
-
-
-
                 </View>
             </ImageBackground>
         </View>
-
-
     )
 }
 
 async function handleDuration(time, type) {
     try {
         const user = await Auth.currentAuthenticatedUser();
-        const original = await DataStore.query(User, user.attributes.sub);
-        await DataStore.save(
-            User.copyOf(original, updated => {
-                updated[type] += time;
-            })
-        );
-        console.log("Current time add: ", time);
+        const { data } = await API.graphql(graphqlOperation(getUser, { id: user.attributes.sub }));
+        console.log(data)
+        data.getUser[type + "D"] = data.getUser[type + "D"] + time;
+        delete data.getUser._deleted;
+        delete data.getUser._lastChangedAt
+        delete data.getUser.createdAt;
+        delete data.getUser.updatedAt;
+        const Userupdate = await API.graphql(graphqlOperation(updateUser, { input: data.getUser }));
+        console.log(Userupdate)
     } catch (error) {
         console.log(error);
     }
