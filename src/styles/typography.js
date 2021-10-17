@@ -38,7 +38,11 @@ const typo = StyleSheet.create({
     T4: {
         fontFamily: 'Montserrat-Bold',
         fontSize: 16,
-    }
+    },
+    T5: {
+        fontFamily: 'Montserrat-Bold',
+        fontSize: 18,
+    },
 })
 
 export default typo;

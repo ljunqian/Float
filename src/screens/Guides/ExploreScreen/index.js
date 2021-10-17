@@ -22,6 +22,8 @@ DataStore.configure({
 
 const ExploreScreen = ({ navigation }) => {
   
+  const [isTimeline, setIsTimeline] = useState(false);
+
   const [info, setInfo] = useState({
     name: '',
     username: '',
@@ -58,6 +60,41 @@ const ExploreScreen = ({ navigation }) => {
     getUserInfo();
   }, []);
 
+  const Timeline = () => {
+    return(
+      <>
+      <Text style={[style.header, typo.T1]}>
+        Start your day
+      </Text>
+      <CardComponent img={Explore1} title={"Meditate Session"}/>
+      <CardComponent img={Explore2} title={"Focus Session"}/>
+    
+      <Text style={[style.header, typo.T1]}>
+        Your afternoon lift
+      </Text>
+      <CardComponent img={Explore3} title={"Move Session"}/>
+
+      <Text style={[style.header, typo.T1]}>
+        At night
+      </Text>
+      <CardComponent img={Explore1} title={"Meditate Session"}/>
+      <CardComponent img={Explore4} title={"Sleep Session"}/>
+      </>
+    )
+  }
+
+  const GetStarted = () => {
+    return(
+      <>
+      {/* code here for Get Started components */}
+      </>
+    )
+  }
+
+  const PageSplit = () => {
+    return(isTimeline?<Timeline/>:<GetStarted/>)
+  }
+
   return (
 
     <ScrollView style={theme.container}> 
@@ -79,22 +116,18 @@ const ExploreScreen = ({ navigation }) => {
           </Text>
         </TouchableOpacity>
       </View>
-      <Text style={[style.header, typo.H2]}>
-        Start your day
-      </Text>
-        <CardComponent img={Explore1} title={"Meditate Session"}/>
-        <CardComponent img={Explore2} title={"Focus Session"}/>
-    
-      <Text style={[style.header, typo.H2]}>
-        Your afternoon lift
-      </Text>
-        <CardComponent img={Explore3} title={"Move Session"}/>
-
-      <Text style={[style.header, typo.H2]}>
-        At night
-      </Text>
-        <CardComponent img={Explore1} title={"Meditate Session"}/>
-        <CardComponent img={Explore4} title={"Sleep Session"}/>
+      <View style={{flexDirection: 'row', alignItems: 'center', margin: 10}}>
+        <TouchableOpacity onPress={()=>setIsTimeline(false)}>
+          <Text style={[typo.T5, {color: 'white'}]}>Get Started</Text>
+          {!isTimeline && <View style={style.whiteline} />}
+        </TouchableOpacity>
+        <Text style={{color: 'white'}}>  |  </Text>
+        <TouchableOpacity onPress={()=>setIsTimeline(true)}>
+          <Text style={[typo.T5, {color: 'white'}]}>Timeline</Text>
+          {isTimeline && <View style={style.whiteline} />}
+        </TouchableOpacity>
+      </View>
+      <PageSplit />
 
     </ScrollView>
   )
@@ -147,7 +180,15 @@ const style = StyleSheet.create({
     justifyContent: 'space-between',
     flexDirection: 'row'
   },
-  header: {marginTop: 20, color: 'white'},
+  header: {
+    marginTop: 10,
+    color: 'white'
+  },
+  whiteline: {
+    height: 2,
+    backgroundColor: 'white',
+    borderRadius: 1,
+  }   
   
 })
 
