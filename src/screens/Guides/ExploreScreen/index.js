@@ -27,7 +27,6 @@ DataStore.configure({
 const ExploreScreen = ({ navigation }) => {
   
   const [isTimeline, setIsTimeline] = useState(false);
-  const [isDone, setIsDone] = useState(false);
 
   const [info, setInfo] = useState({
     name: '',
@@ -65,7 +64,7 @@ const ExploreScreen = ({ navigation }) => {
     getUserInfo();
   }, []);
 
-  const MyRadioButton = () =>{
+  const MyRadioButton = ({isDone}) =>{
     return(isDone?
     <View style={style.MyRadioButton}>
       <Image source={Tick} />
@@ -75,11 +74,13 @@ const ExploreScreen = ({ navigation }) => {
   }
 
   const CardComponent = ({img, type, duration}) => {
+    
+    const [isDone, setIsDone] = useState(false);
+
     return (
       <View style={{display: 'flex', flexDirection: 'row', alignItems: 'center', marginHorizontal: 10}}>
-        <MyRadioButton />
-        {/* <Icon name="radio-button-unchecked" size={30} color="white"/> */}
-        <TouchableOpacity onPress={()=>{isDone?setIsDone(false):setIsDone(true)}}>
+        <MyRadioButton isDone={isDone}/>
+        <TouchableOpacity onPress={()=>{setIsDone(!isDone)}}>
           <View style={style.card}>
             <View>
               <Text style={typo.H2}>Title of Session</Text>
