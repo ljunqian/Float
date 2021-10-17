@@ -6,10 +6,14 @@ import theme, {color} from '../../../styles/theme';
 import { Icon } from 'react-native-elements';
 import LoveRed from '../../../assets/icons/lovered.png';
 import LoveYellow from '../../../assets/icons/loveyellow.png';
+import Time from '../../../assets/icons/time.png';
+import Video from '../../../assets/icons/video.png';
+import Tick from '../../../assets/icons/tick.png';
 import Explore1 from '../../../assets/images/explore1.png';
 import Explore2 from '../../../assets/images/explore2.png';
 import Explore3 from '../../../assets/images/explore3.png';
 import Explore4 from '../../../assets/images/explore4.png';
+import Line32 from '../../../assets/images/Line32.png';
 
 import { Auth } from 'aws-amplify';
 import { DataStore } from '@aws-amplify/datastore';
@@ -23,6 +27,7 @@ DataStore.configure({
 const ExploreScreen = ({ navigation }) => {
   
   const [isTimeline, setIsTimeline] = useState(false);
+  const [isDone, setIsDone] = useState(false);
 
   const [info, setInfo] = useState({
     name: '',
@@ -60,26 +65,71 @@ const ExploreScreen = ({ navigation }) => {
     getUserInfo();
   }, []);
 
-  const Timeline = () => {
-    return(
-      <>
-      <Text style={[style.header, typo.T1]}>
-        Start your day
-      </Text>
-      <CardComponent img={Explore1} title={"Meditate Session"}/>
-      <CardComponent img={Explore2} title={"Focus Session"}/>
-    
-      <Text style={[style.header, typo.T1]}>
-        Your afternoon lift
-      </Text>
-      <CardComponent img={Explore3} title={"Move Session"}/>
+  const MyRadioButton = () =>{
+    return(isDone?
+    <View style={style.MyRadioButton}>
+      <Image source={Tick} />
+    </View>
+    :
+    <Icon name="radio-button-unchecked" size={30} color="white"/>)
+  }
 
-      <Text style={[style.header, typo.T1]}>
-        At night
-      </Text>
-      <CardComponent img={Explore1} title={"Meditate Session"}/>
-      <CardComponent img={Explore4} title={"Sleep Session"}/>
-      </>
+  const CardComponent = ({img, type, duration}) => {
+    return (
+      <View style={{display: 'flex', flexDirection: 'row', alignItems: 'center', marginHorizontal: 10}}>
+        <MyRadioButton />
+        {/* <Icon name="radio-button-unchecked" size={30} color="white"/> */}
+        <TouchableOpacity onPress={()=>{isDone?setIsDone(false):setIsDone(true)}}>
+          <View style={style.card}>
+            <View>
+              <Text style={typo.H2}>Title of Session</Text>
+              <View style={{flexDirection: 'row', left: 15, top: 5}}>
+                <Image source={Video} right={5}/>
+                <Text style={[typo.T6, {color: colours[type]}]}>{type} Activity</Text>
+              </View>
+              <View style={{flexDirection: 'row', left: 16, top: 12}}>
+                <Image source={Time} right={5}/>
+                <Text style={typo.T6}>{duration}</Text>
+              </View>
+            </View>
+            <Image source={img} style={{backgroundColor: '#EEEEEE', width: 70, height: 70}} />
+          </View>
+        </TouchableOpacity>
+      </View>
+    )
+  }
+
+  const Timeline = () => {
+
+    const LineBG = ({ src, top, left }) => {
+      return <Image source={src} style={{position: 'absolute', top: top, left: left}}/>
+    }
+
+    return(
+      <View style={{marginHorizontal: 15}}>
+        <Text style={[style.header, typo.T1]}>
+          Start your day
+        </Text>
+        <CardComponent img={Explore1} type={"Meditate"} duration={'3-5 mins'}/>
+          <LineBG src={Line32} top={'11.25%'} left={'6.5%'}/>
+        <CardComponent img={Explore3} type={"Move"} duration={'40-45 mins'}/>
+          <LineBG src={Line32} top={'24.25%'} left={'6.5%'}/>
+        <CardComponent img={Explore2} type={"Focus"} duration={'15-20 mins'}/>
+
+        <Text style={[style.header, typo.T1]}>
+          Afternoon lift
+        </Text>
+        <CardComponent img={Explore1} type={"Meditate"} duration={'10-15 mins'}/>
+          <LineBG src={Line32} top={'53.25%'} left={'6.5%'}/>
+        <CardComponent img={Explore2} type={"Focus"} duration={'35-40 mins'}/>
+
+        <Text style={[style.header, typo.T1]}>
+          At night
+        </Text>
+        <CardComponent img={Explore4} type={"Sleep"} duration={'3-7 mins'}/>
+          <LineBG src={Line32} top={'82.25%'} left={'6.5%'}/>
+        <CardComponent img={Explore4} type={"Sleep"} duration={'1-3 mins'}/>
+      </View>
     )
   }
 
@@ -97,10 +147,12 @@ const ExploreScreen = ({ navigation }) => {
 
   return (
 
-    <ScrollView style={theme.container}> 
-      <Text style={[typo.H1, {color: 'white'}]}>
-        Good afternoon, {info.username}
-      </Text>
+    <ScrollView style={theme.container}>
+      <View style={{marginHorizontal: 20}}> 
+        <Text style={[typo.H1, {color: 'white'}]}>
+          Good afternoon, {info.username}
+        </Text>
+      </View>
       <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
 
         <TouchableOpacity style={style.button} onPress={() => navigation.navigate('Favourites') }>
@@ -116,12 +168,12 @@ const ExploreScreen = ({ navigation }) => {
           </Text>
         </TouchableOpacity>
       </View>
-      <View style={{flexDirection: 'row', alignItems: 'center', margin: 10}}>
+      <View style={{flexDirection: 'row', alignItems: 'center', marginHorizontal: 15, marginVertical: 10}}>
         <TouchableOpacity onPress={()=>setIsTimeline(false)}>
           <Text style={[typo.T5, {color: 'white'}]}>Get Started</Text>
           {!isTimeline && <View style={style.whiteline} />}
         </TouchableOpacity>
-        <Text style={{color: 'white'}}>  |  </Text>
+        <Text style={[style.pageSplit, {color: 'white'}]}>  |  </Text>
         <TouchableOpacity onPress={()=>setIsTimeline(true)}>
           <Text style={[typo.T5, {color: 'white'}]}>Timeline</Text>
           {isTimeline && <View style={style.whiteline} />}
@@ -133,17 +185,13 @@ const ExploreScreen = ({ navigation }) => {
   )
 }
 
-const CardComponent = ({img, title}) => {
-  return (
 
-    <TouchableOpacity style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
-      <Icon name="radio-button-unchecked" size={30} color="white"/>
-      <View style={style.card}>
-          <Text style={typo.T1}>{title}</Text>
-          <Image source={img} style={{backgroundColor: '#EEEEEE', width: 80, height: 80}} />
-      </View>
-    </TouchableOpacity>
-  )
+
+const colours = {
+  "Meditate": color.Med1,
+  "Move": color.Move1,
+  "Focus": color.Focus3,
+  "Sleep": color.Sleep2,
 }
 
 const style = StyleSheet.create({
@@ -171,9 +219,9 @@ const style = StyleSheet.create({
     borderWidth: 0.5,
     borderColor: 'rgba(0, 0, 0, 0.5)',
     backgroundColor: 'white',
-    height: 100,
-    width: '90%',
-    borderRadius: 12,
+    height: 90,
+    width: '85%',
+    borderRadius: 20,
     margin: 10,
     padding: 10,
     display: 'flex',
@@ -188,6 +236,18 @@ const style = StyleSheet.create({
     height: 2,
     backgroundColor: 'white',
     borderRadius: 1,
+  },
+  pageSplit: {
+    fontFamily: 'Arial',
+    fontSize: 16,
+  },
+  MyRadioButton: {
+    width: 26,
+    height: 26,
+    borderRadius: 13,
+    backgroundColor: 'white',
+    left: -2,
+    marginLeft: 4
   }   
   
 })
