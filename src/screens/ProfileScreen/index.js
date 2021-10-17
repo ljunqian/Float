@@ -8,6 +8,7 @@ import { color } from '../../styles/theme';
 import {useSelector} from 'react-redux';
 // import {JCalendar} from './bigCalendar';   // uncomment to view ; comment './weekcalendar'
 import {JCalendar} from './weekCalendar';
+import * as Progress from 'react-native-progress';
 
 import Friend1 from '../../assets/images/friend1.png';
 import Friend2 from '../../assets/images/friend2.png';
@@ -176,12 +177,27 @@ const NewJourney = ({ info }) => {
         animationType="slide"
         transparent={true}>
         <View style={{flex: 1, backgroundColor: 'rgba(0,0,0,0.5)'}}>
-          <Image source={background[type]} resizeMethod={'scale'} style={{top:type=='sleep'?20:185, left:-45, position: 'absolute'}}/>
+          <Image source={background[type]} resizeMethod={'scale'} style={{top:type=='sleep'?-5:155, left:-45, position: 'absolute'}}/>
           <TouchableOpacity style={{flex: type=='sleep'?1:5}} onPress={() => setModalVisible(false)} />
-          <View style={{flex: type=='sleep'?3.5:5, alignItems: 'center', marginTop: 30}}>
+          <View style={{flex: type=='sleep'?4.5:6, alignItems: 'center', marginTop: 30}}>
             <Text style={[typo.H0, style.title]}>
               {title[type]}
             </Text>
+            <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center', right: 5, margin: 10}}>
+              <Text style={[typo.T3, {color:'white'}]}>
+                Level 2
+              </Text>
+              <Progress.Bar 
+                progress={0.4}
+                width={100}
+                height={8}
+                color={colours[type]}
+                unfilledColor={'white'}
+                borderWidth={0}
+                top={1}
+                left={15}
+              />
+            </View>
             <View style={[style.opaqueContainer, {height: type=='sleep'? 370:200}]}>
               {displayContent()}
             </View>
@@ -329,6 +345,13 @@ const MainProf = ({ navigation }) => {
 }
 
 export default MainProf;
+
+const colours = {
+  "meditate": color.Sleep3,
+  "sleep": color.Med1,
+  "move": color.Focus3,
+  "focus": color.Move2
+}
 
 const title = {
   "meditate": "Meditation",
