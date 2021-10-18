@@ -6,6 +6,7 @@ import { color } from '../../../styles/theme';
 import * as Progress from 'react-native-progress';
 import SleepBG from '../../../assets/images/sleep-planet.png';
 import StarsBG from '../../../assets/images/stars.png';
+import Badge2 from '../../../assets/images/Badges2.png';
 import SleepAvatar from '../../../assets/images/sleep-avatar.png';
 import Sleep1 from '../../../assets/images/sleep1.png';
 // import Sleep2 from '../../../assets/images/sleep2.png';
@@ -98,8 +99,11 @@ const SleepScreen = ({navigation}) => {
         <Text style={[typo.H0, {left:20}]}>
           Sleep 
         </Text>
-        
-          <Text style={[typo.T2, {color:'white', left:20}]}>
+        <View style={{flexDirection:'row', alignItems : 'center'}}> 
+          <Image source={Badge2} style={{ top: 3, marginLeft: 17} }/>
+          
+          <View style={{top: -6, marginLeft: -10}}>
+            <Text style={[typo.T1, {color:'white', left:20, top:2}]}>
             Level 2
           </Text>
           <Progress.Bar 
@@ -109,9 +113,12 @@ const SleepScreen = ({navigation}) => {
             color={color.Sleep3}
             unfilledColor={'white'}
             borderWidth={0}
-            top={10}
+            top={6}
             left={20}
           />
+          </View>
+        </View>
+          
           <Image source={SleepAvatar} style={{ top: 20, left: 20,zIndex: 0, position: 'absolute'}}/>
         </View>
           <View style={{display: 'flex', flex: 8, justifyContent: 'flex-end', alignItems: 'center', zIndex:2}}>

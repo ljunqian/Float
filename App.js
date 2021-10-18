@@ -107,7 +107,7 @@ const BottomBar = () => {
             
             return ((focused)? 
             <View style={{alignItems: 'center', bottom: 2}}>
-                <View style={{height: 2, width:50 , backgroundColor: 'white', bottom:15}}/>
+                <View style={{height: 2, width:50 , backgroundColor: 'white', bottom:13}}/>
                  <Image source={ExploreIcon} />
             </View>
             
@@ -149,7 +149,7 @@ const BottomBar = () => {
           tabBarIcon: ({focused}) => {
             return ((focused)? 
             <View style={{alignItems: 'center', bottom: 2}}>
-                <View style={{height: 2, width:50 , backgroundColor: color.Sleep1, bottom:15}}/>
+                <View style={{height: 2, width:50 , backgroundColor: color.Sleep1, bottom:14}}/>
                  <Image source={SleepIcon} />
             </View>  
             : <Image source ={SleepIconUnclicked} />) 
@@ -168,7 +168,7 @@ const BottomBar = () => {
           tabBarIcon: ({focused}) => {
             return ((focused)? 
             <View style={{alignItems: 'center', bottom: 2}}>
-                <View style={{height: 2, width:50 , backgroundColor: color.Move2, bottom:15}}/>
+                <View style={{height: 2, width:50 , backgroundColor: color.Move2, bottom:14}}/>
                  <Image source={MoveIcon} />
             </View> 
             : <Image source ={MoveIconUnclicked} />) 
@@ -187,7 +187,7 @@ const BottomBar = () => {
           tabBarIcon: ({focused}) => {
             return ((focused)? 
             <View style={{alignItems: 'center', bottom: 1}}>
-                <View style={{height: 2, width:50 , backgroundColor: color.Focus2, bottom:15}}/>
+                <View style={{height: 2, width:50 , backgroundColor: color.Focus2, bottom:13}}/>
                  <Image source={FocusIcon} />
             </View> 
             : <Image source ={FocusIconUnclicked} />) 

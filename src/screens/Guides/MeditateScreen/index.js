@@ -8,12 +8,14 @@ import oldMedBG from '../../../assets/images/meditate-planet.png';
 import newMedBG from '../../../assets/images/medbgnew.png';
 import StarsBG from '../../../assets/images/stars.png';
 import MedAvatar from '../../../assets/images/meditate-avatar.png';
+import Badge1 from '../../../assets/images/Badge1.png';
 import Med from '../../../assets/images/med-1.png'; 
 import Mov from '../../../assets/images/mov-1.png';
 import Med2 from '../../../assets/images/med2.png';
 import play from '../../../assets/icons/play.png';
 import { overflow } from 'styled-system';
 import { Guides } from '../constants';
+import { Row } from 'native-base';
 
 const GuideCardComponent = (props)  => {
   return (
@@ -103,8 +105,11 @@ const MeditateScreen = ({navigation}) => {
         <Text style={[typo.H0,{left:20}]}>
           Meditation
         </Text>
-        
-          <Text style={[typo.T2, {color:'white', left:20 }]}>
+        <View style={{flexDirection:'row', alignItems : 'center'}}> 
+          <Image source={Badge1} style={{ top: 3, marginLeft: 17} }/>
+          
+          <View style={{top: -6, marginLeft: -10}}>
+            <Text style={[typo.T1, {color:'white', left:20, top:2 }]}>
             Level 1
           </Text>
           <Progress.Bar 
@@ -114,9 +119,14 @@ const MeditateScreen = ({navigation}) => {
             color={'#F57212'}
             unfilledColor={'white'}
             borderWidth={0}
-            top={10}
+            top={6}
             left={20}
+            
           />
+          </View>
+        </View>
+        
+          
           <Image source={MedAvatar} style={{ top: 40, left: 20, zIndex: 0, position: 'absolute'}}/>
           
         </View>
