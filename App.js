@@ -10,6 +10,7 @@ import Avatar from './src/assets/images/avatar.png';
 import React, { useState, useEffect } from 'react';
 import { Animated, Image, View, TouchableOpacity, Text, Easing, StyleSheet } from 'react-native';
 import typo from './src/styles/typography';
+import {color}  from './src/styles/theme';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -44,9 +45,16 @@ import otp from './src/screens/Authenticate/otp.js';
 import { Icon } from 'react-native-elements';
 import CoinIcon from './src/assets/icons/coins.png';
 import UserIcon from './src/assets/icons/user.png';
-import MoveIcon from './src/assets/icons/move.png';
-import FocusIcon from './src/assets/icons/focus.png';
+import SleepIcon from './src/assets/icons/sleepclicked.png';
+import SleepIconUnclicked from './src/assets/icons/sleepunclicked.png';
+import MoveIcon from './src/assets/icons/moveclicked.png';
+import MoveIconUnclicked from './src/assets/icons/moveunclicked.png';
+import MeditateIcon from './src/assets/icons/meditateclicked.png';
+import MeditateIconUnclicked from './src/assets/icons/meditateunclicked.png';
+import FocusIcon from './src/assets/icons/focusclicked.png';
+import FocusIconUnclicked from './src/assets/icons/focusunclicked.png';
 import ExploreIcon from './src/assets/icons/explore.png';
+import ExploreIconUnclicked from './src/assets/icons/exploreunclicked.png';
 import MagnifyIcon from './src/assets/icons/magnifier.png';
 // Image source
 import Stars from './src/assets/images/stars.png';
@@ -81,6 +89,7 @@ const BottomBar = () => {
     backgroundColor: '#4F4F4F',
     borderTopRightRadius: 16,
     borderTopLeftRadius: 16,
+    position:'absolute',
   }
   return (
 
@@ -91,63 +100,103 @@ const BottomBar = () => {
         },
       })}
     //tabBar={()=>(<View style={{backgroundColor: 'none', height: 70}}></View>)}
-    >
+    > 
       <Tab.Screen name="Explore" component={ExploreScreen}
         options={({ }) => ({
-          tabBarIcon: () => <Image source={ExploreIcon} />,
+          tabBarIcon: ({focused}) => {
+            
+            return ((focused)? 
+            <View style={{alignItems: 'center', bottom: 2}}>
+                <View style={{height: 2, width:50 , backgroundColor: 'white', bottom:15}}/>
+                 <Image source={ExploreIcon} />
+            </View>
+            
+            : <Image source ={ExploreIconUnclicked} />) 
+          }, 
+          
           headerShown: false,
           tabBarStyle: tabStyle,
-          tabBarLabelStyle: {
+          tabBarActiveTintColor: 'white',
+          tabBarLabelStyle:  {
             marginBottom: 10,
-            color: 'white',
             fontWeight: "400",
           }
         })}
       />
       <Tab.Screen name="Meditate" component={MeditateScreen}
         options={({ }) => ({
-          tabBarIcon: () => <Icon name="circle" size={30} color="white" />,
+          tabBarIcon: ({focused}) => {
+            return ((focused)? 
+            <View style={{alignItems: 'center', bottom: 2}}>
+                <View style={{height: 2, width:50 , backgroundColor: color.Med1, bottom:15}}/>
+                 <Image source={MeditateIcon} />
+            </View> 
+            : <Image source ={MeditateIconUnclicked} />) 
+          }, 
           headerShown: false,
           tabBarStyle: tabStyle,
+          tabBarActiveTintColor: color.Med1,
+
           tabBarLabelStyle: {
             marginBottom: 10,
-            color: 'white',
+            
             fontWeight: "400",
           }
         })}
       />
       <Tab.Screen name="Sleep" component={SleepScreen}
         options={({ }) => ({
-          tabBarIcon: () => <Icon name="nightlight-round" size={30} color="white" />,
+          tabBarIcon: ({focused}) => {
+            return ((focused)? 
+            <View style={{alignItems: 'center', bottom: 2}}>
+                <View style={{height: 2, width:50 , backgroundColor: color.Sleep1, bottom:15}}/>
+                 <Image source={SleepIcon} />
+            </View>  
+            : <Image source ={SleepIconUnclicked} />) 
+          }, 
           headerShown: false,
           tabBarStyle: tabStyle,
+          tabBarActiveTintColor: color.Sleep1,
           tabBarLabelStyle: {
             marginBottom: 10,
-            color: 'white',
             fontWeight: "400",
           }
         })}
       />
       <Tab.Screen name="Move" component={MoveScreen}
         options={({ }) => ({
-          tabBarIcon: () => <Image source={MoveIcon} />,
+          tabBarIcon: ({focused}) => {
+            return ((focused)? 
+            <View style={{alignItems: 'center', bottom: 2}}>
+                <View style={{height: 2, width:50 , backgroundColor: color.Move2, bottom:15}}/>
+                 <Image source={MoveIcon} />
+            </View> 
+            : <Image source ={MoveIconUnclicked} />) 
+          }, 
           headerShown: false,
           tabBarStyle: tabStyle,
+          tabBarActiveTintColor: color.Move2,
           tabBarLabelStyle: {
             marginBottom: 10,
-            color: 'white',
             fontWeight: "400",
           }
         })}
       />
       <Tab.Screen name="Focus" component={FocusScreen}
         options={({ }) => ({
-          tabBarIcon: () => <Image source={FocusIcon} />,
+          tabBarIcon: ({focused}) => {
+            return ((focused)? 
+            <View style={{alignItems: 'center', bottom: 1}}>
+                <View style={{height: 2, width:50 , backgroundColor: color.Focus2, bottom:15}}/>
+                 <Image source={FocusIcon} />
+            </View> 
+            : <Image source ={FocusIconUnclicked} />) 
+          }, 
           headerShown: false,
           tabBarStyle: tabStyle,
+          tabBarActiveTintColor: color.Focus2,
           tabBarLabelStyle: {
             marginBottom: 10,
-            color: 'white',
             fontWeight: "400",
           }
         })}
@@ -265,9 +314,9 @@ const App = () => {
               ),
               headerTitle: () => (<View />),
               headerStyle: {
-                backgroundColor: 'none',
+                backgroundColor: '#272727',
               },
-              headerShadowVisible: false,
+              headerShadowVisible: true,
             })}
           />
           <Stack.Screen name="Profile" component={ProfileScreen}
