@@ -8,6 +8,7 @@ import MoveBG from '../../../assets/images/move-planet.png';
 import StarsBG from '../../../assets/images/stars.png';
 import MedAvatar from '../../../assets/images/meditate-avatar.png';
 import Mov from '../../../assets/images/mov-1.png';
+import Badge1 from '../../../assets/images/Badge1.png';
 import { overflow } from 'styled-system';
 import play from '../../../assets/icons/play.png';
 import { Guides } from '../constants.js';
@@ -96,8 +97,11 @@ const MoveScreen = ({navigation}) => {
         <Text style={[typo.H0, {left:20}]}>
           Move
         </Text>
-        
-          <Text style={[typo.T2, {color:'white', left:20}]}>
+        <View style={{flexDirection:'row', alignItems : 'center'}}> 
+          <Image source={Badge1} style={{ top: 3, marginLeft: 17} }/>
+          
+          <View style={{top: -6, marginLeft: -10}}>
+            <Text style={[typo.T1, {color:'white', left:20, top:2}]}>
             Level 1
           </Text>
           <Progress.Bar 
@@ -107,9 +111,12 @@ const MoveScreen = ({navigation}) => {
             color={color.Move3}
             unfilledColor={'white'}
             borderWidth={0}
-            top={10}
+            top={6}
             left={20}
           />
+          </View>
+        </View>
+          
           <Image source={MedAvatar} style={{ top: 20, left: 20,zIndex: 0, position: 'absolute'}}/>
         </View>
           <View style={{display: 'flex', flex: 8, justifyContent: 'flex-end', alignItems: 'center', zIndex:2}}>

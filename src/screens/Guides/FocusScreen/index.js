@@ -8,6 +8,7 @@ import FocusBG from '../../../assets/images/focus-planet.png';
 import StarsBG from '../../../assets/images/stars.png';
 import SleepAvatar from '../../../assets/images/sleep-avatar.png';
 import Focus1 from '../../../assets/images/focus-1.png';
+import Badge3 from '../../../assets/images/Badges3.png';
 import play from '../../../assets/icons/play.png';
 import { Guides } from '../constants';
 
@@ -97,8 +98,11 @@ const FocusScreen = ({navigation}) => {
         <Text style={[typo.H0, {left:20}]}>
           Focus 
         </Text>
-        
-          <Text style={[typo.T2, {color:'white', left:20}]}>
+        <View style={{flexDirection:'row', alignItems : 'center'}}> 
+          <Image source={Badge3} style={{ top: 3, marginLeft: 17} }/>
+          
+          <View style={{top: -6, marginLeft: -10}}>
+            <Text style={[typo.T1, {color:'white', left:20, top:2}]}>
             Level 2
           </Text>
           <Progress.Bar 
@@ -108,9 +112,11 @@ const FocusScreen = ({navigation}) => {
             color={color.Focus3}
             unfilledColor={'white'}
             borderWidth={0}
-            top={10}
+            top={6}
             left={20}
           />
+          </View>
+          </View>
           <Image source={SleepAvatar} style={{ top: 20, left: 20,zIndex: 0, position: 'absolute'}}/>
         </View>
           <View style={{display: 'flex', flex: 8, justifyContent: 'flex-end', alignItems: 'center', zIndex:2}}>
