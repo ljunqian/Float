@@ -77,7 +77,7 @@ const ExploreScreen = ({ navigation }) => {
     <Icon name="radio-button-unchecked" size={30} color="white"/>)
   }
 
-  const CardComponent = ({img, type, duration}) => {
+  const CardComponent = ({img, type, duration, title}) => {
     
     const [isDone, setIsDone] = useState(false);
 
@@ -111,7 +111,7 @@ const ExploreScreen = ({ navigation }) => {
     }
 
     return(
-      <View style={{marginHorizontal: 15}}>
+      <View style={{marginHorizontal: 15, marginBottom: 100}}>
         <Text style={[style.header, typo.T1]}>
           Start your day
         </Text>
@@ -160,18 +160,18 @@ const ExploreScreen = ({ navigation }) => {
     return(
       <>
       <View style={{flexDirection: 'row'}}>
-        <TouchableOpacity onPress={() => navigation.navigate('GuidesLesson')}>
+        <TouchableOpacity onPress={() => navigation.navigate('GuidesLesson', types[0])}>
           <MyComponent image={Meditate1} title={"Meditation"}/>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('Sleep')}>
+        <TouchableOpacity onPress={() => navigation.navigate('GuidesLesson', types[1])}>
           <MyComponent image={Sleep1} title={"Sleep"}/>
         </TouchableOpacity>
       </View>
       <View style={{flexDirection: 'row'}}>
-        <TouchableOpacity onPress={() => navigation.navigate('Move')}>
+        <TouchableOpacity onPress={() => navigation.navigate('GuidesLesson', types[2])}>
           <MyComponent image={Move1} title={"Move"}/>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('Focus')}>
+        <TouchableOpacity onPress={() => navigation.navigate('GuidesLesson', types[3])}>
           <MyComponent image={Focus1} title={"Focus"}/>
         </TouchableOpacity>
       </View>
@@ -223,7 +223,12 @@ const ExploreScreen = ({ navigation }) => {
   )
 }
 
-
+const types = [
+  "Meditate",
+  "Sleep",
+  "Move",
+  "Focus"
+]
 
 const colours = {
   "Meditate": color.Med1,
