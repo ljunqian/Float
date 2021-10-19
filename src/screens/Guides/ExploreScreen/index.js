@@ -129,7 +129,9 @@ const ExploreScreen = ({ navigation }) => {
               margin: 10, backgroundColor: 'white', overflow: 'hidden'}}>
           <ImageBackground source={image} style={{width:'100%', height: '110%', top: -5}}>
             <View style={{flex: 3, alignItems: 'center', justifyContent: 'center'}}>
-              <Text style={[typo.H4, {color: 'white'}]}>
+              <Text style={[typo.H4, {color: 'white',  textShadowColor: 'rgba(0, 0, 0, 0.75)',
+  textShadowOffset: {width: -1, height: 1},
+  textShadowRadius: 10}]}>
                 {title}
               </Text> 
             </View>
