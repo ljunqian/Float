@@ -19,6 +19,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ExploreScreen from './src/screens/Guides/ExploreScreen';
 import Recents from './src/screens/Guides/ExploreScreen/Recents.js';
 import Favourites from './src/screens/Guides/ExploreScreen/Favourites.js';
+import GuidesLesson from './src/screens/Guides/ExploreScreen/GuidesLesson';
 import SearchScreen from './src/screens/SearchScreen/';
 import GuideComplete from './src/screens/Guides/MeditateScreen/GuideComplete.js';
 
@@ -418,6 +419,17 @@ const App = () => {
           <Stack.Screen name="Favourites" component={Favourites} 
             options={()=>({
               headerShown: false
+            })}
+          />
+          <Stack.Screen name="GuidesLesson" component={GuidesLesson} 
+            options={()=>({
+              headerShadowVisible: false,
+              headerTitleStyle: {color:'white'},
+              headerTintColor: 'white',
+              headerTransparent: true,
+              headerStyle: {
+                backgroundColor: 'transparent'
+              }
             })}
           />
 

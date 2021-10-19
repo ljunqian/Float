@@ -160,7 +160,7 @@ const ExploreScreen = ({ navigation }) => {
     return(
       <>
       <View style={{flexDirection: 'row'}}>
-        <TouchableOpacity onPress={() => navigation.navigate('Meditate')}>
+        <TouchableOpacity onPress={() => navigation.navigate('GuidesLesson')}>
           <MyComponent image={Meditate1} title={"Meditation"}/>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate('Sleep')}>
