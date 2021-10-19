@@ -1,6 +1,9 @@
 
 import React, { useState, useEffect } from 'react';
 import { Button, Text, View, StyleSheet, ScrollView, TouchableOpacity, Image, ImageBackground, Modal } from 'react-native';
+import CalendarPicker from 'react-native-calendar-picker';
+import moment from 'moment';
+import SwipeUpDown from 'react-native-swipe-up-down';
 
 import ProfileScreen from './profile';
 import typo from '../../styles/typography';
@@ -25,7 +28,9 @@ import MedBG from '../../assets/images/meditate-planet.png';
 import SleepBG from '../../assets/images/sleep-planet.png';
 import MoveBG from '../../assets/images/move-planet.png';
 import FocusBG from '../../assets/images/focus-planet.png';
-
+import Coin from '../../assets/icons/coins.png';
+import Forward from '../../assets/icons/forwardarrow.png';
+import Backward from '../../assets/icons/backarrow.png';
 
 const Coins = ({ navigation, i }) => {
   const {coins} = useSelector((state) => state.user.userData);
@@ -33,21 +38,22 @@ const Coins = ({ navigation, i }) => {
     <TouchableOpacity
       onPress={() => { navigation.navigate('Reward'); }}
       style={{
-        alignSelf: 'center', backgroundColor: '#C4C4C4', margin: 15, height: 45, paddingLeft: 12, paddingRight: 12, borderRadius: 8,
+        alignSelf: 'center', height: 45, paddingLeft: 12, paddingRight: 12, borderRadius: 8,
         display: 'flex', flexDirection: 'row', alignItems: 'center'
       }}>
 
-      <Text style={typo.H3}>
-        My Coins Amount: {coins}
+      <Image source={Coin}/>
+      <Text style={[typo.H3, {marginLeft: 5, color: '#F4C34D'}]}>
+         : {coins}
         {//i.coins
         }
       </Text>
       <View
-        style={{ alignSelf: 'center', backgroundColor: '#CD5959', borderRadius: 8, marginLeft: 5, padding: 5, }}
+        style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: '#CD5959', borderRadius: 8, height: 28, width: 80, marginLeft: 7}}
       >
-        <Text style={{ color: 'white' }}
+        <Text style= {[typo.H3, {color: '#FFF'}]}
         >
-          Store
+          STORE
         </Text>
       </View>
 
@@ -269,11 +275,90 @@ const MainProf = ({ navigation }) => {
     getUserInfo();
   }, []);
 
+  let customDatesStyles = [];
+  let today = moment();
+  let day = today.clone().startOf('month');
+  day.subtract(1, 'day');
+  console.log(today.minutes());
+
+  while(day.add(1, 'day').isSame(today, 'month')) {
+    customDatesStyles.push({
+      date: day.clone(),
+      // Random colors
+      style: {backgroundColor: 'red'},
+      textStyle: {color: 'black'}, // sets the font color
+      containerStyle: [], // extra styling for day container
+      allowDisabled: true, // allow custom style to apply to disabled dates
+    });
+  }
+
+  const customDatesStylesCallback = (date) => {
+    return{
+      // style:{
+      //   margin: 10,
+      // },
+      textStyle: {
+        color: '#262626',
+        fontFamily: 'Montserrat-Bold',
+        fontSize: 14
+      },
+    };
+  }
+
+  const customDayHeaderStylesCallback = (dayOfWeek, month, year) => {
+    return {
+      textStyle: {
+        color: '#262626',
+        fontFamily: 'Montserrat-Bold',
+        fontSize: 14
+      }
+    };
+  }
+
   return (
-    <ScrollView style={{ backgroundColor: color.bg, color: 'white' }}>
+    <View>
+    <ScrollView style={{ backgroundColor: '#3C886B', color: 'white' }}>
+    <View style={{backgroundColor: color.bg, height: 280, width: '100%', borderBottomLeftRadius: 50, borderBottomRightRadius: 50, elevation: 10, zIndex: -1}}>
       <ProfileScreen />
-      <Text style={[typo.H1, { textAlign: 'center' }]}>{info.username}</Text>
+      <Text style={[typo.H1, { textAlign: 'center' }]}>{info.username}</Text> 
       <Coins navigation={navigation} i={info} />
+    </View>
+    <Text style={[typo.H1, {marginTop: 20, marginLeft: 20, marginBottom: 13, textShadowColor: '#262626', textShadowOffset: {width: 2, height: 2}, textShadowRadius: 10}]}>Mood Tracker</Text>
+      <View style={{alignItems: 'center', position: 'relative'}}>
+        <View style={{marginBottom: 27}}>
+          <View style={{backgroundColor: '#FFF', position: 'absolute', width: 340, height: '85%', borderRadius: 20, marginTop: 47, alignSelf: 'center'}}/>
+          <CalendarPicker 
+              customDayHeaderStyles={customDayHeaderStylesCallback}
+              customDatesStyles={customDatesStyles}
+              customDatesStyles={customDatesStylesCallback}
+              dayOfWeekStyles={{
+                marginRight: 100
+              }}
+              dayLabelsWrapper={{
+                borderTopWidth: 0,
+                borderBottomWidth: 0,
+                paddingTop: 20
+              }}
+              monthYearHeaderWrapperStyle={{
+                paddingTop: 10 
+              }}
+                textStyle={[
+                typo.H2,
+                {color: '#FFF'}
+                ]}
+                todayTextStyle = {{color: '#FFF'}}
+                todayBackgroundColor = "#FF9F00"
+                previousTitle= {<Image source={Backward}/>}
+                previousTitleStyle={{paddingLeft: 45}}
+                nextTitle= {<Image source={Forward}/>}
+                nextTitleStyle={{paddingRight: 45}}
+                width = {360}
+                height= {400}
+                enableDateChange= {false}
+            />
+          </View>
+      </View>
+      
       <View style={{
         flexDirection: "row", paddingLeft: 5, paddingBottom: 5, paddingRight: 5
       }}>
@@ -340,6 +425,19 @@ const MainProf = ({ navigation }) => {
 
       )}
     </ScrollView>
+        {/* <SwipeUpDown		
+        itemMini={<View style={{height: 56, backgroundColor: 'red'}}><Text style={{color: '#fff', alignSelf: 'center'}}>Hello</Text></View>} // Pass props component when collapsed
+        itemFull={<View />} // Pass props component when show full
+        onShowMini={() => console.log('mini')}
+        onShowFull={() => console.log('full')}
+        onMoveDown={() => console.log('down')}
+        onMoveUp={() => console.log('up')}
+        disablePressToShow={true} // Press item mini to show full
+        style={{ backgroundColor: '#262626' }} // style for swipe
+        swipeHeight={56}
+        animation="spring" 
+        /> */}
+      </View>
   )
 }
 
