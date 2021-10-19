@@ -1,63 +1,58 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Text, View, StyleSheet, Image, TextInputField, TouchableOpacity } from 'react-native';
-import Nav from './Nav';
-import Changeaccountinfo from '../../screens/ProfileScreen/Changeaccountinfo';
+import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Context } from '../Authenticate/store';
 import { Auth } from 'aws-amplify';
-import ProfileScreen from './profile';
 import { color } from '../../styles/theme';
-import BirthDate from '../Authenticate/BirthDate'
-import { Input, Center, Select, NativeBaseProvider } from "native-base"
+import { Input, Select, NativeBaseProvider } from "native-base"
+
+import DatePicker from 'react-native-datepicker';
+import Moment from 'moment';
 
 const editProfile = ({ navigation, route }) => {
   const [state, dispatch] = React.useContext(Context);
-  const [name, setName] = useState('Jun Qian');
-  const [username, setUsername] = useState('ljunqian');
-  const [email, setEmail] = useState('ljunqian123@gmail.com');
-  const [phone, setPhone] = useState('12345678');
-  const [password, setPassword] = useState('testing123');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [gender, setGender] = useState('');
+  const [bdate, setbDate] = useState('');
   const [errorstate, seterrorState] = useState(false);
   const [errorMessage, seterrorMessage] = useState('');
-  const [gender, setGender] = useState('M');
 
+  const getUserInfo = async () => {
+    try {
+      const user = await Auth.currentAuthenticatedUser();
+      setEmail(user.attributes.email)
+      setPhone(user.attributes["custom:phone"])
+      setGender(user.attributes["custom:gender"])
+      setbDate(user.attributes["custom:birthday"])
+    } catch (error) {
+      console.log("Error saving post", error);
+    }
+  }
 
   const handlechange = async () => {
     try {
       let user = await Auth.currentAuthenticatedUser();
 
       let result = await Auth.updateUserAttributes(user, {
-        'email': 'me@anotherdomain.com',
-        'family_name': 'Lastname'
+        'email': email,
+        'custom:birthday': bdate,
+        'custom:gender': gender,
+        'custom:phone': phone
       });
+      console.log(result); // SUCCESS
     } catch (error) {
       console.log(error);
     }
   }
 
   useEffect(() => {
-    console.log('context', state);
+    getUserInfo();
   }, [])
 
   return (
     <NativeBaseProvider>
       <View style={{ backgroundColor: color.bg, minHeight: '100%' }}>
         <View style={{ marginLeft: 50 }}>
-          <Input
-            style={{ width: 331, height: 40 }}
-            value={name}
-            onChangeText={setName}
-            variant="underlined"
-            placeholder="Name"
-            color='white'
-          />
-          <Input
-            style={{ width: 331, height: 40 }}
-            value={username}
-            onChangeText={setUsername}
-            variant="underlined"
-            placeholder="Username"
-            color='white'
-          />
           <Input
             style={{ width: 331, height: 40 }}
             value={email}
@@ -89,14 +84,48 @@ const editProfile = ({ navigation, route }) => {
               _light={{ color: "white", }}
               _dark={{ color: "white", }}
             >
-              <Select.Item label="Female" value="F" />
-              <Select.Item label="Male" value="M" />
-              <Select.Item label="Others" value="NA" />
-            </Select></View>
-          <View style={{ marginBottom: 100 }}>
-            <BirthDate />
+              <Select.Item label="Female" value="Female" />
+              <Select.Item label="Male" value="Male" />
+              <Select.Item label="Others" value="Others" />
+            </Select>
           </View>
-          <TouchableOpacity onPress={() => { navigation.navigate('Change Password') }}>
+          <View style={{ marginBottom: 100 }}>
+            <View style={{ marginLeft: 40 }}>
+              <Text style={style.title}>
+                Birth Date
+              </Text>
+              <DatePicker
+                date={bdate}
+                style={style.datePickerStyle}
+                mode="date" // The enum of date, datetime and time
+                placeholder="select date"
+                format="DD-MM-YYYY"
+                minDate="01-01-1940"
+                maxDate={Moment(Date.now()).format('DD-MM-YYYY')}
+                confirmBtnText="Confirm"
+                cancelBtnText="Cancel"
+                customStyles={{
+                  dateIcon: {
+                    //display: 'none',
+                    position: 'absolute',
+                    left: 0,
+                    top: 4,
+                    marginLeft: 0,
+                  },
+                  dateInput: {
+                    borderWidth: 1,
+                    backgroundColor: 'white',
+                    color: 'white',
+                    marginLeft: 0,
+                  },
+                }}
+                onDateChange={(date) => {
+                  setbDate(date)
+                }}
+              />
+            </View>
+          </View>
+          <TouchableOpacity onPress={() => { navigation.navigate('Change password') }}>
             <View style={{
               marginTop: 10,
               marginRight: 46,
@@ -109,7 +138,7 @@ const editProfile = ({ navigation, route }) => {
               <Text style={{ color: 'white' }}>Change Password</Text>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => { }}>
+          <TouchableOpacity onPress={() => { handlechange() }}>
             <View style={{
               marginTop: 10,
               marginRight: 46,
@@ -123,11 +152,8 @@ const editProfile = ({ navigation, route }) => {
             </View>
           </TouchableOpacity>
         </View>
-
       </View>
-
     </NativeBaseProvider>
-
   )
 }
 
@@ -140,5 +166,18 @@ const style = StyleSheet.create({
   },
   warnStyle: {
     height: '40px'
+  },
+  datePickerStyle: {
+    borderColor: 'blue',
+    width: 320,
+    marginLeft: -40,
+    marginTop: 20,
+  },
+  title: {
+    color: 'white',
+    textAlign: 'center',
+    fontSize: 20,
+    fontWeight: 'bold',
+    right: 140
   }
 })

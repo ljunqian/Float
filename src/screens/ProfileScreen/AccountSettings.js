@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Text, View, StyleSheet, Image, TextInputField, TouchableOpacity } from 'react-native';
 import Nav from './Nav';
-import Changeaccountinfo from '../../screens/ProfileScreen/Changeaccountinfo';
 import { Context } from '../Authenticate/store';
-import { Auth } from 'aws-amplify';
+import { Auth, API, graphqlOperation, } from 'aws-amplify';
 import ProfileScreen from './profile';
 import { color } from '../../styles/theme';
 
+import AWS from '../../../node_modules/aws-sdk/dist/aws-sdk-react-native';
+
+import { deleteUser } from '../../graphql/mutations';
+
 const AccountSettings = ({ navigation, route }) => {
   const [state, dispatch] = React.useContext(Context);
+
   async function handlesignOut() {
     try {
       await Auth.signOut();
@@ -16,6 +20,39 @@ const AccountSettings = ({ navigation, route }) => {
     } catch (error) {
       console.log('error signing out: ', error);
     }
+  }
+
+  async function handledelete() {
+    const user = await Auth.currentAuthenticatedUser();
+    //delete user metadata
+    const userDetails = {
+      id: user.attributes.sub,
+      _version: 1
+    };
+    const deleteduser = await API.graphql(graphqlOperation(deleteUser, { input: userDetails }));
+    console.log(deleteduser);
+
+    //delete user instance from aws cognito
+    AWS.config.apiVersions = {
+      cognitoidentityserviceprovider: '2016-04-18',
+    };
+    AWS.config.update({ region: 'ap-southeast-1' });
+    var cognitoidentityserviceprovider = new AWS.CognitoIdentityServiceProvider();
+    var params = {
+      AccessToken: user.signInUserSession.accessToken.jwtToken.toString() /* required */
+    };
+    cognitoidentityserviceprovider.deleteUser(params, function (err, data) {
+      if (err) {
+        // an error occurred
+        console.log(err, err.stack);
+      }
+      else {
+        // successful response
+        console.log(data)
+        dispatch({ type: 'SIGN_OUT', payload: true });
+        navigation.navigate('Login')
+      };
+    });
   }
 
   useEffect(() => {
@@ -53,7 +90,7 @@ const AccountSettings = ({ navigation, route }) => {
             <Text style={{ color: 'white' }}>Sign Out</Text>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => { Auth.currentAuthenticatedUser().then(console.log) }}>
+        <TouchableOpacity onPress={() => { handledelete() }}>
           <View style={{
             marginTop: 10,
             marginRight: 46,
