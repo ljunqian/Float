@@ -30,6 +30,9 @@ import SignUpScreen from './src/screens/Authenticate/SignUpScreen';
 import otp from './src/screens/Authenticate/otp.js';
 import forgetpass from './src/screens/Authenticate/forgetpass';
 import confirmpass from './src/screens/Authenticate/confirmpass';
+import chatScreen from './src/screens/ProfileScreen/chatScreen';
+import changePass from './src/screens/ProfileScreen/changePass';
+
 import MeditateScreen from './src/screens/Guides/MeditateScreen';
 import GuideDetail from './src/screens/Guides/MeditateScreen/GuideDetail.js';
 import GuideActivity from './src/screens/Guides/MeditateScreen/GuideActivity.js';
@@ -38,16 +41,8 @@ import SleepScreen from './src/screens/Guides/SleepScreen';
 import MoveScreen from './src/screens/Guides/MoveScreen';
 
 //* Profile
-import chatScreen from './src/screens/ProfileScreen/chatScreen';
-import changePass from './src/screens/ProfileScreen/changePass';
 import editProfile from './src/screens/ProfileScreen/editProfile';
 import ProfileScreen from './src/screens/ProfileScreen/';
-import RewardScreen from './src/screens/RewardScreen/';
-import AccountSettings from './src/screens/ProfileScreen/AccountSettings.js';
-import Changeaccountinfo from './src/screens/ProfileScreen/Changeaccountinfo';
-import LoginScreen from './src/screens/Authenticate/LoginScreen';
-import SignUpScreen from './src/screens/Authenticate/SignUpScreen';
-import otp from './src/screens/Authenticate/otp.js';
 
 //* icons
 import { Icon } from 'react-native-elements';

@@ -240,6 +240,8 @@ const MainProf = ({ navigation }) => {
     try {
       const user = await Auth.currentAuthenticatedUser();
       const {data} = await API.graphql(graphqlOperation(getUser, { id: user.attributes.sub }));
+      console.log(data);
+
       setInfo({
         meditateD: secondsToHms(data.getUser.meditateD),
         sleepD: secondsToHms(data.getUser.sleepD),
@@ -267,6 +269,10 @@ const MainProf = ({ navigation }) => {
 
   useEffect(() => {
     getUserInfo();
+
+    return {
+
+    }
   }, []);
 
   return (

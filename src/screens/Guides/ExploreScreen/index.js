@@ -24,7 +24,7 @@ import { Auth } from 'aws-amplify';
 const ExploreScreen = ({ navigation }) => {
   
   const [isTimeline, setIsTimeline] = useState(false);
-
+  const [name, setName] = useState();
   const [info, setInfo] = useState({
     name: '',
     username: '',
@@ -169,7 +169,7 @@ const ExploreScreen = ({ navigation }) => {
     <ScrollView style={theme.container}>
       <View style={{marginHorizontal: 20}}> 
         <Text style={[typo.H1, {color: 'white'}]}>
-          Good afternoon, {info.username}
+          Good afternoon, {name}
         </Text>
       </View>
       <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
