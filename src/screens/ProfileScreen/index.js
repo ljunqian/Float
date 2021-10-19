@@ -6,6 +6,9 @@ import ProfileScreen from './profile';
 import typo from '../../styles/typography';
 import { color } from '../../styles/theme';
 import {useSelector} from 'react-redux';
+// import {JCalendar} from './bigCalendar';   // uncomment to view ; comment './weekcalendar'
+import {JCalendar} from './weekCalendar';
+import * as Progress from 'react-native-progress';
 
 import Friend1 from '../../assets/images/friend1.png';
 import Friend2 from '../../assets/images/friend2.png';
@@ -53,24 +56,44 @@ const Coins = ({ navigation, i }) => {
   )
 }
 
-const JourneyComponent = ({ action, colour, number, suffix }) => {
+const JourneyComponent = ({ action, colour, number, number2, suffix, suffix2, isSleep }) => {
 
-  return (
-    <View style={style.fl}>
-      <View style={{justifyContent: 'center', alignItems: 'center', flex:2, top: 5}}>
+  const Jtime = ({time, suf, bg}) => {
+    return(
+      <View style={{justifyContent: 'center', alignItems: 'center', flex:2, top: 5, backgroundColor: bg}}>
         <Text style={[typo.H0, {color: colour}]}>
-          {number}
+          {time}
         </Text>
         <Text style={[typo.H2, {color: colour}]}>
-          {suffix}
+          {suf}
+        </Text>
+      </View>)
+  }
+
+  if(isSleep){
+    return(
+      <View style={style.fl}>
+        <Jtime time={number} suf={suffix} bg={'none'}/>
+        <Jtime time={number2} suf={suffix2} bg={'none'}/>
+        <Text style={[typo.T1, {marginLeft: 17, flex: 6, flexWrap: 'wrap'}]}>
+          {action}
         </Text>
       </View>
-      <Text style={[typo.T1, {marginRight: 40, flex: 3, flexWrap: 'wrap'}]}>
-        {action}
-      </Text>
-    </View>
-  )
+    )
+  }
+  else{
+    return (
+      <View style={style.fl}>
+        <Jtime time={number} suf={suffix}/>
+        <Text style={[typo.T1, {marginRight: 40, flex: 3, flexWrap: 'wrap'}]}>
+          {action}
+        </Text>
+      </View>
+    )
+  }
+  
 }
+
 
 const FriendComponent = ({ img, name }) => {
   return (
@@ -115,30 +138,36 @@ const NewJourney = ({ info }) => {
   }
 
   const JourneyPopup = () => {
+
     const displayContent = () => {
       if (type === 'meditate'){
         return(
           <>
-          <JourneyComponent action="Total Time Meditated" colour={color.Med1} number={'3'} suffix={'hrs'}/>
-          <JourneyComponent action="Average Time Meditated Per Week" colour={color.Med1} number={'35'} suffix={'min'}/>
+          <JourneyComponent action="Total Time Meditated" colour={color.Med1} number={'3'} suffix={'hrs'} isSleep={false}/>
+          <JourneyComponent action="Average Time Meditated Per Week" colour={color.Med1} number={'35'} suffix={'min'} isSleep={false}/>
           </>
         )
       }else if(type === 'focus'){
         return(
           <>
-          <JourneyComponent action="Average Focus Sessions Per Week" colour={color.Focus1} number={'4'} suffix={'sessions'}/>
-          <JourneyComponent action="Average Time Spent Per Session" colour={color.Focus1} number={'35'} suffix={'min'}/>
+          <JourneyComponent action="Average Focus Sessions Per Week" colour={color.Focus1} number={'4'} suffix={'sessions'} isSleep={false}/>
+          <JourneyComponent action="Average Time Spent Per Session" colour={color.Focus1} number={'35'} suffix={'min'} isSleep={false}/>
           </>
         )
       }else if(type === 'move'){
         return(
           <>
-          <JourneyComponent action="Average Move Sessions Per Week" colour={color.Move1} number={'3'} suffix={'sessions'}/>
-          <JourneyComponent action="Average Time Spent Per Session" colour={color.Move1} number={'20'} suffix={'min'}/>
+          <JourneyComponent action="Average Move Sessions Per Week" colour={color.Move1} number={'3'} suffix={'sessions'} isSleep={false}/>
+          <JourneyComponent action="Average Time Spent Per Session" colour={color.Move1} number={'20'} suffix={'min'} isSleep={false}/>
           </>
         )
       }else{
-
+        return(
+          <>
+          <JourneyComponent action="Average Time In Bed" colour={color.Sleep2} number={'6'} suffix={'hrs'} number2={'36'} suffix2={'min'} isSleep={true}/>
+          <JCalendar styles={style.fls}/>
+          </>
+        )
       }
     }
     
@@ -148,13 +177,28 @@ const NewJourney = ({ info }) => {
         animationType="slide"
         transparent={true}>
         <View style={{flex: 1, backgroundColor: 'rgba(0,0,0,0.5)'}}>
-          <Image source={background[type]} resizeMethod={'scale'} style={{top:185, left:-45, position: 'absolute'}}/>
-          <TouchableOpacity style={{flex: 5}} onPress={() => setModalVisible(false)} />
-          <View style={{flex: 5, alignItems: 'center', marginTop: 30}}>
+          <Image source={background[type]} resizeMethod={'scale'} style={{top:type=='sleep'?-5:155, left:-45, position: 'absolute'}}/>
+          <TouchableOpacity style={{flex: type=='sleep'?1:5}} onPress={() => setModalVisible(false)} />
+          <View style={{flex: type=='sleep'?4.5:6, alignItems: 'center', marginTop: 30}}>
             <Text style={[typo.H0, style.title]}>
               {title[type]}
             </Text>
-            <View style={style.opaqueContainer}>
+            <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center', right: 5, margin: 10}}>
+              <Text style={[typo.T3, {color:'white'}]}>
+                Level 2
+              </Text>
+              <Progress.Bar 
+                progress={0.4}
+                width={100}
+                height={8}
+                color={colours[type]}
+                unfilledColor={'white'}
+                borderWidth={0}
+                top={1}
+                left={15}
+              />
+            </View>
+            <View style={[style.opaqueContainer, {height: type=='sleep'? 370:200}]}>
               {displayContent()}
             </View>
           </View>  
@@ -173,7 +217,7 @@ const NewJourney = ({ info }) => {
         </Text>
       </View>
       <JourneyBtn text={'Meditation'} colour={color.Med1} top={'23%'} left={'43%'} pressHanldler={() => {setModalVisible(true); setType('meditate')}}/>
-      <JourneyBtn text={'Sleep'} colour={color.Sleep2} top={'51%'} left={'25%'}/>
+      <JourneyBtn text={'Sleep'} colour={color.Sleep2} top={'51%'} left={'25%'} pressHanldler={() => {setModalVisible(true); setType('sleep')}}/>
       <JourneyBtn text={'Focus'} colour={color.Focus1} top={'70.5%'} left={'37%'} pressHanldler={() => {setModalVisible(true); setType('focus')}}/>
       <JourneyBtn text={'Move'} colour={color.Move1} top={'84%'} left={'43%'} pressHanldler={() => {setModalVisible(true); setType('move')}}/>
       <JourneyPopup />
@@ -301,6 +345,13 @@ const MainProf = ({ navigation }) => {
 
 export default MainProf;
 
+const colours = {
+  "meditate": color.Sleep3,
+  "sleep": color.Med1,
+  "move": color.Focus3,
+  "focus": color.Move2
+}
+
 const title = {
   "meditate": "Meditation",
   "sleep": "Sleep",
@@ -326,9 +377,13 @@ const style = StyleSheet.create({
   },
   fl: {
     margin: 10, borderRadius: 20, height: 90, width: 340,
-    backgroundColor: 'white', padding: 20, display: 'flex',
+    backgroundColor: 'white', paddingLeft: 10, paddingRight: 20, paddingVertical: 20, display: 'flex',
     flexDirection: 'row', alignItems: 'center',
-    justifyContent: 'space-evenly', left: 5
+    justifyContent: 'center', left: 5
+  },
+  fls: {
+    margin: 10, borderRadius: 20, height: 260, width: 340,
+    backgroundColor: 'white', padding: 20, left: 5, paddingRight: 30
   },
   friend: {
     margin: 10, borderRadius: 20, height: 120,
