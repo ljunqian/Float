@@ -1,9 +1,9 @@
 
 import React, { useState, useEffect } from 'react';
-import { Button, Text, View, StyleSheet, ScrollView, TouchableOpacity, Image, ImageBackground, Modal } from 'react-native';
+import { Button, Text, View, StyleSheet, ScrollView, TouchableOpacity, Image, ImageBackground, Modal, Pressable } from 'react-native';
 import CalendarPicker from 'react-native-calendar-picker';
 import moment from 'moment';
-import SwipeUpDown from 'react-native-swipe-up-down';
+import BottomDrawer from 'react-native-bottom-drawer-view';
 
 import ProfileScreen from './profile';
 import typo from '../../styles/typography';
@@ -326,7 +326,7 @@ const MainProf = ({ navigation }) => {
     </View>
     <Text style={[typo.H1, {marginTop: 20, marginLeft: 20, marginBottom: 13, textShadowColor: '#262626', textShadowOffset: {width: 2, height: 2}, textShadowRadius: 10}]}>Mood Tracker</Text>
       <View style={{alignItems: 'center', position: 'relative'}}>
-        <View style={{marginBottom: 27}}>
+        <View style={{marginBottom: 80}}>
           <View style={{backgroundColor: '#FFF', position: 'absolute', width: 340, height: '85%', borderRadius: 20, marginTop: 47, alignSelf: 'center'}}/>
           <CalendarPicker 
               customDayHeaderStyles={customDayHeaderStylesCallback}
@@ -359,85 +359,81 @@ const MainProf = ({ navigation }) => {
             />
           </View>
       </View>
-      
-      <View style={{
-        flexDirection: "row", paddingLeft: 5, paddingBottom: 5, paddingRight: 5
-      }}>
-        <TouchableOpacity
-          onPress={() => { console.log("friend"); setActive(true) }}
-          style={{
-            flex: 1, height: 45, margin: 5,
-            borderRadius: 5, backgroundColor: active ? 'white' : color.Focus2,
-          }}>
-          <Text style={[typo.H2, { marginTop: 10, alignSelf: 'center' }]}>Friends</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => { setActive(false) }}
-          style={{
-            flex: 1, height: 45, margin: 5,
-            borderRadius: 5, backgroundColor: active ? color.Focus2 : 'white',
-          }}>
-          <Text style={[typo.H2, { marginTop: 10, alignSelf: 'center' }]}>Journey</Text>
-        </TouchableOpacity>
-      </View>
-     
-      {active ? (
-        <>
-         <View style={{
-          flexDirection: "row", paddingLeft: 5, paddingBottom: 5, paddingRight: 5
-        }}>
-          <TouchableOpacity
-                    onPress={() => { navigation.navigate('Chat Screen') }}
-                    style={{
-  
-                      flex: 1, height: 45, margin: 5,
-                      borderRadius: 5, backgroundColor: '#FF9F00', borderRadius: 35
-                    }}>
-                    <Text style={{ color:'white',marginTop: 12, alignSelf: 'center', justifyContent:'center' , fontFamily:'Montserrat-Bold'}}>
-                    Listen to Others</Text>
-                  </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => { navigation.navigate('Chat Screen') }}
-            style={{
-  
-              flex: 1, height: 45, margin: 5,
-              borderRadius: 5, backgroundColor: '#FF9F00',borderRadius: 35
-            }}>
-            <Text style={{ color:'white',marginTop: 12, alignSelf: 'center', justifyContent:'center' , fontFamily:'Montserrat-Bold'}}>Share your Story</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={{
-          flexDirection: "column", paddingTop: 10, paddingLeft: 5, paddingBottom: 25
-        }}>
-          <FriendComponent name="Friend 1" img={Friend1} />
-          <FriendComponent name="Friend 2" img={Friend2} />
-          <FriendComponent name="Friend 3" img={Friend3} />
-          <FriendComponent name="Friend 4" img={Friend1} />
-          <FriendComponent name="Friend 5" img={Friend2} />
+    </ScrollView>
 
-        </View>
+        <BottomDrawer
+            containerHeight={685}
+            downDisplay={530}
+            startUp={false}
+            paddingBottom={100}
+            backgroundColor={'transparent'}
+        >
+          <View style={{flexDirection: "row", backgroundColor: '#3C886B', paddingTop: 20}}>
+            <TouchableOpacity style={{backgroundColor: '#262626', width: '50%', height: 56, alignItems: 'center', justifyContent: 'center', borderTopLeftRadius: 10, borderTopRightRadius: 10, marginRight: 1}}
+            onPress={() => { console.log("friend"); setActive(true) }} 
+            >
+              <Text style={{color: '#FFF', fontFamily: 'FredokaOne-Regular', fontSize: 24}}>Chat</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={{backgroundColor: '#262626', width: '50%', height: 56, alignItems: 'center', justifyContent: 'center', borderTopLeftRadius: 10, borderTopRightRadius: 10,marginLeft: 1}}
+            onPress={() => { console.log("friend"); setActive(false) }}
+            >
+              <Text style={{color: '#FFF', fontFamily: 'FredokaOne-Regular', fontSize: 24}}>Journey</Text>
+            </TouchableOpacity> 
+            
+          </View>
+
+          {active ? (
+        <>
+        
+        <ScrollView style={{backgroundColor: '#262626'}}>
+        <Pressable style={{paddingBottom: 80}}>
+          <View style={{
+            flexDirection: "row", paddingLeft: 5, paddingBottom: 5, paddingRight: 5
+            }}>
+              <TouchableOpacity
+                        onPress={() => { navigation.navigate('Chat Screen') }}
+                        style={{
+      
+                          flex: 1, height: 45, margin: 5,
+                          borderRadius: 5, backgroundColor: '#FF9F00', borderRadius: 35
+                        }}>
+                        <Text style={{ color:'white',marginTop: 12, alignSelf: 'center', justifyContent:'center' , fontFamily:'Montserrat-Bold'}}>
+                        Listen to Others</Text>
+                      </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => { navigation.navigate('Chat Screen') }}
+                style={{
+      
+                  flex: 1, height: 45, margin: 5,
+                  borderRadius: 5, backgroundColor: '#FF9F00',borderRadius: 35
+                }}>
+                <Text style={{ color:'white',marginTop: 12, alignSelf: 'center', justifyContent:'center' , fontFamily:'Montserrat-Bold'}}>Share your Story</Text>
+              </TouchableOpacity>
+          </View>
+
+          <Pressable style={{
+            flexDirection: "column", paddingTop: 10, paddingLeft: 5, paddingBottom: 25
+          }}>
+            <FriendComponent name="Friend 1" img={Friend1} />
+            <FriendComponent name="Friend 2" img={Friend2} />
+            <FriendComponent name="Friend 3" img={Friend3} />
+            <FriendComponent name="Friend 4" img={Friend1} />
+            <FriendComponent name="Friend 5" img={Friend2} />
+
+          </Pressable>
+        </Pressable>
+        </ScrollView>
         </>
       ) : (
-        <View style={{
-          flexDirection: "column", paddingTop: 10,
-        }}>
-          <NewJourney info={info}/>
-        </View>
-
+        <ScrollView style={{backgroundColor: '#262626'}}>
+          <Pressable style={{
+            flexDirection: "column", paddingLeft: 0.5, paddingBottom: 80
+          }}>
+            <NewJourney info={info}/>
+          </Pressable>
+        </ScrollView>
       )}
-    </ScrollView>
-        {/* <SwipeUpDown		
-        itemMini={<View style={{height: 56, backgroundColor: 'red'}}><Text style={{color: '#fff', alignSelf: 'center'}}>Hello</Text></View>} // Pass props component when collapsed
-        itemFull={<View />} // Pass props component when show full
-        onShowMini={() => console.log('mini')}
-        onShowFull={() => console.log('full')}
-        onMoveDown={() => console.log('down')}
-        onMoveUp={() => console.log('up')}
-        disablePressToShow={true} // Press item mini to show full
-        style={{ backgroundColor: '#262626' }} // style for swipe
-        swipeHeight={56}
-        animation="spring" 
-        /> */}
+        </BottomDrawer>
       </View>
   )
 }
