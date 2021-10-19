@@ -1,6 +1,6 @@
 
 import React, {useState, useEffect} from 'react';
-import {Image, Text, View, StyleSheet, ScrollView, TouchableOpacity} from 'react-native';
+import {Image, Text, View, StyleSheet, ScrollView, TouchableOpacity, ImageBackground} from 'react-native';
 import typo from '../../../styles/typography';
 import theme, {color} from '../../../styles/theme';
 import { Icon } from 'react-native-elements';
@@ -14,6 +14,10 @@ import Explore2 from '../../../assets/images/explore2.png';
 import Explore3 from '../../../assets/images/explore3.png';
 import Explore4 from '../../../assets/images/explore4.png';
 import Line32 from '../../../assets/images/Line32.png';
+import Meditate1 from '../../../assets/images/med-1.png';
+import Sleep1 from '../../../assets/images/sleep1.png';
+import Move1 from '../../../assets/images/mov-1.png';
+import Focus1 from '../../../assets/images/focus-1.png';
 
 import { Auth } from 'aws-amplify';
 import { DataStore } from '@aws-amplify/datastore';
@@ -135,9 +139,42 @@ const ExploreScreen = ({ navigation }) => {
   }
 
   const GetStarted = () => {
+    
+    const MyComponent = ({image, title}) => {
+      return(
+        <View style={{height: 155, width: 175, display: 'flex', 
+              flexDirection: 'row',
+              borderRadius: 20,
+              margin: 10, backgroundColor: 'white', overflow: 'hidden'}}>
+          <ImageBackground source={image} style={{width:'100%', height: '110%', top: -5}}>
+            <View style={{flex: 3, alignItems: 'center', justifyContent: 'center'}}>
+              <Text style={[typo.H4, {color: 'white'}]}>
+                {title}
+              </Text> 
+            </View>
+          </ImageBackground>
+        </View>
+      ) 
+    }
+
     return(
       <>
-      {/* code here for Get Started components */}
+      <View style={{flexDirection: 'row'}}>
+        <TouchableOpacity onPress={() => navigation.navigate('Meditate')}>
+          <MyComponent image={Meditate1} title={"Meditation"}/>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('Sleep')}>
+          <MyComponent image={Sleep1} title={"Sleep"}/>
+        </TouchableOpacity>
+      </View>
+      <View style={{flexDirection: 'row'}}>
+        <TouchableOpacity onPress={() => navigation.navigate('Move')}>
+          <MyComponent image={Move1} title={"Move"}/>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('Focus')}>
+          <MyComponent image={Focus1} title={"Focus"}/>
+        </TouchableOpacity>
+      </View>
       </>
     )
   }
