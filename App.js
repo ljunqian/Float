@@ -14,6 +14,8 @@ import {color}  from './src/styles/theme';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
+// Checkin
+import CheckInScreen from './src/screens/SplashScreen/CheckInScreen';
 
 //* Guides
 import ExploreScreen from './src/screens/Guides/ExploreScreen';
@@ -23,6 +25,16 @@ import GuidesLesson from './src/screens/Guides/ExploreScreen/GuidesLesson';
 import SearchScreen from './src/screens/SearchScreen/';
 import GuideComplete from './src/screens/Guides/MeditateScreen/GuideComplete.js';
 
+import RewardScreen from './src/screens/RewardScreen/';
+import AccountSettings from './src/screens/ProfileScreen/AccountSettings.js';
+import LoginScreen from './src/screens/Authenticate/LoginScreen';
+import SignUpScreen from './src/screens/Authenticate/SignUpScreen';
+import otp from './src/screens/Authenticate/otp.js';
+import forgetpass from './src/screens/Authenticate/forgetpass';
+import confirmpass from './src/screens/Authenticate/confirmpass';
+import chatScreen from './src/screens/ProfileScreen/chatScreen';
+import changePass from './src/screens/ProfileScreen/changePass';
+
 import MeditateScreen from './src/screens/Guides/MeditateScreen';
 import GuideDetail from './src/screens/Guides/MeditateScreen/GuideDetail.js';
 import GuideActivity from './src/screens/Guides/MeditateScreen/GuideActivity.js';
@@ -31,16 +43,8 @@ import SleepScreen from './src/screens/Guides/SleepScreen';
 import MoveScreen from './src/screens/Guides/MoveScreen';
 
 //* Profile
-import chatScreen from './src/screens/ProfileScreen/chatScreen';
-import changePass from './src/screens/ProfileScreen/changePass';
 import editProfile from './src/screens/ProfileScreen/editProfile';
 import ProfileScreen from './src/screens/ProfileScreen/';
-import RewardScreen from './src/screens/RewardScreen/';
-import AccountSettings from './src/screens/ProfileScreen/AccountSettings.js';
-import Changeaccountinfo from './src/screens/ProfileScreen/Changeaccountinfo';
-import LoginScreen from './src/screens/Authenticate/LoginScreen';
-import SignUpScreen from './src/screens/Authenticate/SignUpScreen';
-import otp from './src/screens/Authenticate/otp.js';
 
 //* icons
 import { Icon } from 'react-native-elements';
@@ -212,7 +216,6 @@ const App = () => {
   Analytics.configure({ disabled: true })
   const [verticalVal, setVerticalVal] = useState(new Animated.Value(1));
   const [isSplash, setIsSplash] = useState(true);
-  const [isNotSignedIn, setisNotSignedIn] = useState(true);
   const [state, dispatch] = React.useContext(Context);
 
   const {coins} = useSelector((state) => state.user.userData);
@@ -235,7 +238,7 @@ const App = () => {
   }
   
   useEffect(() => {
-    isUserAuthenticated()
+    isUserAuthenticated();
     setTimeout(() => {
       setIsSplash(false);
     }, 6000)
@@ -275,6 +278,7 @@ const App = () => {
             },
             headerLeft: null,
             headerTitle: () => (<View />),
+            headerShadowVisible: false,
           })}
           >
         {state.isSignout ? (
@@ -295,7 +299,11 @@ const App = () => {
           </>
        ) : (
         <>
-       
+          <Stack.Screen name="CheckIn" component={CheckInScreen} 
+            options={()=>({
+              headerShown: false
+            })}
+          />
         
           <Stack.Screen name="Guides" component={BottomBar}
             options={({ navigation }) => ({
@@ -330,7 +338,8 @@ const App = () => {
                 </TouchableOpacity>
               ),
               headerTitle: () => (<View />),
-              headerTintColor: 'white'
+              headerTintColor: 'white',
+              headerShadowVisible: false,
             })}
           />
           <Stack.Screen name="Edit Profile" component={editProfile}
@@ -361,6 +370,16 @@ const App = () => {
               headerTintColor: 'white'
             })}
           />
+            <Stack.Screen name="forget password" component={forgetpass}
+              options={({ navigation }) => ({
+                headerShown: false
+              })}
+            />
+            <Stack.Screen name="confirm password" component={confirmpass}
+              options={({ navigation }) => ({
+                headerShown: false
+              })}
+            />
           <Stack.Screen name="Reward" component={RewardScreen}
             options={({ navigation }) => ({
               headerShadowVisible: false,

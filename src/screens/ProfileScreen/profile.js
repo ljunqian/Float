@@ -10,7 +10,6 @@ import {
   AccessoryImages,
 } from '../RewardScreen/assetConstants';
 
-
 const ProfileScreen = (props) => {
 
   const userState = useSelector((state)=> state.reward);

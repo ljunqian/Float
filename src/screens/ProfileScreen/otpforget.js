@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { View, StyleSheet, Text, KeyboardAvoidingView, TouchableOpacity } from 'react-native'
-import { Input, NativeBaseProvider, Button } from "native-base"
+import { Input, NativeBaseProvider } from "native-base"
 import { Auth } from 'aws-amplify';
 import typo from '../../styles/typography';
 import { color } from '../../styles/theme';
@@ -14,7 +14,6 @@ const otp = ({ navigation, route }) => {
 
   async function confirmSignUp() {
     try {
-      console.log(username);
       await Auth.confirmSignUp(username, code);
       navigation.navigate('Login');
     } catch (error) {
@@ -187,7 +186,6 @@ const otp = ({ navigation, route }) => {
     </NativeBaseProvider >
   )
 }
-
 const styles = StyleSheet.create({
   container: { width: '100%', display: 'flex', paddingLeft: 20, paddingRight: 20, minHeight: '100%', alignItems: 'center', backgroundColor: color.bg },
   forgotButton: {
