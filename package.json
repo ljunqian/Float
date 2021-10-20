@@ -55,6 +55,7 @@
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.3.0",
+    "rn-bottom-drawer": "^1.4.3",
     "rn-sliding-up-panel": "^2.4.5",
     "socket.io": "^4.2.0",
     "stream-chat-react-native": "^3.8.3",

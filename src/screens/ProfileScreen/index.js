@@ -31,6 +31,7 @@ import FocusBG from '../../assets/images/focus-planet.png';
 import Coin from '../../assets/icons/coins.png';
 import Forward from '../../assets/icons/forwardarrow.png';
 import Backward from '../../assets/icons/backarrow.png';
+import { textStyle } from 'styled-system';
 
 const Coins = ({ navigation, i }) => {
   const {coins} = useSelector((state) => state.user.userData);
@@ -279,32 +280,15 @@ const MainProf = ({ navigation }) => {
   let customDatesStyles = [];
   let today = moment();
   let day = today.clone().startOf('month');
-  day.subtract(1, 'day');
-  console.log(today.minutes());
 
-  while(day.add(1, 'day').isSame(today, 'month')) {
-    customDatesStyles.push({
-      date: day.clone(),
-      // Random colors
-      style: {backgroundColor: 'red'},
-      textStyle: {color: 'black'}, // sets the font color
-      containerStyle: [], // extra styling for day container
-      allowDisabled: true, // allow custom style to apply to disabled dates
-    });
-  }
-
-  const customDatesStylesCallback = (date) => {
-    return{
-      // style:{
-      //   margin: 10,
-      // },
-      textStyle: {
-        color: '#262626',
-        fontFamily: 'Montserrat-Bold',
-        fontSize: 14
-      },
-    };
-  }
+  //stylise individual date(s)
+  customDatesStyles.push({
+    //Example of date I want to stylise
+    date: '2021-10-01T00:00:00.000Z',
+    // Mood colour
+    style: {backgroundColor: 'red'},
+    containerStyle: [], // extra styling for day container
+  });
 
   const customDayHeaderStylesCallback = (dayOfWeek, month, year) => {
     return {
@@ -331,7 +315,16 @@ const MainProf = ({ navigation }) => {
           <CalendarPicker 
               customDayHeaderStyles={customDayHeaderStylesCallback}
               customDatesStyles={customDatesStyles}
-              customDatesStyles={customDatesStylesCallback}
+              monthTitleStyle={{
+                color: '#FFF',
+                fontFamily: 'FredokaOne-Regular',
+                fontSize: 20,
+              }}
+              yearTitleStyle={{
+                color: '#FFF',
+                fontFamily: 'FredokaOne-Regular',
+                fontSize: 20,
+              }}
               dayOfWeekStyles={{
                 marginRight: 100
               }}
@@ -341,14 +334,15 @@ const MainProf = ({ navigation }) => {
                 paddingTop: 20
               }}
               monthYearHeaderWrapperStyle={{
-                paddingTop: 10 
+                paddingTop: 10,
+                
               }}
-                textStyle={[
-                typo.H2,
-                {color: '#FFF'}
-                ]}
+                textStyle={{
+                  color: '#262626',
+                  fontFamily: 'Montserrat-Bold',
+                  fontSize: 14
+                }}
                 todayTextStyle = {{color: '#FFF'}}
-                todayBackgroundColor = "#FF9F00"
                 previousTitle= {<Image source={Backward}/>}
                 previousTitleStyle={{paddingLeft: 45}}
                 nextTitle= {<Image source={Forward}/>}
@@ -367,8 +361,11 @@ const MainProf = ({ navigation }) => {
             startUp={false}
             paddingBottom={100}
             backgroundColor={'transparent'}
-        >
-          <View style={{flexDirection: "row", backgroundColor: '#3C886B', paddingTop: 20}}>
+        > 
+          <View style={{width: '100%', height: 30, backgroundColor: '#3C886B', borderTopLeftRadius: 20, borderTopRightRadius: 20, alignItems: 'center', justifyContent: 'center'}}>
+            <View style={{width: 100, height: 3, backgroundColor: '#fff'}}/>
+          </View>
+          <View style={{flexDirection: "row", backgroundColor: '#3C886B'}}>
             <TouchableOpacity style={{backgroundColor: '#262626', width: '50%', height: 56, alignItems: 'center', justifyContent: 'center', borderTopLeftRadius: 10, borderTopRightRadius: 10, marginRight: 1}}
             onPress={() => { console.log("friend"); setActive(true) }} 
             >
