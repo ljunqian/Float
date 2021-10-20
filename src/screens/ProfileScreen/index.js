@@ -246,7 +246,7 @@ const MainProf = ({ navigation }) => {
     try {
       const user = await Auth.currentAuthenticatedUser();
       const {data} = await API.graphql(graphqlOperation(getUser, { id: user.attributes.sub }));
-      console.log(data);
+      console.log(data.getUser.feelings[0]);
 
       setInfo({
         meditateD: secondsToHms(data.getUser.meditateD),

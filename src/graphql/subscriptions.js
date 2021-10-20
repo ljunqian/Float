@@ -11,7 +11,21 @@ export const onCreateUser = /* GraphQL */ `
       moveD
       focusD
       friends
-      userData
+      feelings
+      equippedBackground
+      equippedHat
+      equippedAccesory
+      purchasedBackground
+      purchasedHat
+      purchasedAccessory
+      purchasedVoucher
+      completedMeditate
+      completedSleep
+      completedMove
+      completedFocus
+      recentGuides
+      favGuides
+      username
       _version
       _deleted
       _lastChangedAt
@@ -30,7 +44,21 @@ export const onUpdateUser = /* GraphQL */ `
       moveD
       focusD
       friends
-      userData
+      feelings
+      equippedBackground
+      equippedHat
+      equippedAccesory
+      purchasedBackground
+      purchasedHat
+      purchasedAccessory
+      purchasedVoucher
+      completedMeditate
+      completedSleep
+      completedMove
+      completedFocus
+      recentGuides
+      favGuides
+      username
       _version
       _deleted
       _lastChangedAt
@@ -49,7 +77,21 @@ export const onDeleteUser = /* GraphQL */ `
       moveD
       focusD
       friends
-      userData
+      feelings
+      equippedBackground
+      equippedHat
+      equippedAccesory
+      purchasedBackground
+      purchasedHat
+      purchasedAccessory
+      purchasedVoucher
+      completedMeditate
+      completedSleep
+      completedMove
+      completedFocus
+      recentGuides
+      favGuides
+      username
       _version
       _deleted
       _lastChangedAt

@@ -53,13 +53,121 @@ export const schema = {
                     "attributes": [],
                     "isArrayNullable": true
                 },
-                "userData": {
-                    "name": "userData",
+                "feelings": {
+                    "name": "feelings",
                     "isArray": true,
                     "type": "String",
                     "isRequired": true,
                     "attributes": [],
                     "isArrayNullable": true
+                },
+                "equippedBackground": {
+                    "name": "equippedBackground",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "equippedHat": {
+                    "name": "equippedHat",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "equippedAccesory": {
+                    "name": "equippedAccesory",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "purchasedBackground": {
+                    "name": "purchasedBackground",
+                    "isArray": true,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": [],
+                    "isArrayNullable": true
+                },
+                "purchasedHat": {
+                    "name": "purchasedHat",
+                    "isArray": true,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": [],
+                    "isArrayNullable": true
+                },
+                "purchasedAccessory": {
+                    "name": "purchasedAccessory",
+                    "isArray": true,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": [],
+                    "isArrayNullable": true
+                },
+                "purchasedVoucher": {
+                    "name": "purchasedVoucher",
+                    "isArray": true,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": [],
+                    "isArrayNullable": true
+                },
+                "completedMeditate": {
+                    "name": "completedMeditate",
+                    "isArray": true,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": [],
+                    "isArrayNullable": true
+                },
+                "completedSleep": {
+                    "name": "completedSleep",
+                    "isArray": true,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": [],
+                    "isArrayNullable": true
+                },
+                "completedMove": {
+                    "name": "completedMove",
+                    "isArray": true,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": [],
+                    "isArrayNullable": true
+                },
+                "completedFocus": {
+                    "name": "completedFocus",
+                    "isArray": true,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": [],
+                    "isArrayNullable": true
+                },
+                "recentGuides": {
+                    "name": "recentGuides",
+                    "isArray": true,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": [],
+                    "isArrayNullable": true
+                },
+                "favGuides": {
+                    "name": "favGuides",
+                    "isArray": true,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": [],
+                    "isArrayNullable": true
+                },
+                "username": {
+                    "name": "username",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
                 }
             },
             "syncable": true,
@@ -90,5 +198,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "2cac77393d728592ef6661e1a507c6c2"
+    "version": "e63c98a8740d558d2c42bc01924904f9"
 };

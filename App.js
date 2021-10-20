@@ -10,7 +10,7 @@ import Avatar from './src/assets/images/avatar.png';
 import React, { useState, useEffect } from 'react';
 import { Animated, Image, View, TouchableOpacity, Text, Easing, StyleSheet } from 'react-native';
 import typo from './src/styles/typography';
-import {color}  from './src/styles/theme';
+import { color } from './src/styles/theme';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -94,7 +94,7 @@ const BottomBar = () => {
     backgroundColor: '#4F4F4F',
     borderTopRightRadius: 16,
     borderTopLeftRadius: 16,
-    position:'absolute',
+    position: 'absolute',
   }
   return (
 
@@ -105,24 +105,24 @@ const BottomBar = () => {
         },
       })}
     //tabBar={()=>(<View style={{backgroundColor: 'none', height: 70}}></View>)}
-    > 
+    >
       <Tab.Screen name="Explore" component={ExploreScreen}
         options={({ }) => ({
-          tabBarIcon: ({focused}) => {
-            
-            return ((focused)? 
-            <View style={{alignItems: 'center', bottom: 2}}>
-                <View style={{height: 2, width:50 , backgroundColor: 'white', bottom:13}}/>
-                 <Image source={ExploreIcon} />
-            </View>
-            
-            : <Image source ={ExploreIconUnclicked} />) 
-          }, 
-          
+          tabBarIcon: ({ focused }) => {
+
+            return ((focused) ?
+              <View style={{ alignItems: 'center', bottom: 2 }}>
+                <View style={{ height: 2, width: 50, backgroundColor: 'white', bottom: 13 }} />
+                <Image source={ExploreIcon} />
+              </View>
+
+              : <Image source={ExploreIconUnclicked} />)
+          },
+
           headerShown: false,
           tabBarStyle: tabStyle,
           tabBarActiveTintColor: 'white',
-          tabBarLabelStyle:  {
+          tabBarLabelStyle: {
             marginBottom: 10,
             fontWeight: "400",
           }
@@ -130,35 +130,35 @@ const BottomBar = () => {
       />
       <Tab.Screen name="Meditate" component={MeditateScreen}
         options={({ }) => ({
-          tabBarIcon: ({focused}) => {
-            return ((focused)? 
-            <View style={{alignItems: 'center', bottom: 2}}>
-                <View style={{height: 2, width:50 , backgroundColor: color.Med1, bottom:15}}/>
-                 <Image source={MeditateIcon} />
-            </View> 
-            : <Image source ={MeditateIconUnclicked} />) 
-          }, 
+          tabBarIcon: ({ focused }) => {
+            return ((focused) ?
+              <View style={{ alignItems: 'center', bottom: 2 }}>
+                <View style={{ height: 2, width: 50, backgroundColor: color.Med1, bottom: 15 }} />
+                <Image source={MeditateIcon} />
+              </View>
+              : <Image source={MeditateIconUnclicked} />)
+          },
           headerShown: false,
           tabBarStyle: tabStyle,
           tabBarActiveTintColor: color.Med1,
 
           tabBarLabelStyle: {
             marginBottom: 10,
-            
+
             fontWeight: "400",
           }
         })}
       />
       <Tab.Screen name="Sleep" component={SleepScreen}
         options={({ }) => ({
-          tabBarIcon: ({focused}) => {
-            return ((focused)? 
-            <View style={{alignItems: 'center', bottom: 2}}>
-                <View style={{height: 2, width:50 , backgroundColor: color.Sleep1, bottom:14}}/>
-                 <Image source={SleepIcon} />
-            </View>  
-            : <Image source ={SleepIconUnclicked} />) 
-          }, 
+          tabBarIcon: ({ focused }) => {
+            return ((focused) ?
+              <View style={{ alignItems: 'center', bottom: 2 }}>
+                <View style={{ height: 2, width: 50, backgroundColor: color.Sleep1, bottom: 14 }} />
+                <Image source={SleepIcon} />
+              </View>
+              : <Image source={SleepIconUnclicked} />)
+          },
           headerShown: false,
           tabBarStyle: tabStyle,
           tabBarActiveTintColor: color.Sleep1,
@@ -170,14 +170,14 @@ const BottomBar = () => {
       />
       <Tab.Screen name="Move" component={MoveScreen}
         options={({ }) => ({
-          tabBarIcon: ({focused}) => {
-            return ((focused)? 
-            <View style={{alignItems: 'center', bottom: 2}}>
-                <View style={{height: 2, width:50 , backgroundColor: color.Move2, bottom:14}}/>
-                 <Image source={MoveIcon} />
-            </View> 
-            : <Image source ={MoveIconUnclicked} />) 
-          }, 
+          tabBarIcon: ({ focused }) => {
+            return ((focused) ?
+              <View style={{ alignItems: 'center', bottom: 2 }}>
+                <View style={{ height: 2, width: 50, backgroundColor: color.Move2, bottom: 14 }} />
+                <Image source={MoveIcon} />
+              </View>
+              : <Image source={MoveIconUnclicked} />)
+          },
           headerShown: false,
           tabBarStyle: tabStyle,
           tabBarActiveTintColor: color.Move2,
@@ -189,14 +189,14 @@ const BottomBar = () => {
       />
       <Tab.Screen name="Focus" component={FocusScreen}
         options={({ }) => ({
-          tabBarIcon: ({focused}) => {
-            return ((focused)? 
-            <View style={{alignItems: 'center', bottom: 1}}>
-                <View style={{height: 2, width:50 , backgroundColor: color.Focus2, bottom:13}}/>
-                 <Image source={FocusIcon} />
-            </View> 
-            : <Image source ={FocusIconUnclicked} />) 
-          }, 
+          tabBarIcon: ({ focused }) => {
+            return ((focused) ?
+              <View style={{ alignItems: 'center', bottom: 1 }}>
+                <View style={{ height: 2, width: 50, backgroundColor: color.Focus2, bottom: 13 }} />
+                <Image source={FocusIcon} />
+              </View>
+              : <Image source={FocusIconUnclicked} />)
+          },
           headerShown: false,
           tabBarStyle: tabStyle,
           tabBarActiveTintColor: color.Focus2,
@@ -218,7 +218,7 @@ const App = () => {
   const [isSplash, setIsSplash] = useState(true);
   const [state, dispatch] = React.useContext(Context);
 
-  const {coins} = useSelector((state) => state.user.userData);
+  const { coins } = useSelector((state) => state.user.userData);
   async function isUserAuthenticated() {
     try {
       const user = await Auth.currentAuthenticatedUser();
@@ -226,17 +226,17 @@ const App = () => {
       if (user) {
         setisNotSignedIn(false);
 
-        dispatch({type: 'SIGN_IN', payload: true});
-       
+        dispatch({ type: 'SIGN_IN', payload: true });
+
       } else {
-        {user === 'The user is not authenticated' && (setisNotSignedIn(true))};
+        { user === 'The user is not authenticated' && (setisNotSignedIn(true)) };
 
       }
     } catch (error) {
       console.log(error);
     }
   }
-  
+
   useEffect(() => {
     isUserAuthenticated();
     setTimeout(() => {
@@ -268,108 +268,40 @@ const App = () => {
     )
   }
   return (
-      <NavigationContainer>
-        <Stack.Navigator
-          screenOptions={() => ({
-            headerStyle: {
-              backgroundColor: '#272727',
-              shadowOpacity: 0,
-              headerShown: false
-            },
-            headerLeft: null,
-            headerTitle: () => (<View />),
-            headerShadowVisible: false,
-          })}
-          >
+    <NavigationContainer>
+      <Stack.Navigator
+        screenOptions={() => ({
+          headerStyle: {
+            backgroundColor: '#272727',
+            shadowOpacity: 0,
+            headerShown: false
+          },
+          headerLeft: null,
+          headerTitle: () => (<View />),
+          headerShadowVisible: false,
+        })}
+      >
         {state.isSignout ? (
           <>
-         <Stack.Screen name="Login" component={LoginScreen}
-            screenOptions={() => ({
-              headerStyle: {
+            <Stack.Screen name="Login" component={LoginScreen}
+              screenOptions={() => ({
+                headerStyle: {
+                  headerShown: false
+                },
+                headerTitle: () => (<View />),
+              })}
+            />
+            <Stack.Screen name="Signup" component={SignUpScreen}
+              options={({ navigation }) => ({
                 headerShown: false
-              },
-              headerTitle: () => (<View />),
-            })}
-          /> 
-          <Stack.Screen name="Signup" component={SignUpScreen}
-            options={({ navigation }) => ({
-              headerShown: false
-            })}
-          />
-          </>
-       ) : (
-        <>
-          <Stack.Screen name="CheckIn" component={CheckInScreen} 
-            options={()=>({
-              headerShown: false
-            })}
-          />
-        
-          <Stack.Screen name="Guides" component={BottomBar}
-            options={({ navigation }) => ({
-              headerRight: () => (
-                <TouchableOpacity
-                  onPress={() => navigation.navigate('Search')}
-                >
-                  <Image source={MagnifyIcon} />
-                </TouchableOpacity>
-              ),
-              headerLeft: () => (
-                <TouchableOpacity
-                  onPress={() => navigation.navigate('Profile')}
-                >
-                  <Image source={UserIcon} />
-                </TouchableOpacity>
-              ),
-              headerTitle: () => (<View />),
-              headerStyle: {
-                backgroundColor: '#272727',
-              },
-              headerShadowVisible: true,
-            })}
-          />
-          <Stack.Screen name="Profile" component={ProfileScreen}
-            options={({ navigation }) => ({
-              headerRight: () => (
-                <TouchableOpacity
-                  onPress={() => console.log("pressed")}
-                >
-                  <Icon name="create" size={30} color="white" onPress={() => { navigation.navigate('Account Settings') }} />
-                </TouchableOpacity>
-              ),
-              headerTitle: () => (<View />),
-              headerTintColor: 'white',
-              headerShadowVisible: false,
-            })}
-          />
-          <Stack.Screen name="Edit Profile" component={editProfile}
-            options={() => ({
-              headerTitleStyle: { color: 'white' },
-              headerTintColor: 'white'
-            })}
-          />
-          <Stack.Screen name="otp" component={otp}
-            options={() => ({
-              headerTitleStyle: { color: 'white' },
-              headerTintColor: 'white'
-            })}
-          />
-          <Stack.Screen name="Chat Screen" component={chatScreen}
-            options={({ navigation }) => ({
-              headerLeft: () => (
-                <Image source={Avatar}
-                             style={{marginLeft:70, width: 40, height: 40, borderRadius:80, alignSelf: 'center'}} />
-              ),
-              headerTitle: () => (<Text style={{marginLeft:10, color:'white', fontFamily:'FredokaOne-Regular'}}>username</Text>),
-              headerTintColor: 'white'
-            })}
-          />
-          <Stack.Screen name="Change Password" component={changePass}
-            options={() => ({
-              headerTitleStyle: { color: 'white' },
-              headerTintColor: 'white'
-            })}
-          />
+              })}
+            />
+            <Stack.Screen name="otp" component={otp}
+              options={() => ({
+                headerTitleStyle: { color: 'white' },
+                headerTintColor: 'white'
+              })}
+            />
             <Stack.Screen name="forget password" component={forgetpass}
               options={({ navigation }) => ({
                 headerShown: false
@@ -380,82 +312,150 @@ const App = () => {
                 headerShown: false
               })}
             />
-          <Stack.Screen name="Reward" component={RewardScreen}
-            options={({ navigation }) => ({
-              headerShadowVisible: false,
-              headerTitle: () => (<View />),
-              headerRight: () => (
-                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                  <Image source={CoinIcon} style={{ marginRight: 4 }} />
-                  <Text style={{ fontSize: 18, fontFamily: 'FredokaOne-Regular', color: 'white' }}>
-                    {coins}
-                    {/* {info.meditateD} */}
-                  </Text>
-                </View>
-              ),
-              headerTintColor: 'white'
-            })}
-          />
-          <Stack.Screen name="Account Settings" component={AccountSettings}
-            options={() => ({
-              headerTitleStyle: { color: 'white' },
-              headerTintColor: 'white'
-            })}
-          />
-          <Stack.Screen name="Search" component={SearchScreen} 
-            options={()=>({
-              headerShown: false
-            })}
-          />
-          <Stack.Screen name="GuideDetail" component={GuideDetail} 
-            options={()=>({
-              headerShadowVisible: false,
-              headerTitleStyle: {color:'white'},
-              headerTintColor: 'white',
-              headerTitle: '',
-              headerTransparent: true,
-              headerStyle: {
-                backgroundColor: 'transparent'
-              }
-            })}
-          />
-         
-          <Stack.Screen name="GuideActivity" component={GuideActivity} 
-            options={()=>({
-              headerShown: false
-            })}
-          />
-          <Stack.Screen name="GuideComplete" component={GuideComplete} 
-            options={()=>({
-              headerShown: false
-            })}
-          />
-          <Stack.Screen name="Recents" component={Recents} 
-            options={()=>({
-              headerShown: false
-            })}
-          />
-          <Stack.Screen name="Favourites" component={Favourites} 
-            options={()=>({
-              headerShown: false
-            })}
-          />
-          <Stack.Screen name="GuidesLesson" component={GuidesLesson} 
-            options={()=>({
-              headerShadowVisible: false,
-              headerTitleStyle: {color:'white'},
-              headerTintColor: 'white',
-              headerTransparent: true,
-              headerStyle: {
-                backgroundColor: 'transparent'
-              }
-            })}
-          />
+          </>
+        ) : (
+          <>
+            <Stack.Screen name="CheckIn" component={CheckInScreen}
+              options={() => ({
+                headerShown: false
+              })}
+            />
 
-         </> )}
-        </Stack.Navigator>
-      </NavigationContainer>
-    )
+            <Stack.Screen name="Guides" component={BottomBar}
+              options={({ navigation }) => ({
+                headerRight: () => (
+                  <TouchableOpacity
+                    onPress={() => navigation.navigate('Search')}
+                  >
+                    <Image source={MagnifyIcon} />
+                  </TouchableOpacity>
+                ),
+                headerLeft: () => (
+                  <TouchableOpacity
+                    onPress={() => navigation.navigate('Profile')}
+                  >
+                    <Image source={UserIcon} />
+                  </TouchableOpacity>
+                ),
+                headerTitle: () => (<View />),
+                headerStyle: {
+                  backgroundColor: '#272727',
+                },
+                headerShadowVisible: true,
+              })}
+            />
+            <Stack.Screen name="Profile" component={ProfileScreen}
+              options={({ navigation }) => ({
+                headerRight: () => (
+                  <TouchableOpacity
+                    onPress={() => console.log("pressed")}
+                  >
+                    <Icon name="create" size={30} color="white" onPress={() => { navigation.navigate('Account Settings') }} />
+                  </TouchableOpacity>
+                ),
+                headerTitle: () => (<View />),
+                headerTintColor: 'white',
+                headerShadowVisible: false,
+              })}
+            />
+            <Stack.Screen name="Edit Profile" component={editProfile}
+              options={() => ({
+                headerTitleStyle: { color: 'white' },
+                headerTintColor: 'white'
+              })}
+            />
+            <Stack.Screen name="Chat Screen" component={chatScreen}
+              options={({ navigation }) => ({
+                headerLeft: () => (
+                  <Image source={Avatar}
+                    style={{ marginLeft: 70, width: 40, height: 40, borderRadius: 80, alignSelf: 'center' }} />
+                ),
+                headerTitle: () => (<Text style={{ marginLeft: 10, color: 'white', fontFamily: 'FredokaOne-Regular' }}>username</Text>),
+                headerTintColor: 'white'
+              })}
+            />
+            <Stack.Screen name="Change Password" component={changePass}
+              options={() => ({
+                headerTitleStyle: { color: 'white' },
+                headerTintColor: 'white'
+              })}
+            />
+            <Stack.Screen name="Reward" component={RewardScreen}
+              options={({ navigation }) => ({
+                headerShadowVisible: false,
+                headerTitle: () => (<View />),
+                headerRight: () => (
+                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                    <Image source={CoinIcon} style={{ marginRight: 4 }} />
+                    <Text style={{ fontSize: 18, fontFamily: 'FredokaOne-Regular', color: 'white' }}>
+                      {coins}
+                      {/* {info.meditateD} */}
+                    </Text>
+                  </View>
+                ),
+                headerTintColor: 'white'
+              })}
+            />
+            <Stack.Screen name="Account Settings" component={AccountSettings}
+              options={() => ({
+                headerTitleStyle: { color: 'white' },
+                headerTintColor: 'white'
+              })}
+            />
+            <Stack.Screen name="Search" component={SearchScreen}
+              options={() => ({
+                headerShown: false
+              })}
+            />
+            <Stack.Screen name="GuideDetail" component={GuideDetail}
+              options={() => ({
+                headerShadowVisible: false,
+                headerTitleStyle: { color: 'white' },
+                headerTintColor: 'white',
+                headerTitle: '',
+                headerTransparent: true,
+                headerStyle: {
+                  backgroundColor: 'transparent'
+                }
+              })}
+            />
+
+            <Stack.Screen name="GuideActivity" component={GuideActivity}
+              options={() => ({
+                headerShown: false
+              })}
+            />
+            <Stack.Screen name="GuideComplete" component={GuideComplete}
+              options={() => ({
+                headerShown: false
+              })}
+            />
+            <Stack.Screen name="Recents" component={Recents}
+              options={() => ({
+                headerShown: false
+              })}
+            />
+            <Stack.Screen name="Favourites" component={Favourites}
+              options={() => ({
+                headerShown: false
+              })}
+            />
+            <Stack.Screen name="GuidesLesson" component={GuidesLesson}
+              options={() => ({
+                headerShadowVisible: false,
+                headerTitleStyle: { color: 'white' },
+                headerTintColor: 'white',
+                headerTransparent: true,
+                headerStyle: {
+                  backgroundColor: 'transparent'
+                }
+              })}
+            />
+
+          </>)}
+      </Stack.Navigator>
+    </NavigationContainer>
+  )
 }
 
 const Container = () => {
