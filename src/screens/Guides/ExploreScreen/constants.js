@@ -1,5 +1,7 @@
 import React from 'react';
 
+import {Guides} from '../constants';
+
 import Video1 from '../../../assets/icons/video_orange.png';
 import Video2 from '../../../assets/icons/video_blue.png';
 import Video3 from '../../../assets/icons/video_red.png';
@@ -53,146 +55,113 @@ export const icons = {
 export const lessons = {
     "Meditate": [
         {
-            title: 'Meditation 01',
+            ...Guides[2],
             description: 'Excerise Activity 1.1',
-            duration: '3-5 mins',
-            image: Explore1,
-            line: 70.25,
-            id: 11
+            duration: Guides[2].duration + ' mins',
+            line: 78.25,
         },
         {
-            title: 'Meditation 02',
+            ...Guides[3],
             description: 'Excerise Activity 1.2',
-            duration: '5-10 mins',
-            image: Med3,
-            line: 177.25,
-            id: 12
+            duration: Guides[3].duration + ' mins',
+            line: 197
         },
         {
-            title: 'Meditation 03',
+            ...Guides[0],
             description: 'Excerise Activity 1.3',
-            duration: '10-15 mins',
-            image: Med2,
-            line: 287.25,
-            id: 13
+            duration: Guides[0].duration + ' mins',
+            line: 317
         },
         {
-            title: 'Meditation 04',
+            ...Guides[4],
             description: 'Excerise Activity 1.4',
-            duration: '10-15 mins',
-            image: Explore1,
-            line: 397.25,
-            id: 14
+            duration: Guides[4].duration + ' mins',
+   
+            line: 438
         },
         {
-            title: 'Meditation 05',
+            ...Guides[1],
             description: 'Excerise Activity 1.5',
-            duration: '15-20 mins',
-            image: Med3,
-            line: 397.25,
-            id: 15
+            duration: Guides[1].duration + ' mins',
+            line: 438
         }
     ],
     "Sleep": [
         {
-            title: 'Sleep 01',
+            ...Guides[9],
             description: 'Excerise Activity 1.1',
-            duration: '20-25 mins',
-            image: Sleep3,
-            line: 70.25,
-            id: 21
+            duration: Guides[9].duration + ' mins',
+            line: 78.
         },
         {
-            title: 'Sleep 02',
+            ...Guides[10],
             description: 'Excerise Activity 1.2',
-            duration: '10-15 mins',
-            image: Sleep2,
-            line: 177.25,
-            id: 22
+            duration: Guides[10].duration + ' mins',
+            line: 197
         },
         {
-            title: 'Sleep 03',
+            ...Guides[11],
             description: 'Excerise Activity 1.3',
-            duration: '5-10 mins',
-            image: Focus2,
-            line: 177.25,
-            id: 23
+            duration: Guides[11].duration + ' mins',
+            line: 197
         },
     ],
     "Move": [
         {
-            title: 'Move 01',
+            ...Guides[15],
             description: 'Excerise Activity 1.1',
-            duration: '20-25 mins',
-            image: Move3,
-            line: 70.25,
-            id: 31
+            duration: Guides[15].duration + ' mins',
+            line: 78.
         },
         {
-            title: 'Move 02',
+            ...Guides[14],
             description: 'Excerise Activity 1.2',
-            duration: '10-15 mins',
-            image: Move2,
-            line: 177.25,
-            id: 32
+            duration: Guides[14].duration + ' mins',
+            line: 197
         },
         {
-            title: 'Move 03',
+            ...Guides[16],
             description: 'Excerise Activity 1.3',
-            duration: '10-15 mins',
-            image: Move3,
-            line: 287.25,
-            id: 33
+            duration: Guides[16].duration + ' mins',
+            line: 317
         },
         {
-            title: 'Move 04',
+            ...Guides[13],
             description: 'Excerise Activity 1.4',
-            duration: '5-10 mins',
-            image: Move2,
-            line: 287.25,
-            id: 34
+            duration: Guides[13].duration + ' mins',
+            line: 317
         }
     ],
     "Focus": [
         {
-            title: 'Focus 01',
+            ...Guides[18],
             description: 'Excerise Activity 1.1',
-            duration: '10-15 mins',
-            image: Sleep3,
-            line: 70.25,
-            id: 41
+            duration: Guides[18].duration + ' mins',
+            line: 78.
         },
         {
-            title: 'Focus 02',
+            ...Guides[19],
             description: 'Excerise Activity 1.2',
-            duration: '15 mins',
-            image: Move1,
-            line: 177.25,
-            id: 42
+            duration: Guides[19].duration + ' mins',
+            line: 197
         },
         {
-            title: 'Focus 03',
+            ...Guides[20],
             description: 'Excerise Activity 1.3',
-            duration: '15-20 mins',
-            image: Focus2,
-            line: 287.25,
-            id: 43
+            duration: Guides[20].duration + ' mins',
+            line: 317
         },
         {
-            title: 'Focus 04',
+            ...Guides[21],
             description: 'Excerise Activity 1.4',
-            duration: '10-15 mins',
-            image: Move1,
-            line: 397.25,
-            id: 44
+            duration: Guides[21].duration + ' mins',
+            line: 438
         },
         {
-            title: 'Focus 05',
+            ...Guides[22],
             description: 'Excerise Activity 1.5',
-            duration: '10-15 mins',
-            image: Sleep2,
-            line: 397.25,
-            id: 45
+            duration: Guides[22].duration + ' mins',
+            line: 438
         }
     ]
 }
