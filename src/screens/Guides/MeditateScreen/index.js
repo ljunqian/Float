@@ -5,7 +5,7 @@ import { color } from '../../../styles/theme';
 import layout from '../../../styles/componentLayout';
 import * as Progress from 'react-native-progress';
 import oldMedBG from '../../../assets/images/meditate-planet.png';
-//import newMedBG from '../../../assets/images/medbgnew.png';
+// import newMedBG from '../../../assets/images/medbgnew.png';
 import StarsBG from '../../../assets/images/stars.png';
 import MedAvatar from '../../../assets/images/meditate-avatar.png';
 import Badge1 from '../../../assets/images/Badge1.png';
