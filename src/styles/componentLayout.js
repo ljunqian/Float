@@ -42,7 +42,7 @@ const layout = StyleSheet.create({
   },
   big_button: {
     borderRadius: 48,
-    width: 122,
+    width: 135,
     height: 48,
     alignItems: 'center',
     justifyContent: 'center',

@@ -115,6 +115,9 @@ amplifytools.xcconfig
 #amplify-do-not-edit-end
 
 *.hprof
+android/.gradle/*
+android/app/build/intermediates/*
+android/app/build/outputs/logs/*
 android/.gradle/6.9/executionHistory/executionHistory.bin
 android/.gradle/6.9/executionHistory/executionHistory.lock
 android/.gradle/6.9/fileHashes/fileHashes.bin

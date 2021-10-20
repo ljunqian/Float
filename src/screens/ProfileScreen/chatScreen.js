@@ -1,17 +1,31 @@
-import React, { useState } from 'react'
-import { View, Image, StyleSheet, Text, KeyboardAvoidingView, TouchableOpacity } from 'react-native'
+import React, { Fragment, useState } from 'react'
+import { View, Image, StyleSheet, Text, KeyboardAvoidingView, TouchableOpacity, TextInput } from 'react-native'
 import { Input, Center, NativeBaseProvider, Button } from "native-base"
 import { Auth } from 'aws-amplify';
 import typo from '../../styles/typography';
 import Avatar from '../../assets/images/avatar.png';
 import FloatLogo from '../../assets/images/float.png';
 import { color } from '../../styles/theme';
+import { Icon } from 'react-native-elements';
 
-const initialState = { name: '', description: '' }
 
 const chatScreen = ({ navigation }) => {
+  const [userInput, setUserInput] = useState('');
+  const [userMessages, setUserMessages] = useState(['hello !']);
 
+  const sendMessage = () => {
+    if (!userInput) return;
+    let newMsg = userMessages;
+    newMsg.push(userInput)
+    setUserMessages(newMsg);
+    setUserInput('');
+  }
 
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      sendMessage();
+    }
+  }
 
   return (
     <NativeBaseProvider>
@@ -23,20 +37,48 @@ const chatScreen = ({ navigation }) => {
           <Text style={{ color: 'white', fontFamily: 'Montserrat-Regular' }}>Today</Text>
         </View>
 
-        <View style={{ marginTop: 10, height: 25, backgroundColor: '#4263DD', borderRadius: 5, paddingTop: 3, paddingRight: 25, paddingLeft: 5, alignItems: 'center', alignSelf: 'flex-end' }}>
-          <Text style={{ color: 'white', fontFamily: 'Montserrat-Regular' }}>Hello !</Text>
-        </View>
+        {userMessages.map((msg, index) => (
+          <Fragment key={`msg ${index}`}>
+            <ChatBubbleOwn message={msg}/>
+            <ChatBubbleOpp message={msg}/>
+          </Fragment>
+        ))}
+        
 
-        <View style={{ marginTop: 10, height: 25, backgroundColor: '#44BED9', paddingRight: 25, paddingLeft: 5, paddingTop: 3, borderRadius: 5, alignItems: 'center', alignSelf: 'flex-start' }}>
-          <Text style={{ color: 'white', fontFamily: 'Montserrat-Regular' }}>Hello !</Text>
-        </View>
-
-        <View style={{ height: 40, backgroundColor: 'white', paddingRight: 5, position: 'absolute', bottom: 0, left: 0, right: 0, paddingLeft: 5, alignSelf: 'flex-start' }}>
-          <Text style={{ color: '#666666', fontFamily: 'Montserrat-Regular', paddingLeft: 10, paddingTop: 10 }}>Message</Text>
-        </View>
+        <KeyboardAvoidingView style={{height:40,backgroundColor:'white', paddingRight:5,alignItems:'center', position:'absolute',bottom:0,left:0,right:0, paddingLeft:5,alignSelf:'flex-start', display:'flex', flexDirection: 'row'}}>
+          <TextInput 
+            style={[{color:'#666666', fontFamily:'Montserrat-Regular', paddingLeft:10, paddingTop:10, width:'90%'}]}
+            placeholder="Search"
+            onKeyDown={handleKeyDown}
+            onChangeText={text => {
+                if(text !== ''){
+                    setUserInput(text.toLowerCase())
+                }
+            }}
+            value={userInput}
+          />
+          <Icon name="send" size={30} color="black" onPress={() => sendMessage()} />
+        </KeyboardAvoidingView>
       </View>
 
     </NativeBaseProvider >
+  )
+}
+
+const ChatBubbleOpp = ({message}) => {
+  return (
+    <View style={{marginTop:10,height:25,backgroundColor:'#44BED9', paddingRight:25, paddingLeft:5,paddingTop:3, borderRadius:5 ,alignItems: 'center',alignSelf:'flex-start'}}>
+      <Text style={{color:'white', fontFamily:'Montserrat-Regular'}}>{message}</Text>
+    </View>
+  )
+}
+
+
+const ChatBubbleOwn = ({message}) => {
+  return (
+    <View style={{marginTop:10, height:25,backgroundColor:'#4263DD', borderRadius:5 ,paddingTop:3,paddingRight:25, paddingLeft:5, alignItems: 'center', alignSelf:'flex-end'}}>
+      <Text style={{color:'white', fontFamily:'Montserrat-Regular'}}>{message}</Text>
+    </View>
   )
 }
 const styles = StyleSheet.create({

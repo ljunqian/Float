@@ -2,12 +2,15 @@ import { Auth } from 'aws-amplify';
 import { DataStore } from '@aws-amplify/datastore';
 import { SQLiteAdapter } from '@aws-amplify/datastore-storage-adapter';
 import { User } from "../../models";
-import { SET_USER_DATA } from './type';
+import { SET_USER_DATA, SIGN_IN, UPDATE_COINS } from './type';
 
 DataStore.configure({
   storageAdapter: SQLiteAdapter
 });
 
+export const signIn = () => ({
+    type: SIGN_IN,
+})
 export const getUserInfo = async () => {
     try {
         const { attributes, username } = await Auth.currentAuthenticatedUser();
@@ -30,3 +33,8 @@ export const getUserInfo = async () => {
         console.log("Error saving post", error);
     }
 }
+
+export const updateCoins = ({coins}) => ({
+    type: UPDATE_COINS,
+    payload: coins
+})

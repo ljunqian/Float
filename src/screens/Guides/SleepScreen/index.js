@@ -5,6 +5,8 @@ import layout from '../../../styles/componentLayout';
 import { color } from '../../../styles/theme';
 import * as Progress from 'react-native-progress';
 import SleepBG from '../../../assets/images/sleep-planet.png';
+import StarsBG from '../../../assets/images/stars.png';
+import Badge2 from '../../../assets/images/Badges2.png';
 import SleepAvatar from '../../../assets/images/sleep-avatar.png';
 import Sleep1 from '../../../assets/images/sleep1.png';
 // import Sleep2 from '../../../assets/images/sleep2.png';
@@ -45,16 +47,16 @@ const Recent = ({ array, navigation }) => {
 
   return (
     <View>
-      <Text style={typo.H1}>
+      <Text style={[typo.H1, {left:10}]}>
         Recent
       </Text>
       <View style={{display: 'flex', flexDirection:'row'}}>
         <View style={{flex:1, display: 'flex',flexDirection: 'column'}}>        
           <GuideCardComponent style={{height: 130}} title={one.title} dur={one.duration} img={one.thumbnail} height={140} width={200} click={() => navigation.navigate('GuideDetail', one)}/>
-          <GuideCardComponent style={{height: 195}} title={two.title} dur={two.duration} img={two.thumbnail} height={210} width={200} click={() => navigation.navigate('GuideDetail', two)}/>          
+          <GuideCardComponent style={{height: 195}} title={two.title} dur={two.duration} img={two.thumbnail} height={210} width={200} click={() => navigation.navigate('GuideDetail', two)}/>        
         </View>
         <View style={{flex:1}}>
-          <GuideCardComponent style={{height: 272}} title={three.title} dur={three.duration} img={three.thumbnail} height={278} width={250} click={() => navigation.navigate('GuideDetail', three)}/>          
+          <GuideCardComponent style={{height: 272}} title={three.title} dur={three.duration} img={three.thumbnail} height={285} width={200} click={() => navigation.navigate('GuideDetail', three)}/>          
          </View>
       </View>
     </View>
@@ -69,7 +71,7 @@ const Explore = ({ array, navigation }) => {
 
   return (
     <View> 
-      <Text style={[typo.H1, {marginTop: 20}]}>
+      <Text style={[typo.H1, {marginTop: 20, left:10}]}>
         Explore
       </Text>
       <View style={{display: 'flex', flexDirection: 'row'}}>
@@ -89,15 +91,19 @@ const Explore = ({ array, navigation }) => {
 const SleepScreen = ({navigation}) => {
   return (
     <ScrollView style={{backgroundColor: '#272727'}}> 
-      <ImageBackground source={SleepBG}  resizeMode="cover" style={{width: '100%'}} >
+      <ImageBackground source={StarsBG}  resizeMode="cover" style={{width: '100%'}} >
+      <Image source={SleepBG} style={{ top: -900, left: -20, zIndex: 0, transform:[{scaleY:-1}], position: 'absolute', width: '110%', resizeMode: "contain"}}/>
       <View style={layout.header}>
         <View style={{height: 200}}>
           
-        <Text style={[typo.H0]}>
+        <Text style={[typo.H0, {left:20}]}>
           Sleep 
         </Text>
-        
-          <Text style={[typo.T2, {color:'white'}]}>
+        <View style={{flexDirection:'row', alignItems : 'center'}}> 
+          <Image source={Badge2} style={{ top: 3, marginLeft: 17} }/>
+          
+          <View style={{top: -6, marginLeft: -10}}>
+            <Text style={[typo.T1, {color:'white', left:20, top:2}]}>
             Level 2
           </Text>
           <Progress.Bar 
@@ -107,14 +113,19 @@ const SleepScreen = ({navigation}) => {
             color={color.Sleep3}
             unfilledColor={'white'}
             borderWidth={0}
+            top={6}
+            left={20}
           />
+          </View>
+        </View>
+          
           <Image source={SleepAvatar} style={{ top: 20, left: 20,zIndex: 0, position: 'absolute'}}/>
         </View>
           <View style={{display: 'flex', flex: 8, justifyContent: 'flex-end', alignItems: 'center', zIndex:2}}>
             <Text style={typo.H1}>
               Sleep Session
             </Text>
-            <TouchableOpacity style={[layout.big_button, {backgroundColor: color.Sleep3, marginBottom: 30, zIndex:2, flexDirection: 'row'}]}>
+            <TouchableOpacity style={[layout.big_button, {backgroundColor: color.Sleep2, marginBottom: 30, zIndex:2, flexDirection: 'row'}]}>
                 <Image source={play} style={{marginRight: 5}} />
                 <Text style={[typo.T4, {color: 'white', fontWeight: '400'}]}>
                   Play

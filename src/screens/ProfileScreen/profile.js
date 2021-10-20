@@ -30,6 +30,9 @@ const ProfileScreen = (props) => {
     if (hatName==="Ushanka") {
       top = 6; left=128;
     }
+    if (hatName==="Cowboy") {
+      top = 10; left=114;
+    }
     if (hat) {
       return (
         

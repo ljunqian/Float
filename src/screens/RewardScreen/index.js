@@ -14,6 +14,7 @@ import { TabClicked, TabNotClicked, RewardPopup } from './component';
 
 import {connect, useSelector, useDispatch} from 'react-redux';
 import {updateAvatarState, purchaseAsset} from './Redux/RewardAction';
+import { updateCoins } from '../GlobalStates/UserAction';
 import { rewardTabs } from './assetConstants';
 
 import { API, Auth, graphqlOperation } from 'aws-amplify';
@@ -27,6 +28,8 @@ const RewardScreen = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalContent, setModalContent] = useState();
   const [modalEnoughCoins, setModalEnoughCoins] = useState();
+
+  const {coins} = useSelector((state) => state.user.userData);
 
   const dispatch = useDispatch();
   
@@ -44,7 +47,7 @@ const RewardScreen = ({ navigation }) => {
                 coinsValue={asset.value}
                 purchased={asset.purchased}
                 equipped={asset.name === userData[type]}
-                buyAsset={() => dispatch(purchaseAsset(type, asset.name))}
+                buyAsset={() => buyAsset(type, asset)}
                 updateUser={(name) => updateAvatar(type, name)}
                 showModal={(enough) => showModal(asset, enough)}
               />
@@ -56,6 +59,14 @@ const RewardScreen = ({ navigation }) => {
     )
   }
 
+  const buyAsset = (type, asset) => {
+    const enough = coins > asset.value;
+    if (enough) {
+      dispatch(purchaseAsset(type, asset.name));
+      dispatch(updateCoins({coins: coins-asset.value}))
+    }
+    showModal(asset, enough)
+  }
   const showModal = (asset, enough) => {
     setModalContent(asset);
     setModalVisible(true);
@@ -130,7 +141,6 @@ const RewardCard = (props) => {
     // if my coins >= asset value
     if (!purchasestatus && !equippedstatus) {
       props.buyAsset();
-      props.showModal(true);
     } else
     if (purchasestatus && !equippedstatus) {
       props.updateUser(props.asset);
