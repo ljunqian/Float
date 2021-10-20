@@ -350,13 +350,34 @@ const App = () => {
           />
           <Stack.Screen name="Chat Screen" component={chatScreen}
             options={({ navigation }) => ({
+
               headerLeft: () => (
                 <Image source={Avatar}
                              style={{marginLeft:70, width: 40, height: 40, borderRadius:80, alignSelf: 'center'}} />
               ),
               headerTitle: () => (<Text style={{marginLeft:10, color:'white', fontFamily:'FredokaOne-Regular'}}>username</Text>),
-              headerTintColor: 'white'
-            })}
+              headerTintColor: 'white',
+                                                    headerRight: () => (
+                                                      <TouchableOpacity onPress={() => {  }}>
+                                                                          <View style={{
+                                                                            marginTop: 0,
+
+                                                                            height: 30,
+                                                                            paddingLeft: 10,
+                                                                            paddingRight: 10,
+                                                                            backgroundColor: '#CD5959',
+                                                                            alignItems: 'center',
+                                                                            justifyContent: 'center',
+                                                                            alignSelf: 'center',
+
+                                                                            borderRadius: 35
+                                                                          }}>
+                                                                            <Text style={{ color: 'white',fontFamily:'FredokaOne-Regular', }}>+ Add Friend</Text>
+                                                                          </View>
+                                                                        </TouchableOpacity>
+                                                    ),
+
+                                                  })}
           />
           <Stack.Screen name="Change Password" component={changePass}
             options={() => ({
