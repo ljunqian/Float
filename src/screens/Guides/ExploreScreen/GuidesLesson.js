@@ -20,7 +20,7 @@ import Focus1 from '../../../assets/images/focus-1.png';
 
 const GuideImage = ({type}) => {
     return(
-        <ImageBackground source={image[type]} style={{width: 410, height: 200,}}>
+        <ImageBackground source={image[type]} style={{width: 415, height: 200,}}>
             <View style={{flex: 1, justifyContent: 'flex-end', margin: 20}}>
                 <Text style={[typo.H4, {color: 'white'}]}>
                     {title[type]}
