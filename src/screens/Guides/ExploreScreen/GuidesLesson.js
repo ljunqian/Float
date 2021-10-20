@@ -30,7 +30,7 @@ const GuideImage = ({type}) => {
     )
 }
 
-const GuideLessons = ({type}) => {
+const GuideLessons = ({type, navigation}) => {
 
     const MyRadioButton = ({isDone}) =>{
         return(isDone?
@@ -50,18 +50,21 @@ const GuideLessons = ({type}) => {
             <MyRadioButton isDone={isDone} />
             <TouchableOpacity onPress={()=>{setIsDone(!isDone)}}>
                 <View style={style.card}>
-                    <View>
-                        <Text style={typo.H2}>{title}</Text>
-                        <View style={{flexDirection: 'row', left: 15, top: 5}}>
-                            <Image source={icons[type].video} right={5}/>
-                            <Text style={[typo.T6, {color: colours[type]}]}>{description}</Text>
+                    <View style={{width: 225, justifyContent: 'center', bottom: 5}}>
+                        <Text style={typo.H3}>{title}</Text>
+                        <View style={{justifyContent: 'flex-end'}}>
+                            <View style={{flexDirection: 'row', left: 15, top: 5}}>
+                                <Image source={icons[type].video} right={5}/>
+                                <Text style={[typo.T6, {color: colours[type]}]}>{description}</Text>
+                            </View>
+                            <View style={{flexDirection: 'row', left: 16, top: 12}}>
+                                <Image source={icons[type].time} right={5}/>
+                                <Text style={[typo.T6, {color: colours[type]}]}>{duration}</Text>
+                            </View>
                         </View>
-                        <View style={{flexDirection: 'row', left: 16, top: 12}}>
-                            <Image source={icons[type].time} right={5}/>
-                            <Text style={[typo.T6, {color: colours[type]}]}>{duration}</Text>
-                        </View>
+                        
                     </View>
-                    <Image source={img} style={{width: 70, height: 70, borderRadius: 13, right: 5}} />
+                    <Image source={img} style={{width: 70, height: 70, borderRadius: 13, right: 5}} top={5} />
                 </View>
             </TouchableOpacity>
         </View>
@@ -78,7 +81,7 @@ const GuideLessons = ({type}) => {
             lessons[type].map(item =>{
                 return(
                     <>
-                    <CardComponent key={item.id} title={item.title} img={item.image} duration={item.duration} description={item.description}/>
+                    <CardComponent key={item.id} title={item.title} img={item.thumbnail} duration={item.duration} description={item.description}/>
                     <LineBG src={Line32} top={item.line} left={'6%'}/>
                     </>
                 )
@@ -103,15 +106,15 @@ const GuideLesson = ({navigation, route}) => {
     return(
         <ScrollView contentContainerStyle={[{backgroundColor: '#272727'}]}>
             <GuideImage type={type}/>
-            <GuideLessons style={style.container} type={type}/>
+            <GuideLessons style={style.container} type={type} navigation={navigation}/>
         </ScrollView>
     )
 }
 
 const height = {
-    "Meditate": 560,
-    "Move": 440,
-    "Focus": 560,
+    "Meditate": 600,
+    "Move": 480,
+    "Focus": 600,
     "Sleep": 440,
 }
 
@@ -150,8 +153,8 @@ const style=StyleSheet.create({
         borderWidth: 0.5,
         borderColor: 'rgba(0, 0, 0, 0.5)',
         backgroundColor: 'white',
-        height: 90,
-        width: '85%',
+        height: 100,
+        width: 320,
         borderRadius: 20,
         margin: 10,
         padding: 10,
