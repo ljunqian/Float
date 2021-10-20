@@ -57,35 +57,40 @@ export const lessons = {
             description: 'Excerise Activity 1.1',
             duration: '3-5 mins',
             image: Explore1,
-            line: 70.25
+            line: 70.25,
+            id: 11
         },
         {
             title: 'Meditation 02',
             description: 'Excerise Activity 1.2',
             duration: '5-10 mins',
             image: Med3,
-            line: 177.25
+            line: 177.25,
+            id: 12
         },
         {
             title: 'Meditation 03',
             description: 'Excerise Activity 1.3',
             duration: '10-15 mins',
             image: Med2,
-            line: 287.25
+            line: 287.25,
+            id: 13
         },
         {
             title: 'Meditation 04',
             description: 'Excerise Activity 1.4',
             duration: '10-15 mins',
             image: Explore1,
-            line: 397.25
+            line: 397.25,
+            id: 14
         },
         {
             title: 'Meditation 05',
             description: 'Excerise Activity 1.5',
             duration: '15-20 mins',
             image: Med3,
-            line: 397.25
+            line: 397.25,
+            id: 15
         }
     ],
     "Sleep": [
@@ -94,21 +99,24 @@ export const lessons = {
             description: 'Excerise Activity 1.1',
             duration: '20-25 mins',
             image: Sleep3,
-            line: 70.25
+            line: 70.25,
+            id: 21
         },
         {
             title: 'Sleep 02',
             description: 'Excerise Activity 1.2',
             duration: '10-15 mins',
             image: Sleep2,
-            line: 177.25
+            line: 177.25,
+            id: 22
         },
         {
             title: 'Sleep 03',
             description: 'Excerise Activity 1.3',
             duration: '5-10 mins',
             image: Focus2,
-            line: 177.25
+            line: 177.25,
+            id: 23
         },
     ],
     "Move": [
@@ -117,28 +125,32 @@ export const lessons = {
             description: 'Excerise Activity 1.1',
             duration: '20-25 mins',
             image: Move3,
-            line: 70.25
+            line: 70.25,
+            id: 31
         },
         {
             title: 'Move 02',
             description: 'Excerise Activity 1.2',
             duration: '10-15 mins',
             image: Move2,
-            line: 177.25
+            line: 177.25,
+            id: 32
         },
         {
             title: 'Move 03',
             description: 'Excerise Activity 1.3',
             duration: '10-15 mins',
             image: Move3,
-            line: 287.25
+            line: 287.25,
+            id: 33
         },
         {
             title: 'Move 04',
             description: 'Excerise Activity 1.4',
             duration: '5-10 mins',
             image: Move2,
-            line: 287.25
+            line: 287.25,
+            id: 34
         }
     ],
     "Focus": [
@@ -147,35 +159,40 @@ export const lessons = {
             description: 'Excerise Activity 1.1',
             duration: '10-15 mins',
             image: Sleep3,
-            line: 70.25
+            line: 70.25,
+            id: 41
         },
         {
             title: 'Focus 02',
             description: 'Excerise Activity 1.2',
             duration: '15 mins',
             image: Move1,
-            line: 177.25
+            line: 177.25,
+            id: 42
         },
         {
             title: 'Focus 03',
             description: 'Excerise Activity 1.3',
             duration: '15-20 mins',
             image: Focus2,
-            line: 287.25
+            line: 287.25,
+            id: 43
         },
         {
             title: 'Focus 04',
             description: 'Excerise Activity 1.4',
             duration: '10-15 mins',
             image: Move1,
-            line: 397.25
+            line: 397.25,
+            id: 44
         },
         {
             title: 'Focus 05',
             description: 'Excerise Activity 1.5',
             duration: '10-15 mins',
             image: Sleep2,
-            line: 397.25
+            line: 397.25,
+            id: 45
         }
     ]
 }

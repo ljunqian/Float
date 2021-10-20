@@ -78,7 +78,7 @@ const GuideLessons = ({type}) => {
             lessons[type].map(item =>{
                 return(
                     <>
-                    <CardComponent title={item.title} img={item.image} duration={item.duration} description={item.description}/>
+                    <CardComponent key={item.id} title={item.title} img={item.image} duration={item.duration} description={item.description}/>
                     <LineBG src={Line32} top={item.line} left={'6%'}/>
                     </>
                 )
