@@ -56,32 +56,32 @@ export const lessons = {
     "Meditate": [
         {
             ...Guides[2],
-            description: 'Excerise Activity 1.1',
+            activity: 'Excerise Activity 1.1',
             duration: Guides[2].duration + ' mins',
             line: 78.25,
         },
         {
             ...Guides[3],
-            description: 'Excerise Activity 1.2',
+            activity: 'Excerise Activity 1.2',
             duration: Guides[3].duration + ' mins',
             line: 197
         },
         {
             ...Guides[0],
-            description: 'Excerise Activity 1.3',
+            activity: 'Excerise Activity 1.3',
             duration: Guides[0].duration + ' mins',
             line: 317
         },
         {
             ...Guides[4],
-            description: 'Excerise Activity 1.4',
+            activity: 'Excerise Activity 1.4',
             duration: Guides[4].duration + ' mins',
    
             line: 438
         },
         {
             ...Guides[1],
-            description: 'Excerise Activity 1.5',
+            activity: 'Excerise Activity 1.5',
             duration: Guides[1].duration + ' mins',
             line: 438
         }
@@ -89,19 +89,19 @@ export const lessons = {
     "Sleep": [
         {
             ...Guides[9],
-            description: 'Excerise Activity 1.1',
+            activity: 'Excerise Activity 1.1',
             duration: Guides[9].duration + ' mins',
             line: 78.
         },
         {
             ...Guides[10],
-            description: 'Excerise Activity 1.2',
+            activity: 'Excerise Activity 1.2',
             duration: Guides[10].duration + ' mins',
             line: 197
         },
         {
             ...Guides[11],
-            description: 'Excerise Activity 1.3',
+            activity: 'Excerise Activity 1.3',
             duration: Guides[11].duration + ' mins',
             line: 197
         },
@@ -109,25 +109,25 @@ export const lessons = {
     "Move": [
         {
             ...Guides[15],
-            description: 'Excerise Activity 1.1',
+            activity: 'Excerise Activity 1.1',
             duration: Guides[15].duration + ' mins',
             line: 78.
         },
         {
             ...Guides[14],
-            description: 'Excerise Activity 1.2',
+            activity: 'Excerise Activity 1.2',
             duration: Guides[14].duration + ' mins',
             line: 197
         },
         {
             ...Guides[16],
-            description: 'Excerise Activity 1.3',
+            activity: 'Excerise Activity 1.3',
             duration: Guides[16].duration + ' mins',
             line: 317
         },
         {
             ...Guides[13],
-            description: 'Excerise Activity 1.4',
+            activity: 'Excerise Activity 1.4',
             duration: Guides[13].duration + ' mins',
             line: 317
         }
@@ -135,31 +135,31 @@ export const lessons = {
     "Focus": [
         {
             ...Guides[18],
-            description: 'Excerise Activity 1.1',
+            activity: 'Excerise Activity 1.1',
             duration: Guides[18].duration + ' mins',
             line: 78.
         },
         {
             ...Guides[19],
-            description: 'Excerise Activity 1.2',
+            activity: 'Excerise Activity 1.2',
             duration: Guides[19].duration + ' mins',
             line: 197
         },
         {
             ...Guides[20],
-            description: 'Excerise Activity 1.3',
+            activity: 'Excerise Activity 1.3',
             duration: Guides[20].duration + ' mins',
             line: 317
         },
         {
             ...Guides[21],
-            description: 'Excerise Activity 1.4',
+            activity: 'Excerise Activity 1.4',
             duration: Guides[21].duration + ' mins',
             line: 438
         },
         {
             ...Guides[22],
-            description: 'Excerise Activity 1.5',
+            activity: 'Excerise Activity 1.5',
             duration: Guides[22].duration + ' mins',
             line: 438
         }

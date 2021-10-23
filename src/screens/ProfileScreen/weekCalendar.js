@@ -10,56 +10,56 @@ const myEvents = [
   {
     id: 1,
     description: 'Event',
-    startDate: new Date(2021, 9, 15, 23, 30),
-    endDate: new Date(2021, 9, 16, 9, 0),
+    startDate: new Date(2021, 9, 20, 23, 30),
+    endDate: new Date(2021, 9, 21, 9, 0),
     color: 'transparent',
     // ... more properties if needed,
   },
   {
     id: 2,
     description: 'Event',
-    startDate: new Date(2021, 9, 17, 1, 0),
-    endDate: new Date(2021, 9, 17, 8, 30),
+    startDate: new Date(2021, 9, 22, 1, 0),
+    endDate: new Date(2021, 9, 22, 8, 30),
     color: 'transparent',
     // ... more properties if needed,
   },
   {
     id: 3,
     description: 'Event',
-    startDate: new Date(2021, 9, 18, 0, 0),
-    endDate: new Date(2021, 9, 18, 7, 0),
+    startDate: new Date(2021, 9, 23, 0, 0),
+    endDate: new Date(2021, 9, 23, 7, 0),
     color: 'transparent',
     // ... more properties if needed,
   },
   {
     id: 4,
     description: 'Event',
-    startDate: new Date(2021, 9, 19, 0, 30),
-    endDate: new Date(2021, 9, 19, 8, 0),
+    startDate: new Date(2021, 9, 24, 0, 30),
+    endDate: new Date(2021, 9, 24, 8, 0),
     color: 'transparent',
     // ... more properties if needed,
   },
   {
     id: 5,
     description: 'Event',
-    startDate: new Date(2021, 9, 19, 23, 50),
-    endDate: new Date(2021, 9, 20, 7, 30),
+    startDate: new Date(2021, 9, 24, 23, 50),
+    endDate: new Date(2021, 9, 25, 7, 30),
     color: 'transparent',
     // ... more properties if needed,
   },
   {
     id: 6,
     description: 'Event',
-    startDate: new Date(2021, 9, 21, 0, 50),
-    endDate: new Date(2021, 9, 21, 8, 10),
+    startDate: new Date(2021, 9, 26, 0, 50),
+    endDate: new Date(2021, 9, 26, 8, 10),
     color: 'transparent',
     // ... more properties if needed,
   },
   {
     id: 7,
     description: 'Event',
-    startDate: new Date(2021, 9, 22, 0, 20),
-    endDate: new Date(2021, 9, 22, 8, 20),
+    startDate: new Date(2021, 9, 27, 0, 20),
+    endDate: new Date(2021, 9, 27, 8, 20),
     color: 'transparent',
     // ... more properties if needed,
   },
@@ -88,7 +88,7 @@ export const JCalendar = ({styles}) => {
             headerStyle={myHeader}
             locale={'en_sg'}
             weekStartsOn={6} 
-            numberOfDays={11}
+            numberOfDays={7}
             timeStep={120}
             startHour={0}
             hoursInDisplay={48}

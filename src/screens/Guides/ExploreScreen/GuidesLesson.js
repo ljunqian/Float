@@ -41,14 +41,14 @@ const GuideLessons = ({type, navigation}) => {
         <Icon name="radio-button-unchecked" size={30} color="white"/>)
     }
 
-    const CardComponent = ({img, duration, title, description}) => {
+    const CardComponent = ({img, duration, title, description, item}) => {
         
         const [isDone, setIsDone] = useState(false);
 
         return (
         <View style={{display: 'flex', flexDirection: 'row', alignItems: 'center', marginHorizontal: 20, right: 10}}>
             <MyRadioButton isDone={isDone} />
-            <TouchableOpacity onPress={()=>{setIsDone(!isDone)}}>
+            <TouchableOpacity onPress={()=>{setIsDone(!isDone); navigation.navigate('GuideDetail', item);}}>
                 <View style={style.card}>
                     <View style={{width: 225, justifyContent: 'center', bottom: 5}}>
                         <Text style={typo.H3}>{title}</Text>
@@ -81,7 +81,7 @@ const GuideLessons = ({type, navigation}) => {
             lessons[type].map(item =>{
                 return(
                     <>
-                    <CardComponent key={item.id} title={item.title} img={item.thumbnail} duration={item.duration} description={item.description}/>
+                    <CardComponent key={item.id} title={item.title} img={item.thumbnail} duration={item.duration} description={item.activity} item={item}/>
                     <LineBG src={Line32} top={item.line} left={'6%'}/>
                     </>
                 )
