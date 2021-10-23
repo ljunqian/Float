@@ -13,16 +13,18 @@ const INITIAL_STATE = {
 const GuidesReducer = (prevState = INITIAL_STATE, action) => {
     switch (action.type) {
       case ADD_FAVOURITE: {
+        const newGuide = action.payload;
         const prevFav = prevState.favourites;
-        prevFav.push(action.payload);
+        const added = _.filter(prevFav, (guide) => guide.title !== newGuide.title);
+        added.unshift(newGuide);
         return {
           ...prevState,
-          favourites: prevFav,
+          favourites: added,
         }
       }
       case DELETE_FAVOURITE: {
         const newFav = prevState.favourites.filter(
-          (guide) => guide.title !== action.payload);
+          (guide) => guide.title !== action.payload.title);
         return {
           ...prevState,
           favourites: newFav,
