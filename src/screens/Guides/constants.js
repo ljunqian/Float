@@ -7,6 +7,7 @@ import Med3 from '../../assets/images/med3.png';
 import Sleep1 from '../../assets/images/sleep1.png';
 import Sleep2 from '../../assets/images/sleep2.png';
 import Sleep3 from '../../assets/images/sleep3.png';
+import Sleep4 from '../../assets/images/sleep4.png';
 
 import Mov from '../../assets/images/mov-1.png';
 import Move1 from '../../assets/images/move1.png';
@@ -16,7 +17,7 @@ import Move3 from '../../assets/images/move3.png';
 import Focus1 from '../../assets/images/focus-1.png';
 import Focus2 from '../../assets/images/focus2.png';
 import Focus3 from '../../assets/images/focus3.png';
-import Focus4 from '../../assets/images/sleep3.png';
+import Focus4 from '../../assets/images/focus4.png';
 
 export const Guides = [
     // Meditation Videos
@@ -28,7 +29,7 @@ export const Guides = [
         source : 'inpok4MKVLM',
         description : 'In just 5 minutes you can reset your day in a positive way.',
         type: 'meditate',
-        thumbnail: Med2,
+        thumbnail: Med3,
         key: 0
     },
 
@@ -39,7 +40,7 @@ export const Guides = [
         source : '2K4T9HmEhWE',
         description : 'A 5 minute guided meditation to be used before you sleep.',
         type: 'meditate',
-        thumbnail: Med1,
+        thumbnail: Med2,
         key: 1
     },
 
@@ -50,7 +51,7 @@ export const Guides = [
         source : 'U9YKY7fdwyg',
         description : '10 Minute Meditation For Beginners.',
         type: 'meditate',
-        thumbnail: Med3,
+        thumbnail: Med1,
         key: 2
     },
 
@@ -107,7 +108,7 @@ export const Guides = [
         source : 'aEqlQvczMJQ',
         description : 'If you are feeling restless, listen to this guided meditation to ease your mind and body into falling asleep.',
         type: 'sleep',
-        thumbnail: Sleep3,
+        thumbnail: Sleep4,
         key: 7
     },
 
@@ -118,7 +119,7 @@ export const Guides = [
         source : 'qlxDoq9vohk',
         description : 'If you are feeling restless, listen to this guided meditation to ease your mind and body into falling asleep.',
         type: 'sleep',
-        thumbnail: Med2,
+        thumbnail: Sleep2,
         key: 8
     },
 
@@ -129,7 +130,7 @@ export const Guides = [
         source : 't0kACis_dJE',
         description : 'In order to sleep better, and wake up early, you need to learn about the circadian rhythm - and why it’s important to wake up at a regular time.',
         type: 'sleep',
-        thumbnail: Sleep2,
+        thumbnail: Sleep3,
         key: 9
     },
 
@@ -140,7 +141,7 @@ export const Guides = [
         source : 'aamF_jW-jGM',
         description : 'Entrepreneur Dave Asprey explains why eating raw honey, using incandescent or halogen lights, and modifying your smartphone’s LED display can help you sleep better.',
         type: 'sleep',
-        thumbnail: Sleep3,
+        thumbnail: Sleep2,
         key: 10
     },
 
@@ -151,7 +152,7 @@ export const Guides = [
         source : 'lRp5AC9W_F8',
         description : 'In this book, the first of its kind written by a scientific expert, Professor Matthew Walker explores twenty years of cutting-edge research to solve the mystery of why sleep matters',
         type: 'sleep',
-        thumbnail: Med2,
+        thumbnail: Sleep4,
         key: 11
     },
 
@@ -162,7 +163,7 @@ export const Guides = [
         source : 'EiYm20F9WXU',
         description : 'Cant fall asleep? These sleep tips are better than ASMR!',
         type: 'sleep',
-        thumbnail: Sleep1,
+        thumbnail: Sleep2,
         key: 12
     },
 
@@ -175,7 +176,7 @@ export const Guides = [
         source : '2cg2yiaY8qo',
         description : 'This is a 15-minute restorative practice emphasizing wrist & spine mobility...also slowing your roll for a few minutes to be mindful of your movement and check-in with your body. ',
         type: 'move',
-        thumbnail: Move1,
+        thumbnail: Move3,
         key: 13
     },
 
@@ -186,7 +187,7 @@ export const Guides = [
         source : '0yXaIsVfwzo',
         description : 'In this video we discuss how to improve your cardiovascular system, which can improve your endurance, overall health, and overall fitness.',
         type: 'move',
-        thumbnail: Move2,
+        thumbnail: Move1,
         key: 14
     },
 
@@ -197,7 +198,7 @@ export const Guides = [
         source : '4zBnM_uozXM',
         description : 'Do These 6 Exercises to Increase Your Mobility & Flexibility',
         type: 'move',
-        thumbnail: Move3,
+        thumbnail: Move2,
         key: 15
     },
 
@@ -232,7 +233,7 @@ export const Guides = [
         source : 'O-ETErmpVxI',
         description : 'How To Stay Focused Longer',
         type: 'focus',
-        thumbnail: Focus4,
+        thumbnail: Focus2,
         key: 18
     },
 
@@ -243,7 +244,7 @@ export const Guides = [
         source : '8RV_vYsHceQ',
         description : 'So how exactly do you stay focused? Here are 11 ways. Focus better. Focus on your goals. Get focused. Be more Focused. Here we go. ',
         type: 'focus',
-        thumbnail: Focus2,
+        thumbnail: Focus3,
         key: 19
     },
     
@@ -254,7 +255,7 @@ export const Guides = [
         source : 'a-KCZ1sghLY',
         description : 'If your studying gets interrupted often by distractions or the temptation to multi-task, try these methods of building your ability to focus.',
         type: 'focus',
-        thumbnail: Focus3,
+        thumbnail: Focus4,
         key: 20
     },
 

@@ -9,7 +9,7 @@ import oldMedBG from '../../../assets/images/meditate-planet.png';
 import StarsBG from '../../../assets/images/stars.png';
 import MedAvatar from '../../../assets/images/meditate-avatar.png';
 import Badge1 from '../../../assets/images/Badge1.png';
-import Med from '../../../assets/images/med-1.png'; 
+import Med from '../../../assets/images/med-2.png'; 
 import Mov from '../../../assets/images/mov-1.png';
 import Med2 from '../../../assets/images/med2.png';
 import play from '../../../assets/icons/play.png';
