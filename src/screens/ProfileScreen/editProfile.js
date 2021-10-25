@@ -52,37 +52,38 @@ const editProfile = ({ navigation, route }) => {
   return (
     <NativeBaseProvider>
       <View style={{ backgroundColor: color.bg, minHeight: '100%' }}>
-        <View style={{ marginLeft: 50 }}>
+        <View style={{ marginLeft: 40 }}>
           <Input
-            style={{ width: 331, height: 40 }}
+            style={{ width: 331, height: 40, backgroundColor:"white", marginTop:10 , fontFamily:"FredokaOne-Regular"}}
             value={email}
             onChangeText={setEmail}
             variant="underlined"
             placeholder="Your Email Address"
-            color='white'
+            color='black'
           />
           <Input
-            style={{ width: 331, height: 40 }}
+            style={{ width: 331, height: 40, backgroundColor:"white", marginTop:20 , fontFamily:"FredokaOne-Regular"}}
             value={phone}
             onChangeText={setPhone}
             variant="underlined"
             placeholder="Phone Number"
-            color='white'
+            color='black'
           />
           <View
-            style={{ width: 331, height: 45 }}>
+            style={{ width: 331, height: 40, backgroundColor:"white", marginTop:20 }}>
             <Select
 
               selectedValue={gender}
               minWidth={200}
               accessibilityLabel="Gender"
               placeholder="Gender"
+
               onValueChange={(itemValue) => setGender(itemValue)}
               _selectedItem={{
                 bg: "cyan.600",
               }}
-              _light={{ color: "white", }}
-              _dark={{ color: "white", }}
+              _light={{ color: "black", fontFamily:"FredokaOne-Regular" }}
+              _dark={{ color: "white", fontFamily:"FredokaOne-Regular" }}
             >
               <Select.Item label="Female" value="Female" />
               <Select.Item label="Male" value="Male" />
@@ -91,12 +92,10 @@ const editProfile = ({ navigation, route }) => {
           </View>
           <View style={{ marginBottom: 100 }}>
             <View style={{ marginLeft: 40 }}>
-              <Text style={style.title}>
-                Birth Date
-              </Text>
+
               <DatePicker
                 date={bdate}
-                style={style.datePickerStyle}
+                style={[style.datePickerStyle, {width:331}]}
                 mode="date" // The enum of date, datetime and time
                 placeholder="select date"
                 format="DD-MM-YYYY"

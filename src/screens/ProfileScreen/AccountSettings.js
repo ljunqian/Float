@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Text, View, StyleSheet, Image, TextInputField, TouchableOpacity } from 'react-native';
+import { Button, Text, View, StyleSheet, Image, TextInputField, TouchableOpacity, ScrollView } from 'react-native';
 import Nav from './Nav';
 import { Context } from '../Authenticate/store';
 import { Auth, API, graphqlOperation, } from 'aws-amplify';
@@ -59,21 +59,22 @@ const AccountSettings = ({ navigation, route }) => {
     console.log('context', state);
   }, [])
   return (
-    <View style={{ backgroundColor: color.bg, minHeight: '100%' }}>
+    <ScrollView style={{ backgroundColor: color.bg, minHeight: '100%' }}>
       <ProfileScreen />
       <Nav />
-      <View style={{ marginLeft: 50 }}>
+      <View style={{ marginLeft: 20 }}>
         <TouchableOpacity onPress={() => { navigation.navigate('Edit Profile') }}>
           <View style={{
             marginTop: 10,
             marginRight: 46,
             height: 40,
+            width:365,
             backgroundColor: '#4263DD',
             alignItems: 'center',
             justifyContent: 'center',
             borderRadius: 35
           }}>
-            <Text style={{ color: 'white' }}>Edit Profile</Text>
+            <Text style={{ color: 'white', fontFamily: "FredokaOne-Regular" }}>Edit Profile</Text>
           </View>
         </TouchableOpacity>
 
@@ -82,12 +83,13 @@ const AccountSettings = ({ navigation, route }) => {
             marginTop: 10,
             marginRight: 46,
             height: 40,
+            width:365,
             backgroundColor: '#4263DD',
             alignItems: 'center',
             justifyContent: 'center',
             borderRadius: 35
           }}>
-            <Text style={{ color: 'white' }}>Sign Out</Text>
+            <Text style={{ color: 'white', fontFamily: "FredokaOne-Regular" }}>Sign Out</Text>
           </View>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => { handledelete() }}>
@@ -95,16 +97,18 @@ const AccountSettings = ({ navigation, route }) => {
             marginTop: 10,
             marginRight: 46,
             height: 40,
+            width:365,
             backgroundColor: 'red',
             alignItems: 'center',
             justifyContent: 'center',
-            borderRadius: 35
+            borderRadius: 35,
+            marginBottom: 40
           }}>
-            <Text style={{ color: 'white' }}>Delete Account</Text>
+            <Text style={{ color: 'white', fontFamily: "FredokaOne-Regular" }}>Delete Account</Text>
           </View>
         </TouchableOpacity>
       </View>
-    </View>
+    </ScrollView>
   )
 }
 
