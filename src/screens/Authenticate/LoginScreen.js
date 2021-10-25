@@ -50,36 +50,38 @@ const LoginScreen = ({ navigation }) => {
                     Float
                 </Text>
           </View>
-
-            <Text style={[typo.H2, { color: 'white' }]}>
-              Email
-            </Text>
-            <Input
-              style = {{width:331, height:40}}
-              value={email}
-              onChangeText={setEmail}
-              variant="underlined"
-              placeholder="Your Email Address"
-              color='white'
-            />
-            <Text style={[typo.H2, { color: 'white', paddingTop:20 }]}>
-              Password
-            </Text>
-            <Input
+          <View style={{display: 'flex', alignItems: 'center'}}> 
+            <View>
+              <Text style={[typo.H2, { color: 'white' }]}>
+                Email
+              </Text>
+              <Input
                 style = {{width:331, height:40}}
-              value={password}
-              onChangeText={setPassword}
-              variant="underlined"
-              placeholder="Password"
-              type="password"
-              color='white'
-            />
-            <View style={{ flex : 1 }} />
-
+                value={email}
+                onChangeText={setEmail}
+                variant="underlined"
+                placeholder="Your Email Address"
+                color='white'
+              />
+              <Text style={[typo.H2, { color: 'white', paddingTop:20 }]}>
+                Password
+              </Text>
+              <Input
+                  style = {{width:331, height:40}}
+                value={password}
+                onChangeText={setPassword}
+                variant="underlined"
+                placeholder="Password"
+                type="password"
+                color='white'
+              />
+              </View>
+          </View>
 
 
 
           <TouchableOpacity onPress={() => {signIn()}}>
+            
             <View style={{
                 marginLeft:20,
                 marginRight:20,
@@ -87,7 +89,8 @@ const LoginScreen = ({ navigation }) => {
                 backgroundColor: '#4263DD',
                 alignItems: 'center',
                 justifyContent: 'center',
-                borderRadius: 35
+                borderRadius: 35,
+                marginTop:20
               }}
             >
               <Text style={{ color: 'white' }}>Login</Text>
