@@ -2,12 +2,14 @@ import _ from 'lodash';
 import {
   ADD_FAVOURITE,
   DELETE_FAVOURITE,
-  ADD_RECENT
+  ADD_RECENT,
+  GET_GUIDES
 } from './type'
 
 const INITIAL_STATE = {
     favourites: [],
     recents: [],
+    guides: []
 };
 
 const GuidesReducer = (prevState = INITIAL_STATE, action) => {
@@ -39,6 +41,14 @@ const GuidesReducer = (prevState = INITIAL_STATE, action) => {
         return {
           ...prevState,
           recents: added,
+        }
+      }
+      case GET_GUIDES: {
+        const newGuides = action.payload;
+        console.log("in reducer " + newGuides[0].title);
+        return {
+          ...prevState,
+          guides: newGuides,
         }
       }
       default:

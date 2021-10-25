@@ -32,6 +32,8 @@ const GuideImage = ({type}) => {
 
 const GuideLessons = ({type, navigation}) => {
 
+    //Check if its done from store
+    
     const MyRadioButton = ({isDone}) =>{
         return(isDone?
         <View style={style.MyRadioButton}>

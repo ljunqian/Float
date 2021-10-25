@@ -8,8 +8,7 @@ import heart from '../../../assets/icons/heart.png';
 import redheart from '../../../assets/icons/redheart.png';
 import clock from '../../../assets/icons/clock.png';
 import Med from '../../../assets/images/med-1.png';
-import { addRecent } from '../Redux/GuidesAction';
-import { addFavourite, deleteFavourite } from '../Redux/GuidesAction';
+import { addRecent, addFavourite, deleteFavourite } from '../Redux/GuidesAction';
 import { useSelector, useDispatch } from 'react-redux';
 
 const types = {
@@ -31,7 +30,7 @@ const FavComponent = ({ isFav }) => {
  
     return(
         <View style={{flex: 1}}>
-            <Image source={icon} style={{ top: 10, left:0, zIndex: 0,}} />
+            <Image source={icon} style={{width: 27, height: 27,  top: 10, left:0, zIndex: 0, backgroundColor: 'yellow'}} />
         </View>
     )
 }
@@ -71,7 +70,7 @@ const GuideDetail = ({ navigation, props, route }) => {
                             setFav(true);
                             dispatch(addFavourite({guide: detail}));
                         }
-                        console.log(favourites);
+                        // console.log(favourites);
                     } }>
                         <FavComponent isFav = {isFavourite} />                       
                     </TouchableOpacity>

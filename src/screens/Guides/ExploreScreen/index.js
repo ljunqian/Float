@@ -18,11 +18,15 @@ import Meditate1 from '../../../assets/images/med-1.png';
 import Sleep1 from '../../../assets/images/sleep1.png';
 import Move1 from '../../../assets/images/mov-1.png';
 import Focus1 from '../../../assets/images/focus-1.png';
+import { Guides } from '../constants';
+import { getGuidesInfo } from '../Redux/GuidesAction';
+import { useDispatch } from 'react-redux';
 
 import { Auth } from 'aws-amplify';
 
 const ExploreScreen = ({ navigation }) => {
-  
+  const dispatch = useDispatch();
+
   const [isTimeline, setIsTimeline] = useState(false);
   const [name, setName] = useState();
   const [info, setInfo] = useState({
@@ -47,6 +51,8 @@ const ExploreScreen = ({ navigation }) => {
 
   useEffect(() => {
     getUserInfo();
+    dispatch(getGuidesInfo({guides: Guides}))
+    console.log(Guides[0])
   }, []);
 
   const MyRadioButton = ({isDone}) =>{
@@ -130,8 +136,8 @@ const ExploreScreen = ({ navigation }) => {
           <ImageBackground source={image} style={{width:'100%', height: '110%', top: -5}}>
             <View style={{flex: 3, alignItems: 'center', justifyContent: 'center'}}>
               <Text style={[typo.H4, {color: 'white',  textShadowColor: 'rgba(0, 0, 0, 0.75)',
-  textShadowOffset: {width: -1, height: 1},
-  textShadowRadius: 10}]}>
+                textShadowOffset: {width: -1, height: 1},
+                textShadowRadius: 10}]}>
                 {title}
               </Text> 
             </View>
