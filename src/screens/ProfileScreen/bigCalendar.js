@@ -6,7 +6,7 @@ import Moment from 'moment';
 
 /* Big Calendar can be used to show month  */
 
-const events: ICalendarEvent<{ color?: string }>[] = [
+const events = [
       {
         title: 'Meeting',
         start: Moment('2021-10-15T22:00:00').format(),

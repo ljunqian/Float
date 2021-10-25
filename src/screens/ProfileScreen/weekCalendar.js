@@ -88,7 +88,7 @@ export const JCalendar = ({styles}) => {
             headerStyle={myHeader}
             locale={'en_sg'}
             weekStartsOn={6} 
-            numberOfDays={11}
+            numberOfDays={7}
             timeStep={120}
             startHour={0}
             hoursInDisplay={48}
