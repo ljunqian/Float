@@ -5,6 +5,7 @@ import typo from '../../../styles/typography';
 import back from '../../../assets/icons/backbutton.png';
 import forward from '../../../assets/icons/forwardarrow.png';
 import { Guides } from '../constants';
+import { useSelector } from 'react-redux';
 
 const SearchComponent = ({ navigation, setUserInput, userInput }) => {
     return (
@@ -22,12 +23,12 @@ const SearchComponent = ({ navigation, setUserInput, userInput }) => {
     )
 }
 
-
-
 const Favourites = ({ navigation }) => {
     const [userInput, setUserInput] = useState('');
-        const ListComponent = ({ navigation }) => {
-        let data = Guides.filter(item => 
+    const {favourites} = useSelector((state) => state.guide);
+
+    const ListComponent = ({ navigation }) => {
+        let data = favourites.filter(item => 
         item.type.toLowerCase().includes(userInput) || 
         item.title.toLowerCase().includes(userInput) || 
         item.description.toLowerCase().includes(userInput)); 

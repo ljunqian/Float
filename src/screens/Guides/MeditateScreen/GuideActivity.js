@@ -99,6 +99,8 @@ const VideoComponent = ({ array, navigation }) => {
                             console.log(detail)
                             getTime()
                             navigation.navigate('GuideComplete', detail)
+                            //update done property
+                            
                         } else if (event === 'playing')
                             console.log("Video playing. To skip, end the video")
                     }}

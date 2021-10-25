@@ -10,12 +10,8 @@ import StarsBG from '../../../assets/images/stars.png';
 import MedAvatar from '../../../assets/images/meditate-avatar.png';
 import Badge1 from '../../../assets/images/Badge1.png';
 import Med from '../../../assets/images/med-2.png'; 
-import Mov from '../../../assets/images/mov-1.png';
-import Med2 from '../../../assets/images/med2.png';
 import play from '../../../assets/icons/play.png';
-import { overflow } from 'styled-system';
-import { Guides } from '../constants';
-import { Row } from 'native-base';
+import { Guides, types } from '../constants';
 
 const GuideCardComponent = (props)  => {
   return (
@@ -134,7 +130,9 @@ const MeditateScreen = ({navigation}) => {
             <Text style={typo.H1}>
               Meditation Session
             </Text>
-            <TouchableOpacity style={[layout.big_button, {backgroundColor: color.Med1, marginBottom: 30, zIndex:2, flexDirection: 'row'}]}>
+            <TouchableOpacity 
+              onPress={() => navigation.navigate('GuidesLesson', types.meditate)}
+              style={[layout.big_button, {backgroundColor: color.Med1, marginBottom: 30, zIndex:2, flexDirection: 'row'}]}>
                 <Image source={play} style={{marginRight: 5}} />
                 <Text style={[typo.T4, {color: 'white', fontWeight: '400'}]}>
                   Play
@@ -149,15 +147,15 @@ const MeditateScreen = ({navigation}) => {
         borderRadius: 20,
         margin: 6, overflow:'hidden'}}>
         <ImageBackground source={Med} style={{width:'108%', height: 155, top:-12, left:-16, flexDirection:'row', padding: 12}}>  
-        <View style={{flex: 1}}></View>
-        <View style={{flex: 3, alignItems: 'center', justifyContent: 'center'}}>
-          <Text style={[typo.H4, {color: 'white'}]}>
-            Featured
-          </Text> 
-        </View>
-        <View style={{flex: 1, alignItems: 'flex-end'}}>
-          <MinuteView duration={Guides[1].duration}/>
-        </View>
+          <View style={{flex: 1}}></View>
+          <View style={{flex: 3, alignItems: 'center', justifyContent: 'center'}}>
+            <Text style={[typo.H4, {color: 'white'}]}>
+              Featured
+            </Text> 
+          </View>
+          <View style={{flex: 1, alignItems: 'flex-end'}}>
+            <MinuteView duration={Guides[1].duration}/>
+          </View>
         </ImageBackground>
       </View>
         
@@ -165,9 +163,8 @@ const MeditateScreen = ({navigation}) => {
       <View style={layout.container}>
         <Recent array={Guides} navigation={navigation}/>
         <Explore array={Guides} navigation={navigation}/>
-
-        
       </View>
+      <View style={{height: 100}}/>
       </ImageBackground>
     </ScrollView>
   )

@@ -15,7 +15,8 @@ import redheart from '../../../assets/icons/redheart.png';
 import heart from '../../../assets/icons/heart.png';
 import { Guides } from './constants';
 
-import { useSelector } from 'react-redux';
+import { addFavourite, deleteFavourite } from '../Redux/GuidesAction';
+import { useSelector, useDispatch } from 'react-redux';
 
 const ActDetailComponent = ({ detail }) => {
     return(
@@ -24,7 +25,7 @@ const ActDetailComponent = ({ detail }) => {
                 {detail.title}
             </Text>
             <Text style={[typo.T1,{ color: 'white', fontWeight:'400'}]}>
-                {detail.duration} min 
+                {detail.duration} 
             </Text>
         </View>
     )
@@ -110,8 +111,10 @@ const MidComponent = ({style, navigation, detail}) => {
 
 const Complete = ({ navigation, route }) => {
     const detail = route.params;
-    const [isFavourite, setFav] = useState(false);
-    
+    const {favourites} = useSelector((state) => state.guide);
+    const [isFavourite, setFav] = useState(favourites.some((guide)=>guide.title == detail.title));
+    const dispatch = useDispatch();
+
     return  (
 
         <View style={styles.container}> 
@@ -131,34 +134,25 @@ const Complete = ({ navigation, route }) => {
                 
                 <MidComponent style={{flex: 6, marginTop: 70, alignItems: 'center'}} navigation={navigation} detail={detail}/>
 
-                {/* <ExpCoinsComponent styles={{flex: 1, marginTop: 70}} />
-                
-                <View style={{flex: 1, marginTop: 20}}>
-                   <Image source={avatarsmall} />
-                </View>
-                 
-
-                <View style={{flex: 3, marginTop: 55}}>
-                    <TouchableOpacity style={styles.button} onPress={() => navigation.popToTop()}>
-                        <Text style={[typo.H3, {color: 'white'}]}>Done</Text> 
-                    </TouchableOpacity>    
-                </View> */}
-
                 <View style={{flex: 4, marginTop: 50, alignItems: 'center'}}>
                     <TouchableOpacity onPress={ () => {
-                        if (isFavourite == true)
+                        if (isFavourite == true){
                             setFav(false);
-                        else
+                            dispatch(deleteFavourite({title: detail}));
+                        } else {
                             setFav(true);
+                            dispatch(addFavourite({guide: detail}));
+                        }
+                        console.log(favourites);
                     } }>
                         <FavComponent isFav = {isFavourite} />                       
                     </TouchableOpacity>
                 </View>
-
-              
               
             </View>
-            </ImageBackground>
+
+        </ImageBackground>
+
         </View>
       
         
