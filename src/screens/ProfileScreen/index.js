@@ -388,7 +388,7 @@ const MainProf = ({ navigation }) => {
         <>
         
         <ScrollView style={{backgroundColor: '#262626'}}>
-        <Pressable style={{paddingBottom: 80}}>
+        <Pressable style={{paddingBottom: 80, marginTop: 20}}>
           <View style={{
             flexDirection: "row", paddingLeft: 5, paddingBottom: 5, paddingRight: 5
             }}>
