@@ -25,7 +25,7 @@ const ActDetailComponent = ({ detail }) => {
                 {detail.title}
             </Text>
             <Text style={[typo.T1,{ color: 'white', fontWeight:'400'}]}>
-                {detail.duration} 
+                {detail.duration} mins
             </Text>
         </View>
     )
