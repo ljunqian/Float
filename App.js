@@ -224,8 +224,6 @@ const App = () => {
       const user = await Auth.currentAuthenticatedUser();
       //console.log('user is',user);
       if (user) {
-        setisNotSignedIn(false);
-
         dispatch({type: 'SIGN_IN', payload: true});
        
       } else {
