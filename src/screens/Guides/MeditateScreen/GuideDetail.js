@@ -30,7 +30,7 @@ const FavComponent = ({ isFav }) => {
  
     return(
         <View style={{flex: 1}}>
-            <Image source={icon} style={{width: 27, height: 27,  top: 10, left:0, zIndex: 0, backgroundColor: 'yellow'}} />
+            <Image source={icon} style={{width: 27, height: 27,  top: 10, left:0, zIndex: 0}} />
         </View>
     )
 }

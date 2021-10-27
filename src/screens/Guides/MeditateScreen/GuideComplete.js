@@ -58,18 +58,21 @@ const MidComponent = ({style, navigation, detail}) => {
     const fadeAnim2 = useRef(new Animated.Value(0)).current  // Initial value for opacity: 0
 
     useEffect(() => {
-        Animated.timing(
+        let isMounted = true; 
+        if(isMounted) {Animated.timing(
             fadeAnim,
             {
                 toValue: 1,
                 duration: 500,
                 useNativeDriver: true,
             }
-            ).start();        
+            ).start()};
+        return () => { isMounted = false };        
     }, [fadeAnim])   
 
     useEffect(() => {
-        setTimeout(() => {
+        let isMounted = true;
+        if(isMounted) {setTimeout(() => {
             setIsCombined(true);
             Animated.timing(
             fadeAnim2,
@@ -79,7 +82,8 @@ const MidComponent = ({style, navigation, detail}) => {
                 useNativeDriver: true,
             }
             ).start();
-        }, 3000)  
+        }, 3000)};
+        return () => { isMounted = false };       
     }, [fadeAnim2]) 
 
     if(isCombined == false){

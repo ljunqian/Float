@@ -12,6 +12,9 @@ import { Guides } from './constants';
 import { color } from '../../../styles/theme';
 import YoutubePlayer, { YoutubeIframeRef } from 'react-native-youtube-iframe';
 
+import { updateDone } from '../Redux/GuidesAction';
+import { useDispatch } from 'react-redux';
+
 import { API, Auth, graphqlOperation } from 'aws-amplify'
 
 import { updateUser } from "../../../graphql/mutations"
@@ -71,6 +74,7 @@ async function handleDuration(time, type) {
 
 const VideoComponent = ({ array, navigation }) => {
 
+    const dispatch = useDispatch();
     const playerRef = useRef();
     const detail = array;
     const getTime = function () {
@@ -96,11 +100,11 @@ const VideoComponent = ({ array, navigation }) => {
                         if (event === 'ended') {
                             // auto navigate upon completion
                             detail.done = true
+                            dispatch(updateDone({guide: detail})) //update done property
                             console.log(detail)
                             getTime()
                             navigation.navigate('GuideComplete', detail)
-                            //update done property
-                            
+
                         } else if (event === 'playing')
                             console.log("Video playing. To skip, end the video")
                     }}
