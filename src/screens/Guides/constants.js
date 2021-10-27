@@ -19,6 +19,13 @@ import Focus2 from '../../assets/images/focus2.png';
 import Focus3 from '../../assets/images/focus3.png';
 import Focus4 from '../../assets/images/focus4.png';
 
+export const types = {
+    meditate: "Meditate",
+    sleep: "Sleep",
+    move: "Move",
+    focus: "Focus"
+  }
+  
 export const Guides = [
     // Meditation Videos
 

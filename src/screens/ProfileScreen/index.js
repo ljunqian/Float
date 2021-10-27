@@ -31,7 +31,6 @@ import FocusBG from '../../assets/images/focus-planet.png';
 import Coin from '../../assets/icons/coins.png';
 import Forward from '../../assets/icons/forwardarrow.png';
 import Backward from '../../assets/icons/backarrow.png';
-import { textStyle } from 'styled-system';
 
 const Coins = ({ navigation, i }) => {
   const {coins} = useSelector((state) => state.user.userData);
@@ -246,8 +245,8 @@ const MainProf = ({ navigation }) => {
   const getUserInfo = async () => {
     try {
       const user = await Auth.currentAuthenticatedUser();
+      setInfo({username: user.username});
       const {data} = await API.graphql(graphqlOperation(getUser, { id: user.attributes.sub }));
-      console.log(data);
 
       setInfo({
         meditateD: secondsToHms(data.getUser.meditateD),
@@ -255,8 +254,8 @@ const MainProf = ({ navigation }) => {
         moveD: secondsToHms(data.getUser.moveD),
         focusD: secondsToHms(data.getUser.focusD),
         coins: data.getUser.coins,
-        username: user.username
       });
+
     } catch (error) {
       console.log(error);
     }

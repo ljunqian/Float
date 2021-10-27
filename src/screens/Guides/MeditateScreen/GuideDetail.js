@@ -5,10 +5,11 @@ import { Guides } from './constants';
 import layout from '../../../styles/componentLayout';
 import { color } from '../../../styles/theme';
 import heart from '../../../assets/icons/heart.png';
+import redheart from '../../../assets/icons/redheart.png';
 import clock from '../../../assets/icons/clock.png';
 import Med from '../../../assets/images/med-1.png';
-import { addRecent } from '../Redux/GuidesAction';
-import { useDispatch } from 'react-redux';
+import { addRecent, addFavourite, deleteFavourite } from '../Redux/GuidesAction';
+import { useSelector, useDispatch } from 'react-redux';
 
 const types = {
     meditate: 'Meditate',
@@ -24,11 +25,23 @@ const buttoncolour = {
     focus: color.Focus1
 }
 
+const FavComponent = ({ isFav }) => {
+    let icon = isFav? redheart : heart;
+ 
+    return(
+        <View style={{flex: 1}}>
+            <Image source={icon} style={{width: 27, height: 27,  top: 10, left:0, zIndex: 0,}} />
+        </View>
+    )
+}
+
 const GuideDetail = ({ navigation, props, route }) => {
 
-    const detail = route.params;       // get object passed from previous activity 
+    const detail = route.params;       // get object passed from previous activity
+    const {favourites} = useSelector((state) => state.guide);
+    const [isFavourite, setFav] = useState(favourites.some((guide)=>guide.title == detail.title));
+    const dispatch = useDispatch(); 
 
-    const dispatch = useDispatch();
     useEffect(()=>{
         console.log('in detail', detail)
         dispatch(addRecent({guide: detail}));
@@ -49,9 +62,18 @@ const GuideDetail = ({ navigation, props, route }) => {
                         {/* Title of the activity */}
                         { detail.title }
                     </Text>
-                    <View style={{flex: 1}}>
-                        <Image source={heart} style={{ top: 10, left:0, zIndex: 0,}} />
-                    </View>
+                    <TouchableOpacity onPress={ () => {
+                        if (isFavourite == true){
+                            setFav(false);
+                            dispatch(deleteFavourite({title: detail}));
+                        } else {
+                            setFav(true);
+                            dispatch(addFavourite({guide: detail}));
+                        }
+                        // console.log(favourites);
+                    } }>
+                        <FavComponent isFav = {isFavourite} />                       
+                    </TouchableOpacity>
                 </View>
                 {/* Type/Duration */}
                 <View style={{ marginBottom: 20, flexDirection: 'row'}}>

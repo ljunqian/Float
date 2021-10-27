@@ -2,27 +2,31 @@ import _ from 'lodash';
 import {
   ADD_FAVOURITE,
   DELETE_FAVOURITE,
-  ADD_RECENT
+  ADD_RECENT,
+  GET_GUIDES
 } from './type'
 
 const INITIAL_STATE = {
     favourites: [],
     recents: [],
+    guides: []
 };
 
 const GuidesReducer = (prevState = INITIAL_STATE, action) => {
     switch (action.type) {
       case ADD_FAVOURITE: {
+        const newGuide = action.payload;
         const prevFav = prevState.favourites;
-        prevFav.push(action.payload);
+        const added = _.filter(prevFav, (guide) => guide.title !== newGuide.title);
+        added.unshift(newGuide);
         return {
           ...prevState,
-          favourites: prevFav,
+          favourites: added,
         }
       }
       case DELETE_FAVOURITE: {
         const newFav = prevState.favourites.filter(
-          (guide) => guide.title !== action.payload);
+          (guide) => guide.title !== action.payload.title);
         return {
           ...prevState,
           favourites: newFav,
@@ -37,6 +41,14 @@ const GuidesReducer = (prevState = INITIAL_STATE, action) => {
         return {
           ...prevState,
           recents: added,
+        }
+      }
+      case GET_GUIDES: {
+        const newGuides = action.payload;
+        console.log("in reducer " + newGuides[0].title);
+        return {
+          ...prevState,
+          guides: newGuides,
         }
       }
       default:
