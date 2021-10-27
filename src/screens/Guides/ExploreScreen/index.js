@@ -15,13 +15,14 @@ import Explore3 from '../../../assets/images/explore3.png';
 import Explore4 from '../../../assets/images/explore4.png';
 import Line32 from '../../../assets/images/Line32.png';
 import Meditate1 from '../../../assets/images/med-1.png';
+import Meditate2 from '../../../assets/images/med-2.png';
 import Sleep1 from '../../../assets/images/sleep1.png';
-import Move1 from '../../../assets/images/mov-1.png';
+import Move1 from '../../../assets/images/move-2.png';
 import Focus1 from '../../../assets/images/focus-1.png';
 import { Guides } from '../constants';
 import { getGuidesInfo } from '../Redux/GuidesAction';
 import { useDispatch } from 'react-redux';
-
+import { types } from '../constants';
 import { Auth } from 'aws-amplify';
 
 const ExploreScreen = ({ navigation }) => {
@@ -149,18 +150,18 @@ const ExploreScreen = ({ navigation }) => {
     return(
       <>
       <View style={{flexDirection: 'row'}}>
-        <TouchableOpacity onPress={() => navigation.navigate('GuidesLesson', types[0])}>
-          <MyComponent image={Meditate1} title={"Meditation"}/>
+        <TouchableOpacity onPress={() => navigation.navigate('GuidesLesson', types.meditate)}>
+          <MyComponent image={Meditate2} title={"Meditation"}/>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('GuidesLesson', types[1])}>
+        <TouchableOpacity onPress={() => navigation.navigate('GuidesLesson', types.sleep)}>
           <MyComponent image={Sleep1} title={"Sleep"}/>
         </TouchableOpacity>
       </View>
       <View style={{flexDirection: 'row'}}>
-        <TouchableOpacity onPress={() => navigation.navigate('GuidesLesson', types[2])}>
+        <TouchableOpacity onPress={() => navigation.navigate('GuidesLesson', types.move)}>
           <MyComponent image={Move1} title={"Move"}/>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('GuidesLesson', types[3])}>
+        <TouchableOpacity onPress={() => navigation.navigate('GuidesLesson', types.focus)}>
           <MyComponent image={Focus1} title={"Focus"}/>
         </TouchableOpacity>
       </View>
@@ -211,13 +212,6 @@ const ExploreScreen = ({ navigation }) => {
     </ScrollView>
   )
 }
-
-const types = [
-  "Meditate",
-  "Sleep",
-  "Move",
-  "Focus"
-]
 
 const colours = {
   "Meditate": color.Med1,

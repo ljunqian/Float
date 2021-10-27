@@ -9,9 +9,8 @@ import StarsBG from '../../../assets/images/stars.png';
 import MedAvatar from '../../../assets/images/meditate-avatar.png';
 import Mov from '../../../assets/images/move-2.png';
 import Badge1 from '../../../assets/images/Badge1.png';
-import { overflow } from 'styled-system';
 import play from '../../../assets/icons/play.png';
-import { Guides } from '../constants.js';
+import { Guides, types } from '../constants.js';
 
 const GuideCardComponent = (props)  => {
   return (
@@ -124,7 +123,9 @@ const MoveScreen = ({navigation}) => {
               Move Session
             </Text>
 
-            <TouchableOpacity style={[layout.big_button, {backgroundColor: color.Move1, marginBottom: 30, zIndex:2, flexDirection: 'row'}]}>
+            <TouchableOpacity 
+              onPress={() => navigation.navigate('GuidesLesson', types.move)}
+              style={[layout.big_button, {backgroundColor: color.Move1, marginBottom: 30, zIndex:2, flexDirection: 'row'}]}>
                 <Image source={play} style={{marginRight: 5}} />
                 <Text style={[typo.T4, {color: 'white', fontWeight: '400'}]}>
                   Play
@@ -157,6 +158,7 @@ const MoveScreen = ({navigation}) => {
         <Recent array={Guides} navigation={navigation}/>
         <Explore array={Guides} navigation={navigation}/>
       </View>
+      <View style={{height: 100}}/>
       </ImageBackground>
     </ScrollView>
   )

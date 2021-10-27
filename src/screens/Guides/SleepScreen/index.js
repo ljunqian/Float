@@ -12,7 +12,7 @@ import Sleep1 from '../../../assets/images/sleep1.png';
 // import Sleep2 from '../../../assets/images/sleep2.png';
 // import Sleep3 from '../../../assets/images/sleep3.png';
 import play from '../../../assets/icons/play.png';
-import { Guides } from '../constants';
+import { Guides, types } from '../constants';
 
 const GuideCardComponent = (props)  => {
   return (
@@ -90,7 +90,7 @@ const Explore = ({ array, navigation }) => {
 
 const SleepScreen = ({navigation}) => {
   return (
-    <ScrollView style={{backgroundColor: '#272727'}}> 
+    <ScrollView style={{backgroundColor: '#272727',}}> 
       <ImageBackground source={StarsBG}  resizeMode="cover" style={{width: '100%'}} >
       <Image source={SleepBG} style={{ top: -900, left: -20, zIndex: 0, transform:[{scaleY:-1}], position: 'absolute', width: '110%', resizeMode: "contain"}}/>
       <View style={layout.header}>
@@ -125,7 +125,9 @@ const SleepScreen = ({navigation}) => {
             <Text style={typo.H1}>
               Sleep Session
             </Text>
-            <TouchableOpacity style={[layout.big_button, {backgroundColor: color.Sleep2, marginBottom: 30, zIndex:2, flexDirection: 'row'}]}>
+            <TouchableOpacity 
+              onPress={() => navigation.navigate('GuidesLesson', types.sleep)}
+              style={[layout.big_button, {backgroundColor: color.Sleep2, marginBottom: 30, zIndex:2, flexDirection: 'row'}]}>
                 <Image source={play} style={{marginRight: 5}} />
                 <Text style={[typo.T4, {color: 'white', fontWeight: '400'}]}>
                   Play
@@ -157,6 +159,7 @@ const SleepScreen = ({navigation}) => {
         <Recent array={Guides} navigation={navigation}/>
         <Explore array={Guides} navigation={navigation}/>
       </View>
+      <View style={{height: 100}}/>
       </ImageBackground>
     </ScrollView>
   )

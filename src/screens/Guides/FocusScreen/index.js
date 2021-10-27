@@ -10,7 +10,7 @@ import SleepAvatar from '../../../assets/images/sleep-avatar.png';
 import Focus1 from '../../../assets/images/focus-1.png';
 import Badge3 from '../../../assets/images/Badges3.png';
 import play from '../../../assets/icons/play.png';
-import { Guides } from '../constants';
+import { Guides, types } from '../constants';
 
 
 const GuideCardComponent = (props)  => {
@@ -124,7 +124,9 @@ const FocusScreen = ({navigation}) => {
               Focus Session
             </Text>
 
-            <TouchableOpacity style={[layout.big_button, {backgroundColor: color.Focus1, marginBottom: 30, zIndex:2, flexDirection: 'row'}]}>
+            <TouchableOpacity 
+              onPress={() => navigation.navigate('GuidesLesson', types.focus)}
+              style={[layout.big_button, {backgroundColor: color.Focus1, marginBottom: 30, zIndex:2, flexDirection: 'row'}]}>
                 <Image source={play} style={{marginRight: 5}} />
                 <Text style={[typo.T4, {color: 'white', fontWeight: '400'}]}>
                   Play
@@ -156,6 +158,7 @@ const FocusScreen = ({navigation}) => {
         <Recent array={Guides} navigation={navigation}/>
         <Explore array={Guides} navigation={navigation}/>        
       </View>
+      <View style={{height: 100}}/>
       </ImageBackground>
     </ScrollView>
   )

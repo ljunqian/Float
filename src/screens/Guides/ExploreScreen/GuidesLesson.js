@@ -1,21 +1,14 @@
-import React, {useState} from 'react';
+import React, {Fragment, useState} from 'react';
 import {View, Image, Text, StyleSheet, TouchableOpacity, ScrollView, ImageBackground} from 'react-native';
 import typo from '../../../styles/typography';
 import theme, {color} from '../../../styles/theme';
 import { Icon } from 'react-native-elements';
 import {lessons, icons} from './constants';
 
-import Time from '../../../assets/icons/time.png';
-import Video from '../../../assets/icons/video.png';
-import Tick from '../../../assets/icons/tick.png';
 import Line32 from '../../../assets/images/Line32.png';
-import Explore1 from '../../../assets/images/explore1.png';
-import Explore2 from '../../../assets/images/explore2.png';
-import Explore3 from '../../../assets/images/explore3.png';
-import Explore4 from '../../../assets/images/explore4.png';
-import Meditate1 from '../../../assets/images/med-1.png';
+import Meditate1 from '../../../assets/images/med-2.png';
 import Sleep1 from '../../../assets/images/sleep1.png';
-import Move1 from '../../../assets/images/mov-1.png';
+import Move1 from '../../../assets/images/move-2.png';
 import Focus1 from '../../../assets/images/focus-1.png';
 import { useSelector } from 'react-redux';
 
@@ -85,10 +78,10 @@ const GuideLessons = ({type, navigation}) => {
             lessons[type].map(item =>{
                 console.log('in guidesLesson ' + item.key)
                 return(
-                    <>
-                        <CardComponent ikey={item.key} title={item.title} img={item.thumbnail} duration={item.duration} description={item.activity} item={item}/>
-                        <LineBG ikey={'L'+item.key} src={Line32} top={item.line} left={'6%'}/>
-                    </>
+                    <Fragment key={item.id}>
+                        <CardComponent  title={item.title} img={item.thumbnail} duration={item.duration} description={item.activity} item={item}/>
+                        <LineBG key={item.id} src={Line32} top={item.line} left={'6%'}/>
+                    </Fragment>
                 )
             })
         )
