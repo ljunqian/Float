@@ -7,5 +7,7 @@ NTU Design & Innovation Project
 
 This project aims to recreate and improve existing app Headspace.
 
-# Prerequisites
-> We're living the future so
+# What is Float
+>Float is a mobile app project done by 11 Information Engineering Media 
+>(IEM) students for their Design & Innovation module at Nanyang >Technological University (NTU). The objective of the app was to give >students better methods of coping with their mental wellbeing as well >as provide meaniningful metrics to track the student's progress.
+
