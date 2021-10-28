@@ -1,6 +1,5 @@
 
-![GitHub Logo](https://user-images.githubusercontent.com/80868913/139021831-00c2c5e4-6202-4636-89e6-bdc91f963afb.jpg")
-Format: ![Alt Text](url)
+![FLOAT ICON](https://user-images.githubusercontent.com/80868913/139021831-00c2c5e4-6202-4636-89e6-bdc91f963afb.jpg)
 
 # What is Float?
 >Float is a mobile app project done by 11 Information Engineering Media 
