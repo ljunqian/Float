@@ -8,3 +8,4 @@ NTU Design & Innovation Project
 This project aims to recreate and improve existing app Headspace.
 
 # Prerequisites
+> We're living the future so
