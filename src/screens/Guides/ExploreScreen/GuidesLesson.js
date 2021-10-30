@@ -28,9 +28,7 @@ const GuideLessons = ({type, navigation}) => {
 
     const {guides} = useSelector((state) => state.guide);
 
-    const MyRadioButton = ({item}) =>{
-        
-        let isDone = guides[item.key].done; //Check if its done from store
+    const MyRadioButton = ({isDone}) =>{
 
         return(isDone?  
         <View style={style.MyRadioButton}>
@@ -41,12 +39,13 @@ const GuideLessons = ({type, navigation}) => {
     }
 
     const CardComponent = ({ ikey, img, duration, title, description, item }) => {
+        const isDone = guides[item.key].done; //Check if its done from store
 
         return (
         <View key={ikey} style={{display: 'flex', flexDirection: 'row', alignItems: 'center', marginHorizontal: 20, right: 10}}>
-            <MyRadioButton item={item}/>
+            <MyRadioButton isDone={isDone}/>
             <TouchableOpacity onPress={()=>{navigation.navigate('GuideDetail', item)}}>
-                <View style={style.card}>
+                <View style={[style.card, {opacity: isDone? 0.8:1}]}>
                     <View style={{width: 225, justifyContent: 'center', bottom: 5}}>
                         <Text style={typo.H3}>{title}</Text>
                         <View style={{justifyContent: 'flex-end'}}>

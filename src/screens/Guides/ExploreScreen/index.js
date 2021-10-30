@@ -55,8 +55,7 @@ const ExploreScreen = ({ navigation }) => {
     dispatch(getGuidesInfo({guides: Guides}))
   }, []);
 
-  const MyRadioButton = ({item}) =>{
-    const isDone = guides[item.key].done;
+  const MyRadioButton = ({isDone}) =>{
 
     return(isDone?
     <View style={style.MyRadioButton}>
@@ -67,15 +66,14 @@ const ExploreScreen = ({ navigation }) => {
   }
 
   const CardComponent = ({img, type, duration, guide}) => {
-    
-    const [isDone, setIsDone] = useState(false);
+    const isDone = guides[guide.key].done;
 
     return (
       <View style={{display: 'flex', flexDirection: 'row', alignItems: 'center', marginHorizontal: 20, right: 10}}>
-        <MyRadioButton item={guide}/>
+        <MyRadioButton isDone={isDone}/>
         <TouchableOpacity onPress={()=>navigation.navigate('GuideDetail', guide)}>
-          <View style={style.card}>
-            <View style={{width: 230, justifyContent: 'center', bottom: 5, paddingRight: 40}}>
+          <View style={[style.card, {opacity: isDone? 0.8:1}]}>
+            <View style={{width: 235, justifyContent: 'center', bottom: 5, paddingRight: 40}}>
               <Text style={typo.H3}>{guide.title}</Text>
               <View style={{flexDirection: 'row', left: 15, top: 5}}>
                 <Image source={Video} right={5}/>
@@ -86,7 +84,7 @@ const ExploreScreen = ({ navigation }) => {
                 <Text style={typo.T6}>{guide.duration} mins</Text>
               </View>
             </View>
-            <Image source={img} style={{width: 80, height: 80, borderRadius: 13, right: 35}}/>
+            <Image source={img} style={{width: 75, height: 75, borderRadius: 13, right: 35}}/>
           </View>
         </TouchableOpacity>
       </View>
@@ -104,9 +102,9 @@ const ExploreScreen = ({ navigation }) => {
         <Text style={[style.header, typo.T1]}>
           Start your day
         </Text>
-        <CardComponent img={Explore1} type={"Meditate"} duration={'3-5 mins'} guide={Guides[0]}/>
+        <CardComponent img={Explore1} type={"Meditate"} duration={'3-5 mins'} guide={Guides[3]}/>
           <LineBG src={Line32} top={'11.5%'} left={'6.5%'}/>
-        <CardComponent img={Explore3} type={"Move"} duration={'40-45 mins'} guide={Guides[13]}/>
+        <CardComponent img={Explore3} type={"Move"} duration={'40-45 mins'} guide={Guides[14]}/>
           <LineBG src={Line32} top={'24.5%'} left={'6.5%'}/>
         <CardComponent img={Explore2} type={"Focus"} duration={'15-20 mins'} guide={Guides[18]}/>
 
