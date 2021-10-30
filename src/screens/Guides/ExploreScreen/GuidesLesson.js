@@ -45,7 +45,7 @@ const GuideLessons = ({type, navigation}) => {
         return (
         <View key={ikey} style={{display: 'flex', flexDirection: 'row', alignItems: 'center', marginHorizontal: 20, right: 10}}>
             <MyRadioButton item={item}/>
-            <TouchableOpacity onPress={()=>{navigation.navigate('GuideDetail', item);}}>
+            <TouchableOpacity onPress={()=>{navigation.navigate('GuideDetail', item)}}>
                 <View style={style.card}>
                     <View style={{width: 225, justifyContent: 'center', bottom: 5}}>
                         <Text style={typo.H3}>{title}</Text>
