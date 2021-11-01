@@ -1,4 +1,4 @@
-import { SET_USER_DATA, SIGN_IN, UPDATE_COINS } from "./type";
+import { SET_USER_DATA, SIGN_IN, UPDATE_COINS, UPDATE_MEDLEVEL } from "./type";
 
 const INITIAL_STATE = {
     userData: {
@@ -6,11 +6,25 @@ const INITIAL_STATE = {
         username: '',
         email: '',
         coins: 3000,
-        meditateD: '',
+        meditateD: 5000,
         sleepD: '',
         moveD: '',
         friends: []
     },
+    levels:{
+      levelMeditate: 1,
+      levelsleep: 1,
+      levelfocus: 1,
+      levelmove: 1,
+    },
+  
+    exp:{
+      meditateexp:0 ,
+      sleepexp:0 ,
+      focusexp:0 ,
+      moveexp:0 ,
+    },
+
     isLoggedIn: false,
 };
 
@@ -33,6 +47,29 @@ const UserReducer = (prevState = INITIAL_STATE, action) => {
           }
         };
       }
+      case UPDATE_MEDLEVEL: {
+        
+        const medtime = prevState.userData.meditateD;
+        console.log("in reduce", medtime);
+        
+        const exp = medtime/10;
+        console.log("in reduce", exp);
+        const levelup = prevState.levels.levelMeditate +  exp/180;
+        
+        console.log("in reduce", levelup);
+        // const currentlevel = [action.payload.levels[0] + levelup ,,,];
+
+        return {
+          ...prevState,
+          exp:{
+            meditateexp: exp,
+          },
+          
+          levelMeditate: levelup,
+          
+        };
+      }
+      
       /*
       case SIGN_IN: {
         return {
@@ -46,6 +83,7 @@ const UserReducer = (prevState = INITIAL_STATE, action) => {
           isLoggedIn: false,
         }
       }*/
+
       default:
           return {...prevState};
     }

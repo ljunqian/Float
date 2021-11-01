@@ -19,6 +19,10 @@ import Focus2 from '../../assets/images/focus2.png';
 import Focus3 from '../../assets/images/focus3.png';
 import Focus4 from '../../assets/images/focus4.png';
 
+import Badge1 from '../../assets/images/Badge1.png';
+import Badge2 from '../../assets/images/Badges2.png';
+import Badge3 from '../../assets/images/Badges3.png';
+
 export const types = {
     meditate: "Meditate",
     sleep: "Sleep",
@@ -321,3 +325,10 @@ export const Guides = [
         key: 25
     },
 ];
+
+export const badges =  {
+    Level1: Badge3,
+    Level2: Badge1,
+    Level3: Badge2,
+  }
+  

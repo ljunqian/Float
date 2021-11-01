@@ -10,7 +10,7 @@ import SleepAvatar from '../../../assets/images/sleep-avatar.png';
 import Focus1 from '../../../assets/images/focus-1.png';
 import Badge3 from '../../../assets/images/Badges3.png';
 import play from '../../../assets/icons/play.png';
-import { Guides, types } from '../constants';
+import { Guides , badges, types} from '../constants';
 
 
 const GuideCardComponent = (props)  => {
@@ -99,7 +99,7 @@ const FocusScreen = ({navigation}) => {
           Focus 
         </Text>
         <View style={{flexDirection:'row', alignItems : 'center'}}> 
-          <Image source={Badge3} style={{ top: 3, marginLeft: 17} }/>
+          <Image source={badges['Level2']} style={{ top: 3, marginLeft: 17} }/>
           
           <View style={{top: -6, marginLeft: -10}}>
             <Text style={[typo.T1, {color:'white', left:20, top:2}]}>
