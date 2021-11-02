@@ -2,7 +2,8 @@ import {
   ADD_FAVOURITE,
   DELETE_FAVOURITE,
   ADD_RECENT,
-  GET_GUIDES
+  GET_GUIDES,
+  UPDATE_DONE,
 } from './type'
 
 
@@ -33,6 +34,13 @@ export const addRecent = ({guide}) => {
 export const getGuidesInfo = ({guides}) => {
   return({
     type: GET_GUIDES,
-    payload: guides
+    payload: guides,
+  })
+}
+
+export const updateDone = ({guide}) => {
+  return({
+    type: UPDATE_DONE,
+    payload: guide,
   })
 }

@@ -10,6 +10,7 @@ import Meditate1 from '../../../assets/images/med-2.png';
 import Sleep1 from '../../../assets/images/sleep1.png';
 import Move1 from '../../../assets/images/move-2.png';
 import Focus1 from '../../../assets/images/focus-1.png';
+import { useSelector } from 'react-redux';
 
 const GuideImage = ({type}) => {
     return(
@@ -25,10 +26,11 @@ const GuideImage = ({type}) => {
 
 const GuideLessons = ({type, navigation}) => {
 
-    //Check if its done from store
-    
+    const {guides} = useSelector((state) => state.guide);
+
     const MyRadioButton = ({isDone}) =>{
-        return(isDone?
+
+        return(isDone?  
         <View style={style.MyRadioButton}>
         <Image source={icons[type].tick} />
         </View>
@@ -36,15 +38,14 @@ const GuideLessons = ({type, navigation}) => {
         <Icon name="radio-button-unchecked" size={30} color="white"/>)
     }
 
-    const CardComponent = ({ key, img, duration, title, description, item }) => {
-        
-        const [isDone, setIsDone] = useState(false);
+    const CardComponent = ({ ikey, img, duration, title, description, item }) => {
+        const isDone = guides[item.key].done; //Check if its done from store
 
         return (
-        <View key={key} style={{display: 'flex', flexDirection: 'row', alignItems: 'center', marginHorizontal: 20, right: 10}}>
-            <MyRadioButton isDone={isDone} />
-            <TouchableOpacity onPress={()=>{setIsDone(!isDone); navigation.navigate('GuideDetail', item);}}>
-                <View style={style.card}>
+        <View key={ikey} style={{display: 'flex', flexDirection: 'row', alignItems: 'center', marginHorizontal: 20, right: 10}}>
+            <MyRadioButton isDone={isDone}/>
+            <TouchableOpacity onPress={()=>{navigation.navigate('GuideDetail', item)}}>
+                <View style={[style.card, {opacity: isDone? 0.8:1}]}>
                     <View style={{width: 225, justifyContent: 'center', bottom: 5}}>
                         <Text style={typo.H3}>{title}</Text>
                         <View style={{justifyContent: 'flex-end'}}>
@@ -66,14 +67,15 @@ const GuideLessons = ({type, navigation}) => {
         )
     }
     
-    const LineBG = ({ key, src, top, left }) => {
-      return <Image key={key} source={src} style={{position: 'absolute', top: top, left: left}}/>
+    const LineBG = ({ ikey, src, top, left }) => {
+      return <Image key={ikey} source={src} style={{position: 'absolute', top: top, left: left}}/>
     }
 
     const DCardComponent = () => {
 
         return(
-            lessons[type].map( (item, index) =>{
+            lessons[type].map(item =>{
+                console.log('in guidesLesson ' + item.key)
                 return(
                     <Fragment key={`${item.id}-${index}`}>
                         <CardComponent key={item.id} title={item.title} img={item.thumbnail} duration={item.duration} description={item.activity} item={item}/>
