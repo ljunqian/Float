@@ -11,7 +11,21 @@ export const getUser = /* GraphQL */ `
       moveD
       focusD
       friends
-      userData
+      feelings
+      equippedBackground
+      equippedHat
+      equippedAccesory
+      purchasedBackground
+      purchasedHat
+      purchasedAccessory
+      purchasedVoucher
+      completedMeditate
+      completedSleep
+      completedMove
+      completedFocus
+      recentGuides
+      favGuides
+      username
       _version
       _deleted
       _lastChangedAt
@@ -35,7 +49,21 @@ export const listUsers = /* GraphQL */ `
         moveD
         focusD
         friends
-        userData
+        feelings
+        equippedBackground
+        equippedHat
+        equippedAccesory
+        purchasedBackground
+        purchasedHat
+        purchasedAccessory
+        purchasedVoucher
+        completedMeditate
+        completedSleep
+        completedMove
+        completedFocus
+        recentGuides
+        favGuides
+        username
         _version
         _deleted
         _lastChangedAt
@@ -68,7 +96,21 @@ export const syncUsers = /* GraphQL */ `
         moveD
         focusD
         friends
-        userData
+        feelings
+        equippedBackground
+        equippedHat
+        equippedAccesory
+        purchasedBackground
+        purchasedHat
+        purchasedAccessory
+        purchasedVoucher
+        completedMeditate
+        completedSleep
+        completedMove
+        completedFocus
+        recentGuides
+        favGuides
+        username
         _version
         _deleted
         _lastChangedAt

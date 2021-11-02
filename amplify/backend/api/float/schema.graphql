@@ -6,6 +6,20 @@ type User @model @auth(rules: [{allow: private}]) {
   moveD: Int!
   focusD: Int!
   friends: [String!]
-  userData: [String!]
+  feelings: [String!]
+  equippedBackground: String!
+  equippedHat: String!
+  equippedAccesory: String!
+  purchasedBackground: [String!]
+  purchasedHat: [String!]
+  purchasedAccessory: [String!]
+  purchasedVoucher: [String!]
+  completedMeditate: [String!]
+  completedSleep: [String!]
+  completedMove: [String!]
+  completedFocus: [String!]
+  recentGuides: [String!]
+  favGuides: [String!]
+  username: String!
 }
  
