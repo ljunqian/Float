@@ -54,7 +54,7 @@ const GuideLessons = ({type, navigation}) => {
                             </View>
                             <View style={{flexDirection: 'row', left: 16, top: 12}}>
                                 <Image source={icons[type].time} right={5}/>
-                                <Text style={[typo.T6, {color: colours[type]}]}>{duration}</Text>
+                                <Text style={[typo.T6, {color: colours[type]}]}>{duration} mins</Text>
                             </View>
                         </View>
                         
@@ -73,10 +73,10 @@ const GuideLessons = ({type, navigation}) => {
     const DCardComponent = () => {
 
         return(
-            lessons[type].map(item =>{
+            lessons[type].map( (item, index) =>{
                 return(
-                    <Fragment key={item.id}>
-                        <CardComponent  title={item.title} img={item.thumbnail} duration={item.duration} description={item.activity} item={item}/>
+                    <Fragment key={`${item.id}-${index}`}>
+                        <CardComponent key={item.id} title={item.title} img={item.thumbnail} duration={item.duration} description={item.activity} item={item}/>
                         <LineBG key={item.id} src={Line32} top={item.line} left={'6%'}/>
                     </Fragment>
                 )

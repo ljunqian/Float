@@ -1,16 +1,12 @@
 import React, { useRef } from 'react';
-import { View, Text, StyleSheet, ImageBackground, Image, TouchableOpacity, SafeAreaView } from 'react-native';
+import { View, Text, StyleSheet, ImageBackground, SafeAreaView } from 'react-native';
 import typo from '../../../styles/typography';
-import { layout, style } from 'styled-system';
-import MedBG from '../../../assets/images/meditate-planet.png';
+
 import MedBG1 from '../../../assets/images/meditate-planet1.png';
 import SleepBG from '../../../assets/images/sleep-planet.png';
 import MoveBG from '../../../assets/images/move-planet.png';
 import FocusBG from '../../../assets/images/focus-planet.png';
-import Bigplay from '../../../assets/icons/bigplay.png';
-import { Guides } from './constants';
-import { color } from '../../../styles/theme';
-import YoutubePlayer, { YoutubeIframeRef } from 'react-native-youtube-iframe';
+import YoutubePlayer from 'react-native-youtube-iframe';
 
 import { API, Auth, graphqlOperation } from 'aws-amplify'
 
@@ -52,7 +48,7 @@ const Activity = ({ navigation, route }) => {
     )
 }
 
-async function handleDuration(time, type) {
+/* async function handleDuration(time, type) {
     try {
         const user = await Auth.currentAuthenticatedUser();
         const { data } = await API.graphql(graphqlOperation(getUser, { id: user.attributes.sub }));
@@ -67,7 +63,7 @@ async function handleDuration(time, type) {
     } catch (error) {
         console.log(error);
     }
-}
+} */
 
 const VideoComponent = ({ array, navigation }) => {
 

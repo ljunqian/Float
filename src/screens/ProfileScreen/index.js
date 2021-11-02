@@ -284,13 +284,13 @@ const MainProf = ({ navigation }) => {
   let customDatesStyles = [];
   let today = moment();
   let day = today.clone().startOf('month');
-
+  console.log(day);
   //stylise individual date(s)
   customDatesStyles.push({
     //Example of date I want to stylise
-    date: '2021-10-01T00:00:00.000Z',
+    date: new Date(),
     // Mood colour
-    style: {backgroundColor: 'red'},
+    style: {backgroundColor: colours.sleep},
     containerStyle: [], // extra styling for day container
   });
 
@@ -453,6 +453,14 @@ const title = {
   "sleep": "Sleep",
   "move": "Move",
   "focus": "Focus"
+}
+
+
+const moodColors = {
+  "meditate": color.Med1,
+  "sleep": color.Sleep3,
+  "move": color.Move2,
+  "focus": color.Focus3
 }
 
 const background = {

@@ -1,7 +1,3 @@
-import React from 'react';
-import { StyleSheet } from 'react-native';
-
-import Med from '../../../assets/images/med-1.png'; 
 import Med1 from '../../../assets/images/med1.png';
 import Med2 from '../../../assets/images/med2.png';
 import Med3 from '../../../assets/images/med3.png';

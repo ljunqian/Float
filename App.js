@@ -224,7 +224,6 @@ const App = () => {
       const user = await Auth.currentAuthenticatedUser();
       //console.log('user is',user);
       if (user) {
-        setisNotSignedIn(false);
 
         dispatch({type: 'SIGN_IN', payload: true});
        
@@ -240,7 +239,7 @@ const App = () => {
   useEffect(() => {
     isUserAuthenticated();
     setTimeout(() => {
-      setIsSplash(false);
+     setIsSplash(false);
     }, 6000)
 
     Animated.loop(
@@ -259,7 +258,7 @@ const App = () => {
       <View style={style.viewStyle}>
         <Image source={Stars} style={style.bgImage} />
         <View style={style.logoView}>
-          <Animated.Image source={Float} style={{ top: 0, transform: [{ translateY: verticalVal }] }} />
+          <Animated.Image source={Float} style={{ top: 0,transform: [{ translateY: verticalVal }] }} />
           <Text style={[typo.H1, { color: 'white' }]}>
             Float
           </Text>

@@ -35,7 +35,7 @@ const GuidesReducer = (prevState = INITIAL_STATE, action) => {
       case ADD_RECENT: {
         const newGuide = action.payload;
         const prevRecent = prevState.recents;
-        const added = _.filter(prevRecent, (guide) => guide.title !== newGuide.title);
+        const added = _.filter(prevRecent, (guide) => guide.source !== newGuide.source);
         added.unshift(newGuide);
         if (added.length > 10) {added.splice(0,10)}
         return {
