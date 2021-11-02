@@ -3,7 +3,8 @@ import {
   ADD_FAVOURITE,
   DELETE_FAVOURITE,
   ADD_RECENT,
-  GET_GUIDES
+  GET_GUIDES,
+  UPDATE_DONE,
 } from './type'
 
 const INITIAL_STATE = {
@@ -35,7 +36,7 @@ const GuidesReducer = (prevState = INITIAL_STATE, action) => {
       case ADD_RECENT: {
         const newGuide = action.payload;
         const prevRecent = prevState.recents;
-        const added = _.filter(prevRecent, (guide) => guide.title !== newGuide.title);
+        const added = _.filter(prevRecent, (guide) => guide.source !== newGuide.source);
         added.unshift(newGuide);
         if (added.length > 10) {added.splice(0,10)}
         return {
@@ -49,6 +50,17 @@ const GuidesReducer = (prevState = INITIAL_STATE, action) => {
         return {
           ...prevState,
           guides: newGuides,
+        }
+      }
+      case UPDATE_DONE: {
+        const newGuide = action.payload;
+        const updatedGuides = prevState.guides;
+        updatedGuides[newGuide.key] = newGuide;
+        console.log('in reducer ' + newGuide.title);
+        console.log('in reducer ' + updatedGuides[newGuide.key].done);
+        return {
+          ...prevState,
+          guides: updatedGuides,
         }
       }
       default:

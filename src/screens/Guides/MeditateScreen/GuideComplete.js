@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, StyleSheet, ImageBackground, Image, TouchableOpacity, Animated } from 'react-native';
 import typo from '../../../styles/typography';
-import { style } from 'styled-system';
-import MedBG from '../../../assets/images/meditate-planet.png';
 import MedBG1 from '../../../assets/images/meditate-planet1.png';
 import SleepBG from '../../../assets/images/sleep-planet.png';
 import MoveBG from '../../../assets/images/move-planet.png';
@@ -13,7 +11,6 @@ import { color } from '../../../styles/theme';
 import avatarsmall from '../../../assets/images/avatarsmall.png';
 import redheart from '../../../assets/icons/redheart.png';
 import heart from '../../../assets/icons/heart.png';
-import { Guides } from './constants';
 
 import { addFavourite, deleteFavourite } from '../Redux/GuidesAction';
 import { useSelector, useDispatch } from 'react-redux';
@@ -58,18 +55,21 @@ const MidComponent = ({style, navigation, detail}) => {
     const fadeAnim2 = useRef(new Animated.Value(0)).current  // Initial value for opacity: 0
 
     useEffect(() => {
-        Animated.timing(
+        let isMounted = true; 
+        if(isMounted) {Animated.timing(
             fadeAnim,
             {
                 toValue: 1,
                 duration: 500,
                 useNativeDriver: true,
             }
-            ).start();        
+            ).start()};
+        return () => { isMounted = false };        
     }, [fadeAnim])   
 
     useEffect(() => {
-        setTimeout(() => {
+        let isMounted = true;
+        if(isMounted) {setTimeout(() => {
             setIsCombined(true);
             Animated.timing(
             fadeAnim2,
@@ -79,7 +79,7 @@ const MidComponent = ({style, navigation, detail}) => {
                 useNativeDriver: true,
             }
             ).start();
-        }, 3000)  
+        }, 2000)}  
     }, [fadeAnim2]) 
 
     if(isCombined == false){

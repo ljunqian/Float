@@ -7,7 +7,6 @@ import textStyle from '../../../styles/typography';
 import BG from '../../../assets/images/journeybg-1.gif';
 import calIcon from '../../../assets/icons/calendar.png';
 import {moods} from './moodConstants'
-import { marginTop } from 'styled-system';
 
 import moment from 'moment';
 

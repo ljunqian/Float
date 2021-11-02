@@ -245,7 +245,7 @@ export const Guides = [
     },
 
     {
-        title : '4 Minute Psychological Tips On Staying Focuse',
+        title : '4 Minute Psychological Tips On Staying Focused',
         duration : 4,
         done : false,
         source : '8RV_vYsHceQ',
