@@ -38,13 +38,13 @@ export const updateCoins = ({coins}) => ({
     type: UPDATE_COINS,
     payload: coins
 })
-export const updateLevel = ({exp, type}) => ({
-
+export const updateLevel = ({exp,levelup}) => ({
+     
     
         type: UPDATE_MEDLEVEL,
         payload: {
-            exp : 200,
-            type: ''
+            exp,
+            levelup
         } 
    
     

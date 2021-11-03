@@ -54,7 +54,7 @@ const UserReducer = (prevState = INITIAL_STATE, action) => {
         
         const exp = medtime/10;
         console.log("in reduce", exp);
-        const levelup = prevState.levels.levelMeditate +  exp/180;
+        const levelup = Math.floor(exp/180) ;
         
         console.log("in reduce", levelup);
         // const currentlevel = [action.payload.levels[0] + levelup ,,,];
@@ -64,8 +64,10 @@ const UserReducer = (prevState = INITIAL_STATE, action) => {
           exp:{
             meditateexp: exp,
           },
+          levels:{
+            levelMeditate: levelup,
+          },
           
-          levelMeditate: levelup,
           
         };
       }

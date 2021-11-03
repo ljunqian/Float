@@ -93,16 +93,18 @@ const Explore = ({ array, navigation }) => {
 }
 
 const MeditateScreen = ({navigation}) => {
-  const levels = 1;
-  const {userData} = useSelector((state) => state.user);
+  const {levelMeditate} = useSelector((state) => state.user.levels);
+  
   const dispatch = useDispatch(); 
   useEffect(()=>{
     console.log("hi");
     dispatch(updateLevel({exp: 100}));
    }, []);
-   const UpdateBadge = ({ levels }) => {
-    let icon = icon1;
+  const GetBadge = () => {
+    const levels = levelMeditate;
+    console.log("in reduce", levels);
     let icon1 = badges.Level1;
+    let icon = icon1;
     let icon2 = badges.Level2;
     let icon3 = badges.Level3;
     if(levels == 2){
@@ -112,7 +114,11 @@ const MeditateScreen = ({navigation}) => {
       icon = icon3;
     } 
   
-    
+    return(
+      icon
+    )
+      
+  
   }
   return (
     <ScrollView sourcestyle={{backgroundColor: '#272727'}}> 
@@ -126,7 +132,7 @@ const MeditateScreen = ({navigation}) => {
           Meditation
         </Text>
         <View style={{flexDirection:'row', alignItems : 'center'}}> 
-          <Image source={icon} style={{ top: 3, marginLeft: 17} }/>
+          <Image source={GetBadge()} style={{ top: 3, marginLeft: 17} }/>
           
           <View style={{top: -6, marginLeft: -10}}>
             <Text style={[typo.T1, {color:'white', left:20, top:2 }]}>
