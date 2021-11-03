@@ -245,11 +245,10 @@ const MainProf = ({ navigation }) => {
   const getUserInfo = async () => {
     try {
       const user = await Auth.currentAuthenticatedUser();
-      setInfo({username: user.username});
       const {data} = await API.graphql(graphqlOperation(getUser, { id: user.attributes.sub }));
-      // console.log(data.getUser.feelings[0]);
 
       setInfo({
+        username: user.username,
         meditateD: secondsToHms(data.getUser.meditateD),
         sleepD: secondsToHms(data.getUser.sleepD),
         moveD: secondsToHms(data.getUser.moveD),
