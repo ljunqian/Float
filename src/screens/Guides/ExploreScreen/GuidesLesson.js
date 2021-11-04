@@ -74,7 +74,7 @@ const GuideLessons = ({type, navigation}) => {
     const DCardComponent = () => {
 
         return(
-            lessons[type].map(item =>{
+            lessons[type].map((item, index) =>{
                 console.log('in guidesLesson ' + item.key)
                 return(
                     <Fragment key={`${item.id}-${index}`}>
