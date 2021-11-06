@@ -63,6 +63,14 @@ const GuidesReducer = (prevState = INITIAL_STATE, action) => {
           guides: updatedGuides,
         }
       }
+
+      case UPDATE_DONE_WITH_API: {
+        const {completed} = action.payload;
+        return {
+          ...prevState,
+          completedFocus: completed,
+        }
+      }
       default:
           return {...prevState};
     }
