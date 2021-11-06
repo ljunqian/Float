@@ -4,6 +4,7 @@ import {
   ADD_RECENT,
   GET_GUIDES,
   UPDATE_DONE,
+  UPDATE_DONE_WITH_API,
 } from './type'
 import { getUserAPI, updateUserAPI } from '../../GlobalStates/api';
 
@@ -62,7 +63,7 @@ export const updateDoneWithAPI =  ({guide, type}) => async () => {
 }
 
 
-export const updateDone = () => {
+export const updateDone = ({guide}) => {
   return({
     type: UPDATE_DONE,
     payload: guide,

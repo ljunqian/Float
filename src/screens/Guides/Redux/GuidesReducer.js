@@ -5,6 +5,7 @@ import {
   ADD_RECENT,
   GET_GUIDES,
   UPDATE_DONE,
+  UPDATE_DONE_WITH_API,
 } from './type'
 
 const INITIAL_STATE = {
