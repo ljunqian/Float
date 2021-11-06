@@ -245,16 +245,17 @@ const MainProf = ({ navigation }) => {
   const getUserInfo = async () => {
     try {
       const user = await Auth.currentAuthenticatedUser();
-      setInfo({username: user.username});
+      // if(user.username) setInfo({username: user.username});
       const {data} = await API.graphql(graphqlOperation(getUser, { id: user.attributes.sub }));
-      // console.log(data.getUser.feelings[0]);
-
+      
       setInfo({
+        ...info,
         meditateD: secondsToHms(data.getUser.meditateD),
         sleepD: secondsToHms(data.getUser.sleepD),
         moveD: secondsToHms(data.getUser.moveD),
         focusD: secondsToHms(data.getUser.focusD),
         coins: data.getUser.coins,
+        username: user.username,
       });
 
     } catch (error) {
@@ -285,7 +286,7 @@ const MainProf = ({ navigation }) => {
   let customDatesStyles = [];
   let today = moment();
   let day = today.clone().startOf('month');
-  console.log(day);
+  console.log('in here',day);
   //stylise individual date(s)
   customDatesStyles.push({
     //Example of date I want to stylise
@@ -304,7 +305,7 @@ const MainProf = ({ navigation }) => {
       }
     };
   }
-
+console.log('is user', info);
   return (
     <View>
     <ScrollView style={{ backgroundColor: '#3C886B', color: 'white' }}>
@@ -442,12 +443,6 @@ const MainProf = ({ navigation }) => {
 
 export default MainProf;
 
-const colours = {
-  "meditate": color.Sleep3,
-  "sleep": color.Med1,
-  "move": color.Focus3,
-  "focus": color.Move2
-}
 
 const title = {
   "meditate": "Meditation",
@@ -462,6 +457,13 @@ const moodColors = {
   "sleep": color.Sleep3,
   "move": color.Move2,
   "focus": color.Focus3
+}
+
+const colours = {
+  "Meditate": color.Med1,
+  "Move": color.Move1,
+  "Focus": color.Focus3,
+  "Sleep": color.Sleep2,
 }
 
 const background = {
