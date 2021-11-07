@@ -45,7 +45,7 @@ const ExpCoinsComponent = ({ styles, isTotal }) => {
             </View>
             
             <Text style={[typo.H2,{color: 'white', fontWeight:'400'}]}>
-                {isTotal?'250 EXP':'+ 1 Apple (150 exp)'}
+                {isTotal?'250 EXP':'+ 150 exp'}
             </Text>
         </View>
     )
