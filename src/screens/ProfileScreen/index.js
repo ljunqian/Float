@@ -241,21 +241,39 @@ const MainProf = ({ navigation }) => {
     moveD: '',
     focusD: ''
   });
+  const [feelings, setFeelings] =  useState([{
+    date: '',
+    feeling: '',
+  }]);
 
   const getUserInfo = async () => {
     try {
       const user = await Auth.currentAuthenticatedUser();
-      setInfo({username: user.username});
       const {data} = await API.graphql(graphqlOperation(getUser, { id: user.attributes.sub }));
-      console.log(data.getUser.feelings[0]);
+      let myFeelings =  [];
 
       setInfo({
+        ...info,
         meditateD: secondsToHms(data.getUser.meditateD),
         sleepD: secondsToHms(data.getUser.sleepD),
         moveD: secondsToHms(data.getUser.moveD),
         focusD: secondsToHms(data.getUser.focusD),
         coins: data.getUser.coins,
+        username: user.username,
       });
+
+      // Get list of feelings, and update myFeelings
+      data.getUser.feelings.map(item => {
+        console.log('in item', item)
+        const newArr = {
+          date: item.slice(6,16),
+          feeling: item.slice(26,-1).toLowerCase()
+        }
+        myFeelings = [...myFeelings, newArr];
+        console.log('in updated', myFeelings);
+        setFeelings(myFeelings);
+      })
+      
 
     } catch (error) {
       console.log(error);
@@ -276,7 +294,7 @@ const MainProf = ({ navigation }) => {
 
   useEffect(() => {
     getUserInfo();
-
+    console.log("get user info")
     return {
 
     }
@@ -285,15 +303,18 @@ const MainProf = ({ navigation }) => {
   let customDatesStyles = [];
   let today = moment();
   let day = today.clone().startOf('month');
-
+  console.log('in here',day);
   //stylise individual date(s)
-  customDatesStyles.push({
+  feelings.map(item => {
+    customDatesStyles.push({
     //Example of date I want to stylise
-    date: '2021-10-01T00:00:00.000Z',
+    date: moment(item.date, 'DD-MM-YYYY'),
     // Mood colour
-    style: {backgroundColor: 'red'},
+    style: {backgroundColor: moodColors[item.feeling]},
     containerStyle: [], // extra styling for day container
   });
+  })
+  
 
   const customDayHeaderStylesCallback = (dayOfWeek, month, year) => {
     return {
@@ -304,7 +325,7 @@ const MainProf = ({ navigation }) => {
       }
     };
   }
-
+console.log('is user', info);
   return (
     <View>
     <ScrollView style={{ backgroundColor: '#3C886B', color: 'white' }}>
@@ -442,18 +463,28 @@ const MainProf = ({ navigation }) => {
 
 export default MainProf;
 
-const colours = {
-  "meditate": color.Sleep3,
-  "sleep": color.Med1,
-  "move": color.Focus3,
-  "focus": color.Move2
-}
 
 const title = {
   "meditate": "Meditation",
   "sleep": "Sleep",
   "move": "Move",
   "focus": "Focus"
+}
+
+
+const moodColors = {
+  "happy": color.Med1,
+  "sad": color.Sleep2,
+  "anxious": color.Move1,
+  "calm": color.Focus2,
+  "santa": color.Focus2,
+}
+
+const colours = {
+  "Meditate": color.Med1,
+  "Move": color.Move1,
+  "Focus": color.Focus3,
+  "Sleep": color.Sleep2,
 }
 
 const background = {

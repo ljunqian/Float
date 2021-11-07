@@ -156,7 +156,7 @@ export const VoucherImages = [
     {
         name: '1-for-1 Korean BBQ',
         source: Voucher1,
-        value: '200',
+        value: '2000',
         id: 'Voucher BBQ',
         purchased: false
     },
@@ -164,7 +164,7 @@ export const VoucherImages = [
     {
         name: 'Weekday Lunch Deals',
         source: Voucher2,
-        value: 'Voucher Lunch',
+        value: '1500',
         id: '2',
         purchased: false
     },
@@ -172,7 +172,7 @@ export const VoucherImages = [
     {
         name: '50% off 2nd admission',
         source: Voucher3,
-        value: '200',
+        value: '2500',
         id: 'Voucher 50%',
         purchased: false
     },

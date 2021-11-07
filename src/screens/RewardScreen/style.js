@@ -1,6 +1,4 @@
 import {StyleSheet} from 'react-native';
-import { inlineStyles } from 'react-native-svg';
-import { backgroundColor, flexWrap } from 'styled-system';
 
 const style = StyleSheet.create({
     tabBar: {

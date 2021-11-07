@@ -83,7 +83,7 @@ const GuideDetail = ({ navigation, props, route }) => {
                     </Text>
                     <Image source={clock} style={{ top: 3, marginLeft: 10}} />
                     <Text style={[typo.T3, {color: 'white', marginLeft: 10, marginTop: 3}]}>
-                        { detail.duration } min
+                        { detail.duration } mins
                     </Text>
                 </View>
                 {/* Description */}

@@ -5,7 +5,6 @@ import { color } from '../../../styles/theme';
 import layout from '../../../styles/componentLayout';
 import * as Progress from 'react-native-progress';
 import oldMedBG from '../../../assets/images/meditate-planet.png';
-// import newMedBG from '../../../assets/images/medbgnew.png';
 import StarsBG from '../../../assets/images/stars.png';
 import MedAvatar from '../../../assets/images/meditate-avatar.png';
 import Badge1 from '../../../assets/images/Badge1.png';
@@ -123,7 +122,6 @@ const MeditateScreen = ({navigation}) => {
   }
   return (
     <ScrollView sourcestyle={{backgroundColor: '#272727'}}> 
-      {/* <Image source={oldMedBG} style={{marginRight: 5, position: 'absolute'}} /> */}
       <ImageBackground source={StarsBG}  resizeMode="cover" style={{width: '100%'}} >
       <Image source={oldMedBG} style={{ top: -900, left: -20, zIndex: 0, transform:[{scaleY:-1}], position: 'absolute', width: '110%', resizeMode: "contain"}}/>
       <View style={layout.header}>
