@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { Button, Text, View, StyleSheet, ScrollView, TouchableOpacity, Image, ImageBackground, Modal, Pressable } from 'react-native';
+import { Button, Text, View, StyleSheet, ScrollView, TouchableOpacity, Image, Pressable, Modal, Keyboard, TextInput } from 'react-native';
 import CalendarPicker from 'react-native-calendar-picker';
 import moment from 'moment';
 import BottomDrawer from 'react-native-bottom-drawer-view';
@@ -31,7 +31,50 @@ import FocusBG from '../../assets/images/focus-planet.png';
 import Coin from '../../assets/icons/coins.png';
 import Forward from '../../assets/icons/forwardarrow.png';
 import Backward from '../../assets/icons/backarrow.png';
+const SearchBar = (props) => {
+  return (
+    <View style={style.container2}>
+      <View
+        style={
+          !props.clicked
+            ? style.searchBar__unclicked
+            : style.searchBar__unclicked
+        }
+      >
+        {/* search Icon */}
 
+        {/* Input field */}
+        <TextInput
+          style={style.input2}
+          placeholder="Search"
+          value={props.searchPhrase}
+          onChangeText={props.setSearchPhrase}
+          onFocus={() => {
+            props.setClicked(true);
+          }}
+        />
+        {/* cross Icon, depending on whether the search bar is clicked or not */}
+        {/* {props.clicked && (
+          <Entypo name="cross" size={20} color="black" style={{ padding: 1 }} onPress={() => {
+              props.setSearchPhrase("")
+          }}/>
+        )} */}
+      </View>
+      {/* cancel button, depending on whether the search bar is clicked or not */}
+     {/*  {props.clicked && (
+        <View>
+          <Button
+            title="Cancel"
+            onPress={() => {
+              Keyboard.dismiss();
+              props.setClicked(false);
+            }}
+          ></Button>
+        </View>
+      )} */}
+    </View>
+  );
+};
 const Coins = ({ navigation, i }) => {
   const {coins} = useSelector((state) => state.user.userData);
   return (
@@ -105,7 +148,18 @@ const FriendComponent = ({ img, name }) => {
   return (
     <View style={style.friend}>
       <Image source={img} style={{ marginRight: 10, borderRadius: 20 }} />
-      <Text style={typo.H2}>
+      <Text style={[{color: "white"}, typo.H2]}>
+        {name}
+      </Text>
+    </View>
+  )
+}
+
+const FriendTop = ({ img, name }) => {
+  return (
+    <View style={style.friendcol}>
+      <Image source={img} style={{  borderRadius: 20 }} />
+      <Text style={[{color: "white"}, typo.H2]}>
         {name}
       </Text>
     </View>
@@ -233,13 +287,16 @@ const NewJourney = ({ info }) => {
 
 const MainProf = ({ navigation }) => {
   const [active, setActive] = useState(true);
+  const [clicked, setClicked] = useState(false);
+  const [searchPhrase, setSearchPhrase] = useState('');
   const [info, setInfo] = useState({
     username: '',
     coins: 0,
     meditateD: '',
     sleepD: '',
     moveD: '',
-    focusD: ''
+    focusD: '',
+    search: ''
   });
   const [feelings, setFeelings] =  useState([{
     date: '',
@@ -410,40 +467,62 @@ console.log('is user', info);
         
         <ScrollView style={{backgroundColor: '#262626'}}>
         <Pressable style={{paddingBottom: 80, marginTop: 20}}>
-          <View style={{
-            flexDirection: "row", paddingLeft: 5, paddingBottom: 5, paddingRight: 5
-            }}>
-              <TouchableOpacity
-                        onPress={() => { navigation.navigate('Chat Screen') }}
-                        style={{
-      
-                          flex: 1, height: 45, margin: 5,
-                          borderRadius: 5, backgroundColor: '#FF9F00', borderRadius: 35
-                        }}>
-                        <Text style={{ color:'white',marginTop: 12, alignSelf: 'center', justifyContent:'center' , fontFamily:'Montserrat-Bold'}}>
-                        Listen to Others</Text>
-                      </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => { navigation.navigate('Chat Screen') }}
-                style={{
-      
-                  flex: 1, height: 45, margin: 5,
-                  borderRadius: 5, backgroundColor: '#FF9F00',borderRadius: 35
-                }}>
-                <Text style={{ color:'white',marginTop: 12, alignSelf: 'center', justifyContent:'center' , fontFamily:'Montserrat-Bold'}}>Share your Story</Text>
-              </TouchableOpacity>
-          </View>
+        <View style={{backgroundColor:'#262626', paddingTop:40}}>
 
-          <Pressable style={{
-            flexDirection: "column", paddingTop: 10, paddingLeft: 5, paddingBottom: 25
-          }}>
-            <FriendComponent name="Friend 1" img={Friend1} />
-            <FriendComponent name="Friend 2" img={Friend2} />
-            <FriendComponent name="Friend 3" img={Friend3} />
-            <FriendComponent name="Friend 4" img={Friend1} />
-            <FriendComponent name="Friend 5" img={Friend2} />
+<Text style={{fontFamily:'FredokaOne-Regular', fontSize:32, marginLeft:20, color:'white'}}>Active Chats</Text>
+<View style={{
+          flexDirection: "row", paddingTop: 10,  paddingBottom: 25
+        }}>
+           <TouchableOpacity onPress={() => { navigation.navigate('Chat Screen') }}>
+                <FriendTop name="Friend 1" img={Friend1} />
+           </TouchableOpacity>
+           <TouchableOpacity onPress={() => { navigation.navigate('Chat Screen') }}>
+           <FriendTop name="Friend 2" img={Friend2} />
+           </TouchableOpacity>
+           <TouchableOpacity onPress={() => { navigation.navigate('Chat Screen') }}>
+           <FriendTop name="Friend 3" img={Friend3} />
+           </TouchableOpacity>
 
-          </Pressable>
+        </View>
+
+
+<View style={{
+                flexDirection: "row", paddingLeft: 5, paddingBottom: 5, paddingRight: 5
+              }}>
+                <TouchableOpacity
+                          onPress={() => { navigation.navigate('Chat Screen') }}
+                          style={{
+
+                            flex: 1, height: 45, margin: 5,
+                            borderRadius: 5, backgroundColor: '#44BED9', borderRadius: 35
+                          }}>
+                          <Text style={{ color:'white',marginTop: 12, alignSelf: 'center', justifyContent:'center' , fontFamily:'Montserrat-Bold'}}>
+                          Listen to Others</Text>
+                        </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => { navigation.navigate('Chat Screen') }}
+                  style={{
+
+                    flex: 1, height: 45, margin: 5,
+                    borderRadius: 5, backgroundColor: '#44BED9',borderRadius: 35
+                  }}>
+                  <Text style={{ color:'white',marginTop: 12, alignSelf: 'center', justifyContent:'center' , fontFamily:'Montserrat-Bold'}}>Share your Story</Text>
+                </TouchableOpacity>
+              </View>
+
+<Text style={{fontFamily:'FredokaOne-Regular', fontSize:32, marginLeft:20, color:'white'}}>My Friends</Text>
+<SearchBar clicked={clicked} setClicked={setClicked} setSearchPhrase={setSearchPhrase} searchPhrase={searchPhrase}/>
+<View style={{
+  flexDirection: "column", paddingTop: 10, paddingLeft: 5, paddingBottom: 25
+}}>
+  <FriendComponent name="Friend 1" img={Friend1} />
+  <FriendComponent name="Friend 2" img={Friend2} />
+  <FriendComponent name="Friend 3" img={Friend3} />
+  <FriendComponent name="Friend 4" img={Friend1} />
+  <FriendComponent name="Friend 5" img={Friend2} />
+
+</View>
+</View>
         </Pressable>
         </ScrollView>
         </>
@@ -514,11 +593,17 @@ const style = StyleSheet.create({
     backgroundColor: 'white', padding: 20, left: 5, paddingRight: 30
   },
   friend: {
-    margin: 10, borderRadius: 20, height: 120,
-    backgroundColor: 'white', padding: 12,
+    marginLeft: 20, borderRadius: 20, height: 120,
+    backgroundColor: '#262626', padding: 5,
     display: 'flex', flexDirection: 'row',
     alignItems: 'center'
   },
+  friendcol: {
+      marginLeft: 20, borderRadius: 20, height: 120,
+      backgroundColor: '#262626', padding: 5,
+      display: 'flex', flexDirection: 'column',
+      alignItems: 'center'
+    },
   journeyButton: {
     backgroundColor: 'white',
     height: 40,
@@ -542,6 +627,37 @@ const style = StyleSheet.create({
     justifyContent: 'flex-end',
     backgroundColor: 'rgba(255, 255, 255, 0.3)',
     borderRadius: 20
-  }
+  },
+  container2: {
+        marginLeft:20,
+        margin: 15,
+        justifyContent: "flex-start",
+        alignItems: "center",
+        flexDirection: "row",
+        width: "95%",
+
+      },
+      searchBar__unclicked: {
+        padding: 0,
+        flexDirection: "row",
+        width: "95%",
+        backgroundColor: "#d9dbda",
+        borderRadius: 15,
+        alignItems: "center",
+      },
+      searchBar__clicked: {
+        padding: 0,
+        flexDirection: "row",
+        width: "80%",
+        backgroundColor: "#d9dbda",
+        borderRadius: 15,
+        alignItems: "center",
+        justifyContent: "space-evenly",
+      },
+      input2: {
+        fontSize: 20,
+        marginLeft: 10,
+        width: "90%",
+      },
 
 })
