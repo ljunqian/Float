@@ -241,12 +241,17 @@ const MainProf = ({ navigation }) => {
     moveD: '',
     focusD: ''
   });
+  const [feelings, setFeelings] =  useState([{
+    date: '',
+    feeling: '',
+  }]);
 
   const getUserInfo = async () => {
     try {
       const user = await Auth.currentAuthenticatedUser();
       const {data} = await API.graphql(graphqlOperation(getUser, { id: user.attributes.sub }));
-      
+      let myFeelings =  [];
+
       setInfo({
         ...info,
         meditateD: secondsToHms(data.getUser.meditateD),
@@ -256,6 +261,19 @@ const MainProf = ({ navigation }) => {
         coins: data.getUser.coins,
         username: user.username,
       });
+
+      // Get list of feelings, and update myFeelings
+      data.getUser.feelings.map(item => {
+        console.log('in item', item)
+        const newArr = {
+          date: item.slice(6,16),
+          feeling: item.slice(26,-1).toLowerCase()
+        }
+        myFeelings = [...myFeelings, newArr];
+        console.log('in updated', myFeelings);
+        setFeelings(myFeelings);
+      })
+      
 
     } catch (error) {
       console.log(error);
@@ -276,7 +294,7 @@ const MainProf = ({ navigation }) => {
 
   useEffect(() => {
     getUserInfo();
-
+    console.log("get user info")
     return {
 
     }
@@ -287,13 +305,16 @@ const MainProf = ({ navigation }) => {
   let day = today.clone().startOf('month');
   console.log('in here',day);
   //stylise individual date(s)
-  customDatesStyles.push({
+  feelings.map(item => {
+    customDatesStyles.push({
     //Example of date I want to stylise
-    date: new Date(),
+    date: moment(item.date, 'DD-MM-YYYY'),
     // Mood colour
-    style: {backgroundColor: colours.sleep},
+    style: {backgroundColor: moodColors[item.feeling]},
     containerStyle: [], // extra styling for day container
   });
+  })
+  
 
   const customDayHeaderStylesCallback = (dayOfWeek, month, year) => {
     return {
@@ -452,10 +473,11 @@ const title = {
 
 
 const moodColors = {
-  "meditate": color.Med1,
-  "sleep": color.Sleep3,
-  "move": color.Move2,
-  "focus": color.Focus3
+  "happy": color.Med1,
+  "sad": color.Sleep2,
+  "anxious": color.Move1,
+  "calm": color.Focus2,
+  "santa": color.Focus2,
 }
 
 const colours = {
