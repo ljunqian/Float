@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { Button, Text, View, StyleSheet, ScrollView, TouchableOpacity, Image, ImageBackground, Modal } from 'react-native';
+import { Button, Text, View, StyleSheet, ScrollView, TouchableOpacity, Image, ImageBackground, Modal, Keyboard, TextInput } from 'react-native';
 import CalendarPicker from 'react-native-calendar-picker';
 import moment from 'moment';
 import SwipeUpDown from 'react-native-swipe-up-down';
@@ -31,7 +31,50 @@ import FocusBG from '../../assets/images/focus-planet.png';
 import Coin from '../../assets/icons/coins.png';
 import Forward from '../../assets/icons/forwardarrow.png';
 import Backward from '../../assets/icons/backarrow.png';
+const SearchBar = (props) => {
+  return (
+    <View style={style.container2}>
+      <View
+        style={
+          !props.clicked
+            ? style.searchBar__unclicked
+            : style.searchBar__clicked
+        }
+      >
+        {/* search Icon */}
 
+        {/* Input field */}
+        <TextInput
+          style={style.input2}
+          placeholder="Search"
+          value={props.searchPhrase}
+          onChangeText={props.setSearchPhrase}
+          onFocus={() => {
+            props.setClicked(true);
+          }}
+        />
+        {/* cross Icon, depending on whether the search bar is clicked or not */}
+        {props.clicked && (
+          <Entypo name="cross" size={20} color="black" style={{ padding: 1 }} onPress={() => {
+              props.setSearchPhrase("")
+          }}/>
+        )}
+      </View>
+      {/* cancel button, depending on whether the search bar is clicked or not */}
+      {props.clicked && (
+        <View>
+          <Button
+            title="Cancel"
+            onPress={() => {
+              Keyboard.dismiss();
+              props.setClicked(false);
+            }}
+          ></Button>
+        </View>
+      )}
+    </View>
+  );
+};
 const Coins = ({ navigation, i }) => {
   const {coins} = useSelector((state) => state.user.userData);
   return (
@@ -250,7 +293,8 @@ const MainProf = ({ navigation }) => {
     meditateD: '',
     sleepD: '',
     moveD: '',
-    focusD: ''
+    focusD: '',
+    search: ''
   });
 
   const getUserInfo = async () => {
@@ -440,6 +484,9 @@ const MainProf = ({ navigation }) => {
                           <Text style={{ color:'white',marginTop: 12, alignSelf: 'center', justifyContent:'center' , fontFamily:'Montserrat-Bold'}}>Share your Story</Text>
                         </TouchableOpacity>
                       </View>
+
+        <Text style={{fontFamily:'FredokaOne-Regular', fontSize:32, marginLeft:20, color:'white'}}>My Friends</Text>
+        <SearchBar/>
         <View style={{
           flexDirection: "column", paddingTop: 10, paddingLeft: 5, paddingBottom: 25
         }}>
@@ -554,6 +601,37 @@ const style = StyleSheet.create({
     justifyContent: 'flex-end',
     backgroundColor: 'rgba(255, 255, 255, 0.3)',
     borderRadius: 20
-  }
+  },
+  container2: {
+        marginLeft:20,
+        margin: 15,
+        justifyContent: "flex-start",
+        alignItems: "center",
+        flexDirection: "row",
+        width: "95%",
+
+      },
+      searchBar__unclicked: {
+        padding: 0,
+        flexDirection: "row",
+        width: "95%",
+        backgroundColor: "#d9dbda",
+        borderRadius: 15,
+        alignItems: "center",
+      },
+      searchBar__clicked: {
+        padding: 0,
+        flexDirection: "row",
+        width: "80%",
+        backgroundColor: "#d9dbda",
+        borderRadius: 15,
+        alignItems: "center",
+        justifyContent: "space-evenly",
+      },
+      input2: {
+        fontSize: 20,
+        marginLeft: 10,
+        width: "90%",
+      },
 
 })
