@@ -15,7 +15,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 // Checkin
-import CheckInScreen from './src/screens/SplashScreen/CheckInScreen';
+
 
 //* Guides
 import ExploreScreen from './src/screens/Guides/ExploreScreen';
@@ -315,11 +315,7 @@ const App = () => {
           </>
         ) : (
           <>
-            <Stack.Screen name="CheckIn" component={CheckInScreen}
-              options={() => ({
-                headerShown: false
-              })}
-            />
+
 
             <Stack.Screen name="Guides" component={BottomBar}
               options={({ navigation }) => ({

@@ -105,7 +105,18 @@ const FriendComponent = ({ img, name }) => {
   return (
     <View style={style.friend}>
       <Image source={img} style={{ marginRight: 10, borderRadius: 20 }} />
-      <Text style={typo.H2}>
+      <Text style={[{color: "white"}, typo.H2]}>
+        {name}
+      </Text>
+    </View>
+  )
+}
+
+const FriendTop = ({ img, name }) => {
+  return (
+    <View style={style.friendcol}>
+      <Image source={img} style={{  borderRadius: 20 }} />
+      <Text style={[{color: "white"}, typo.H2]}>
         {name}
       </Text>
     </View>
@@ -364,53 +375,71 @@ const MainProf = ({ navigation }) => {
             />
           </View>
       </View>
-      
+
       <View style={{
-        flexDirection: "row", paddingLeft: 5, paddingBottom: 5, paddingRight: 5
+        flexDirection: "row", paddingLeft: 0,  paddingRight: 0, marginTop:0, paddingBottom:0
       }}>
         <TouchableOpacity
           onPress={() => { console.log("friend"); setActive(true) }}
           style={{
-            flex: 1, height: 45, margin: 5,
-            borderRadius: 5, backgroundColor: active ? 'white' : color.Focus2,
+            flex: 1, height: 45, marginRight: 1,
+            borderTopLeftRadius:15 ,borderTopRightRadius:15 , backgroundColor: active ? '#262626' : color.Focus2,
           }}>
-          <Text style={[typo.H2, { marginTop: 10, alignSelf: 'center' }]}>Friends</Text>
+          <Text style={[typo.H2, { color:'white', marginTop: 10, alignSelf: 'center' }]}>Chat</Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => { setActive(false) }}
           style={{
-            flex: 1, height: 45, margin: 5,
-            borderRadius: 5, backgroundColor: active ? color.Focus2 : 'white',
+            flex: 1, height: 45, margin: 0,
+            borderTopLeftRadius:15 ,borderTopRightRadius:15 , backgroundColor: active ? color.Focus2 : '#262626',
           }}>
-          <Text style={[typo.H2, { marginTop: 10, alignSelf: 'center' }]}>Journey</Text>
+          <Text style={[typo.H2, { color:'white', marginTop: 10, alignSelf: 'center' }]}>Journey</Text>
         </TouchableOpacity>
       </View>
-     
       {active ? (
         <>
-         <View style={{
-          flexDirection: "row", paddingLeft: 5, paddingBottom: 5, paddingRight: 5
-        }}>
-          <TouchableOpacity
-                    onPress={() => { navigation.navigate('Chat Screen') }}
-                    style={{
-  
-                      flex: 1, height: 45, margin: 5,
-                      borderRadius: 5, backgroundColor: '#FF9F00', borderRadius: 35
-                    }}>
-                    <Text style={{ color:'white',marginTop: 12, alignSelf: 'center', justifyContent:'center' , fontFamily:'Montserrat-Bold'}}>
-                    Listen to Others</Text>
-                  </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => { navigation.navigate('Chat Screen') }}
-            style={{
-  
-              flex: 1, height: 45, margin: 5,
-              borderRadius: 5, backgroundColor: '#FF9F00',borderRadius: 35
-            }}>
-            <Text style={{ color:'white',marginTop: 12, alignSelf: 'center', justifyContent:'center' , fontFamily:'Montserrat-Bold'}}>Share your Story</Text>
-          </TouchableOpacity>
-        </View>
+        <View style={{backgroundColor:'#262626', paddingTop:40}}>
+
+        <Text style={{fontFamily:'FredokaOne-Regular', fontSize:32, marginLeft:20, color:'white'}}>Active Chats</Text>
+        <View style={{
+                  flexDirection: "row", paddingTop: 10,  paddingBottom: 25
+                }}>
+                   <TouchableOpacity onPress={() => { navigation.navigate('Chat Screen') }}>
+                        <FriendTop name="Friend 1" img={Friend1} />
+                   </TouchableOpacity>
+                   <TouchableOpacity onPress={() => { navigation.navigate('Chat Screen') }}>
+                   <FriendTop name="Friend 2" img={Friend2} />
+                   </TouchableOpacity>
+                   <TouchableOpacity onPress={() => { navigation.navigate('Chat Screen') }}>
+                   <FriendTop name="Friend 3" img={Friend3} />
+                   </TouchableOpacity>
+
+                </View>
+
+
+        <View style={{
+                        flexDirection: "row", paddingLeft: 5, paddingBottom: 5, paddingRight: 5
+                      }}>
+                        <TouchableOpacity
+                                  onPress={() => { navigation.navigate('Chat Screen') }}
+                                  style={{
+
+                                    flex: 1, height: 45, margin: 5,
+                                    borderRadius: 5, backgroundColor: '#44BED9', borderRadius: 35
+                                  }}>
+                                  <Text style={{ color:'white',marginTop: 12, alignSelf: 'center', justifyContent:'center' , fontFamily:'Montserrat-Bold'}}>
+                                  Listen to Others</Text>
+                                </TouchableOpacity>
+                        <TouchableOpacity
+                          onPress={() => { navigation.navigate('Chat Screen') }}
+                          style={{
+
+                            flex: 1, height: 45, margin: 5,
+                            borderRadius: 5, backgroundColor: '#44BED9',borderRadius: 35
+                          }}>
+                          <Text style={{ color:'white',marginTop: 12, alignSelf: 'center', justifyContent:'center' , fontFamily:'Montserrat-Bold'}}>Share your Story</Text>
+                        </TouchableOpacity>
+                      </View>
         <View style={{
           flexDirection: "column", paddingTop: 10, paddingLeft: 5, paddingBottom: 25
         }}>
@@ -420,6 +449,7 @@ const MainProf = ({ navigation }) => {
           <FriendComponent name="Friend 4" img={Friend1} />
           <FriendComponent name="Friend 5" img={Friend2} />
 
+        </View>
         </View>
         </>
       ) : (
@@ -490,11 +520,17 @@ const style = StyleSheet.create({
     backgroundColor: 'white', padding: 20, left: 5, paddingRight: 30
   },
   friend: {
-    margin: 10, borderRadius: 20, height: 120,
-    backgroundColor: 'white', padding: 12,
+    marginLeft: 20, borderRadius: 20, height: 120,
+    backgroundColor: '#262626', padding: 5,
     display: 'flex', flexDirection: 'row',
     alignItems: 'center'
   },
+  friendcol: {
+      marginLeft: 20, borderRadius: 20, height: 120,
+      backgroundColor: '#262626', padding: 5,
+      display: 'flex', flexDirection: 'column',
+      alignItems: 'center'
+    },
   journeyButton: {
     backgroundColor: 'white',
     height: 40,
