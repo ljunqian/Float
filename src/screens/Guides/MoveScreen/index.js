@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Text, View, ScrollView, TouchableOpacity, ImageBackground, Image} from 'react-native';
 import typo from '../../../styles/typography';
 import { color } from '../../../styles/theme';
@@ -10,7 +10,9 @@ import MedAvatar from '../../../assets/images/meditate-avatar.png';
 import Mov from '../../../assets/images/move-2.png';
 import Badge1 from '../../../assets/images/Badge1.png';
 import play from '../../../assets/icons/play.png';
-import { Guides, types } from '../constants.js';
+import { Guides, types, badges } from '../constants.js';
+import {updateLevel } from '../../GlobalStates/UserAction';
+import { useSelector, useDispatch } from 'react-redux';
 
 const GuideCardComponent = (props)  => {
   return (
@@ -86,6 +88,29 @@ const Explore = ({ array, navigation }) => {
 }
 
 const MoveScreen = ({navigation}) => {
+  const {levelmove} = useSelector((state) => state.user.levels);
+  const {moveexp} = useSelector((state) => state.user.exp);
+ 
+  const GetBadge = () => {
+    const levels = levelmove;
+    console.log("in reduce", levels);
+    let icon1 = badges.Level1;
+    let icon = icon1;
+    let icon2 = badges.Level2;
+    let icon3 = badges.Level3;
+    if(levels == 2){
+        icon = icon2;
+        
+    } else if (levels >= 3){
+      icon = icon3;
+    } 
+  
+    return(
+      icon
+    )
+      
+  
+  }
   return (
     <ScrollView style={{backgroundColor: '#272727'}}> 
       <ImageBackground source={StarsBG}  resizeMode="cover" style={{width: '100%'}} >
@@ -97,14 +122,14 @@ const MoveScreen = ({navigation}) => {
           Move
         </Text>
         <View style={{flexDirection:'row', alignItems : 'center'}}> 
-          <Image source={Badge1} style={{ top: 3, marginLeft: 17} }/>
+          <Image source={GetBadge()} style={{ top: 3, marginLeft: 17} }/>
           
           <View style={{top: -6, marginLeft: -10}}>
             <Text style={[typo.T1, {color:'white', left:20, top:2}]}>
-            Level 1
+            Level {levelmove}
           </Text>
           <Progress.Bar 
-            progress={0.4}
+            progress={(moveexp%180)/180}
             width={100}
             height={8}
             color={color.Move3}
