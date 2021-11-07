@@ -94,7 +94,8 @@ const Explore = ({ array, navigation }) => {
 
 const MeditateScreen = ({navigation}) => {
   const {levelMeditate} = useSelector((state) => state.user.levels);
-  
+  const {meditateexp} = useSelector((state) => state.user.exp);
+  console.log("in reduce", meditateexp);
   const dispatch = useDispatch(); 
   useEffect(()=>{
     console.log("hi");
@@ -136,10 +137,10 @@ const MeditateScreen = ({navigation}) => {
           
           <View style={{top: -6, marginLeft: -10}}>
             <Text style={[typo.T1, {color:'white', left:20, top:2 }]}>
-            Level 1
+            Level {levelMeditate}
           </Text>
           <Progress.Bar 
-            progress={0.4}
+            progress={(meditateexp%180)/180}
             width={100}
             height={8}
             color={'#F57212'}

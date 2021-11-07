@@ -1,4 +1,4 @@
-import { SET_USER_DATA, SIGN_IN, UPDATE_COINS, UPDATE_MEDLEVEL } from "./type";
+import { SET_USER_DATA, SIGN_IN, UPDATE_COINS, UPDATE_LEVEL } from "./type";
 
 const INITIAL_STATE = {
     userData: {
@@ -6,9 +6,10 @@ const INITIAL_STATE = {
         username: '',
         email: '',
         coins: 3000,
-        meditateD: 5000,
-        sleepD: '',
+        meditateD: 4000,
+        sleepD: 1000,
         moveD: '',
+        focusD: 6000,
         friends: []
     },
     levels:{
@@ -47,25 +48,39 @@ const UserReducer = (prevState = INITIAL_STATE, action) => {
           }
         };
       }
-      case UPDATE_MEDLEVEL: {
+      case UPDATE_LEVEL: {
         
         const medtime = prevState.userData.meditateD;
-        console.log("in reduce", medtime);
+        const medexp = medtime/10;
+        const medlevelup = Math.max(Math.floor(medexp/180), 1) ;
+
+        const sleeptime = prevState.userData.sleepD;
+        const sleepexp = sleeptime/10;
+        const sleeplevelup = Math.max(Math.floor(sleepexp/180), 1) ;
+
+        const movetime = prevState.userData.moveD;
+        const moveexp = movetime/10;
+        const movelevelup = Math.max(Math.floor(moveexp/180), 1) ;
         
-        const exp = medtime/10;
-        console.log("in reduce", exp);
-        const levelup = Math.floor(exp/180) ;
+        const focustime = prevState.userData.focusD;
+        const focusexp = focustime/10;
+        const focuslevelup = Math.max(Math.floor(focusexp/180), 1) ;
         
-        console.log("in reduce", levelup);
-        // const currentlevel = [action.payload.levels[0] + levelup ,,,];
+        
 
         return {
           ...prevState,
           exp:{
-            meditateexp: exp,
+            meditateexp: medexp,
+            sleepexp: sleepexp,
+            moveexp: moveexp,
+            focusexp: focusexp,
           },
           levels:{
-            levelMeditate: levelup,
+            levelMeditate: medlevelup,
+            levelsleep: sleeplevelup,
+            levelfocus: focuslevelup,
+            levelmove: movelevelup,
           },
           
           
