@@ -46,7 +46,7 @@ const GuideLessons = ({type, navigation}) => {
             <MyRadioButton isDone={isDone}/>
             <TouchableOpacity onPress={()=>{navigation.navigate('GuideDetail', item)}}>
                 <View style={[style.card, {opacity: isDone? 0.8:1}]}>
-                    <View style={{width: 225, justifyContent: 'center', bottom: 5}}>
+                    <View style={{flex: 3,justifyContent: 'center', bottom: 5}}>
                         <Text style={typo.H3}>{title}</Text>
                         <View style={{justifyContent: 'flex-end'}}>
                             <View style={{flexDirection: 'row', left: 15, top: 5}}>
@@ -60,10 +60,11 @@ const GuideLessons = ({type, navigation}) => {
                         </View>
                         
                     </View>
-                    <Image source={img} style={{width: 70, height: 70, borderRadius: 13, right: 5}} top={5} />
+                    <Image source={img} style={{flex: 1.5, height: 80, borderRadius: 13, right: 5}} top={5} />
                 </View>
             </TouchableOpacity>
         </View>
+
         )
     }
     
@@ -79,7 +80,7 @@ const GuideLessons = ({type, navigation}) => {
                 return(
                     <Fragment key={`${item.id}-${index}`}>
                         <CardComponent key={item.id} title={item.title} img={item.thumbnail} duration={item.duration} description={item.activity} item={item}/>
-                        <LineBG key={item.id} src={Line32} top={item.line} left={'6%'}/>
+                        <LineBG key={item.id} src={Line32} top={item.line} left={'7%'}/>
                     </Fragment>
                 )
             })
@@ -87,8 +88,8 @@ const GuideLessons = ({type, navigation}) => {
     }
 
     return(
-        <View style={{marginVertical: 10, backgroundColor: '#272727', height: height[type]}}>
-            <View style={{marginHorizontal: 15}}>
+        <View style={{marginTop: 10, marginBottom: 80, backgroundColor: '#272727', height: height[type]}}>
+            <View style={{marginHorizontal: 15,}}>
                 <DCardComponent />
             </View>
         </View>
@@ -150,15 +151,19 @@ const style=StyleSheet.create({
         borderWidth: 0.5,
         borderColor: 'rgba(0, 0, 0, 0.5)',
         backgroundColor: 'white',
-        height: 100,
-        width: 320,
+        //height: 100,
+        width: '70%',
         borderRadius: 20,
         margin: 10,
         padding: 10,
+        paddingBottom: 15,
+        paddingTop: 10,
         display: 'flex',
         justifyContent: 'space-between',
-        flexDirection: 'row'
-    },
+        alignItems: 'center',
+        flexDirection: 'row',
+        display: 'flex'
+      },
     MyRadioButton: {
         width: 26,
         height: 26,

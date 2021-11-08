@@ -86,11 +86,11 @@ const CheckIn = ({navigation}) =>{
                 <TouchableOpacity onPress={()=> {
                     setModalVisible(true);
                     updateMoodHandler({mood: moodSelected});
-                    } }>
-                {moodSelected !=null && !modalVisible &&
-                <View style={[styles.continueButtonContainer, {marginTop: 30}]}>
-                    <Text style={textStyle.T4}>Continue</Text>
-                </View>}
+                    } } style={{width: '100%'}}>
+                    {moodSelected !=null && !modalVisible &&
+                    <View style={[styles.continueButtonContainer, {marginTop: 30}]}>
+                        <Text style={textStyle.T4}>Continue</Text>
+                    </View>}
                 </TouchableOpacity>
             </ImageBackground>
         </View>
@@ -102,7 +102,7 @@ const MoodCard = (props) =>{
 
     return(
         <TouchableOpacity style = {[styles.moodCard, {marginTop: 30, backgroundColor: bg}]} onPress={()=> props.setmoodSelected()}>
-            <Image source={props.source} style={{marginTop: 12}}/>
+            <Image source={props.source} style={{marginTop: 12, width: '85%', height: '55%'}}/>
             <Text style={[textStyle.T3, {marginTop: 10}]}>{props.name}</Text>
         </TouchableOpacity>
     )

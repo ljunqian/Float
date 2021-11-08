@@ -9,12 +9,13 @@ const styles = StyleSheet.create({
     },
     moodCard: {
         alignItems: 'center',
-        width: 165,
-        height: 177,
-        borderRadius: 20
+        width: '47%',
+        height: '40%',
+        borderRadius: 20,
     },
     continueButtonContainer: {
-        width: 366,
+        width: '90%',
+        alignSelf:'center',
         height: 46,
         backgroundColor: "#B2E5D7",
         borderRadius: 40,

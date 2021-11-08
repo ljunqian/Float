@@ -174,8 +174,10 @@ const MeditateScreen = ({navigation}) => {
       <View style={{height: 155, display: 'flex', 
         flexDirection: 'row', padding: 12,
         borderRadius: 20,
-        margin: 6, overflow:'hidden'}}>
-        <ImageBackground source={Med} style={{width:'108%', height: 155, top:-12, left:-16, flexDirection:'row', padding: 12}}>  
+        margin: 6, overflow:'hidden',
+        width: '95%', alignSelf: 'center'
+        }}>
+        <ImageBackground source={Med} style={{width:'110%', height: 155, top:-12, left:-16, flexDirection:'row', padding: 12}}>  
           <View style={{flex: 1}}></View>
           <View style={{flex: 3, alignItems: 'center', justifyContent: 'center'}}>
             <Text style={[typo.H4, {color: 'white'}]}>

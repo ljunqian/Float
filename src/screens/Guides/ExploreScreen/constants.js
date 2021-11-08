@@ -58,32 +58,32 @@ export const lessons = {
             ...Guides[2],
             activity: 'Excerise Activity 1.1',
             duration: Guides[2].duration,
-            line: 78.25,
+            line: 85,
         },
         {
             ...Guides[3],
             activity: 'Excerise Activity 1.2',
             duration: Guides[3].duration,
-            line: 197
+            line: 220
         },
         {
             ...Guides[0],
             activity: 'Excerise Activity 1.3',
             duration: Guides[0].duration,
-            line: 317
+            line: 345
         },
         {
             ...Guides[4],
             activity: 'Excerise Activity 1.4',
             duration: Guides[4].duration,
    
-            line: 438
+            line: 480
         },
         {
             ...Guides[1],
             activity: 'Excerise Activity 1.5',
             duration: Guides[1].duration,
-            line: 438
+            line: 480
         }
     ],
     "Sleep": [
@@ -91,19 +91,19 @@ export const lessons = {
             ...Guides[9],
             activity: 'Excerise Activity 1.1',
             duration: Guides[9].duration,
-            line: 78.
+            line: 85,
         },
         {
             ...Guides[10],
             activity: 'Excerise Activity 1.2',
             duration: Guides[10].duration,
-            line: 197
+            line: 210
         },
         {
             ...Guides[11],
             activity: 'Excerise Activity 1.3',
             duration: Guides[11].duration,
-            line: 197
+            line: 210
         },
     ],
     "Move": [
@@ -111,25 +111,25 @@ export const lessons = {
             ...Guides[15],
             activity: 'Excerise Activity 1.1',
             duration: Guides[15].duration,
-            line: 78.
+            line: 85,
         },
         {
             ...Guides[14],
             activity: 'Excerise Activity 1.2',
             duration: Guides[14].duration,
-            line: 197
+            line: 210,
         },
         {
             ...Guides[16],
             activity: 'Excerise Activity 1.3',
             duration: Guides[16].duration,
-            line: 317
+            line: 335,
         },
         {
             ...Guides[13],
             activity: 'Excerise Activity 1.4',
             duration: Guides[13].duration,
-            line: 317
+            line: 335
         }
     ],
     "Focus": [
@@ -137,31 +137,31 @@ export const lessons = {
             ...Guides[18],
             activity: 'Excerise Activity 1.1',
             duration: Guides[18].duration,
-            line: 78.
+            line: 85,
         },
         {
             ...Guides[19],
             activity: 'Excerise Activity 1.2',
             duration: Guides[19].duration,
-            line: 197
+            line: 210,
         },
         {
             ...Guides[20],
             activity: 'Excerise Activity 1.3',
             duration: Guides[20].duration,
-            line: 317
+            line: 335
         },
         {
             ...Guides[21],
             activity: 'Excerise Activity 1.4',
             duration: Guides[21].duration,
-            line: 438
+            line: 450
         },
         {
             ...Guides[22],
             activity: 'Excerise Activity 1.5',
             duration: Guides[22].duration,
-            line: 438
+            line: 450
         }
     ]
 }

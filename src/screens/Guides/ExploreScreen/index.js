@@ -73,7 +73,7 @@ const ExploreScreen = ({ navigation }) => {
         <MyRadioButton isDone={isDone}/>
         <TouchableOpacity onPress={()=>navigation.navigate('GuideDetail', guide)}>
           <View style={[style.card, {opacity: isDone? 0.8:1}]}>
-            <View style={{width: 235, justifyContent: 'center', bottom: 5, paddingRight: 40}}>
+            <View style={{flex: 3, justifyContent: 'center', bottom: 5, paddingRight: 20}}>
               <Text style={typo.H3}>{guide.title}</Text>
               <View style={{flexDirection: 'row', left: 15, top: 5}}>
                 <Image source={Video} right={5}/>
@@ -84,7 +84,7 @@ const ExploreScreen = ({ navigation }) => {
                 <Text style={typo.T6}>{guide.duration} mins</Text>
               </View>
             </View>
-            <Image source={img} style={{width: 75, height: 75, borderRadius: 13, right: 35}}/>
+            <Image source={img} style={{flex: 1.5, borderRadius: 13}}/>
           </View>
         </TouchableOpacity>
       </View>
@@ -127,44 +127,36 @@ const ExploreScreen = ({ navigation }) => {
 
   const GetStarted = () => {
     
-    const MyComponent = ({image, title}) => {
+    const MyComponent = ({image, title, onPress}) => {
       return(
-        <View style={{height: 155, width: 175, display: 'flex', 
-              flexDirection: 'row',
-              borderRadius: 20,
-              margin: 10, backgroundColor: 'white', overflow: 'hidden'}}>
-          <ImageBackground source={image} style={{width:'100%', height: '110%', top: -5}}>
-            <View style={{flex: 3, alignItems: 'center', justifyContent: 'center'}}>
-              <Text style={[typo.H4, {color: 'white',  textShadowColor: 'rgba(0, 0, 0, 0.75)',
-                textShadowOffset: {width: -1, height: 1},
-                textShadowRadius: 10}]}>
-                {title}
-              </Text> 
-            </View>
-          </ImageBackground>
-        </View>
+          <TouchableOpacity style={{height: 150, width: '47%', display: 'flex', 
+                flexDirection: 'row',
+                borderRadius: 20,
+                marginBottom: 20, backgroundColor: 'white', overflow: 'hidden'}}
+                onPress={onPress}
+                >
+            <ImageBackground source={image} style={{width:'100%', height: '110%', top: -10}}>
+              <View style={{flex: 3, alignItems: 'center', justifyContent: 'center'}}>
+                <Text style={[typo.H4, {color: 'white',  textShadowColor: 'rgba(0, 0, 0, 0.75)', fontSize: 24,
+                  textShadowOffset: {width: -1, height: 1},
+                  textShadowRadius: 10}]}>
+                  {title}
+                </Text> 
+              </View>
+            </ImageBackground>
+          </TouchableOpacity>
       ) 
     }
 
     return(
-      <>
-      <View style={{flexDirection: 'row'}}>
-        <TouchableOpacity onPress={() => navigation.navigate('GuidesLesson', types.meditate)}>
-          <MyComponent image={Meditate2} title={"Meditation"}/>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('GuidesLesson', types.sleep)}>
-          <MyComponent image={Sleep1} title={"Sleep"}/>
-        </TouchableOpacity>
-      </View>
-      <View style={{flexDirection: 'row'}}>
-        <TouchableOpacity onPress={() => navigation.navigate('GuidesLesson', types.move)}>
-          <MyComponent image={Move1} title={"Move"}/>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('GuidesLesson', types.focus)}>
-          <MyComponent image={Focus1} title={"Focus"}/>
-        </TouchableOpacity>
-      </View>
-      </>
+      <ScrollView>
+        <View  style={{flexDirection: 'row', justifyContent: 'space-between', flexWrap: 'wrap', width: '100%', padding: 10}}>
+          <MyComponent image={Meditate2} title={"Meditation"} onPress={() => navigation.navigate('GuidesLesson', types.meditate)}/>
+          <MyComponent image={Sleep1} title={"Sleep"} onPress={() => navigation.navigate('GuidesLesson', types.sleep)}/>
+          <MyComponent image={Move1} title={"Move"} onPress={() => navigation.navigate('GuidesLesson', types.move)}/>
+          <MyComponent image={Focus1} title={"Focus"}  onPress={() => navigation.navigate('GuidesLesson', types.focus)}/>
+        </View>
+      </ScrollView>
     )
   }
 
@@ -231,7 +223,7 @@ const style = StyleSheet.create({
     borderColor: 'rgba(0, 0, 0, 0.5)',
     backgroundColor: 'white',
     color: 'black',
-    width: 180,
+    width: '45%',
     height: 45,
     display: 'flex',
     flexDirection: 'row',
@@ -244,15 +236,18 @@ const style = StyleSheet.create({
     borderWidth: 0.5,
     borderColor: 'rgba(0, 0, 0, 0.5)',
     backgroundColor: 'white',
-    height: 100,
-    width: 300,
+    //height: 100,
+    width: '72%',
     borderRadius: 20,
     margin: 10,
     padding: 10,
+    paddingBottom: 15,
+    paddingTop: 15,
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    display: 'flex'
   },
   header: {
     marginTop: 10,
