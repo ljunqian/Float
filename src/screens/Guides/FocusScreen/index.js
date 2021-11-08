@@ -179,7 +179,7 @@ const FocusScreen = ({navigation}) => {
               Featured
             </Text>
           </View>
-          <View style={{flex: 1, alignItems: 'flex-end', justifyContent: 'flex-start'}}>
+          <View style={{width: 20, marginRight: 5,flex: 1,  alignItems: 'flex-end', justifyContent: 'flex-start'}}>
             <MinuteView duration={Guides[25].duration}/>
           </View>
           </ImageBackground>

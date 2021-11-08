@@ -184,10 +184,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         marginVertical: 15,
-        marginLeft: 10
+        display: 'flex',
+        width: '100%',
     },
     small_guideComponent: {
-        width: 110,
+        flex: 1.5,
         height: 70,
         borderRadius: 20,
         marginHorizontal: 20,
@@ -201,12 +202,12 @@ const styles = StyleSheet.create({
         top: -2,
     },
     textBox: {
-        width: 200, 
+        flex: 3,
         height: 70, 
         justifyContent: 'center',
     },
     whiteline: {
-        width: 390,
+        width: '100%',
         height: 2,
         backgroundColor: 'white',
         borderRadius: 1,
@@ -221,7 +222,7 @@ const styles = StyleSheet.create({
         borderRadius: 48
     },
     big_guideComponent: {
-        width: 180,
+        width: 160,
         height: 90,
         borderRadius: 20,
         margin: 6,
@@ -242,6 +243,7 @@ const styles = StyleSheet.create({
         display: 'flex', 
         alignItems: 'center', 
         marginTop: 27,
+        padding: 10,
     },
 })
 

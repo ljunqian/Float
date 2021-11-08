@@ -184,7 +184,7 @@ const MeditateScreen = ({navigation}) => {
               Featured
             </Text> 
           </View>
-          <View style={{flex: 1, alignItems: 'flex-end'}}>
+          <View style={{width: 20, marginRight: 5, flex: 1,  alignItems: 'flex-end'}}>
             <MinuteView duration={Guides[1].duration}/>
           </View>
         </ImageBackground>

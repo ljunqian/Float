@@ -35,7 +35,6 @@ const RewardScreen = ({ navigation }) => {
   
   const AssetChoices = ({assetArray, type}) => {
     return (
-      <Fragment>
         <View style={style.rewardRowContainer}>
           {/*Populate Asset Reward Cards*/}
           {assetArray.map((asset) => {
@@ -55,7 +54,6 @@ const RewardScreen = ({ navigation }) => {
           })
           }
         </View>
-      </Fragment>
     )
   }
 
@@ -78,34 +76,40 @@ const RewardScreen = ({ navigation }) => {
   }
 
   return (
-      <VStack style={{backgroundColor: color.bg}}>
+      <View style={{backgroundColor: color.bg, width: '100%', minHeight: '100%'}}>
         { modalVisible && 
           <RewardPopup 
             enoughCoins={modalEnoughCoins} navigation={navigation} 
             setModalVisible={setModalVisible}
             modalVisible={modalVisible} modalContent={modalContent}
         />}
-        <ProfileScreen style={{position: 'absolute', zIndex: 1}}/>
-      
-        <HStack style={style.tabBar}>
-          {rewardTabs.map((tab)=>(
-            <TouchableOpacity onPress= { () => {setIsTab(tab.title)}} key={tab.title}>
-              <View style = {{alignItems: 'center', justifyContent: 'center'}}>
-              { isTab === tab.title ?
-                <TabClicked img={tab.imgClicked} text={tab.title}/>
-                : <TabNotClicked img={tab.imgNotCLicked} text={tab.title}/>
-              }
-              </View>
-            </TouchableOpacity>
-          ))}
-        </HStack>
 
-        <ScrollView showsVerticalScrollIndicator={false}>
+        <View style={{height: '40%'}}>
+          <ProfileScreen style={{position: 'absolute', zIndex: 1, top: 0,height: 180}}/>
+        
+          <View style={style.tabBar}>
+            {rewardTabs.map((tab)=>(
+              <TouchableOpacity onPress= { () => {setIsTab(tab.title)}} key={tab.title}>
+                <View style = {{alignItems: 'center', justifyContent: 'center'}}>
+                { isTab === tab.title ?
+                  <TabClicked img={tab.imgClicked} text={tab.title} left={tab.left}/>
+                  : <TabNotClicked img={tab.imgNotCLicked} text={tab.title} left={tab.left}/>
+                }
+                </View>
+              </TouchableOpacity>
+            ))}
+          </View>
+        </View>
+
+        <ScrollView showsVerticalScrollIndicator={true} style={{width: '100%', paddingTop: 20, height: '60%'}}>
           {isTab === "Background" ? (
             <AssetChoices assetArray={userData.backgroundList} type={"background"} />
           ) 
           : isTab === "Hats" ? (
+            <>
             <AssetChoices assetArray={userData.hatList} type={"hat"}/>
+            <AssetChoices assetArray={userData.hatList} type={"hat"}/>
+            </>
             
           ) : isTab === "Accessories" ? (
             <AssetChoices assetArray= {userData.accessoryList} type={"accessory"}/>
@@ -124,10 +128,10 @@ const RewardScreen = ({ navigation }) => {
               </View>
             </Fragment>
           ) : (
-            console.log("Failed to load reward cards")
+            <View />
           )}
       </ScrollView>
-    </VStack>
+    </View>
   )
 }
 
@@ -151,10 +155,7 @@ const RewardCard = (props) => {
   }
 
   return (
-    <View>
-      <TouchableOpacity onPress={() => { purchaseOrEquip(); }}>
-        <VStack>
-          <View style={[style.rewardCardContainer, { backgroundColor: equippedstatus? '#A5A6F6' : 'white' }]}>
+      <TouchableOpacity onPress={() => { purchaseOrEquip(); }} style={[style.rewardCardContainer, { backgroundColor: equippedstatus? '#A5A6F6' : 'white' }]}>
             <Image source={props.img} style={style.rewardItemImage} />
             <HStack>
               <Text style={{ marginTop: 5, marginLeft: 5, fontSize: 14, fontFamily: 'Montserrat-Bold' }}>
@@ -175,10 +176,7 @@ const RewardCard = (props) => {
                 )}
               </View>
             </HStack>
-          </View>
-        </VStack>
       </TouchableOpacity>
-    </View>
   )
 }
 

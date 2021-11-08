@@ -181,7 +181,7 @@ const SleepScreen = ({navigation}) => {
               Featured
             </Text> 
           </View>
-          <View style={{flex: 1, alignItems: 'flex-end'}}>
+          <View style={{width: 20, marginRight: 5, flex: 1, alignItems: 'flex-end'}}>
             <MinuteView duration={Guides[12].duration}/>
           </View>
           </ImageBackground>

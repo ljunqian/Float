@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { View, Text, StyleSheet, ImageBackground, SafeAreaView } from 'react-native';
+import { View, Text, StyleSheet, ImageBackground, SafeAreaView,Dimensions } from 'react-native';
 import typo from '../../../styles/typography';
 
 import MedBG1 from '../../../assets/images/meditate-planet1.png';
@@ -69,6 +69,8 @@ const Activity = ({ navigation, route }) => {
 } */
 
 const VideoComponent = ({ array, navigation }) => {
+    const windowWidth = Dimensions.get('window').width;
+    const windowHeight = Dimensions.get('window').height;
 
     const dispatch = useDispatch();
     const playerRef = useRef();
@@ -88,8 +90,8 @@ const VideoComponent = ({ array, navigation }) => {
             <SafeAreaView>
                 <YoutubePlayer
                     ref={playerRef}
-                    height={231}
-                    width={410}
+                    height={windowHeight*0.3}
+                    width={windowWidth}
                     play={false}
                     videoId={detail.source} 
                     onChangeState={event => {

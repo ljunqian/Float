@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { Button, Text, View, StyleSheet, ScrollView, TouchableOpacity, Image, Pressable, Modal, Keyboard, TextInput } from 'react-native';
+import { Dimensions, Text, View, StyleSheet, ScrollView, TouchableOpacity, Image, Pressable, Modal, Keyboard, TextInput } from 'react-native';
 import CalendarPicker from 'react-native-calendar-picker';
 import moment from 'moment';
 import BottomDrawer from 'react-native-bottom-drawer-view';
@@ -268,8 +268,10 @@ const NewJourney = ({ info }) => {
     )
   }
 
+  const windowHeight = Dimensions.get('window').height;
+
   return(
-    <View style={{display: 'flex', width: 411, height: 731}}>
+    <View style={{display: 'flex', width: 411, height: windowHeight}}>
       <JourneyBgImg />
       <View style={{marginTop: 33, alignSelf: 'center'}}>
         <Text style={typo.H0}>
@@ -382,10 +384,11 @@ const MainProf = ({ navigation }) => {
       }
     };
   }
-console.log('is user', info);
+
+  const windowWidth = Dimensions.get('window').width;
   return (
     <View>
-    <ScrollView style={{ backgroundColor: '#3C886B', color: 'white' }}>
+    <ScrollView style={{ backgroundColor: '#3C886B', color: 'white', }}>
     <View style={{backgroundColor: color.bg, height: 280, width: '100%', borderBottomLeftRadius: 50, borderBottomRightRadius: 50, elevation: 10, zIndex: -1}}>
       <ProfileScreen />
       <Text style={[typo.H1, { textAlign: 'center' }]}>{info.username}</Text> 
@@ -393,8 +396,8 @@ console.log('is user', info);
     </View>
     <Text style={[typo.H1, {marginTop: 20, marginLeft: 20, marginBottom: 13, textShadowColor: '#262626', textShadowOffset: {width: 2, height: 2}, textShadowRadius: 10}]}>Mood Tracker</Text>
       <View style={{alignItems: 'center', position: 'relative'}}>
-        <View style={{marginBottom: 80}}>
-          <View style={{backgroundColor: '#FFF', position: 'absolute', width: 340, height: '85%', borderRadius: 20, marginTop: 47, alignSelf: 'center'}}/>
+        <View style={{marginBottom: 100}}>
+          <View style={{backgroundColor: '#FFF', position: 'absolute', width: '90%', height: '85%',borderRadius: 20, marginTop: 47, alignSelf: 'center'}}/>
           <CalendarPicker 
               customDayHeaderStyles={customDayHeaderStylesCallback}
               customDatesStyles={customDatesStyles}
@@ -430,7 +433,7 @@ console.log('is user', info);
                 previousTitleStyle={{paddingLeft: 45}}
                 nextTitle= {<Image source={Forward}/>}
                 nextTitleStyle={{paddingRight: 45}}
-                width = {360}
+                width = {windowWidth*0.9}
                 height= {400}
                 enableDateChange= {false}
             />
@@ -467,12 +470,12 @@ console.log('is user', info);
         
         <ScrollView style={{backgroundColor: '#262626'}}>
         <Pressable style={{paddingBottom: 80, marginTop: 20}}>
-        <View style={{backgroundColor:'#262626', paddingTop:40}}>
+        <View style={{backgroundColor:'#262626', paddingTop:20}}>
 
-<Text style={{fontFamily:'FredokaOne-Regular', fontSize:32, marginLeft:20, color:'white'}}>Active Chats</Text>
-<View style={{
-          flexDirection: "row", paddingTop: 10,  paddingBottom: 25
-        }}>
+<Text style={{fontFamily:'FredokaOne-Regular', fontSize:28, marginLeft:20, color:'white'}}>Active Chats</Text>
+<ScrollView style={{
+          flexDirection: "row", paddingTop: 10,  paddingBottom: 25, 
+        }} horizontal={true}>
            <TouchableOpacity onPress={() => { navigation.navigate('Chat Screen') }}>
                 <FriendTop name="Friend 1" img={Friend1} />
            </TouchableOpacity>
@@ -483,7 +486,7 @@ console.log('is user', info);
            <FriendTop name="Friend 3" img={Friend3} />
            </TouchableOpacity>
 
-        </View>
+        </ScrollView>
 
 
 <View style={{
@@ -510,7 +513,7 @@ console.log('is user', info);
                 </TouchableOpacity>
               </View>
 
-<Text style={{fontFamily:'FredokaOne-Regular', fontSize:32, marginLeft:20, color:'white'}}>My Friends</Text>
+<Text style={{fontFamily:'FredokaOne-Regular', fontSize:28, marginLeft:20, marginTop: 20, color:'white'}}>My Friends</Text>
 <SearchBar clicked={clicked} setClicked={setClicked} setSearchPhrase={setSearchPhrase} searchPhrase={searchPhrase}/>
 <View style={{
   flexDirection: "column", paddingTop: 10, paddingLeft: 5, paddingBottom: 25

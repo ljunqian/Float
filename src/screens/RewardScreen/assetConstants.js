@@ -31,21 +31,25 @@ export const rewardTabs = [
         title: 'Background',
         imgClicked: BackGroundTabClicked,
         imgNotCLicked: BackGroundTab,
+        left: -3
     },
     {
         title: 'Hats',
         imgClicked: HatsTabClicked,
         imgNotCLicked: HatsTab,
+        left: -6
     },
     {
         title: 'Accessories',
         imgClicked: AccessoriesTabClicked,
         imgNotCLicked: AccessoriesTab,
+        left: -4
     },
     {
         title: 'Vouchers',
         imgClicked: VouchersTabClicked,
         imgNotCLicked: VouchersTab,
+        left: -3
     },
 
 ]

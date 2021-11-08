@@ -45,7 +45,7 @@ const Recents = ({ navigation }) => {
                                 <Text style={[typo.T1, {color: 'white'}]}>{item.title}</Text>
                                 <Text style={[typo.T3, {color: 'grey'}]}>{item.type} - {item.duration} mins</Text>
                             </View>
-                            <Image source={forward} style={{marginLeft: 10, marginRight: 40}}/>
+                            <Image source={forward} style={{marginLeft: 10, marginRight: 20}}/>
                         </TouchableOpacity>
                         <View style={styles.whiteline}></View>
                     </View>
@@ -91,10 +91,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         marginVertical: 15,
-        marginLeft: 10
+        display: 'flex',
+        width: '100%',
     },
     imageContainer: {
-        width: 110,
+        flex: 1.5,
         height: 70,
         borderRadius: 20,
         marginHorizontal: 20,
@@ -108,12 +109,12 @@ const styles = StyleSheet.create({
         top: -2,
     },
     textBox: {
-        width: 200, 
+        flex: 3,
         height: 70, 
         justifyContent: 'center',
     },
     whiteline: {
-        width: 390,
+        width: '100%',
         height: 2,
         backgroundColor: 'white',
         borderRadius: 1,

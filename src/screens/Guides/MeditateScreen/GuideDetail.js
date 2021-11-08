@@ -48,10 +48,10 @@ const GuideDetail = ({ navigation, props, route }) => {
     }, [detail]);
 
     return (
-        <View style={{display: 'flex'}}> 
+        <View style={{display: 'flex', width: '100%', height: '100%', backgroundColor: 'yellow'}}> 
             {/*IMAGE DIV*/}
             <View style={styles.imgContainer}>
-                <Image source={detail.thumbnail} style={{position: 'absolute', zIndex: 0, top: -7, left: -8, width:427, height:260 }} />
+                <Image source={detail.thumbnail} style={{position: 'absolute', zIndex: 0, top: -7, left: -8, width:'120%', height:'120%' }} />
             </View>
 
             {/*CONTENT DIV*/}
@@ -106,26 +106,26 @@ const GuideDetail = ({ navigation, props, route }) => {
 
 const styles = StyleSheet.create({
     imgContainer : {
-        height : 240,
-        width : 412,
+        flex: 3,
+        width : '100%',
         backgroundColor : '#EEEEEE',    
     },
     cntContainer : {
-        height: 330,
-        width: 412,
-        paddingHorizontal: 20,
+        flex: 4,
+        width: '100%',
+        padding: 20,
         backgroundColor : '#272727',     
     },
     btnContainer : {
         display: 'flex',
         height: 100,
-        width: 412,
+        width: '100%',
         alignItems: 'center',
         backgroundColor : '#272727',     
     },
     button : {
         height: 48,
-        width: 370,
+        width: '90%',
         alignItems: 'center',   
         justifyContent: 'center',
         borderRadius: 48, 

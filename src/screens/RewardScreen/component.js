@@ -4,25 +4,25 @@ import style from './style';
 
 export const TabClicked = (props) =>{ 
     return(
-      <Fragment>
-            <View style={{backgroundColor: '#A5A6F6', height: 2, width: 56, marginBottom: 8}}/>
+      <View style={{display: 'flex', alignItems: 'center', width: 60}}>
+            <View style={{backgroundColor: '#A5A6F6', height: 2, width: 30, marginBottom: 8, }}/>
               <View style = {style.tabIcon}>
-              <Image source={props.img}/>
-            </View>
-            <Text style ={{fontSize: 14, fontFamily: 'Montserrat-Bold', color: '#A5A6F6'}}>{props.text}</Text>
-      </Fragment>
+                <Image source={props.img} style={{left: props.left}}/>
+              </View>
+            <Text style ={{fontSize: 8, fontFamily: 'Montserrat-Bold', color: '#A5A6F6'}}>{props.text}</Text>
+      </View>
     )
   }
   
 export const TabNotClicked =(props) => {
     return(
-      <Fragment>
-        <View style={{height: 2, width: 56, marginBottom: 8}}/>
+      <View style={{display: 'flex', alignItems: 'center', width: 60}}>
+        <View style={{height: 2, width: 40, marginBottom: 8,}}/>
           <View style = {style.tabIcon}>
-          <Image source={props.img}/>
+          <Image source={props.img} style={{left: props.left}}/>
         </View>
-        <Text style ={{fontSize: 14, fontFamily: 'Montserrat-Bold', color: 'white'}}>{props.text}</Text>
-      </Fragment>
+        <Text style ={{fontSize: 8, fontFamily: 'Montserrat-Bold', textAlign: 'center', color:'white'}}>{props.text}</Text>
+      </View>
     )
   }
 

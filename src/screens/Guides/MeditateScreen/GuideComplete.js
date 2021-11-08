@@ -100,7 +100,7 @@ const MidComponent = ({style, navigation, detail}) => {
                 <Image source={avatarsmall} />
             </View>            
 
-            <View style={{flex: 3, marginTop: 55}}>
+            <View style={{flex: 3, marginTop: 55, width: '100%'}}>
                 <TouchableOpacity style={[styles.button, {backgroundColor: buttoncolour[detail.type] }]} onPress={() => navigation.popToTop()}>
                     <Text style={[typo.H3, {color: 'white'}]}>Done</Text> 
                 </TouchableOpacity>    
@@ -211,13 +211,15 @@ const styles = StyleSheet.create({
     actComponent: {
         display: 'flex',
         flex: 1,
+        width: '100%',
         justifyContent: 'center',
         alignItems: 'center',
         //backgroundColor: 'white',
     },
     button : {
         height: 48,
-        width: 370,
+        width: '90%',
+        alignSelf: 'center',
         alignItems: 'center',   
         justifyContent: 'center',
         borderRadius: 48, 

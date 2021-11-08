@@ -2,28 +2,33 @@ import {StyleSheet} from 'react-native';
 
 const style = StyleSheet.create({
     tabBar: {
-      width: 411,
-      marginBottom: 20,
-      justifyContent: 'center',
+      width: '90%',
+      alignSelf: 'center',
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'space-evenly',
       alignItems: 'center',
-      marginTop:30,
+      marginTop: 20,
     },
 
     tabIcon: {
-      width: 30,
-      height: 30,
-      marginHorizontal: 31
+      width: 20,
+      height: 20,
+      marginBottom: 8,
+      //marginHorizontal: 31
     },
 
     rewardRowContainer: {
-      marginHorizontal: 12,
+     // marginHorizontal: 12,
+      width: '100%',
       flexDirection: 'row',
-      flexWrap: 'wrap'
+      flexWrap: 'wrap',
+      justifyContent: 'flex-start',
     },
     
     rewardCardContainer: {
       margin: 8,
-      width: 176,
+      width: '45%',
       padding: 6,
       borderRadius: 10
     },
