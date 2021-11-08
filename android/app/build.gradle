@@ -147,6 +147,12 @@ android {
             keyAlias 'androiddebugkey'
             keyPassword 'android'
         }
+        release {
+            storeFile file('float_key.keystore')
+            storePassword 'floatkey'
+            keyAlias 'float_key'
+            keyPassword 'floatkey'
+        }
     }
     buildTypes {
         debug {
