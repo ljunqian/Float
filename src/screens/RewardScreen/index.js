@@ -13,17 +13,15 @@ import CoinIcon from '../../assets/icons/coins.png';
 import { TabClicked, TabNotClicked, RewardPopup } from './component';
 
 import {connect, useSelector, useDispatch} from 'react-redux';
-import {updateAvatarState, purchaseAsset} from './Redux/RewardAction';
+import {updateAvatarState, purchaseAsset, initialiseState, resetData} from './Redux/RewardAction';
 import { updateCoins } from '../GlobalStates/UserAction';
 import { rewardTabs } from './assetConstants';
 
-import { API, Auth, graphqlOperation } from 'aws-amplify';
-import { getUser } from "../../graphql/queries"
 
 const RewardScreen = ({ navigation }) => {
   const [isTab, setIsTab] = useState("Background");
 
-  const userData = useSelector((state) => state.reward);
+  const rewardData = useSelector((state) => state.reward);
 
   const [modalVisible, setModalVisible] = useState(false);
   const [modalContent, setModalContent] = useState();
@@ -33,7 +31,23 @@ const RewardScreen = ({ navigation }) => {
 
   const dispatch = useDispatch();
   
+  useEffect(()=>{
+    console.log('initialising')
+    // for demo purpose
+    dispatch(resetData());
+    dispatch(initialiseState());
+  }, []);
+
+
+  const isPurchased = (name, type) => {
+    if (name && type) {
+      return rewardData['purchased_'+type].includes(name);
+    }
+    return false;
+  }
   const AssetChoices = ({assetArray, type}) => {
+
+
     return (
         <View style={style.rewardRowContainer}>
           {/*Populate Asset Reward Cards*/}
@@ -44,8 +58,8 @@ const RewardScreen = ({ navigation }) => {
                 img={asset.source}
                 asset={asset.name}
                 coinsValue={asset.value}
-                purchased={asset.purchased}
-                equipped={asset.name === userData[type]}
+                purchased={isPurchased(asset.name, type)}
+                equipped={asset.name === rewardData[type]}
                 buyAsset={() => buyAsset(type, asset)}
                 updateUser={(name) => updateAvatar(type, name)}
                 showModal={(enough) => showModal(asset, enough)}
@@ -103,25 +117,27 @@ const RewardScreen = ({ navigation }) => {
 
         <ScrollView showsVerticalScrollIndicator={true} style={{width: '100%', paddingTop: 20, height: '60%'}}>
           {isTab === "Background" ? (
-            <AssetChoices assetArray={userData.backgroundList} type={"background"} />
+            <AssetChoices assetArray={rewardData.backgroundList} type={"background"} />
           ) 
           : isTab === "Hats" ? (
             <>
-            <AssetChoices assetArray={userData.hatList} type={"hat"}/>
-            <AssetChoices assetArray={userData.hatList} type={"hat"}/>
+            <AssetChoices assetArray={rewardData.hatList} type={"hat"}/>
             </>
             
           ) : isTab === "Accessories" ? (
-            <AssetChoices assetArray= {userData.accessoryList} type={"accessory"}/>
+            <AssetChoices assetArray= {rewardData.accessoryList} type={"accessory"}/>
 
           ) : isTab === "Vouchers" ? (
             <Fragment>
               <View style={{ flex: 1, display: 'flex' }}>
-                {userData.voucherList.map((voucherInfo) => {
+                {rewardData.voucherList.map((voucherInfo) => {
                   return (
                     <VoucherCard key={voucherInfo.id} img={voucherInfo.source} asset={voucherInfo.name} coinsValue={voucherInfo.value}
-                      redeemed={voucherInfo.purchased} showModal={(enough) => showModal(voucherInfo, enough)}
-                      buyVoucher={()=>dispatch(purchaseAsset('voucher', voucherInfo.name))} />
+                      redeemed={isPurchased(voucherInfo.name,'voucher' )} showModal={(enough) => showModal(voucherInfo, enough)}
+                      buyVoucher={()=>{
+                        dispatch(purchaseAsset('voucher', voucherInfo.name))
+                        dispatch(updateCoins({coins: coins-voucherInfo.value}))
+                      }} />
                   )
                 })
                 }

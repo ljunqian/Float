@@ -14,18 +14,17 @@ import {
   PURCHASE_ACCESSORY,
   PURCHASE_BACKGROUND,
   PURCHASE_VOUCHER,
+  INITIALISE_STATE
 } from './type'
-
-import { API, Auth, graphqlOperation } from 'aws-amplify';
-import { getUser } from "../../../graphql/queries"
-import { updateUser } from "../../../graphql/mutations"
-
-import React, { useEffect } from 'react';
 
 const INITIAL_STATE = {
   background: 'Mountain',
   hat: '',
   accessory: '',
+  purchased_background: [],
+  purchased_hat: [],
+  purchased_accessory: [],
+  purchased_voucher:  [],
   backgroundList: BackgroundImages,
   hatList: HatImages,
   accessoryList: AccessoryImages,
@@ -47,6 +46,19 @@ const updateAssetList = (assetArray, assetName) => {
 
 const RewardReducer = (prevState = INITIAL_STATE, action) => {
   switch (action.type) {
+    case INITIALISE_STATE: {
+      const data = action.payload;
+      return {
+        ...prevState,
+        background: data.equippedBackground,
+        hat: data.equippedHat,
+        accessory: data.equippedAccesory,
+        purchased_background: data.purchasedBackground,
+        purchased_hat: data.purchasedHat,
+        purchased_accessory: data.purchasedAccessory,
+        purchased_voucher: data.purchasedVoucher,
+      }
+    }
     case CHANGE_BACKGROUND: {
       return {
         ...prevState,
@@ -74,34 +86,30 @@ const RewardReducer = (prevState = INITIAL_STATE, action) => {
       }
     }
     case PURCHASE_BACKGROUND: {
-      const newBackground = updateAssetList(prevState.backgroundList, action.payload);
       return {
         ...prevState,
-        backgroundList: newBackground,
-        background: action.payload,
+        purchased_background: action.payload.content,
+        background: action.payload.asset,
       }
     }
     case PURCHASE_HAT: {
-      const newHat = updateAssetList(prevState.hatList, action.payload);
       return {
         ...prevState,
-        hatList: newHat,
-        hat: action.payload,
+        purchased_hat: action.payload.content,
+        hat: action.payload.asset,
       }
     }
     case PURCHASE_ACCESSORY: {
-      const newAccessory = updateAssetList(prevState.accessoryList, action.payload);
       return {
         ...prevState,
-        accessoryList: newAccessory,
-        accessory: action.payload,
+        purchased_accessory: action.payload.content,
+        accessory: action.payload.asset,
       }
     }
     case PURCHASE_VOUCHER: {
-      const newVoucher = updateAssetList(prevState.voucherList, action.payload);
       return {
         ...prevState,
-        voucherList: newVoucher,
+        purchased_voucher: action.payload.content,
       }
     }
     default:
