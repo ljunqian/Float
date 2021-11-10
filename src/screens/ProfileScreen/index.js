@@ -169,7 +169,9 @@ const FriendTop = ({ img, name }) => {
 const NewJourney = ({ info }) => {
   const [modalVisible, setModalVisible] = useState(false); 
   const [type, setType] = useState('');
-
+  const {levels} = useSelector((state) => state.user);
+  const {exp} = useSelector((state) => state.user);
+  
   const JourneyBtn = ({ text, colour, top, left, pressHanldler }) => {
     return(
       <TouchableOpacity style={[style.journeyButton, {top: top, left: left}]} onPress={pressHanldler}> 
@@ -245,10 +247,10 @@ const NewJourney = ({ info }) => {
             </Text>
             <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center', right: 5, margin: 10}}>
               <Text style={[typo.T3, {color:'white'}]}>
-                Level 2
+                Level {levels['level'+type]}
               </Text>
               <Progress.Bar 
-                progress={0.4}
+                progress={exp && exp[type+'exp'] ? (exp[type+'exp']%180)/180 : 0}
                 width={100}
                 height={8}
                 color={colours[type]}
@@ -321,13 +323,11 @@ const MainProf = ({ navigation }) => {
 
       // Get list of feelings, and update myFeelings
       data.getUser.feelings.map(item => {
-        console.log('in item', item)
         const newArr = {
           date: item.slice(6,16),
           feeling: item.slice(26,-1).toLowerCase()
         }
         myFeelings = [...myFeelings, newArr];
-        console.log('in updated', myFeelings);
         setFeelings(myFeelings);
       })
       
@@ -360,7 +360,6 @@ const MainProf = ({ navigation }) => {
   let customDatesStyles = [];
   let today = moment();
   let day = today.clone().startOf('month');
-  console.log('in here',day);
   //stylise individual date(s)
   feelings.map(item => {
     customDatesStyles.push({
@@ -382,7 +381,6 @@ const MainProf = ({ navigation }) => {
       }
     };
   }
-console.log('is user', info);
   return (
     <View>
     <ScrollView style={{ backgroundColor: '#3C886B', color: 'white' }}>
@@ -560,10 +558,10 @@ const moodColors = {
 }
 
 const colours = {
-  "Meditate": color.Med1,
-  "Move": color.Move1,
-  "Focus": color.Focus3,
-  "Sleep": color.Sleep2,
+  "meditate": color.Med2,
+  "move": color.Move2,
+  "focus": color.Focus3,
+  "sleep": color.Sleep1,
 }
 
 const background = {

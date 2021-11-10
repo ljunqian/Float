@@ -13,7 +13,6 @@ import Sleep1 from '../../../assets/images/sleep1.png';
 // import Sleep3 from '../../../assets/images/sleep3.png';
 import play from '../../../assets/icons/play.png';
 import { Guides, types, badges } from '../constants';
-import {updateLevel } from '../../GlobalStates/UserAction';
 import { useSelector, useDispatch } from 'react-redux';
 
 const GuideCardComponent = (props)  => {
@@ -93,11 +92,7 @@ const Explore = ({ array, navigation }) => {
 const SleepScreen = ({navigation}) => {
   const {levelsleep} = useSelector((state) => state.user.levels);
   const {sleepexp} = useSelector((state) => state.user.exp);
-  const dispatch = useDispatch(); 
-  useEffect(()=>{
-    console.log("hi");
-    dispatch(updateLevel({exp: 100}));
-   }, []);
+  
   const GetBadge = () => {
     const levels = levelsleep;
     console.log("in reduce", levels);
@@ -137,7 +132,7 @@ const SleepScreen = ({navigation}) => {
             Level {levelsleep}
           </Text>
           <Progress.Bar 
-            progress={(sleepexp%180)/180}
+            progress={sleepexp? (sleepexp%180)/180 : 0.1}
             width={100}
             height={8}
             color={color.Sleep3}

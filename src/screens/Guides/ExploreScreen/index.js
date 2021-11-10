@@ -23,6 +23,7 @@ import { Guides, types } from '../constants';
 import { getGuidesInfo } from '../Redux/GuidesAction';
 import { useSelector, useDispatch } from 'react-redux';
 import { Auth } from 'aws-amplify';
+import { initiateLevel } from '../../GlobalStates/UserAction';
 
 const ExploreScreen = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -52,7 +53,8 @@ const ExploreScreen = ({ navigation }) => {
 
   useEffect(() => {
     getUserInfo();
-    dispatch(getGuidesInfo({guides: Guides}))
+    // dispatch(getGuidesInfo({guides: Guides}))
+    dispatch(initiateLevel())
   }, []);
 
   const MyRadioButton = ({isDone}) =>{

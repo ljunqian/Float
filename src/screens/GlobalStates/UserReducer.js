@@ -13,7 +13,7 @@ const INITIAL_STATE = {
         friends: []
     },
     levels:{
-      levelMeditate: 1,
+      levelmeditate: 1,
       levelsleep: 1,
       levelfocus: 1,
       levelmove: 1,
@@ -49,22 +49,22 @@ const UserReducer = (prevState = INITIAL_STATE, action) => {
         };
       }
       case UPDATE_LEVEL: {
-        
-        const medtime = prevState.userData.meditateD;
+        const userData = action.payload;
+        const medtime = userData.meditateD;
         const medexp = medtime/10;
-        const medlevelup = Math.max(Math.floor(medexp/180), 1) ;
+        const medlevelup = Math.max(Math.ceil(medexp/180), 1) ;
 
-        const sleeptime = prevState.userData.sleepD;
+        const sleeptime = userData.sleepD;
         const sleepexp = sleeptime/10;
-        const sleeplevelup = Math.max(Math.floor(sleepexp/180), 1) ;
+        const sleeplevelup = Math.max(Math.ceil(sleepexp/180), 1) ;
 
-        const movetime = prevState.userData.moveD;
+        const movetime = userData.moveD;
         const moveexp = movetime/10;
-        const movelevelup = Math.max(Math.floor(moveexp/180), 1) ;
+        const movelevelup = Math.max(Math.ceil(moveexp/180), 1) ;
         
-        const focustime = prevState.userData.focusD;
+        const focustime = userData.focusD;
         const focusexp = focustime/10;
-        const focuslevelup = Math.max(Math.floor(focusexp/180), 1) ;
+        const focuslevelup = Math.max(Math.ceil(focusexp/180), 1) ;
         
         
 
@@ -77,7 +77,7 @@ const UserReducer = (prevState = INITIAL_STATE, action) => {
             focusexp: focusexp,
           },
           levels:{
-            levelMeditate: medlevelup,
+            levelmeditate: medlevelup,
             levelsleep: sleeplevelup,
             levelfocus: focuslevelup,
             levelmove: movelevelup,

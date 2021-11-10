@@ -1,4 +1,5 @@
 import React, {Fragment} from 'react';
+import {HStack} from 'native-base';
 import { Button, Text, View, ScrollView, TouchableOpacity, Image, Modal, Alert, Pressable } from 'react-native';
 import style from './style';
 
@@ -63,7 +64,7 @@ export const RewardPopup = ({enoughCoins, navigation, modalVisible, setModalVisi
                 ):(
                   <View>
                   <Text style={style.text}>Earn more coins by doing more activities</Text>
-                  <HStack>
+                    <HStack>
                       <Pressable
                         style={[style.button, style.buttonClose, {marginRight: 6, width: 125}]}
                         onPress={() => { navigation.navigate('Meditate'); }}

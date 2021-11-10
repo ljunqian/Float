@@ -11,7 +11,6 @@ import Mov from '../../../assets/images/move-2.png';
 import Badge1 from '../../../assets/images/Badge1.png';
 import play from '../../../assets/icons/play.png';
 import { Guides, types, badges } from '../constants.js';
-import {updateLevel } from '../../GlobalStates/UserAction';
 import { useSelector, useDispatch } from 'react-redux';
 
 const GuideCardComponent = (props)  => {
@@ -129,7 +128,7 @@ const MoveScreen = ({navigation}) => {
             Level {levelmove}
           </Text>
           <Progress.Bar 
-            progress={(moveexp%180)/180}
+            progress={moveexp ? (moveexp%180)/180 : 0}
             width={100}
             height={8}
             color={color.Move3}

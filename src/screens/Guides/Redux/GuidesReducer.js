@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import { Guides } from '../constants';
 import {
   ADD_FAVOURITE,
   DELETE_FAVOURITE,
@@ -11,7 +12,7 @@ import {
 const INITIAL_STATE = {
     favourites: [],
     recents: [],
-    guides: []
+    guides: Guides
 };
 
 const GuidesReducer = (prevState = INITIAL_STATE, action) => {

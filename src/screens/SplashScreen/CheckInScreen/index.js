@@ -29,7 +29,6 @@ const CheckIn = ({navigation}) =>{
             let userFeelings =  [];
 
             getUserData.data.getUser.feelings.map(item => {
-                console.log('in item', item)
                 userFeelings = [...userFeelings, item];
             })
             const updatedFeelings = _.filter(userFeelings, (mood) => mood.slice(6,16) !== userMood.slice(6,16));

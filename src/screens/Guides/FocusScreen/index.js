@@ -11,7 +11,6 @@ import Focus1 from '../../../assets/images/focus-1.png';
 import Badge3 from '../../../assets/images/Badges3.png';
 import play from '../../../assets/icons/play.png';
 import { Guides , badges, types} from '../constants';
-import {updateLevel } from '../../GlobalStates/UserAction';
 import { useSelector, useDispatch } from 'react-redux';
 
 const GuideCardComponent = (props)  => {
@@ -92,11 +91,6 @@ const FocusScreen = ({navigation}) => {
   const {levelfocus} = useSelector((state) => state.user.levels);
   const {focusexp} = useSelector((state) => state.user.exp);
   
-  const dispatch = useDispatch(); 
-  useEffect(()=>{
-    console.log("hi");
-    dispatch(updateLevel({exp: 100}));
-   }, []);
   const GetBadge = () => {
     const levels = levelfocus;
     console.log("in reduce", levels);
@@ -136,7 +130,7 @@ const FocusScreen = ({navigation}) => {
             Level {levelfocus}
           </Text>
           <Progress.Bar 
-            progress={(focusexp%180)/180}
+            progress={focusexp ? (focusexp%180)/180 : 0.1}
             width={100}
             height={8}
             color={color.Focus3}

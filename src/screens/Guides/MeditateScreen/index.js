@@ -11,7 +11,6 @@ import Badge1 from '../../../assets/images/Badge1.png';
 import Med from '../../../assets/images/med-2.png'; 
 import play from '../../../assets/icons/play.png';
 import { Guides, types, badges } from '../constants';
-import {updateLevel } from '../../GlobalStates/UserAction';
 import { useSelector, useDispatch } from 'react-redux';
 
 const GuideCardComponent = (props)  => {
@@ -92,17 +91,11 @@ const Explore = ({ array, navigation }) => {
 }
 
 const MeditateScreen = ({navigation}) => {
-  const {levelMeditate} = useSelector((state) => state.user.levels);
+  const {levelmeditate} = useSelector((state) => state.user.levels);
   const {meditateexp} = useSelector((state) => state.user.exp);
   console.log("in reduce", meditateexp);
-  const dispatch = useDispatch(); 
-  useEffect(()=>{
-    console.log("hi");
-    dispatch(updateLevel({exp: 100}));
-   }, []);
   const GetBadge = () => {
-    const levels = levelMeditate;
-    console.log("in reduce", levels);
+    const levels = levelmeditate;
     let icon1 = badges.Level1;
     let icon = icon1;
     let icon2 = badges.Level2;
@@ -120,6 +113,10 @@ const MeditateScreen = ({navigation}) => {
       
   
   }
+
+  const progress = (meditateexp%180)/180;
+  console.log('progress ', progress);
+
   return (
     <ScrollView sourcestyle={{backgroundColor: '#272727'}}> 
       <ImageBackground source={StarsBG}  resizeMode="cover" style={{width: '100%'}} >
@@ -135,10 +132,10 @@ const MeditateScreen = ({navigation}) => {
           
           <View style={{top: -6, marginLeft: -10}}>
             <Text style={[typo.T1, {color:'white', left:20, top:2 }]}>
-            Level {levelMeditate}
+            Level {levelmeditate}
           </Text>
           <Progress.Bar 
-            progress={(meditateexp%180)/180}
+            progress={meditateexp ? (meditateexp%180)/180 : 0}
             width={100}
             height={8}
             color={'#F57212'}
@@ -146,7 +143,6 @@ const MeditateScreen = ({navigation}) => {
             borderWidth={0}
             top={6}
             left={20}
-            
           />
           </View>
         </View>

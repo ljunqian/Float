@@ -15,7 +15,7 @@ export const updateUserAPI = async ({updatedUser}) => {
       ...updatedUser
     }
     const currentUserData= await API.graphql(graphqlOperation(updateUser, { input: updatedUserData }));
-    return currentUserData;
+    return currentUserData.data.updateUser;
   }
 
 // return the user data from backend
