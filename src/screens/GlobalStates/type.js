@@ -7,3 +7,5 @@ export const SIGN_IN = "SIGN_IN";
 export const SIGN_OUT = "SIGN_OUT";
 export const UPDATE_COINS = "UPDATE_COINS";
 export const UPDATE_LEVEL = "UPDATE_LEVEL";
+
+export const CHAT_NAME = "CHAT_NAME";

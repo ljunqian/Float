@@ -8,7 +8,7 @@
 
 import Avatar from './src/assets/images/avatar.png';
 import React, { useState, useEffect } from 'react';
-import { Animated, Image, View, TouchableOpacity, Text, Easing, StyleSheet } from 'react-native';
+import { Animated, Image, View, TouchableOpacity, Text, Easing, StyleSheet, LogBox } from 'react-native';
 import typo from './src/styles/typography';
 import {color}  from './src/styles/theme';
 import { NavigationContainer } from '@react-navigation/native';
@@ -212,13 +212,14 @@ const BottomBar = () => {
 }
 
 const App = () => {
-
+LogBox.ignoreAllLogs(true);
   Analytics.configure({ disabled: true })
   const [verticalVal, setVerticalVal] = useState(new Animated.Value(1));
   const [isSplash, setIsSplash] = useState(true);
   const [state, dispatch] = React.useContext(Context);
-
+  const [addFriend, setAddFriend] = useState(true);
   const {coins} = useSelector((state) => state.user.userData);
+  const {chatName} = useSelector((state) => state.user);
   async function isUserAuthenticated() {
     try {
       const user = await Auth.currentAuthenticatedUser();
@@ -359,24 +360,24 @@ const App = () => {
                 <Image source={Avatar}
                              style={{marginLeft:70, width: 40, height: 40, borderRadius:80, alignSelf: 'center'}} />
               ),
-              headerTitle: () => (<Text style={{marginLeft:10, color:'white', fontFamily:'FredokaOne-Regular'}}>username</Text>),
+              headerTitle: () => (<Text style={{marginLeft:10, color:'white', fontFamily:'FredokaOne-Regular'}}>{chatName}</Text>),
               headerTintColor: 'white',
               headerRight: () => (
-              <TouchableOpacity onPress={() => {  }}>
+              <TouchableOpacity onPress={() => {setAddFriend(!addFriend)}}>
                 <View style={{
                   marginTop: 0,
 
                   height: 30,
                   paddingLeft: 10,
                   paddingRight: 10,
-                  backgroundColor: '#CD5959',
+                  backgroundColor: addFriend ? color.Move1 : color.Focus1,
                   alignItems: 'center',
                   justifyContent: 'center',
                   alignSelf: 'center',
 
                   borderRadius: 35
                 }}>
-                  <Text style={{ color: 'white',fontFamily:'FredokaOne-Regular', }}>+ Add Friend</Text>
+                  <Text style={{ color: 'white',fontFamily:'FredokaOne-Regular', }}> {addFriend ? '+ Add Friend' : 'Friend'}</Text>
                 </View>
               </TouchableOpacity>
             ),

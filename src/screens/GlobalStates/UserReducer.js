@@ -1,4 +1,4 @@
-import { SET_USER_DATA, SIGN_IN, UPDATE_COINS, UPDATE_LEVEL } from "./type";
+import { SET_USER_DATA, SIGN_IN, UPDATE_COINS, UPDATE_LEVEL, CHAT_NAME } from "./type";
 
 const INITIAL_STATE = {
     userData: {
@@ -25,12 +25,19 @@ const INITIAL_STATE = {
       focusexp:0 ,
       moveexp:0 ,
     },
-
+    chatName: '',
     isLoggedIn: false,
 };
 
 const UserReducer = (prevState = INITIAL_STATE, action) => {
     switch (action.type) {
+      case CHAT_NAME: {
+        console.log('in chatname', action.payload)
+        return {
+          ...prevState,
+          chatName: action.payload,
+        }
+      }
       case SET_USER_DATA: {
         console.log("in reduce", action);
         return {

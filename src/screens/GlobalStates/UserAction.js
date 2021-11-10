@@ -2,7 +2,7 @@ import { Auth } from 'aws-amplify';
 import { DataStore } from '@aws-amplify/datastore';
 import { SQLiteAdapter } from '@aws-amplify/datastore-storage-adapter';
 import { User } from "../../models";
-import { SET_USER_DATA, SIGN_IN, UPDATE_COINS , UPDATE_LEVEL} from './type';
+import { SET_USER_DATA, SIGN_IN, UPDATE_COINS , UPDATE_LEVEL, CHAT_NAME} from './type';
 import { getUserAPI, updateUserAPI } from './api';
 
 DataStore.configure({
@@ -38,6 +38,11 @@ export const getUserInfo = async () => {
 export const updateCoins = ({coins}) => ({
     type: UPDATE_COINS,
     payload: coins
+})
+
+export const changeChatName = ({name}) => ({
+    type: CHAT_NAME,
+    payload: name
 })
 
 export const initiateLevel = () => async (dispatch) => {

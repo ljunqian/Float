@@ -8,14 +8,11 @@ import BottomDrawer from 'react-native-bottom-drawer-view';
 import ProfileScreen from './profile';
 import typo from '../../styles/typography';
 import { color } from '../../styles/theme';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 // import {JCalendar} from './bigCalendar';   // uncomment to view ; comment './weekcalendar'
 import {JCalendar} from './weekCalendar';
 import * as Progress from 'react-native-progress';
-
-import Friend1 from '../../assets/images/friend1.png';
-import Friend2 from '../../assets/images/friend2.png';
-import Friend3 from '../../assets/images/friend3.png';
+import { changeChatName } from '../GlobalStates/UserAction';
 import { API, Auth, graphqlOperation } from 'aws-amplify';
 import { getUser } from "../../graphql/queries"
 import JourneyBG from '../../assets/images/journeybg-1.gif';
@@ -31,6 +28,7 @@ import FocusBG from '../../assets/images/focus-planet.png';
 import Coin from '../../assets/icons/coins.png';
 import Forward from '../../assets/icons/forwardarrow.png';
 import Backward from '../../assets/icons/backarrow.png';
+import { ActiveFriends, Friends } from './constants';
 const SearchBar = (props) => {
   return (
     <View style={style.container2}>
@@ -144,14 +142,14 @@ const JourneyComponent = ({ action, colour, number, number2, suffix, suffix2, is
 }
 
 
-const FriendComponent = ({ img, name }) => {
+const FriendComponent = ({ img, name, onPress }) => {
   return (
-    <View style={style.friend}>
+    <TouchableOpacity style={style.friend} onPress={onPress}>
       <Image source={img} style={{ marginRight: 10, borderRadius: 20 }} />
       <Text style={[{color: "white"}, typo.H2]}>
         {name}
       </Text>
-    </View>
+    </TouchableOpacity>
   )
 }
 
@@ -288,6 +286,7 @@ const NewJourney = ({ info }) => {
 }
 
 const MainProf = ({ navigation }) => {
+  const dispatch = useDispatch();
   const [active, setActive] = useState(true);
   const [clicked, setClicked] = useState(false);
   const [searchPhrase, setSearchPhrase] = useState('');
@@ -381,6 +380,11 @@ const MainProf = ({ navigation }) => {
       }
     };
   }
+
+  const goToChat = (name) => {
+    dispatch(changeChatName({name: name}));
+    navigation.navigate('Chat Screen')
+  }
   return (
     <View>
     <ScrollView style={{ backgroundColor: '#3C886B', color: 'white' }}>
@@ -467,38 +471,36 @@ const MainProf = ({ navigation }) => {
         <Pressable style={{paddingBottom: 80, marginTop: 20}}>
         <View style={{backgroundColor:'#262626', paddingTop:40}}>
 
-<Text style={{fontFamily:'FredokaOne-Regular', fontSize:32, marginLeft:20, color:'white'}}>Active Chats</Text>
-<View style={{
-          flexDirection: "row", paddingTop: 10,  paddingBottom: 25
-        }}>
-           <TouchableOpacity onPress={() => { navigation.navigate('Chat Screen') }}>
-                <FriendTop name="Friend 1" img={Friend1} />
-           </TouchableOpacity>
-           <TouchableOpacity onPress={() => { navigation.navigate('Chat Screen') }}>
-           <FriendTop name="Friend 2" img={Friend2} />
-           </TouchableOpacity>
-           <TouchableOpacity onPress={() => { navigation.navigate('Chat Screen') }}>
-           <FriendTop name="Friend 3" img={Friend3} />
-           </TouchableOpacity>
-
-        </View>
+          <Text style={{fontFamily:'FredokaOne-Regular', fontSize:32, marginLeft:20, color:'white'}}>Active Chats</Text>
+          <ScrollView style={{
+                    flexDirection: "row", paddingTop: 10,  paddingBottom: 25
+                  }} horizontal>
+                    {ActiveFriends.map((friend) => {
+                      return (
+                        <TouchableOpacity onPress={() => {goToChat(friend.name)}}>
+                            <FriendTop name={friend.name} img={friend.img} />
+                      </TouchableOpacity>
+                      )
+                    })}
+                  </ScrollView>
 
 
-<View style={{
+          <View style={{
                 flexDirection: "row", paddingLeft: 5, paddingBottom: 5, paddingRight: 5
               }}>
                 <TouchableOpacity
-                          onPress={() => { navigation.navigate('Chat Screen') }}
-                          style={{
+                  onPress={() => {goToChat('Hao Weng')}}
+                  style={{
 
-                            flex: 1, height: 45, margin: 5,
-                            borderRadius: 5, backgroundColor: '#44BED9', borderRadius: 35
-                          }}>
-                          <Text style={{ color:'white',marginTop: 12, alignSelf: 'center', justifyContent:'center' , fontFamily:'Montserrat-Bold'}}>
-                          Listen to Others</Text>
-                        </TouchableOpacity>
+                    flex: 1, height: 45, margin: 5,
+                    borderRadius: 5, backgroundColor: '#44BED9', borderRadius: 35
+                  }}>
+                    <Text style={{ color:'white',marginTop: 12, alignSelf: 'center', justifyContent:'center' , fontFamily:'Montserrat-Bold'}}>
+                    Listen to Others
+                    </Text>
+                  </TouchableOpacity>
                 <TouchableOpacity
-                  onPress={() => { navigation.navigate('Chat Screen') }}
+                  onPress={() => {goToChat('Hao Weng')}}
                   style={{
 
                     flex: 1, height: 45, margin: 5,
@@ -508,19 +510,17 @@ const MainProf = ({ navigation }) => {
                 </TouchableOpacity>
               </View>
 
-<Text style={{fontFamily:'FredokaOne-Regular', fontSize:32, marginLeft:20, color:'white'}}>My Friends</Text>
-<SearchBar clicked={clicked} setClicked={setClicked} setSearchPhrase={setSearchPhrase} searchPhrase={searchPhrase}/>
-<View style={{
-  flexDirection: "column", paddingTop: 10, paddingLeft: 5, paddingBottom: 25
-}}>
-  <FriendComponent name="Friend 1" img={Friend1} />
-  <FriendComponent name="Friend 2" img={Friend2} />
-  <FriendComponent name="Friend 3" img={Friend3} />
-  <FriendComponent name="Friend 4" img={Friend1} />
-  <FriendComponent name="Friend 5" img={Friend2} />
+              <Text style={{fontFamily:'FredokaOne-Regular', fontSize:32, marginLeft:20, color:'white'}}>My Friends</Text>
+              <SearchBar clicked={clicked} setClicked={setClicked} setSearchPhrase={setSearchPhrase} searchPhrase={searchPhrase}/>
+                <View style={{
+                  flexDirection: "column", paddingTop: 10, paddingLeft: 5, paddingBottom: 25
+                }}>
+                  {Friends.map((friend) => (
+                    <FriendComponent name={friend.name} img={friend.img} onPress={() => {goToChat(friend.name)}}/>
+                  ))}
 
-</View>
-</View>
+                </View>
+            </View>
         </Pressable>
         </ScrollView>
         </>

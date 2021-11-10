@@ -20,8 +20,6 @@ const CheckIn = ({navigation}) =>{
     const [modalVisible, setModalVisible] = useState(false);
     const [moodSelected, setmoodSelected] = useState(null);
 
-    console.log(date)
-
     async function updateUserFeelings(userMood) {
         try{
             const user = await Auth.currentAuthenticatedUser();
@@ -33,7 +31,6 @@ const CheckIn = ({navigation}) =>{
             })
             const updatedFeelings = _.filter(userFeelings, (mood) => mood.slice(6,16) !== userMood.slice(6,16));
             updatedFeelings.unshift(userMood);
-            console.log('out updated', updatedFeelings)
 
             const updateFeelingsDetails = {
                 id: user.attributes.sub,
@@ -41,8 +38,7 @@ const CheckIn = ({navigation}) =>{
                 feelings: updatedFeelings
             }
             const updateUserDataFeelings = await API.graphql(graphqlOperation(updateUser, { input: updateFeelingsDetails }));
-            console.log(updateUserDataFeelings);
-            console.log(getUserData.data.getUser.feelings);
+        
         } catch(error){
             console.log(error);
         }
