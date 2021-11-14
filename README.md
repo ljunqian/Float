@@ -31,6 +31,6 @@ To setup the project on your computer, you should
 
 # References
 1. [Float Figma](https://www.figma.com/file/ibmfrATs58G0Gm1SZZVqFd/FLOAT-1.0?node-id=249%3A802)
-2 [AWS Amplify](https://docs.amplify.aws/start/q/integration/react/?sc_icampaign=react-start&sc_ichannel=docs-home)
+2. [AWS Amplify](https://docs.amplify.aws/start/q/integration/react/?sc_icampaign=react-start&sc_ichannel=docs-home)
 3. Report: 
 4. Deck: 
