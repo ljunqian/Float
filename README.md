@@ -17,6 +17,9 @@ This is an extremely challenging project, because we are a group of randomly sel
 We are using:
 * Node ver 16.13.0 LTS
 * jdk ver 14.0.1
+* aws-amplify ver 6.3.1
+* AWS account
+
 
 # Setup
 To setup the project on your computer, you should 
@@ -28,5 +31,6 @@ To setup the project on your computer, you should
 
 # References
 1. [Float Figma](https://www.figma.com/file/ibmfrATs58G0Gm1SZZVqFd/FLOAT-1.0?node-id=249%3A802)
-2. Report: 
-3. Deck: 
+2 [AWS Amplify](https://docs.amplify.aws/start/q/integration/react/?sc_icampaign=react-start&sc_ichannel=docs-home)
+3. Report: 
+4. Deck: 
