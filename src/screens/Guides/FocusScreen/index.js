@@ -1,4 +1,4 @@
-import React from 'react';
+import React ,{useEffect} from 'react';
 import {Text, View, ScrollView, TouchableOpacity, Image, ImageBackground} from 'react-native';
 import typo from '../../../styles/typography';
 import layout from '../../../styles/componentLayout';
@@ -10,8 +10,8 @@ import SleepAvatar from '../../../assets/images/sleep-avatar.png';
 import Focus1 from '../../../assets/images/focus-1.png';
 import Badge3 from '../../../assets/images/Badges3.png';
 import play from '../../../assets/icons/play.png';
-import { Guides } from '../constants';
-
+import { Guides , badges, types} from '../constants';
+import { useSelector, useDispatch } from 'react-redux';
 
 const GuideCardComponent = (props)  => {
   return (
@@ -88,6 +88,30 @@ const Explore = ({ array, navigation }) => {
 }
 
 const FocusScreen = ({navigation}) => {
+  const {levelfocus} = useSelector((state) => state.user.levels);
+  const {focusexp} = useSelector((state) => state.user.exp);
+  
+  const GetBadge = () => {
+    const levels = levelfocus;
+    console.log("in reduce", levels);
+    let icon1 = badges.Level1;
+    let icon = icon1;
+    let icon2 = badges.Level2;
+    let icon3 = badges.Level3;
+    if(levels == 2){
+        icon = icon2;
+        
+    } else if (levels >= 3){
+      icon = icon3;
+    } 
+  
+    return(
+      icon
+
+    )
+      
+  
+  }
   return (
     <ScrollView style={{backgroundColor: '#272727'}}> 
       <ImageBackground source={StarsBG}  resizeMode="cover" style={{width: '100%'}} >
@@ -99,14 +123,14 @@ const FocusScreen = ({navigation}) => {
           Focus 
         </Text>
         <View style={{flexDirection:'row', alignItems : 'center'}}> 
-          <Image source={Badge3} style={{ top: 3, marginLeft: 17} }/>
+          <Image source={GetBadge()} style={{ top: 3, marginLeft: 17} }/>
           
           <View style={{top: -6, marginLeft: -10}}>
             <Text style={[typo.T1, {color:'white', left:20, top:2}]}>
-            Level 2
+            Level {levelfocus}
           </Text>
           <Progress.Bar 
-            progress={0.4}
+            progress={focusexp ? (focusexp%180)/180 : 0.1}
             width={100}
             height={8}
             color={color.Focus3}
@@ -124,7 +148,9 @@ const FocusScreen = ({navigation}) => {
               Focus Session
             </Text>
 
-            <TouchableOpacity style={[layout.big_button, {backgroundColor: color.Focus1, marginBottom: 30, zIndex:2, flexDirection: 'row'}]}>
+            <TouchableOpacity 
+              onPress={() => navigation.navigate('GuidesLesson', types.focus)}
+              style={[layout.big_button, {backgroundColor: color.Focus1, marginBottom: 30, zIndex:2, flexDirection: 'row'}]}>
                 <Image source={play} style={{marginRight: 5}} />
                 <Text style={[typo.T4, {color: 'white', fontWeight: '400'}]}>
                   Play
@@ -156,6 +182,7 @@ const FocusScreen = ({navigation}) => {
         <Recent array={Guides} navigation={navigation}/>
         <Explore array={Guides} navigation={navigation}/>        
       </View>
+      <View style={{height: 100}}/>
       </ImageBackground>
     </ScrollView>
   )

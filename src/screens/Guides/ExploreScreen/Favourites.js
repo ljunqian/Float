@@ -5,6 +5,7 @@ import typo from '../../../styles/typography';
 import back from '../../../assets/icons/backbutton.png';
 import forward from '../../../assets/icons/forwardarrow.png';
 import { Guides } from '../constants';
+import { useSelector } from 'react-redux';
 
 const SearchComponent = ({ navigation, setUserInput, userInput }) => {
     return (
@@ -22,12 +23,12 @@ const SearchComponent = ({ navigation, setUserInput, userInput }) => {
     )
 }
 
-
-
 const Favourites = ({ navigation }) => {
     const [userInput, setUserInput] = useState('');
-        const ListComponent = ({ navigation }) => {
-        let data = Guides.filter(item => 
+    const {favourites} = useSelector((state) => state.guide);
+
+    const ListComponent = ({ navigation }) => {
+        let data = favourites.filter(item => 
         item.type.toLowerCase().includes(userInput) || 
         item.title.toLowerCase().includes(userInput) || 
         item.description.toLowerCase().includes(userInput)); 
@@ -42,7 +43,7 @@ const Favourites = ({ navigation }) => {
                             </View>
                             <View style={styles.textBox}>
                                 <Text style={[typo.T1, {color: 'white'}]}>{item.title}</Text>
-                                <Text style={[typo.T3, {color: 'grey'}]}>{item.type} - {item.duration} min</Text>
+                                <Text style={[typo.T3, {color: 'grey'}]}>{item.type} - {item.duration} mins</Text>
                             </View>
                             <Image source={forward} style={{marginLeft: 10, marginRight: 40}}/>
                         </TouchableOpacity>

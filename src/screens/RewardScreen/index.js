@@ -117,7 +117,9 @@ const RewardScreen = ({ navigation }) => {
                   return (
                     <VoucherCard key={voucherInfo.id} img={voucherInfo.source} asset={voucherInfo.name} coinsValue={voucherInfo.value}
                       redeemed={voucherInfo.purchased} showModal={(enough) => showModal(voucherInfo, enough)}
-                      buyVoucher={()=>dispatch(purchaseAsset('voucher', voucherInfo.name))} />
+                      buyVoucher={()=>{
+                        buyAsset('voucher', voucherInfo)
+                      }} />
                   )
                 })
                 }

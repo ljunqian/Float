@@ -1,108 +1,139 @@
-import React, {useState} from 'react';
+import React, {Fragment, useState} from 'react';
 import {View, Image, Text, StyleSheet, TouchableOpacity, ScrollView, ImageBackground} from 'react-native';
 import typo from '../../../styles/typography';
 import theme, {color} from '../../../styles/theme';
 import { Icon } from 'react-native-elements';
+import {lessons, icons} from './constants';
 
-import Time from '../../../assets/icons/time.png';
-import Video from '../../../assets/icons/video.png';
-import Tick from '../../../assets/icons/tick.png';
 import Line32 from '../../../assets/images/Line32.png';
-import Explore1 from '../../../assets/images/explore1.png';
-import Explore2 from '../../../assets/images/explore2.png';
-import Explore3 from '../../../assets/images/explore3.png';
-import Explore4 from '../../../assets/images/explore4.png';
-import Meditate1 from '../../../assets/images/med-1.png';
+import Meditate1 from '../../../assets/images/med-2.png';
 import Sleep1 from '../../../assets/images/sleep1.png';
-import Move1 from '../../../assets/images/mov-1.png';
+import Move1 from '../../../assets/images/move-2.png';
 import Focus1 from '../../../assets/images/focus-1.png';
+import { useSelector } from 'react-redux';
 
-const GuideImage = () => {
+const GuideImage = ({type}) => {
     return(
-        <ImageBackground source={Meditate1} style={{height: 200, backgroundColor: 'yellow', }}>
-        
+        <ImageBackground source={image[type]} style={{width: 415, height: 200,}}>
+            <View style={{flex: 1, justifyContent: 'flex-end', margin: 20}}>
+                <Text style={[typo.H4, {color: 'white'}]}>
+                    {title[type]}
+                </Text>
+            </View>
         </ImageBackground >
     )
 }
 
-const GuideLessons = () => {
-    
+const GuideLessons = ({type, navigation}) => {
+
+    const {guides} = useSelector((state) => state.guide);
+
     const MyRadioButton = ({isDone}) =>{
-        return(isDone?
+
+        return(isDone?  
         <View style={style.MyRadioButton}>
-        <Image source={Tick} />
+        <Image source={icons[type].tick} />
         </View>
         :
         <Icon name="radio-button-unchecked" size={30} color="white"/>)
     }
 
-    const CardComponent = ({img, type, duration}) => {
-        
-        const [isDone, setIsDone] = useState(false);
+    const CardComponent = ({ ikey, img, duration, title, description, item }) => {
+        const isDone = guides[item.key].done; //Check if its done from store
 
         return (
-        <View style={{display: 'flex', flexDirection: 'row', alignItems: 'center', marginHorizontal: 15}}>
+        <View key={ikey} style={{display: 'flex', flexDirection: 'row', alignItems: 'center', marginHorizontal: 20, right: 10}}>
             <MyRadioButton isDone={isDone}/>
-            <TouchableOpacity onPress={()=>{setIsDone(!isDone)}}>
-                <View style={style.card}>
-                    <View>
-                        <Text style={typo.H2}>Title of Session</Text>
-                        <View style={{flexDirection: 'row', left: 15, top: 5}}>
-                            <Image source={Video} right={5}/>
-                            <Text style={[typo.T6, {color: colours[type]}]}>{type} Activity</Text>
+            <TouchableOpacity onPress={()=>{navigation.navigate('GuideDetail', item)}}>
+                <View style={[style.card, {opacity: isDone? 0.8:1}]}>
+                    <View style={{width: 225, justifyContent: 'center', bottom: 5}}>
+                        <Text style={typo.H3}>{title}</Text>
+                        <View style={{justifyContent: 'flex-end'}}>
+                            <View style={{flexDirection: 'row', left: 15, top: 5}}>
+                                <Image source={icons[type].video} right={5}/>
+                                <Text style={[typo.T6, {color: colours[type]}]}>{description}</Text>
+                            </View>
+                            <View style={{flexDirection: 'row', left: 16, top: 12}}>
+                                <Image source={icons[type].time} right={5}/>
+                                <Text style={[typo.T6, {color: colours[type]}]}>{duration} mins</Text>
+                            </View>
                         </View>
-                        <View style={{flexDirection: 'row', left: 16, top: 12}}>
-                            <Image source={Time} right={5}/>
-                            <Text style={typo.T6}>{duration}</Text>
-                        </View>
+                        
                     </View>
-                    <Image source={img} style={{backgroundColor: '#EEEEEE', width: 70, height: 70}} />
+                    <Image source={img} style={{width: 70, height: 70, borderRadius: 13, right: 5}} top={5} />
                 </View>
             </TouchableOpacity>
         </View>
         )
     }
+    
+    const LineBG = ({ ikey, src, top, left }) => {
+      return <Image key={ikey} source={src} style={{position: 'absolute', top: top, left: left}}/>
+    }
 
-    const LineBG = ({ src, top, left }) => {
-      return <Image source={src} style={{position: 'absolute', top: top, left: left}}/>
+    const DCardComponent = () => {
+
+        return(
+            lessons[type].map((item, index) =>{
+                console.log('in guidesLesson ' + item.key)
+                return(
+                    <Fragment key={`${item.id}-${index}`}>
+                        <CardComponent key={item.id} title={item.title} img={item.thumbnail} duration={item.duration} description={item.activity} item={item}/>
+                        <LineBG key={item.id} src={Line32} top={item.line} left={'6%'}/>
+                    </Fragment>
+                )
+            })
+        )
     }
 
     return(
-        <View style={{height: 800, backgroundColor: '#272727'}}>
+        <View style={{marginVertical: 10, backgroundColor: '#272727', height: height[type]}}>
             <View style={{marginHorizontal: 15}}>
-           
-                <CardComponent img={Explore1} type={"Meditate"} duration={'3-5 mins'}/>
-                    <LineBG src={Line32} top={'9.25%'} left={'7.5%'}/>
-                <CardComponent img={Explore3} type={"Move"} duration={'40-45 mins'}/>
-                    <LineBG src={Line32} top={'23.25%'} left={'7.5%'}/>
-                <CardComponent img={Explore2} type={"Focus"} duration={'15-20 mins'}/>
-
-                <CardComponent img={Explore1} type={"Meditate"} duration={'10-15 mins'}/>
-                    <LineBG src={Line32} top={'51.5%'} left={'7.5%'}/>
-                <CardComponent img={Explore2} type={"Focus"} duration={'35-40 mins'}/>
-
-                <CardComponent img={Explore4} type={"Sleep"} duration={'3-7 mins'}/>
-                    <LineBG src={Line32} top={'80.25%'} left={'7.5%'}/>
-                <CardComponent img={Explore4} type={"Sleep"} duration={'1-3 mins'}/>
+                <DCardComponent />
             </View>
         </View>
     )
 }
 
-const GuideLesson = ({navigation}) => {
+const GuideLesson = ({navigation, route}) => {
+    
+    const type = route.params;
+    console.log(type);
+
     return(
         <ScrollView contentContainerStyle={[{backgroundColor: '#272727'}]}>
-            <GuideImage />
-            <GuideLessons style={style.container}/>
+            <GuideImage type={type}/>
+            <GuideLessons style={style.container} type={type} navigation={navigation}/>
         </ScrollView>
     )
 }
 
+const height = {
+    "Meditate": 600,
+    "Move": 480,
+    "Focus": 600,
+    "Sleep": 440,
+}
+
+const image = {
+    "Meditate": Meditate1,
+    "Move": Move1,
+    "Focus": Focus1,
+    "Sleep": Sleep1,
+}
+
+const title = {
+    "Meditate": "Meditation Lesson",
+    "Move": "Move Lesson",
+    "Focus": "Focus Lesson",
+    "Sleep": "Sleep Lesson",
+}
+
 const colours = {
-  "Meditate": color.Med1,
-  "Move": color.Move1,
-  "Focus": color.Focus3,
-  "Sleep": color.Sleep2,
+    "Meditate": color.Med1,
+    "Move": color.Move1,
+    "Focus": color.Focus3,
+    "Sleep": color.Sleep2,
 }
 
 const style=StyleSheet.create({
@@ -119,8 +150,8 @@ const style=StyleSheet.create({
         borderWidth: 0.5,
         borderColor: 'rgba(0, 0, 0, 0.5)',
         backgroundColor: 'white',
-        height: 90,
-        width: '85%',
+        height: 100,
+        width: 320,
         borderRadius: 20,
         margin: 10,
         padding: 10,

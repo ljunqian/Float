@@ -1,21 +1,17 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Text, View, ScrollView, TouchableOpacity, ImageBackground, Image} from 'react-native';
 import typo from '../../../styles/typography';
 import { color } from '../../../styles/theme';
 import layout from '../../../styles/componentLayout';
 import * as Progress from 'react-native-progress';
 import oldMedBG from '../../../assets/images/meditate-planet.png';
-// import newMedBG from '../../../assets/images/medbgnew.png';
 import StarsBG from '../../../assets/images/stars.png';
 import MedAvatar from '../../../assets/images/meditate-avatar.png';
 import Badge1 from '../../../assets/images/Badge1.png';
-import Med from '../../../assets/images/med-1.png'; 
-import Mov from '../../../assets/images/mov-1.png';
-import Med2 from '../../../assets/images/med2.png';
+import Med from '../../../assets/images/med-2.png'; 
 import play from '../../../assets/icons/play.png';
-import { overflow } from 'styled-system';
-import { Guides } from '../constants';
-import { Row } from 'native-base';
+import { Guides, types, badges } from '../constants';
+import { useSelector, useDispatch } from 'react-redux';
 
 const GuideCardComponent = (props)  => {
   return (
@@ -26,6 +22,7 @@ const GuideCardComponent = (props)  => {
       </Text>
       <MinuteView duration={props.dur}/>
     </TouchableOpacity>
+
   )
 }
 
@@ -81,7 +78,7 @@ const Explore = ({ array, navigation }) => {
       </Text>
       <View style={{display: 'flex', flexDirection: 'row'}}>
         <View style={{flex: 1, display: 'flex'}}>
-          <GuideCardComponent style={{height: 130}} title={one.title} dur={one.duration} img={one.thumbnail} height={140} width={200} click={() => navigation.navigate('GuideDetail', one)}/>
+          <GuideCardComponent style={{height: 130}} title={one.title} dur={one.duration} img={one.thumbnail} height={140} width={200} click={() => navigation.navigate('GuideDetail', one) }/>
           <GuideCardComponent style={{height: 272}} title={three.title} dur={three.duration} img={three.thumbnail} height={285} width={200} click={() => navigation.navigate('GuideDetail', three)}/>
         </View>
         <View style={{flex: 1, display: 'flex'}}>
@@ -94,9 +91,34 @@ const Explore = ({ array, navigation }) => {
 }
 
 const MeditateScreen = ({navigation}) => {
+  const {levelmeditate} = useSelector((state) => state.user.levels);
+  const {meditateexp} = useSelector((state) => state.user.exp);
+  console.log("in reduce", meditateexp);
+  const GetBadge = () => {
+    const levels = levelmeditate;
+    let icon1 = badges.Level1;
+    let icon = icon1;
+    let icon2 = badges.Level2;
+    let icon3 = badges.Level3;
+    if(levels == 2){
+        icon = icon2;
+        
+    } else if (levels >= 3){
+      icon = icon3;
+    } 
+  
+    return(
+      icon
+    )
+      
+  
+  }
+
+  const progress = (meditateexp%180)/180;
+  console.log('progress ', progress);
+
   return (
     <ScrollView sourcestyle={{backgroundColor: '#272727'}}> 
-      {/* <Image source={oldMedBG} style={{marginRight: 5, position: 'absolute'}} /> */}
       <ImageBackground source={StarsBG}  resizeMode="cover" style={{width: '100%'}} >
       <Image source={oldMedBG} style={{ top: -900, left: -20, zIndex: 0, transform:[{scaleY:-1}], position: 'absolute', width: '110%', resizeMode: "contain"}}/>
       <View style={layout.header}>
@@ -106,14 +128,14 @@ const MeditateScreen = ({navigation}) => {
           Meditation
         </Text>
         <View style={{flexDirection:'row', alignItems : 'center'}}> 
-          <Image source={Badge1} style={{ top: 3, marginLeft: 17} }/>
+          <Image source={GetBadge()} style={{ top: 3, marginLeft: 17} }/>
           
           <View style={{top: -6, marginLeft: -10}}>
             <Text style={[typo.T1, {color:'white', left:20, top:2 }]}>
-            Level 1
+            Level {levelmeditate}
           </Text>
           <Progress.Bar 
-            progress={0.4}
+            progress={meditateexp ? (meditateexp%180)/180 : 0}
             width={100}
             height={8}
             color={'#F57212'}
@@ -121,7 +143,6 @@ const MeditateScreen = ({navigation}) => {
             borderWidth={0}
             top={6}
             left={20}
-            
           />
           </View>
         </View>
@@ -134,7 +155,9 @@ const MeditateScreen = ({navigation}) => {
             <Text style={typo.H1}>
               Meditation Session
             </Text>
-            <TouchableOpacity style={[layout.big_button, {backgroundColor: color.Med1, marginBottom: 30, zIndex:2, flexDirection: 'row'}]}>
+            <TouchableOpacity 
+              onPress={() => navigation.navigate('GuidesLesson', types.meditate)}
+              style={[layout.big_button, {backgroundColor: color.Med1, marginBottom: 30, zIndex:2, flexDirection: 'row'}]}>
                 <Image source={play} style={{marginRight: 5}} />
                 <Text style={[typo.T4, {color: 'white', fontWeight: '400'}]}>
                   Play
@@ -149,15 +172,15 @@ const MeditateScreen = ({navigation}) => {
         borderRadius: 20,
         margin: 6, overflow:'hidden'}}>
         <ImageBackground source={Med} style={{width:'108%', height: 155, top:-12, left:-16, flexDirection:'row', padding: 12}}>  
-        <View style={{flex: 1}}></View>
-        <View style={{flex: 3, alignItems: 'center', justifyContent: 'center'}}>
-          <Text style={[typo.H4, {color: 'white'}]}>
-            Featured
-          </Text> 
-        </View>
-        <View style={{flex: 1, alignItems: 'flex-end'}}>
-          <MinuteView duration={Guides[1].duration}/>
-        </View>
+          <View style={{flex: 1}}></View>
+          <View style={{flex: 3, alignItems: 'center', justifyContent: 'center'}}>
+            <Text style={[typo.H4, {color: 'white'}]}>
+              Featured
+            </Text> 
+          </View>
+          <View style={{flex: 1, alignItems: 'flex-end'}}>
+            <MinuteView duration={Guides[1].duration}/>
+          </View>
         </ImageBackground>
       </View>
         
@@ -165,13 +188,14 @@ const MeditateScreen = ({navigation}) => {
       <View style={layout.container}>
         <Recent array={Guides} navigation={navigation}/>
         <Explore array={Guides} navigation={navigation}/>
-
-        
       </View>
+      <View style={{height: 100}}/>
       </ImageBackground>
     </ScrollView>
   )
 }
+
+
 
 
 export default MeditateScreen;

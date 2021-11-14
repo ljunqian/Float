@@ -1,21 +1,18 @@
 
 import React, { useState, useEffect } from 'react';
-import { Button, Text, View, StyleSheet, ScrollView, TouchableOpacity, Image, ImageBackground, Modal } from 'react-native';
+import { Button, Text, View, StyleSheet, ScrollView, TouchableOpacity, Image, Pressable, Modal, Keyboard, TextInput } from 'react-native';
 import CalendarPicker from 'react-native-calendar-picker';
 import moment from 'moment';
-import SwipeUpDown from 'react-native-swipe-up-down';
+import BottomDrawer from 'react-native-bottom-drawer-view';
 
 import ProfileScreen from './profile';
 import typo from '../../styles/typography';
 import { color } from '../../styles/theme';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 // import {JCalendar} from './bigCalendar';   // uncomment to view ; comment './weekcalendar'
 import {JCalendar} from './weekCalendar';
 import * as Progress from 'react-native-progress';
-
-import Friend1 from '../../assets/images/friend1.png';
-import Friend2 from '../../assets/images/friend2.png';
-import Friend3 from '../../assets/images/friend3.png';
+import { changeChatName } from '../GlobalStates/UserAction';
 import { API, Auth, graphqlOperation } from 'aws-amplify';
 import { getUser } from "../../graphql/queries"
 import JourneyBG from '../../assets/images/journeybg-1.gif';
@@ -31,7 +28,51 @@ import FocusBG from '../../assets/images/focus-planet.png';
 import Coin from '../../assets/icons/coins.png';
 import Forward from '../../assets/icons/forwardarrow.png';
 import Backward from '../../assets/icons/backarrow.png';
+import { ActiveFriends, Friends } from './constants';
+const SearchBar = (props) => {
+  return (
+    <View style={style.container2}>
+      <View
+        style={
+          !props.clicked
+            ? style.searchBar__unclicked
+            : style.searchBar__unclicked
+        }
+      >
+        {/* search Icon */}
 
+        {/* Input field */}
+        <TextInput
+          style={style.input2}
+          placeholder="Search"
+          value={props.searchPhrase}
+          onChangeText={props.setSearchPhrase}
+          onFocus={() => {
+            props.setClicked(true);
+          }}
+        />
+        {/* cross Icon, depending on whether the search bar is clicked or not */}
+        {/* {props.clicked && (
+          <Entypo name="cross" size={20} color="black" style={{ padding: 1 }} onPress={() => {
+              props.setSearchPhrase("")
+          }}/>
+        )} */}
+      </View>
+      {/* cancel button, depending on whether the search bar is clicked or not */}
+     {/*  {props.clicked && (
+        <View>
+          <Button
+            title="Cancel"
+            onPress={() => {
+              Keyboard.dismiss();
+              props.setClicked(false);
+            }}
+          ></Button>
+        </View>
+      )} */}
+    </View>
+  );
+};
 const Coins = ({ navigation, i }) => {
   const {coins} = useSelector((state) => state.user.userData);
   return (
@@ -101,11 +142,22 @@ const JourneyComponent = ({ action, colour, number, number2, suffix, suffix2, is
 }
 
 
-const FriendComponent = ({ img, name }) => {
+const FriendComponent = ({ img, name, onPress }) => {
   return (
-    <View style={style.friend}>
+    <TouchableOpacity style={style.friend} onPress={onPress}>
       <Image source={img} style={{ marginRight: 10, borderRadius: 20 }} />
-      <Text style={typo.H2}>
+      <Text style={[{color: "white"}, typo.H2]}>
+        {name}
+      </Text>
+    </TouchableOpacity>
+  )
+}
+
+const FriendTop = ({ img, name }) => {
+  return (
+    <View style={style.friendcol}>
+      <Image source={img} style={{  borderRadius: 20 }} />
+      <Text style={[{color: "white"}, typo.H2]}>
         {name}
       </Text>
     </View>
@@ -115,7 +167,9 @@ const FriendComponent = ({ img, name }) => {
 const NewJourney = ({ info }) => {
   const [modalVisible, setModalVisible] = useState(false); 
   const [type, setType] = useState('');
-
+  const {levels} = useSelector((state) => state.user);
+  const {exp} = useSelector((state) => state.user);
+  
   const JourneyBtn = ({ text, colour, top, left, pressHanldler }) => {
     return(
       <TouchableOpacity style={[style.journeyButton, {top: top, left: left}]} onPress={pressHanldler}> 
@@ -191,10 +245,10 @@ const NewJourney = ({ info }) => {
             </Text>
             <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center', right: 5, margin: 10}}>
               <Text style={[typo.T3, {color:'white'}]}>
-                Level 2
+                Level {levels['level'+type]}
               </Text>
               <Progress.Bar 
-                progress={0.4}
+                progress={exp && exp[type+'exp'] ? (exp[type+'exp']%180)/180 : 0}
                 width={100}
                 height={8}
                 color={colours[type]}
@@ -232,30 +286,51 @@ const NewJourney = ({ info }) => {
 }
 
 const MainProf = ({ navigation }) => {
+  const dispatch = useDispatch();
   const [active, setActive] = useState(true);
+  const [clicked, setClicked] = useState(false);
+  const [searchPhrase, setSearchPhrase] = useState('');
   const [info, setInfo] = useState({
     username: '',
     coins: 0,
     meditateD: '',
     sleepD: '',
     moveD: '',
-    focusD: ''
+    focusD: '',
+    search: ''
   });
+  const [feelings, setFeelings] =  useState([{
+    date: '',
+    feeling: '',
+  }]);
 
   const getUserInfo = async () => {
     try {
       const user = await Auth.currentAuthenticatedUser();
       const {data} = await API.graphql(graphqlOperation(getUser, { id: user.attributes.sub }));
-      console.log(data.getUser.feelings[0]);
+      let myFeelings =  [];
 
       setInfo({
+        ...info,
         meditateD: secondsToHms(data.getUser.meditateD),
         sleepD: secondsToHms(data.getUser.sleepD),
         moveD: secondsToHms(data.getUser.moveD),
         focusD: secondsToHms(data.getUser.focusD),
         coins: data.getUser.coins,
-        username: user.username
+        username: user.username,
       });
+
+      // Get list of feelings, and update myFeelings
+      data.getUser.feelings.map(item => {
+        const newArr = {
+          date: item.slice(6,16),
+          feeling: item.slice(26,-1).toLowerCase()
+        }
+        myFeelings = [...myFeelings, newArr];
+        setFeelings(myFeelings);
+      })
+      
+
     } catch (error) {
       console.log(error);
     }
@@ -275,7 +350,7 @@ const MainProf = ({ navigation }) => {
 
   useEffect(() => {
     getUserInfo();
-
+    console.log("get user info")
     return {
 
     }
@@ -284,32 +359,17 @@ const MainProf = ({ navigation }) => {
   let customDatesStyles = [];
   let today = moment();
   let day = today.clone().startOf('month');
-  day.subtract(1, 'day');
-  console.log(today.minutes());
-
-  while(day.add(1, 'day').isSame(today, 'month')) {
+  //stylise individual date(s)
+  feelings.map(item => {
     customDatesStyles.push({
-      date: day.clone(),
-      // Random colors
-      style: {backgroundColor: 'red'},
-      textStyle: {color: 'black'}, // sets the font color
-      containerStyle: [], // extra styling for day container
-      allowDisabled: true, // allow custom style to apply to disabled dates
-    });
-  }
-
-  const customDatesStylesCallback = (date) => {
-    return{
-      // style:{
-      //   margin: 10,
-      // },
-      textStyle: {
-        color: '#262626',
-        fontFamily: 'Montserrat-Bold',
-        fontSize: 14
-      },
-    };
-  }
+    //Example of date I want to stylise
+    date: moment(item.date, 'DD-MM-YYYY'),
+    // Mood colour
+    style: {backgroundColor: moodColors[item.feeling]},
+    containerStyle: [], // extra styling for day container
+  });
+  })
+  
 
   const customDayHeaderStylesCallback = (dayOfWeek, month, year) => {
     return {
@@ -321,6 +381,10 @@ const MainProf = ({ navigation }) => {
     };
   }
 
+  const goToChat = (name) => {
+    dispatch(changeChatName({name: name}));
+    navigation.navigate('Chat Screen')
+  }
   return (
     <View>
     <ScrollView style={{ backgroundColor: '#3C886B', color: 'white' }}>
@@ -331,12 +395,21 @@ const MainProf = ({ navigation }) => {
     </View>
     <Text style={[typo.H1, {marginTop: 20, marginLeft: 20, marginBottom: 13, textShadowColor: '#262626', textShadowOffset: {width: 2, height: 2}, textShadowRadius: 10}]}>Mood Tracker</Text>
       <View style={{alignItems: 'center', position: 'relative'}}>
-        <View style={{marginBottom: 27}}>
+        <View style={{marginBottom: 80}}>
           <View style={{backgroundColor: '#FFF', position: 'absolute', width: 340, height: '85%', borderRadius: 20, marginTop: 47, alignSelf: 'center'}}/>
           <CalendarPicker 
               customDayHeaderStyles={customDayHeaderStylesCallback}
               customDatesStyles={customDatesStyles}
-              customDatesStyles={customDatesStylesCallback}
+              monthTitleStyle={{
+                color: '#FFF',
+                fontFamily: 'FredokaOne-Regular',
+                fontSize: 20,
+              }}
+              yearTitleStyle={{
+                color: '#FFF',
+                fontFamily: 'FredokaOne-Regular',
+                fontSize: 20,
+              }}
               dayOfWeekStyles={{
                 marginRight: 100
               }}
@@ -346,14 +419,15 @@ const MainProf = ({ navigation }) => {
                 paddingTop: 20
               }}
               monthYearHeaderWrapperStyle={{
-                paddingTop: 10 
+                paddingTop: 10,
+                
               }}
-                textStyle={[
-                typo.H2,
-                {color: '#FFF'}
-                ]}
+                textStyle={{
+                  color: '#262626',
+                  fontFamily: 'Montserrat-Bold',
+                  fontSize: 14
+                }}
                 todayTextStyle = {{color: '#FFF'}}
-                todayBackgroundColor = "#FF9F00"
                 previousTitle= {<Image source={Backward}/>}
                 previousTitleStyle={{paddingLeft: 45}}
                 nextTitle= {<Image source={Forward}/>}
@@ -364,103 +438,130 @@ const MainProf = ({ navigation }) => {
             />
           </View>
       </View>
-      
-      <View style={{
-        flexDirection: "row", paddingLeft: 5, paddingBottom: 5, paddingRight: 5
-      }}>
-        <TouchableOpacity
-          onPress={() => { console.log("friend"); setActive(true) }}
-          style={{
-            flex: 1, height: 45, margin: 5,
-            borderRadius: 5, backgroundColor: active ? 'white' : color.Focus2,
-          }}>
-          <Text style={[typo.H2, { marginTop: 10, alignSelf: 'center' }]}>Friends</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => { setActive(false) }}
-          style={{
-            flex: 1, height: 45, margin: 5,
-            borderRadius: 5, backgroundColor: active ? color.Focus2 : 'white',
-          }}>
-          <Text style={[typo.H2, { marginTop: 10, alignSelf: 'center' }]}>Journey</Text>
-        </TouchableOpacity>
-      </View>
-     
-      {active ? (
-        <>
-         <View style={{
-          flexDirection: "row", paddingLeft: 5, paddingBottom: 5, paddingRight: 5
-        }}>
-          <TouchableOpacity
-                    onPress={() => { navigation.navigate('Chat Screen') }}
-                    style={{
-  
-                      flex: 1, height: 45, margin: 5,
-                      borderRadius: 5, backgroundColor: '#FF9F00', borderRadius: 35
-                    }}>
-                    <Text style={{ color:'white',marginTop: 12, alignSelf: 'center', justifyContent:'center' , fontFamily:'Montserrat-Bold'}}>
-                    Listen to Others</Text>
-                  </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => { navigation.navigate('Chat Screen') }}
-            style={{
-  
-              flex: 1, height: 45, margin: 5,
-              borderRadius: 5, backgroundColor: '#FF9F00',borderRadius: 35
-            }}>
-            <Text style={{ color:'white',marginTop: 12, alignSelf: 'center', justifyContent:'center' , fontFamily:'Montserrat-Bold'}}>Share your Story</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={{
-          flexDirection: "column", paddingTop: 10, paddingLeft: 5, paddingBottom: 25
-        }}>
-          <FriendComponent name="Friend 1" img={Friend1} />
-          <FriendComponent name="Friend 2" img={Friend2} />
-          <FriendComponent name="Friend 3" img={Friend3} />
-          <FriendComponent name="Friend 4" img={Friend1} />
-          <FriendComponent name="Friend 5" img={Friend2} />
+    </ScrollView>
 
-        </View>
+        <BottomDrawer
+            containerHeight={685}
+            downDisplay={530}
+            startUp={false}
+            paddingBottom={100}
+            backgroundColor={'transparent'}
+        > 
+          <View style={{width: '100%', height: 30, backgroundColor: '#3C886B', borderTopLeftRadius: 20, borderTopRightRadius: 20, alignItems: 'center', justifyContent: 'center'}}>
+            <View style={{width: 100, height: 3, backgroundColor: '#fff'}}/>
+          </View>
+          <View style={{flexDirection: "row", backgroundColor: '#3C886B'}}>
+            <TouchableOpacity style={{backgroundColor: '#262626', width: '50%', height: 56, alignItems: 'center', justifyContent: 'center', borderTopLeftRadius: 10, borderTopRightRadius: 10, marginRight: 1}}
+            onPress={() => { console.log("friend"); setActive(true) }} 
+            >
+              <Text style={{color: '#FFF', fontFamily: 'FredokaOne-Regular', fontSize: 24}}>Chat</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={{backgroundColor: '#262626', width: '50%', height: 56, alignItems: 'center', justifyContent: 'center', borderTopLeftRadius: 10, borderTopRightRadius: 10,marginLeft: 1}}
+            onPress={() => { console.log("friend"); setActive(false) }}
+            >
+              <Text style={{color: '#FFF', fontFamily: 'FredokaOne-Regular', fontSize: 24}}>Journey</Text>
+            </TouchableOpacity> 
+            
+          </View>
+
+          {active ? (
+        <>
+        
+        <ScrollView style={{backgroundColor: '#262626'}}>
+        <Pressable style={{paddingBottom: 80, marginTop: 20}}>
+        <View style={{backgroundColor:'#262626', paddingTop:40}}>
+
+          <Text style={{fontFamily:'FredokaOne-Regular', fontSize:32, marginLeft:20, color:'white'}}>Active Chats</Text>
+          <ScrollView style={{
+                    flexDirection: "row", paddingTop: 10,  paddingBottom: 25
+                  }} horizontal>
+                    {ActiveFriends.map((friend) => {
+                      return (
+                        <TouchableOpacity onPress={() => {goToChat(friend.name)}}>
+                            <FriendTop name={friend.name} img={friend.img} />
+                      </TouchableOpacity>
+                      )
+                    })}
+                  </ScrollView>
+
+
+          <View style={{
+                flexDirection: "row", paddingLeft: 5, paddingBottom: 5, paddingRight: 5
+              }}>
+                <TouchableOpacity
+                  onPress={() => {goToChat('Hao Weng')}}
+                  style={{
+
+                    flex: 1, height: 45, margin: 5,
+                    borderRadius: 5, backgroundColor: '#44BED9', borderRadius: 35
+                  }}>
+                    <Text style={{ color:'white',marginTop: 12, alignSelf: 'center', justifyContent:'center' , fontFamily:'Montserrat-Bold'}}>
+                    Listen to Others
+                    </Text>
+                  </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {goToChat('Hao Weng')}}
+                  style={{
+
+                    flex: 1, height: 45, margin: 5,
+                    borderRadius: 5, backgroundColor: '#44BED9',borderRadius: 35
+                  }}>
+                  <Text style={{ color:'white',marginTop: 12, alignSelf: 'center', justifyContent:'center' , fontFamily:'Montserrat-Bold'}}>Share your Story</Text>
+                </TouchableOpacity>
+              </View>
+
+              <Text style={{fontFamily:'FredokaOne-Regular', fontSize:32, marginLeft:20, color:'white'}}>My Friends</Text>
+              <SearchBar clicked={clicked} setClicked={setClicked} setSearchPhrase={setSearchPhrase} searchPhrase={searchPhrase}/>
+                <View style={{
+                  flexDirection: "column", paddingTop: 10, paddingLeft: 5, paddingBottom: 25
+                }}>
+                  {Friends.map((friend) => (
+                    <FriendComponent name={friend.name} img={friend.img} onPress={() => {goToChat(friend.name)}}/>
+                  ))}
+
+                </View>
+            </View>
+        </Pressable>
+        </ScrollView>
         </>
       ) : (
-        <View style={{
-          flexDirection: "column", paddingTop: 10,
-        }}>
-          <NewJourney info={info}/>
-        </View>
-
+        <ScrollView style={{backgroundColor: '#262626'}}>
+          <Pressable style={{
+            flexDirection: "column", paddingLeft: 0.5, paddingBottom: 80
+          }}>
+            <NewJourney info={info}/>
+          </Pressable>
+        </ScrollView>
       )}
-    </ScrollView>
-        {/* <SwipeUpDown		
-        itemMini={<View style={{height: 56, backgroundColor: 'red'}}><Text style={{color: '#fff', alignSelf: 'center'}}>Hello</Text></View>} // Pass props component when collapsed
-        itemFull={<View />} // Pass props component when show full
-        onShowMini={() => console.log('mini')}
-        onShowFull={() => console.log('full')}
-        onMoveDown={() => console.log('down')}
-        onMoveUp={() => console.log('up')}
-        disablePressToShow={true} // Press item mini to show full
-        style={{ backgroundColor: '#262626' }} // style for swipe
-        swipeHeight={56}
-        animation="spring" 
-        /> */}
+        </BottomDrawer>
       </View>
   )
 }
 
 export default MainProf;
 
-const colours = {
-  "meditate": color.Sleep3,
-  "sleep": color.Med1,
-  "move": color.Focus3,
-  "focus": color.Move2
-}
 
 const title = {
   "meditate": "Meditation",
   "sleep": "Sleep",
   "move": "Move",
   "focus": "Focus"
+}
+
+
+const moodColors = {
+  "happy": color.Med1,
+  "sad": color.Sleep2,
+  "anxious": color.Move1,
+  "calm": color.Focus2,
+  "santa": color.Focus2,
+}
+
+const colours = {
+  "meditate": color.Med2,
+  "move": color.Move2,
+  "focus": color.Focus3,
+  "sleep": color.Sleep1,
 }
 
 const background = {
@@ -490,11 +591,17 @@ const style = StyleSheet.create({
     backgroundColor: 'white', padding: 20, left: 5, paddingRight: 30
   },
   friend: {
-    margin: 10, borderRadius: 20, height: 120,
-    backgroundColor: 'white', padding: 12,
+    marginLeft: 20, borderRadius: 20, height: 120,
+    backgroundColor: '#262626', padding: 5,
     display: 'flex', flexDirection: 'row',
     alignItems: 'center'
   },
+  friendcol: {
+      marginLeft: 20, borderRadius: 20, height: 120,
+      backgroundColor: '#262626', padding: 5,
+      display: 'flex', flexDirection: 'column',
+      alignItems: 'center'
+    },
   journeyButton: {
     backgroundColor: 'white',
     height: 40,
@@ -518,6 +625,37 @@ const style = StyleSheet.create({
     justifyContent: 'flex-end',
     backgroundColor: 'rgba(255, 255, 255, 0.3)',
     borderRadius: 20
-  }
+  },
+  container2: {
+        marginLeft:20,
+        margin: 15,
+        justifyContent: "flex-start",
+        alignItems: "center",
+        flexDirection: "row",
+        width: "95%",
+
+      },
+      searchBar__unclicked: {
+        padding: 0,
+        flexDirection: "row",
+        width: "95%",
+        backgroundColor: "#d9dbda",
+        borderRadius: 15,
+        alignItems: "center",
+      },
+      searchBar__clicked: {
+        padding: 0,
+        flexDirection: "row",
+        width: "80%",
+        backgroundColor: "#d9dbda",
+        borderRadius: 15,
+        alignItems: "center",
+        justifyContent: "space-evenly",
+      },
+      input2: {
+        fontSize: 20,
+        marginLeft: 10,
+        width: "90%",
+      },
 
 })

@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, StyleSheet, ImageBackground, Image, TouchableOpacity, Animated } from 'react-native';
 import typo from '../../../styles/typography';
-import { style } from 'styled-system';
-import MedBG from '../../../assets/images/meditate-planet.png';
 import MedBG1 from '../../../assets/images/meditate-planet1.png';
 import SleepBG from '../../../assets/images/sleep-planet.png';
 import MoveBG from '../../../assets/images/move-planet.png';
@@ -13,9 +11,9 @@ import { color } from '../../../styles/theme';
 import avatarsmall from '../../../assets/images/avatarsmall.png';
 import redheart from '../../../assets/icons/redheart.png';
 import heart from '../../../assets/icons/heart.png';
-import { Guides } from './constants';
 
-import { useSelector } from 'react-redux';
+import { addFavourite, deleteFavourite } from '../Redux/GuidesAction';
+import { useSelector, useDispatch } from 'react-redux';
 
 const ActDetailComponent = ({ detail }) => {
     return(
@@ -24,7 +22,7 @@ const ActDetailComponent = ({ detail }) => {
                 {detail.title}
             </Text>
             <Text style={[typo.T1,{ color: 'white', fontWeight:'400'}]}>
-                {detail.duration} min 
+                {detail.duration} mins
             </Text>
         </View>
     )
@@ -44,7 +42,7 @@ const ExpCoinsComponent = ({ styles, isTotal }) => {
             </View>
             
             <Text style={[typo.H2,{color: 'white', fontWeight:'400'}]}>
-                {isTotal?'250 EXP':'+ 1 Apple (150 exp)'}
+                {isTotal?'250 EXP':'+ 150 exp'}
             </Text>
         </View>
     )
@@ -57,18 +55,21 @@ const MidComponent = ({style, navigation, detail}) => {
     const fadeAnim2 = useRef(new Animated.Value(0)).current  // Initial value for opacity: 0
 
     useEffect(() => {
-        Animated.timing(
+        let isMounted = true; 
+        if(isMounted) {Animated.timing(
             fadeAnim,
             {
                 toValue: 1,
                 duration: 500,
                 useNativeDriver: true,
             }
-            ).start();        
+            ).start()};
+        return () => { isMounted = false };        
     }, [fadeAnim])   
 
     useEffect(() => {
-        setTimeout(() => {
+        let isMounted = true;
+        if(isMounted) {setTimeout(() => {
             setIsCombined(true);
             Animated.timing(
             fadeAnim2,
@@ -78,7 +79,7 @@ const MidComponent = ({style, navigation, detail}) => {
                 useNativeDriver: true,
             }
             ).start();
-        }, 3000)  
+        }, 2000)}  
     }, [fadeAnim2]) 
 
     if(isCombined == false){
@@ -110,8 +111,10 @@ const MidComponent = ({style, navigation, detail}) => {
 
 const Complete = ({ navigation, route }) => {
     const detail = route.params;
-    const [isFavourite, setFav] = useState(false);
-    
+    const {favourites} = useSelector((state) => state.guide);
+    const [isFavourite, setFav] = useState(favourites.some((guide)=>guide.title == detail.title));
+    const dispatch = useDispatch();
+
     return  (
 
         <View style={styles.container}> 
@@ -131,34 +134,25 @@ const Complete = ({ navigation, route }) => {
                 
                 <MidComponent style={{flex: 6, marginTop: 70, alignItems: 'center'}} navigation={navigation} detail={detail}/>
 
-                {/* <ExpCoinsComponent styles={{flex: 1, marginTop: 70}} />
-                
-                <View style={{flex: 1, marginTop: 20}}>
-                   <Image source={avatarsmall} />
-                </View>
-                 
-
-                <View style={{flex: 3, marginTop: 55}}>
-                    <TouchableOpacity style={styles.button} onPress={() => navigation.popToTop()}>
-                        <Text style={[typo.H3, {color: 'white'}]}>Done</Text> 
-                    </TouchableOpacity>    
-                </View> */}
-
                 <View style={{flex: 4, marginTop: 50, alignItems: 'center'}}>
                     <TouchableOpacity onPress={ () => {
-                        if (isFavourite == true)
+                        if (isFavourite == true){
                             setFav(false);
-                        else
+                            dispatch(deleteFavourite({title: detail}));
+                        } else {
                             setFav(true);
+                            dispatch(addFavourite({guide: detail}));
+                        }
+                        console.log(favourites);
                     } }>
                         <FavComponent isFav = {isFavourite} />                       
                     </TouchableOpacity>
                 </View>
-
-              
               
             </View>
-            </ImageBackground>
+
+        </ImageBackground>
+
         </View>
       
         

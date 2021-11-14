@@ -15,14 +15,20 @@ import Explore3 from '../../../assets/images/explore3.png';
 import Explore4 from '../../../assets/images/explore4.png';
 import Line32 from '../../../assets/images/Line32.png';
 import Meditate1 from '../../../assets/images/med-1.png';
+import Meditate2 from '../../../assets/images/med-2.png';
 import Sleep1 from '../../../assets/images/sleep1.png';
-import Move1 from '../../../assets/images/mov-1.png';
+import Move1 from '../../../assets/images/move-2.png';
 import Focus1 from '../../../assets/images/focus-1.png';
-
+import { Guides, types } from '../constants';
+import { getGuidesInfo } from '../Redux/GuidesAction';
+import { useSelector, useDispatch } from 'react-redux';
 import { Auth } from 'aws-amplify';
+import { initiateLevel } from '../../GlobalStates/UserAction';
 
 const ExploreScreen = ({ navigation }) => {
-  
+  const dispatch = useDispatch();
+  const {guides} = useSelector((state) => state.guide);
+
   const [isTimeline, setIsTimeline] = useState(false);
   const [name, setName] = useState();
   const [info, setInfo] = useState({
@@ -47,9 +53,12 @@ const ExploreScreen = ({ navigation }) => {
 
   useEffect(() => {
     getUserInfo();
+    // dispatch(getGuidesInfo({guides: Guides}))
+    dispatch(initiateLevel())
   }, []);
 
   const MyRadioButton = ({isDone}) =>{
+
     return(isDone?
     <View style={style.MyRadioButton}>
       <Image source={Tick} />
@@ -58,27 +67,26 @@ const ExploreScreen = ({ navigation }) => {
     <Icon name="radio-button-unchecked" size={30} color="white"/>)
   }
 
-  const CardComponent = ({img, type, duration}) => {
-    
-    const [isDone, setIsDone] = useState(false);
+  const CardComponent = ({img, type, duration, guide}) => {
+    const isDone = guides[guide.key].done;
 
     return (
-      <View style={{display: 'flex', flexDirection: 'row', alignItems: 'center', marginHorizontal: 10}}>
+      <View style={{display: 'flex', flexDirection: 'row', alignItems: 'center', marginHorizontal: 20, right: 10}}>
         <MyRadioButton isDone={isDone}/>
-        <TouchableOpacity onPress={()=>{setIsDone(!isDone)}}>
-          <View style={style.card}>
-            <View>
-              <Text style={typo.H2}>Title of Session</Text>
+        <TouchableOpacity onPress={()=>navigation.navigate('GuideDetail', guide)}>
+          <View style={[style.card, {opacity: isDone? 0.8:1}]}>
+            <View style={{width: 235, justifyContent: 'center', bottom: 5, paddingRight: 40}}>
+              <Text style={typo.H3}>{guide.title}</Text>
               <View style={{flexDirection: 'row', left: 15, top: 5}}>
                 <Image source={Video} right={5}/>
                 <Text style={[typo.T6, {color: colours[type]}]}>{type} Activity</Text>
               </View>
               <View style={{flexDirection: 'row', left: 16, top: 12}}>
                 <Image source={Time} right={5}/>
-                <Text style={typo.T6}>{duration}</Text>
+                <Text style={typo.T6}>{guide.duration} mins</Text>
               </View>
             </View>
-            <Image source={img} style={{backgroundColor: '#EEEEEE', width: 70, height: 70}} />
+            <Image source={img} style={{width: 75, height: 75, borderRadius: 13, right: 35}}/>
           </View>
         </TouchableOpacity>
       </View>
@@ -92,29 +100,29 @@ const ExploreScreen = ({ navigation }) => {
     }
 
     return(
-      <View style={{marginHorizontal: 15}}>
+      <View style={{marginHorizontal: 15, marginBottom: 100}}>
         <Text style={[style.header, typo.T1]}>
           Start your day
         </Text>
-        <CardComponent img={Explore1} type={"Meditate"} duration={'3-5 mins'}/>
-          <LineBG src={Line32} top={'11.25%'} left={'6.5%'}/>
-        <CardComponent img={Explore3} type={"Move"} duration={'40-45 mins'}/>
-          <LineBG src={Line32} top={'24.25%'} left={'6.5%'}/>
-        <CardComponent img={Explore2} type={"Focus"} duration={'15-20 mins'}/>
+        <CardComponent img={Explore1} type={"Meditate"} duration={'3-5 mins'} guide={Guides[3]}/>
+          <LineBG src={Line32} top={'11.5%'} left={'6.5%'}/>
+        <CardComponent img={Explore3} type={"Move"} duration={'40-45 mins'} guide={Guides[14]}/>
+          <LineBG src={Line32} top={'24.5%'} left={'6.5%'}/>
+        <CardComponent img={Explore2} type={"Focus"} duration={'15-20 mins'} guide={Guides[18]}/>
 
         <Text style={[style.header, typo.T1]}>
           Afternoon lift
         </Text>
-        <CardComponent img={Explore1} type={"Meditate"} duration={'10-15 mins'}/>
-          <LineBG src={Line32} top={'53.25%'} left={'6.5%'}/>
-        <CardComponent img={Explore2} type={"Focus"} duration={'35-40 mins'}/>
+        <CardComponent img={Explore1} type={"Meditate"} duration={'10-15 mins'} guide={Guides[1]}/>
+          <LineBG src={Line32} top={'53.5%'} left={'6.5%'}/>
+        <CardComponent img={Explore2} type={"Focus"} duration={'35-40 mins'} guide={Guides[14]}/>
 
         <Text style={[style.header, typo.T1]}>
           At night
         </Text>
-        <CardComponent img={Explore4} type={"Sleep"} duration={'3-7 mins'}/>
-          <LineBG src={Line32} top={'82.25%'} left={'6.5%'}/>
-        <CardComponent img={Explore4} type={"Sleep"} duration={'1-3 mins'}/>
+        <CardComponent img={Explore4} type={"Sleep"} duration={'3-7 mins'} guide={Guides[7]}/>
+          <LineBG src={Line32} top={'82.5%'} left={'6.5%'}/>
+        <CardComponent img={Explore4} type={"Sleep"} duration={'1-3 mins'} guide={Guides[8]}/>
       </View>
     )
   }
@@ -130,8 +138,8 @@ const ExploreScreen = ({ navigation }) => {
           <ImageBackground source={image} style={{width:'100%', height: '110%', top: -5}}>
             <View style={{flex: 3, alignItems: 'center', justifyContent: 'center'}}>
               <Text style={[typo.H4, {color: 'white',  textShadowColor: 'rgba(0, 0, 0, 0.75)',
-  textShadowOffset: {width: -1, height: 1},
-  textShadowRadius: 10}]}>
+                textShadowOffset: {width: -1, height: 1},
+                textShadowRadius: 10}]}>
                 {title}
               </Text> 
             </View>
@@ -143,18 +151,18 @@ const ExploreScreen = ({ navigation }) => {
     return(
       <>
       <View style={{flexDirection: 'row'}}>
-        <TouchableOpacity onPress={() => navigation.navigate('GuidesLesson')}>
-          <MyComponent image={Meditate1} title={"Meditation"}/>
+        <TouchableOpacity onPress={() => navigation.navigate('GuidesLesson', types.meditate)}>
+          <MyComponent image={Meditate2} title={"Meditation"}/>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('Sleep')}>
+        <TouchableOpacity onPress={() => navigation.navigate('GuidesLesson', types.sleep)}>
           <MyComponent image={Sleep1} title={"Sleep"}/>
         </TouchableOpacity>
       </View>
       <View style={{flexDirection: 'row'}}>
-        <TouchableOpacity onPress={() => navigation.navigate('Move')}>
+        <TouchableOpacity onPress={() => navigation.navigate('GuidesLesson', types.move)}>
           <MyComponent image={Move1} title={"Move"}/>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('Focus')}>
+        <TouchableOpacity onPress={() => navigation.navigate('GuidesLesson', types.focus)}>
           <MyComponent image={Focus1} title={"Focus"}/>
         </TouchableOpacity>
       </View>
@@ -206,8 +214,6 @@ const ExploreScreen = ({ navigation }) => {
   )
 }
 
-
-
 const colours = {
   "Meditate": color.Med1,
   "Move": color.Move1,
@@ -240,13 +246,14 @@ const style = StyleSheet.create({
     borderWidth: 0.5,
     borderColor: 'rgba(0, 0, 0, 0.5)',
     backgroundColor: 'white',
-    height: 90,
-    width: '85%',
+    height: 100,
+    width: 300,
     borderRadius: 20,
     margin: 10,
     padding: 10,
     display: 'flex',
     justifyContent: 'space-between',
+    alignItems: 'center',
     flexDirection: 'row'
   },
   header: {

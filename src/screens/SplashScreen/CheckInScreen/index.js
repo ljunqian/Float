@@ -7,16 +7,51 @@ import textStyle from '../../../styles/typography';
 import BG from '../../../assets/images/journeybg-1.gif';
 import calIcon from '../../../assets/icons/calendar.png';
 import {moods} from './moodConstants'
-import { marginTop } from 'styled-system';
 
 import moment from 'moment';
+import _ from 'lodash';
+
+import { API, Auth, graphqlOperation } from 'aws-amplify';
+import { getUser } from '../../../graphql/queries';
+import { updateUser } from '../../../graphql/mutations';
 
 const CheckIn = ({navigation}) =>{
     let date = moment().format("DD YYYY, h.mm"),  month = moment().format("MMM"), time = moment().format("a");
     const [modalVisible, setModalVisible] = useState(false);
     const [moodSelected, setmoodSelected] = useState(null);
 
-    console.log(date)
+    async function updateUserFeelings(userMood) {
+        try{
+            const user = await Auth.currentAuthenticatedUser();
+            const getUserData = await API.graphql(graphqlOperation(getUser, { id: user.attributes.sub }));
+            let userFeelings =  [];
+
+            getUserData.data.getUser.feelings.map(item => {
+                userFeelings = [...userFeelings, item];
+            })
+            const updatedFeelings = _.filter(userFeelings, (mood) => mood.slice(6,16) !== userMood.slice(6,16));
+            updatedFeelings.unshift(userMood);
+
+            const updateFeelingsDetails = {
+                id: user.attributes.sub,
+                _version: getUserData.data.getUser._version,
+                feelings: updatedFeelings
+            }
+            const updateUserDataFeelings = await API.graphql(graphqlOperation(updateUser, { input: updateFeelingsDetails }));
+        
+        } catch(error){
+            console.log(error);
+        }
+    }
+
+    //onPress Handler
+    const updateMoodHandler = ({mood}) => {
+        let cdate = moment().format("DD-MM-YYYY");
+        console.log('check in', cdate);
+        let newMood = '{date=' + cdate + ', feeling=' + mood.name +'}';
+        console.log('check in', newMood);
+        updateUserFeelings(newMood)
+    }
 
     return(
         <View>
@@ -43,7 +78,10 @@ const CheckIn = ({navigation}) =>{
                     })}
                 </View>
 
-                <TouchableOpacity onPress={()=> setModalVisible(true)}>
+                <TouchableOpacity onPress={()=> {
+                    setModalVisible(true);
+                    updateMoodHandler({mood: moodSelected});
+                    } }>
                 {moodSelected !=null && !modalVisible &&
                 <View style={[styles.continueButtonContainer, {marginTop: 30}]}>
                     <Text style={textStyle.T4}>Continue</Text>
@@ -55,10 +93,7 @@ const CheckIn = ({navigation}) =>{
 }
 
 const MoodCard = (props) =>{
-    let bg = '#FFF';
-    if(props.moodSelected != null && props.moodSelected.name === props.name){
-        bg = '#B2E5D7';
-    }
+    const bg = (props.moodSelected != null && props.moodSelected.name === props.name)? '#B2E5D7' : '#FFF' ;
 
     return(
         <TouchableOpacity style = {[styles.moodCard, {marginTop: 30, backgroundColor: bg}]} onPress={()=> props.setmoodSelected()}>

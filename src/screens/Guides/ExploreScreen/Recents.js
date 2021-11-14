@@ -43,7 +43,7 @@ const Recents = ({ navigation }) => {
                             </View>
                             <View style={styles.textBox}>
                                 <Text style={[typo.T1, {color: 'white'}]}>{item.title}</Text>
-                                <Text style={[typo.T3, {color: 'grey'}]}>{item.type} - {item.duration} min</Text>
+                                <Text style={[typo.T3, {color: 'grey'}]}>{item.type} - {item.duration} mins</Text>
                             </View>
                             <Image source={forward} style={{marginLeft: 10, marginRight: 40}}/>
                         </TouchableOpacity>
