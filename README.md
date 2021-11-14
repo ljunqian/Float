@@ -31,6 +31,11 @@ To setup the project on your computer, you should
 
 # References
 1. [Float Figma](https://www.figma.com/file/ibmfrATs58G0Gm1SZZVqFd/FLOAT-1.0?node-id=249%3A802)
-2. [AWS Amplify](https://docs.amplify.aws/start/q/integration/react/?sc_icampaign=react-start&sc_ichannel=docs-home)
-3. Report: 
-4. Deck: 
+2. [Float Video](https://youtu.be/kbPCllKB8UE) 
+
+
+# Resources
+1. [AWS Amplify](https://docs.amplify.aws/start/q/integration/react/?sc_icampaign=react-start&sc_ichannel=docs-home)
+2. [React Native](https://reactnative.dev/docs/getting-started)
+3. [React Navigation](https://reactnavigation.org/docs/getting-started)
+4. [React Redux](https://redux.js.org/introduction/getting-started)
