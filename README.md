@@ -33,6 +33,8 @@ To setup the project on your computer, you should
 1. [Float Figma](https://www.figma.com/file/ibmfrATs58G0Gm1SZZVqFd/FLOAT-1.0?node-id=249%3A802)
 2. [Float Video](https://youtu.be/kbPCllKB8UE) 
 3. [Float Report](https://github.com/ljunqian/Float/blob/main/reports/Group%202%20(Float)%20-%20IEM%20DIP%20Group%20Report.pdf)
+4. [Float Poster 1 (Promotional)](https://github.com/ljunqian/Float/blob/main/reports/Promotional%20Poster.jpg)
+5. [Float Poster 2 (Exhibition)](https://github.com/ljunqian/Float/blob/main/reports/Exhibition%20Poster.jpg)
 
 
 # Resources
